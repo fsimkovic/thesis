@@ -122,7 +122,7 @@ Given that the overall precision of contact pairs predicted by the three metapre
 
 The data presented in Fig \ref{fig:ample_predictors_prcpeaks} also indicates that there is no direct link between chain length or Neff and the precision of the resulting contact predictions. The N-(5'-phosphoribosyl)anthranilate isomerase sequence (PDB: 4aaj) with a chain length of 228 residues and 750 effective sequences in its Pfam alignment yielded a mean precision at \textit{L}/10 contact pairs of 0.283 (top-\textit{L}: 0.195) across the three metapredictors. This strongly contrasts with the sequence of sortase B (PDB: 2oqz), which shows similar characteristics yet obtained  mean precision at \textit{L}/10 contact pairs of 0.938 (top-\textit{L}: 0.622).
 
-Although the contact predictions differ in precision, an interesting question rests with the similarity of the predicted contact pairs amongst the sets. Thus, the similarity of contact predictions across the three metapredictors is an important metric to evaluate the most appropriate algorithm for AMPLE users. Using the Jaccard similarity index to evaluate the direct overlap of contact pairs across sets of predictions, the data suggests very little similarity between the contact predictions of the three metapredictors for each target (Fig \ref{fig:ample_predictors_jaccardidx}). As with the differences in precision scores at higher cutoff thresholds, the Jaccard index is also lower - indicating less overlap - at higher cutoff thresholds.
+Although the contact predictions differ in precision, an interesting question rests with the similarity of the predicted contact pairs amongst the sets. Thus, the similarity of contact predictions across the three metapredictors is an important metric to evaluate the most appropriate algorithm for AMPLE users. Using the Jaccard similarity index to evaluate the direct overlap of contact pairs across sets of predictions, the data suggests very little similarity between the contact predictions of the three metapredictors for each target (Fig \ref{fig:ample_predictors_jaccardidx}). As with the differences in precision scores at higher cutoff thresholds, the Jaccard index is also lower - indicating less overlap - at higher cutoff thresholds. However, it is worth noting that the Jaccard index only considers identical matches and does not consider the neighbourhood of a contact pair. Thus, the index does not highlight similar regions with contact pairs in both maps.
 
 \begin{figure}[H]
     \centering
@@ -290,7 +290,7 @@ Lastly, three targets were solved with one or two decoy sets alone. The structur
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_predictors_1fvg_gbb_phaser_c1_t25_r3_polyAla.png}
-    \caption{Successful search model post-PHASER placement for peptide methionine sulfoxide reductase (PDB: 1fvg). BBCONTACTS distance restraints are represented as green lines, \textalpha-helices in blue and \textbeta-strands in red. Secondary structure assignment calculated with STRIDE (REF).}
+    \caption{Successful search model post-PHASER placement for peptide methionine sulfoxide reductase (PDB: 1fvg). BBCONTACTS distance restraints are represented as green lines, \textalpha-helices in blue and \textbeta-strands in red. Secondary structure assignment calculated with STRIDE \cite{Frishman1995-ns}.}
     \label{fig:ample_predictors_1fvg_gbb_phaser_c1_t25_r3_polyAla}
 \end{figure}
 
