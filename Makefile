@@ -3,6 +3,7 @@
 all:
 	xelatex main
 	bibtex main
+	makeglossaries main
 	xelatex main
 	xelatex main
 

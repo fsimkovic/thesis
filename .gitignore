@@ -1,0 +1,14 @@
+*.ac[nr]
+*.alg
+*.aux
+*.bbl 
+*.bcf
+*-blx.bib
+*.blg 
+*.dvi
+*.gl[gos]
+*.ist
+*.lo[fgt] 
+*.out 
+*.toc 
+*.xml 
