@@ -1,0 +1,68 @@
+% \section{Introduction}
+%
+% - \texit{Ab initio} structure prediction is a balancing act between time spent to generate decoys and the quality of the final decoy set
+% - \texit{Ab initio} structure prediction can only predict accurate structures with a subselection of fragments collective capturing the overall target fold
+%
+% - AMPLE requires decoys with the overall accurate fold yet enough diversity in the set to truncate to the conserved core
+% - AMPLE typically succeeds with small to medium size fragments relative to the target sequence (20-50\%)
+%
+% This bares the question whether fragments extracted for \texit{ab initio} structure prediction are sufficient as MR
+% search models. This stems primarily on the assumption that fragment picking algorithms can identify fragments based on
+% sequence features that are structurally similar to a sequence position in our target.
+%
+% - Something about the addition of contacts as unique feature for further identifying correct fragments
+% - Something about differences to other fragment-MR approaches
+
+\section{Methods}
+
+\subsection{Target selection}
+Targets were manually chosen using favourable cases for this proof-of-principle study, i.e. resolution was chosen to
+be ~1.5\AA, target chain lengths were $<150$ residues, and only a single molecule is present in the asymmetric unit
+(Table \ref{table:ample_flib_target_properties}).
+
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
+      \hline
+      \textbf{Target} & \textbf{Fold} & \textbf{Chain Length} & \textbf{Resolution (\AA)} & \textbf{Nmol/ASU} &
+\textbf{Space Group} \\ 
+      \hline
+      1aba & mixed \textalpha-\textbeta & 87    & 1.45 & 1      & P $2_1$ $2_1$ $2_1$   \\ \hline
+      1lo7 & mixed \textalpha-\textbeta & 141   & 1.50 & 1      & I $2$ $2$ $2$         \\ \hline
+      1u06 & all-\textbeta              & 62    & 1.49 & 1      & P $2_1$ $2_1$ $2_1$   \\ \hline
+      5nfc & all-\textbeta              & 147   & 1.59 & 1      & P $2_1$ $2_1$ $2_1$   \\ \hline
+  \end{tabularx}
+  \caption{Target properties.}
+  \label{table:ample_flib_target_properties}
+\end{table}
+
+% \subsection{Preparation for Flib fragment picking}
+% - Secondary structure prediction with PSICOV
+% - Contact prediction with METAPSICOV
+% - HHpred with custom script
+% - BLASTp homolog identification
+
+\subsection{Fragment picking using Flib}
+Fragments for this study were picked using the Flib algorithm \cite{De_Oliveira2015-ba}. 
+
+Two modifications were made to the default Flib v1.01 (\url{https://github.com/sauloho/Flib-Coevo}) protocol. The
+first focuses on exclusion of fragments with $>90$\% helical content (assigned by DSSP \cite{Frishman1995-ns}). The second modification
+was to allow fragments with R.M.S.D. $>10.0$\AA\ to be considered.
+
+Two-hundred fragments were picked per target sequence position. Top-$L$ or $L/2$ contact pairs were considered from both
+METAPSICOV STAGE 1 and STAGE 2 predictions with a minimum sequence separation of either 6 or 12 residues. Helical
+fragments were either in- or excluded and only fragments with length between 6 or 12 residues up-to 63 residues
+considered. Overall, this generated 16 fragment libraries per target. 
+
+Each fragment library was then filtered to remove homologs. Hereby, BLASTp \cite{Altschul1990-nc} and HHpred
+\cite{Soding2005-sx} searches were conducted to identify homologous PDB entries. The BLASTp search was performed identically to \cite{De_Oliveira2015-ba}. The HHpred search parameters were identical to the MPI-Toolkit \cite{Biegert2006-ny} webserver version (\url{https://toolkit.tuebingen.mpg.de/}). Fragments derived from PDB entries identified by BLASTp and HHpred (probability score of $\geq20.0$) were excluded from the fragment libraries.
+
+All fragments per target were then grouped by their length. Subsequently, they were ranked twice by Flib scores and
+R.M.S.D. values, and the best fragment selected. The coordinates for the selected fragments were then extracted and two
+versions for each file created, once containing backbone atoms only and once containing all atoms.
+
+\subsection{Molecular Replacement in MrBUMP}
+The previously extracted fragments were subjected to the MR pipeline MrBUMP \cite{Keegan2008-hk}. The latter uses PHASER
+\cite{McCoy2007-bf} for MR, REFMAC5 \cite{Murshudov2011-we} for refinement and SHELXE \cite{Thorn2013-ir} for density modification and main-chain tracing. MrBUMP default parameters were used with exception of the PHASER RMS estimate. MR was attempted for each coordinate file with a PHASER RMS value of 0.1, 0.6, and 1.0.
+
+MR success was assessed identically to Chapter XYZ.
