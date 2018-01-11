@@ -27,7 +27,7 @@ Targets were manually chosen using favourable cases for this proof-of-principle 
       1u06 & all-\textbeta              & 62    & 1.49 & 1      & P $2_1$ $2_1$ $2_1$   \\ \hline
       5nfc & all-\textbeta              & 147   & 1.59 & 1      & P $2_1$ $2_1$ $2_1$   \\ \hline
   \end{tabularx}
-  \caption{Target properties.}
+  \caption{Overview of Flib target properties.}
   \label{table:ample_flib_target_properties}
 \end{table}
 
@@ -68,15 +68,16 @@ The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demon
 % This needs to be fixed. Put across the top the number of contacts selected and reduce the width of the empty column. Maybe some summary statistics?
 \begin{table}[H]
   \centering
-  \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|}
+  \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|}
       \hline
-	  \textbf{Target} & \textbf{STAGE 1} & \textbf{STAGE 2} & \textbf{Jaccard} && \textbf{STAGE 1} & \textbf{STAGE 2} & \textbf{Jaccard} \\ \hline
-	  1aba	&	0.884	&	0.884	&	0.303	&&	0.713	&	0.759	&	0.513	\\ \hline
-	  1lo7	&	0.857	&	0.957	&	0.308	&&	0.738	&	0.837	&	0.446	\\ \hline
-	  1u06	&	0.839	&	0.806	&	0.378	&&	0.710	&	0.787	&	0.459	\\ \hline
-	  5nfc	&	0.822	&	0.836	&	0.327	&&	0.619	&	0.762	&	0.434	\\ \hline
+	  \multirow{2}{*}{\textbf{Target}} & \multicolumn{3}{c|}{\textbf{\textit{L/2} contact pairs}} & \multicolumn{3}{c|}{\textbf{\textit{L} contact pairs}} 				\\ \cline{2-7}
+	  							&  	STAGE 1	& 	STAGE 2	& 	Jaccard 	& 	STAGE 1 	& 	STAGE 2 	& 	Jaccard	 	\\ \hline
+	  1aba						&	0.884	&	0.884	&	0.303	&	0.713	&	0.759	&	0.513		\\ \hline
+	  1lo7						&	0.857	&	0.957	&	0.308	&	0.738	&	0.837	&	0.446		\\ \hline
+	  1u06						&	0.839	&	0.806	&	0.378	&	0.710	&	0.787	&	0.459		\\ \hline
+	  5nfc						&	0.822	&	0.836	&	0.327	&	0.619	&	0.762	&	0.434		\\ \hline
   \end{tabularx}
-  \caption{Precision scores for METAPSICOV \cite{Jones2015-wp} STAGE 1 and STAGE 2 contact predictions.}
+  \caption[Contact prediction summary for Flib targets]{Precision scores for METAPSICOV \cite{Jones2015-wp} STAGE 1 and STAGE 2 contact predictions. Jaccard index calculated for the same contact pairs between METAPSICOV STAGE 1 and STAGE 2 predictions.}
   \label{table:ample_flib_contact_precision}
 \end{table}
 
