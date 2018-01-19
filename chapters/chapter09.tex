@@ -59,7 +59,7 @@ The secondary structure prediction highlighted high precision between each targe
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ample_flib_psipred.pdf}
-	\caption{Schematic comparison of PSIPRED \cite{Jones1999-fi} secondary structure prediction and DSSP \cite{Frishman1995-ns} assignment. Percentage identity is provided next to each identifier.}
+	\caption[PSIPRED schema for Flib targets]{Schematic comparison of PSIPRED \cite{Jones1999-fi} secondary structure prediction and DSSP \cite{Frishman1995-ns} assignment. Percentage identity is provided next to each identifier.}
 	\label{fig:ample_flib_psipred}
 \end{figure}
 
@@ -70,7 +70,7 @@ The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demon
   \centering
   \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|}
       \hline
-	  \multirow{2}{*}{\textbf{Target}} & \multicolumn{3}{c|}{\textbf{\textit{L/2} contact pairs}} & \multicolumn{3}{c|}{\textbf{\textit{L} contact pairs}} 				\\ \cline{2-7}
+	  \multirow{2}{*}{\textbf{Target}} & \multicolumn{3}{c|}{\textbf{\textit{L/2} contact pairs}} & \multicolumn{3}{c|}{\textbf{\textit{L} contact pairs}} 	\\ \cline{2-7}
 	  							&  	STAGE 1	& 	STAGE 2	& 	Jaccard 	& 	STAGE 1 	& 	STAGE 2 	& 	Jaccard	 	\\ \hline
 	  1aba						&	0.884	&	0.884	&	0.303	&	0.713	&	0.759	&	0.513		\\ \hline
 	  1lo7						&	0.857	&	0.957	&	0.308	&	0.738	&	0.837	&	0.446		\\ \hline
@@ -81,7 +81,14 @@ The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demon
   \label{table:ample_flib_contact_precision}
 \end{table}
 
-The torsion angle analysis ...
+An analysis of the absolute difference of torsion angles between the SPIDER2 \cite{Heffernan2015-wp} prediction and a corresponding reference crystal structure highlight accurate predictions for three of four targets (Fig \ref{fig:ample_flib_spider2}). The largest \gls{mae} of \textphi-angles across the four target sequences is $24.347^{\circ}$, and the largest \gls{mae} of \textpsi-angles is $45.459^{\circ}$ (\gls{mae} values for \gls{pdb} entry 1u06). The smallest \textphi-\gls{mae} is $13.822^{\circ}$ (\gls{pdb}: 1aba) and smallest \textpsi-\gls{mae} is $17.273^{\circ}$ (\gls{pdb}: 1lo7). Segments in sequence space with regular secondary structure, as predicted by PSIPRED \cite{Jones1999-fi}, result primarily in low \gls{mae} of torsion angles. In contrast, unstructured regions highlight much larger \gls{mae} values indicating the difficulty of predicted these regions. Noticeably, the \textpsi-\gls{mae} appears to be much larger in those regions than the \textphi-\gls{mae} for the same residue.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_spider2.pdf}
+	\caption[SPIDER2 torsion angle prediction analysis of Flib targets]{Comparison of \acrlong{mae} of torsion angles predicted by SPIDER2 and extracted from a corresponding \gls{pdb} structure. PSIPRED \cite{Jones1999-fi} secondary structure prediction provided alongside the \gls{mae} values.}
+	\label{fig:ample_flib_spider2}
+\end{figure}
 
 % \subsection{Flib fragment picking}
 % - Overall distribution of Flib and \gls{rmsd} scores (also by target)
