@@ -13,10 +13,12 @@
 
 \section{Methods}
 \subsection{Target selection}
-Targets were manually chosen using favourable cases for this proof-of-principle study, i.e. resolution was chosen to be ~1.5\AA, target chain lengths were $<150$ residues, and only a single molecule is present in the asymmetric unit (Table \ref{table:ample_flib_target_properties}).
+Targets were manually chosen using favourable cases for this proof-of-principle study, i.e. resolution was chosen to be ~1.5\AA, target chain lengths were $<150$ residues, and only a single molecule is present in the asymmetric unit (\cref{table:ample_flib_target_properties}).
 
 \begin{table}[H]
   \centering
+  \caption{Overview of Flib target properties.}
+  \label{table:ample_flib_target_properties}
   \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
       \hline
       \textbf{Target} & \textbf{Fold} & \textbf{Chain Length} & \textbf{Resolution (\AA)} & \textbf{Nmol/ASU} &
@@ -27,20 +29,18 @@ Targets were manually chosen using favourable cases for this proof-of-principle 
       1u06 & all-\textbeta              & 62    & 1.49 & 1      & P $2_1$ $2_1$ $2_1$   \\ \hline
       5nfc & all-\textbeta              & 147   & 1.59 & 1      & P $2_1$ $2_1$ $2_1$   \\ \hline
   \end{tabularx}
-  \caption{Overview of Flib target properties.}
-  \label{table:ample_flib_target_properties}
 \end{table}
 
 \subsection{Fragment picking using Flib}
 Fragments for this study were picked using the Flib algorithm \cite{De_Oliveira2015-ba}. 
 
-Flib requires four inputs: the predicted secondary structure, predicted torsion angles, predicted residue-residue contact prediction and a copy of the \gls{pdb}. The secondary structure for each target was predicted using PSIPRED v4.0 \cite{Jones1999-fi} with default parameters. The torsion angles were predicted using SPIDER2 \cite{Heffernan2015-wp} with default parameters, and residue-residue contact pairs using METAPSICOV v1.04 \cite{Jones2015-wp} with default parameters. HHBLITS v2.0.16 \cite{Remmert2011-ze} with database version \texttt{uniprot20\_2016\_02} was used by METAPSICOV to generate the \gls{msa} for contact prediction of each target sequence. BLASTp v2.2.31+ was used by PSIPRED with the UNIPROT database version \texttt{uniref90-2016\_06}. The local copy of the \gls{pdb} for fragment picking was downloaded on August 11, 2016.
+Flib requires four inputs: the predicted secondary structure, predicted torsion angles, predicted residue-residue contact prediction and a copy of the \gls{pdb}. The secondary structure for each target was predicted using PSIPRED v4.0 \cite{Jones1999-fi} with default parameters. The torsion angles were predicted using SPIDER2 \cite{Heffernan2015-wp} with default parameters, and residue-residue contact pairs using METAPSICOV v1.04 \cite{Jones2015-wp} with default parameters. HHBLITS v2.0.16 \cite{Remmert2011-ze} with database version \texttt{uniprot20\_2016\_02} was used by METAPSICOV to generate the \gls{msa} for contact prediction of each target sequence. BLASTp v2.2.31+ \cite{Altschul1990-nc,Camacho2009-ue} was used by PSIPRED with the UNIPROT database version \texttt{uniref90-2016\_06}. The local copy of the \gls{pdb} for fragment picking was downloaded on August 11, 2016.
 
 Two modifications were made to the default Flib v1.01 (\url{https://github.com/sauloho/Flib-Coevo}) protocol. The first focuses on exclusion of fragments with $>90$\% helical content (assigned by DSSP \cite{Frishman1995-ns}). The second modification was to allow fragments with \gls{rmsd} $>10.0$\AA\ to be considered.
 
 Two-hundred fragments were picked per target sequence position. Top-$L$ or $L/2$ contact pairs were considered from both METAPSICOV STAGE 1 and STAGE 2 predictions with a minimum sequence separation of either 6 or 12 residues. Helical fragments were either in- or excluded and only fragments with length between 6 or 12 residues up-to 63 residues considered. Overall, this generated 16 fragment libraries per target.
 
-Each fragment library was then filtered to remove homologs. Hereby, BLASTp \cite{Altschul1990-nc} and HHpred \cite{Soding2005-sx} searches were conducted to identify homologous PDB entries. The BLASTp search was performed identically to \cite{De_Oliveira2015-ba}. The HHpred search parameters were identical to the MPI-Toolkit \cite{Biegert2006-ny} webserver version (\url{https://toolkit.tuebingen.mpg.de/}). Fragments derived from PDB entries identified by BLASTp and HHpred (probability score of $\geq20.0$) were excluded from the fragment libraries.
+Each fragment library was then filtered to remove homologs. Hereby, BLASTp and HHpred \cite{Soding2005-sx} searches were conducted to identify homologous PDB entries. The BLASTp search was performed identically to \cite{De_Oliveira2015-ba}. The HHpred search parameters were identical to the MPI-Toolkit \cite{Biegert2006-ny} webserver version (\url{https://toolkit.tuebingen.mpg.de/}). Fragments derived from PDB entries identified by BLASTp and HHpred (probability score of $\geq20.0$) were excluded from the fragment libraries.
 
 All fragments per target were then grouped by their length. Subsequently, they were ranked twice by Flib scores and \gls{rmsd} values, and the best fragment selected. The coordinates for the selected fragments were then extracted and two versions for each file created, once containing backbone atoms only and once containing all atoms.
 
@@ -52,9 +52,9 @@ The \gls{mr} success for each search model was assessed by SHELXE scores only, w
 
 \section{Results}
 \subsection{Precision of Flib dependency data}
-The first part of this study is to analyse the data dependencies required by the Flib fragment picking algorithm. This analysis is important given that the Flib fragment picking heavily relies on the individual features in the selection and scoring of each individual fragment \cite{De_Oliveira2015-ba}. Poor data at this stage could lead to poor fragments unsuitable for \gls{mr} trials, given that high accuracy, i.e. a low \gls{rmsd} between the search model and target are required \cite{} (<-- Phaser paper here).
+The first part of this study is to analyse the data dependencies required by the Flib fragment picking algorithm. This analysis is important given that the Flib fragment picking heavily relies on the individual features in the selection and scoring of each individual fragment \cite{De_Oliveira2015-ba}. Poor data at this stage could lead to poor fragments unsuitable for \gls{mr} trials given that high accuracy, i.e. an low \gls{rmsd} value between the search model and target, is required.
 
-The secondary structure prediction highlighted high precision between each target's prediction and the DSSP-assigned \cite{Frishman1995-ns} secondary structure of the target reference structure (Fig \ref{fig:ample_flib_psipred}). The three targets with \gls{pdb} identifiers 1aba, 1lo7 and 1u06 have secondary structure predictions with a precision of $>72$\%. The fourth target, 5nfc, shows comparatively poor precision of 52.4\%. However, almost all secondary structure features are correctly identified. Furthermore, a total of nine residues are missing from the target \gls{pdb} structure, thus lowering the precision score by 5\% (<-- double-check).
+The secondary structure prediction highlighted high precision between each target's prediction and the DSSP-assigned \cite{Frishman1995-ns} secondary structure of the target reference structure (\cref{fig:ample_flib_psipred}). The three targets with \gls{pdb} identifiers 1aba, 1lo7 and 1u06 have secondary structure predictions with a precision of $>72$\%. The fourth target, 5nfc, shows comparatively poor precision of 52.4\%. However, almost all secondary structure features are correctly identified.
 
 \begin{figure}[H]
 	\centering
@@ -63,11 +63,12 @@ The secondary structure prediction highlighted high precision between each targe
 	\label{fig:ample_flib_psipred}
 \end{figure}
 
-The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demonstrate the high precision scores achievable by this algorithm (Table \ref{table:ample_flib_contact_precision}). In this study, the top contact pairs at cutoffs \textit{L} and \textit{L/2} were provided to the Flib algorithm. All targets have precision scores for both sets of predictions at both cutoff levels of $>0.6$ (Table \ref{table:ample_flib_contact_precision}).
+The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demonstrate the high precision scores achievable by this algorithm (\cref{table:ample_flib_contact_precision}). In this study, the top contact pairs at cutoffs \textit{L} and \textit{L/2} were provided to the Flib algorithm. All targets have precision scores for both sets of predictions at both cutoff levels of $>0.6$ (\cref{table:ample_flib_contact_precision}).
 
-% This needs to be fixed. Put across the top the number of contacts selected and reduce the width of the empty column. Maybe some summary statistics?
 \begin{table}[H]
   \centering
+  \caption[Contact prediction summary for Flib targets]{Precision scores for METAPSICOV \cite{Jones2015-wp} STAGE 1 and STAGE 2 contact predictions. Jaccard index calculated for the same contact pairs between METAPSICOV STAGE 1 and STAGE 2 predictions.}
+  \label{table:ample_flib_contact_precision}
   \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|}
       \hline
 	  \multirow{2}{*}{\textbf{Target}} & \multicolumn{3}{c|}{\textbf{\textit{L/2} contact pairs}} & \multicolumn{3}{c|}{\textbf{\textit{L} contact pairs}} 	\\ \cline{2-7}
@@ -77,23 +78,54 @@ The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demon
 	  1u06						&	0.839	&	0.806	&	0.378	&	0.710	&	0.787	&	0.459		\\ \hline
 	  5nfc						&	0.822	&	0.836	&	0.327	&	0.619	&	0.762	&	0.434		\\ \hline
   \end{tabularx}
-  \caption[Contact prediction summary for Flib targets]{Precision scores for METAPSICOV \cite{Jones2015-wp} STAGE 1 and STAGE 2 contact predictions. Jaccard index calculated for the same contact pairs between METAPSICOV STAGE 1 and STAGE 2 predictions.}
-  \label{table:ample_flib_contact_precision}
 \end{table}
 
-An analysis of the absolute difference of torsion angles between the SPIDER2 \cite{Heffernan2015-wp} prediction and a corresponding reference crystal structure highlight accurate predictions for three of four targets (Fig \ref{fig:ample_flib_spider2}). The largest \gls{mae} of \textphi-angles across the four target sequences is $24.347^{\circ}$, and the largest \gls{mae} of \textpsi-angles is $45.459^{\circ}$ (\gls{mae} values for \gls{pdb} entry 1u06). The smallest \textphi-\gls{mae} is $13.822^{\circ}$ (\gls{pdb}: 1aba) and smallest \textpsi-\gls{mae} is $17.273^{\circ}$ (\gls{pdb}: 1lo7). Segments in sequence space with regular secondary structure, as predicted by PSIPRED \cite{Jones1999-fi}, result primarily in low \gls{mae} of torsion angles. In contrast, unstructured regions highlight much larger \gls{mae} values indicating the difficulty of predicted these regions. Noticeably, the \textpsi-\gls{mae} appears to be much larger in those regions than the \textphi-\gls{mae} for the same residue.
+Given the two prediction files, both show localised clusters of contact pairs suggesting
+ secondary structure features found in the native protein structures (\cref{fig:ample_flib_cmaps}). However, METAPSICOV STAGE 1 predictions show a much higher frequency of singleton contact pairs, i.e. ones without a neighbouring contact pair.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_cmaps.pdf}
+	\caption[Contact map comparison for Flib targets]{Comparison of $L/2$ and $L$ correctly (gray) and incorrectly (pink) predicted contact pairs for four Flib targets. Contacts were predicted using METAPSICOV STAGE 1 (top left) and STAGE 2 (bottom right) \cite{Jones2015-wp}. True and false positive contact pairs were identified using a 8\AA cutoff between C\textalpha\ (C\textbeta\ in case of GLY) atoms of a reference crystal structure.}
+	\label{fig:ample_flib_cmaps}
+\end{figure}
+
+An analysis of the absolute difference of torsion angles between the SPIDER2 \cite{Heffernan2015-wp} prediction and a corresponding reference crystal structure highlight accurate predictions for three of four targets (\cref{fig:ample_flib_spider2}). The largest \gls{mae} of \textphi-angles across the four target sequences is $24.347^{\circ}$, and the largest \gls{mae} of \textpsi-angles is $45.459^{\circ}$ (\gls{mae} values for \gls{pdb} entry 1u06). The smallest \textphi-\gls{mae} is $13.822^{\circ}$ (\gls{pdb}: 1aba) and smallest \textpsi-\gls{mae} is $17.273^{\circ}$ (\gls{pdb}: 1lo7). Segments in sequence space with regular secondary structure, as predicted by PSIPRED \cite{Jones1999-fi}, result primarily in low \gls{mae} of torsion angles. In contrast, unstructured regions highlight much larger \gls{mae} values indicating the difficulty of predicted these regions. Noticeably, the \textpsi-\gls{mae} appears to be much larger in those regions than the \textphi-\gls{mae} for the same residue.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ample_flib_spider2.pdf}
-	\caption[SPIDER2 torsion angle prediction analysis of Flib targets]{Comparison of \acrlong{mae} of torsion angles predicted by SPIDER2 and extracted from a corresponding \gls{pdb} structure. PSIPRED \cite{Jones1999-fi} secondary structure prediction provided alongside the \gls{mae} values.}
+	\caption[SPIDER2 torsion angle prediction analysis of Flib targets]{Comparison of \gls{mae} of torsion angles predicted by SPIDER2 and extracted from a corresponding \gls{pdb} structure. PSIPRED \cite{Jones1999-fi} secondary structure prediction provided alongside the \gls{mae} values.}
 	\label{fig:ample_flib_spider2}
 \end{figure}
 
-% \subsection{Flib fragment picking}
-% - Overall distribution of Flib and \gls{rmsd} scores (also by target)
-% - Which parameter combination picks fragments with lowest Flib scores
 
+\subsection{Flib fragment picking}
 
+Sixteen Flib fragment libraries were picked for each protein target in this study. Each fragment library consisted of one permutation given altering input paramaters and contact prediction files.
 
+Across all four targets, the Flib algorithm selected a total of 8,548,775 fragments (\cref{table:ample_flib_frag_summary}). Despite differences in target chain length and fold, the fragment library show similar statistics across the four protein targets. The Flib score average falls at ~3,200 Flib score units with an average \gls{rmsd} of 9.0\AA. There appears to be no correlation between the mean Flib scores and \gls{rmsd} values, given that target 1aba has the lowest mean \gls{rmsd} yet second highest Flib score compared to target 1u06 with the lowest mean Flib score and highest mean \gls{rmsd}. Furthermore, the distributions of fragments amongst all fragment libraries appear very similar between the four targets (\cref{fig:ample_flib_flibrmsddist}).
+
+\begin{table}[H]
+  \centering
+  \caption[Flib fragment characterics across four protein targets]{Summary of fragment statistics for Flib libraries selected for four protein targets.}
+  \label{table:ample_flib_frag_summary}
+  \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|}
+      \hline%
+      \multirow{2}{*}{\textbf{Target}} & \multirow{2}{*}{\textbf{Count}} & \multicolumn{3}{c|}{\textbf{Flib score}} & \multicolumn{3}{c|}{\textbf{\gls{rmsd}}} \\ \cline{3-8}
+      		&			& Median 	& Mean 		& Sigma 	& Median & Mean & Sigma \\ \hline
+	  1aba	& 2,094,332	& 3061.05	& 3217.49	& 1405.71	& 7.70	& 7.85	& 3.81	\\ \hline
+  	  1lo7  & 2,501,675	& 3187.44	& 3372.06	& 1497.49	& 9.00	& 9.43	& 4.61  \\ \hline
+      1u06  & 1,136,435	& 2902.68	& 3035.50	& 1306.17	& 9.51	& 9.48	& 3.94	\\ \hline
+      5nfc  & 2,816,333	& 2982.69	& 3127.00	& 1316.56	& 8.89	& 9.16	& 4.18	\\ \hline \hline
+      Total	& 8,548,775	& 3049.31	& 3208.72	& 1397.20	& 8.68	& 8.96	& 4.25	\\ \hline
+  \end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_flibrmsddist.pdf}
+	\caption[Fragment distribution by Flib score and \gls{rmsd}]{Comparison of Flib score and \gls{rmsd} values per fragment for four different Flib targets. Whiskers range from minimum to maximum values.}
+	\label{fig:ample_flib_flibrmsddist}
+\end{figure}
 
