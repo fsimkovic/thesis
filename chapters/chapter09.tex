@@ -104,28 +104,21 @@ An analysis of the absolute difference of torsion angles between the SPIDER2 \ci
 
 Sixteen Flib fragment libraries were picked for each protein target in this study. Each fragment library consisted of one permutation given altering input paramaters and contact prediction files.
 
-Across all four targets, the Flib algorithm selected a total of 8,548,775 fragments (\cref{table:ample_flib_frag_summary}). Despite differences in target chain length and fold, the fragment library show similar statistics across the four protein targets. The Flib score average falls at ~3,200 Flib score units with an average \gls{rmsd} of 9.0\AA. There appears to be no correlation between the mean Flib scores and \gls{rmsd} values, given that target 1aba has the lowest mean \gls{rmsd} yet second highest Flib score compared to target 1u06 with the lowest mean Flib score and highest mean \gls{rmsd}. Furthermore, the distributions of fragments amongst all fragment libraries appear very similar between the four targets (\cref{fig:ample_flib_flibrmsddist}).
+Across all four targets, the Flib algorithm selected a total of 8,548,775 fragments (\cref{table:ample_flib_frag_summary}). The fragment libraries show similar statistics across the four protein targets despite the diversity in fold and chain lengths. The Flib score average falls at ~3,200 Flib score units with an average 9.0\AA \gls{rmsd}.
 
 \begin{table}[H]
   \centering
   \caption[Flib fragment characterics across four protein targets]{Summary of fragment statistics for Flib libraries selected for four protein targets.}
   \label{table:ample_flib_frag_summary}
-  \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|}
+  \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|X|}
       \hline%
-      \multirow{2}{*}{\textbf{Target}} & \multirow{2}{*}{\textbf{Count}} & \multicolumn{3}{c|}{\textbf{Flib score}} & \multicolumn{3}{c|}{\textbf{\gls{rmsd}}} \\ \cline{3-8}
-      		&			& Median 	& Mean 		& Sigma 	& Median & Mean & Sigma \\ \hline
-	  1aba	& 2,094,332	& 3061.05	& 3217.49	& 1405.71	& 7.70	& 7.85	& 3.81	\\ \hline
-  	  1lo7  & 2,501,675	& 3187.44	& 3372.06	& 1497.49	& 9.00	& 9.43	& 4.61  \\ \hline
-      1u06  & 1,136,435	& 2902.68	& 3035.50	& 1306.17	& 9.51	& 9.48	& 3.94	\\ \hline
-      5nfc  & 2,816,333	& 2982.69	& 3127.00	& 1316.56	& 8.89	& 9.16	& 4.18	\\ \hline \hline
-      Total	& 8,548,775	& 3049.31	& 3208.72	& 1397.20	& 8.68	& 8.96	& 4.25	\\ \hline
+      \multirow{2}{*}{\textbf{Target}} & \multirow{2}{*}{\textbf{Count}} & \multirow{2}{*}{\textbf{Homologs}} & \multicolumn{3}{c|}{\textbf{Flib score}} & \multicolumn{3}{c|}{\textbf{\gls{rmsd}}} \\ \cline{3-8}
+      		&			&			& Median 	& Mean 		& Sigma 	& Median 	& Mean 	& Sigma \\ \hline
+	  1aba	& 2,094,332	& 45,193	& 3061.05	& 3217.49	& 1405.71	& 7.70		& 7.85	& 3.81	\\ \hline
+  	  1lo7  & 2,501,675	& 23,416	& 3187.44	& 3372.06	& 1497.49	& 9.00		& 9.43	& 4.61  \\ \hline
+      1u06  & 1,136,435	& 60,456	& 2902.68	& 3035.50	& 1306.17	& 9.51		& 9.48	& 3.94	\\ \hline
+      5nfc  & 2,816,333	& 48,839	& 2982.69	& 3127.00	& 1316.56	& 8.89		& 9.16	& 4.18	\\ \hline \hline
+      Total	& 8,548,775	& 177,904	& 3049.31	& 3208.72	& 1397.20	& 8.68		& 8.96	& 4.25	\\ \hline
   \end{tabularx}
 \end{table}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{ample_flib_flibrmsddist.pdf}
-	\caption[Fragment distribution by Flib score and \gls{rmsd}]{Comparison of Flib score and \gls{rmsd} values per fragment for four different Flib targets. Whiskers range from minimum to maximum values.}
-	\label{fig:ample_flib_flibrmsddist}
-\end{figure}
 
