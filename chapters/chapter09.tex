@@ -99,12 +99,11 @@ An analysis of the absolute difference of torsion angles between the SPIDER2 \ci
 	\label{fig:ample_flib_spider2}
 \end{figure}
 
-
 \subsection{Flib fragment picking}
 
 Sixteen Flib fragment libraries were picked for each protein target in this study. Each fragment library consisted of one permutation given altering input paramaters and contact prediction files.
 
-Across all four targets, the Flib algorithm selected a total of 8,548,775 fragments (\cref{table:ample_flib_frag_summary}). The fragment libraries show similar statistics across the four protein targets despite the diversity in fold and chain lengths. The Flib score average falls at ~3,200 Flib score units with an average 9.0\AA \gls{rmsd}.
+Across all four targets, the Flib algorithm selected a total of 8,548,775 fragments (\cref{table:ample_flib_frag_summary}). The fragment libraries show similar statistics across the four protein targets despite the diversity in fold and chain lengths. The Flib score average falls at ~3,200 Flib score units with an average 9.0\AA \gls{rmsd}. Target 1u06 scored the lowest mean Flib score with 3035.50 units; however, the same target scored the worst by mean \gls{rmsd} with an average of 9.48\AA. In contrast, 1aba achieved the best mean \gls{rmsd} of 7.85\AA given the second highest mean Flib score of 3217.49 units (\cref{table:ample_flib_frag_summary}).
 
 \begin{table}[H]
   \centering
@@ -121,4 +120,26 @@ Across all four targets, the Flib algorithm selected a total of 8,548,775 fragme
       Total	& 8,548,775	& 177,904	& 3049.31	& 3208.72	& 1397.20	& 8.68		& 8.96	& 4.25	\\ \hline
   \end{tabularx}
 \end{table}
+
+A split of the per-target fragment libraries into their distinct conditions highlights the improved library quality of certain conditions with regards to the mean Flib score and \gls{rmsd} (\cref{fig:ample_flib_flibcond}). In particular, top-$L$ (6 residues sequence separation) METAPSICOV STAGE 1 contact predictions yielded the lowest for both metrics across all targets, which suggests this condition to be the most favourable for picking fragments. A comparison of the sequence separation, i.e. using all contact pairs or medium- and long-range ones only, strongly suggests much lower and thus more favourable scores for using all contact pairs. A very similar difference is noticeable for METAPSICOV STAGE 2 contact predictions (\cref{fig:ample_flib_flibcond}). Independent of the starting contact prediction, the most favourable condition for selecting fragments using Flib uses top-$L$ contact pairs with 6 residues sequence separation. The exclusion of idealised \textalpha-helical fragments did not affect the overall Flib score and \gls{rmsd} greatly ($max \Delta_{Flib}=25.87; max \Delta_{RMSD}=0.06$).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_flibcond.pdf}
+	\caption[Flib fragment library comparison]{Flib fragment library comparison for four targets highlighting the differences in mean Flib score and \gls{rmsd} by starting with different subsets of contact predictions. $L$ refers to the number of residues per target sequence. $Y$ refers to idealised \textalpha-helical fragment exclusion during fragment picking; $N$ refers to treating those fragments like all others.}
+	\label{fig:ample_flib_flibcond}
+\end{figure}
+
+\subsection{Flib fragment selection for \acrlong{mr}}
+
+One of the most important aspects of bypassing \textit{ab initio} structure prediction and using the relevant fragments directly as \gls{mr} search models is the selection of the fragments with the highest similarity between fragment and target structure. The Flib score - a cumulative metric judging the quality of a fragment - is the most obvious feature; however, it is unknown to-date whether a correlation between the Flib score and the fragment \gls{rmsd} exists. Taking all non-homologous fragments in this study, a first attempt was made to identify a correlation between a fragment's Flib score and \gls{rmsd}. A positive correlation exists for all libraries given their individual picking condition; however, a small fraction of fragments appear as outliers (\cref{fig:ample_flib_flibrelat}). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_flibrelat.png}
+	\caption[Correlation analysis for Flib score and \gls{rmsd}]{Scatterplot highlighting the positive correlation between fragment Flib scores (x-axes) and \gls{rmsd} values (y-axes). Four targets are illustrated: 1aba (green), 1lo7 (yellow), 1u06 (orange), and 5nfc (purple). Each column represents a different fragment picking strategy, and no fragment illustrated correpsonds to an idealised \textalpha-helix.}
+	\label{fig:ample_flib_flibrelat}
+\end{figure}
+
+An analysis of the outliers for characteristics that would allow for their exclusion showed the randomness of their occurrence. These fragments contain all secondary structure types, span the entire target sequence and consist of a great range of peptide lengths. Furthermore, they occur in all fragment libraries, irrelevant of their original picking strategy. The only characteristic, which would be impossible to use \textit{a priori} is the fragments' \gls{rmsd} values, which are $>30$\AA. However, it is worth noting that the minimum Flib score in the outlier fragment set and the remaining fragment sets are distinctly different. The outliers' minimum extracted from all fragment sets is 993.02 Flib score units. In comparison, fragments with \gls{rmsd} $\leq30$\AA have a minimum \gls{rmsd} of 72.16, which suggests that the "outlier" fragments might not make it in the final selection.
 
