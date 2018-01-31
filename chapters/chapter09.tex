@@ -149,8 +149,18 @@ One of the most important aspects of bypassing \textit{ab initio} structure pred
 	\label{fig:ample_flib_flibrelat}
 \end{figure}
 
-An analysis of the outliers for characteristics that would allow for their exclusion showed the randomness of their occurrence. These fragments contain all secondary structure types, span the entire target sequence and consist of a great range of peptide lengths. Furthermore, they occur in all fragment libraries, irrelevant of their original picking strategy. The only characteristic, which would be impossible to use \textit{a priori} is the fragments' \gls{rmsd} values, which are $>30$\AA. However, it is worth noting that the minimum Flib score in the outlier fragment set and the remaining fragment sets are distinctly different. The outliers' minimum extracted from all fragment sets is 795.62 Flib score units. In comparison, fragments with \gls{rmsd} $\leq30$\AA\ have a minimum \gls{rmsd} of 72.16, which suggests that the outlier fragments might not make it in the final selection.
+An analysis of the outliers for characteristics that would allow for their exclusion showed the randomness of their occurrence. These fragments contain all secondary structure types, span the entire target sequence and consist of a great range of peptide lengths. Furthermore, they occur in all fragment libraries, irrelevant of their original picking strategy. The only characteristic setting these outlier fragments apart from the remaining set is an \gls{rmsd} value of $>30$\AA. Nevertheless, it appears that these outlier fragments with unusually high \gls{rmsd} values are not to be included in the final fragment search model set, given that their overall minimum Flib score is 795.62 units, over 10 times as much as the overall minimum for the remaining fragments. Indeed, an inspection of our final fragment set for \gls{mr} trials highlights the absence of any of these outlier fragments.
 
-% - no outliers made it to the final set
-% - larger fragments have inherently lower Flib scores but also lower RMSD
-% - three large fragments have high Flib but low-ish RMSD
+A closer inspection of the fragments in the final \gls{mr} set further supports the positively linear relationship between a fragment's Flib score and \gls{rmsd} (\cref{fig:ample_flib_finalrelat}). An increase in Flib score is related to a higher \gls{rmsd} value. Furthermore, the size of the fragments also correlates as a third feature with the two aformentioned ones. Longer fragments - with higher proportions of dissimilarity between fragment and target - show higher Flib scores and \gls{rmsd} values (\cref{fig:ample_flib_finalrelat}). Noticeably, a cluster of large fragments with the highest Flib scores in the set show a high similarity to their target structure (\cref{fig:ample_flib_finalrelat}). All fragments in this cluster were picked for the bacteriophage T4 glutaredoxin sequence (\gls{pdb} ID: 1aba) and extracted from the same region of the crystal structure of the actin-related protein ARP8 (\gls{pdb} ID: 4am6). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_finalrelat.pdf}
+	\caption[Correlation analysis for final Flib \gls{mr} fragments]{Scatterplot highlighting the positive correlation between fragment Flib scores and \gls{rmsd} values. The plot contains all fragments independent of target or picking strategy. The size of each scatter point illustrates the fragment length. Outlier fragments derived from \gls{pdb} entry 4am6 are highlighted.}
+	\label{fig:ample_flib_finalrelat}
+\end{figure}
+
+Fragments in the final set comprise a diverse set of short super-secondary structure motifs to small substructures.
+
+% - fragment examples
+% - fragment eLLG given calculated RMSD, and three estimated RMSD values
