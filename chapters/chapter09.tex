@@ -149,9 +149,7 @@ One of the most important aspects of bypassing \textit{ab initio} structure pred
 	\label{fig:ample_flib_flibrelat}
 \end{figure}
 
-An analysis of the outliers for characteristics that would allow for their exclusion showed the randomness of their occurrence. These fragments contain all secondary structure types, span the entire target sequence and consist of a great range of peptide lengths. Furthermore, they occur in all fragment libraries, irrelevant of their original picking strategy. The only characteristic setting these outlier fragments apart from the remaining set is an \gls{rmsd} value of $>30$\AA. Nevertheless, it appears that these outlier fragments with unusually high \gls{rmsd} values are not to be included in the final fragment search model set, given that their overall minimum Flib score is 795.62 units, over 10 times as much as the overall minimum for the remaining fragments. Indeed, an inspection of our final fragment set for \gls{mr} trials highlights the absence of any of these outlier fragments.
-
-A closer inspection of the fragments in the final \gls{mr} set further supports the positively linear relationship between a fragment's Flib score and \gls{rmsd} (\cref{fig:ample_flib_finalrelat}). An increase in Flib score is related to a higher \gls{rmsd} value. Furthermore, the size of the fragments also correlates as a third feature with the two aformentioned ones. Longer fragments - with higher proportions of dissimilarity between fragment and target - show higher Flib scores and \gls{rmsd} values (\cref{fig:ample_flib_finalrelat}). Noticeably, a cluster of large fragments with the highest Flib scores in the set show a high similarity to their target structure (\cref{fig:ample_flib_finalrelat}). All fragments in this cluster were picked for the bacteriophage T4 glutaredoxin sequence (\gls{pdb} ID: 1aba) and extracted from the same region of the crystal structure of the actin-related protein ARP8 (\gls{pdb} ID: 4am6). 
+An analysis of the outliers for characteristics that would allow for their exclusion showed the randomness of their occurrence. These fragments contain all secondary structure types, span the entire target sequence and consist of a gsreat range of peptide lengths. Furthermore, they occur in all fragment libraries, irrelevant of their original picking strategy. The only characteristic setting these outlier fragments apart from the remaining set is an \gls{rmsd} value of $>30$\AA. Nevertheless, it appears that these outlier fragments with unusually high \gls{rmsd} values are not to be included in the final fragment search model set, given that their overall minimum Flib score is 795.62 units, over 10 times as much as the overall minimum for the remaining fragments. Indeed, an inspection of our final fragment set for \gls{mr} trials highlights the absence of any of these outlier fragments.
 
 \begin{figure}[H]
 	\centering
@@ -160,7 +158,22 @@ A closer inspection of the fragments in the final \gls{mr} set further supports 
 	\label{fig:ample_flib_finalrelat}
 \end{figure}
 
-Fragments in the final set comprise a diverse set of short super-secondary structure motifs to small substructures.
+A closer inspection of the fragment metrics in the final \gls{mr} set further supports the positively linear relationship between a fragment's Flib score and \gls{rmsd} (\cref{fig:ample_flib_finalrelat}). An increase in Flib score is related to a higher \gls{rmsd} value, thus a lower Flib score indicates less structural similarity between the fragment and the target fold. Furthermore, the size of the fragments also correlates as a third feature with the two aformentioned ones. Longer fragments - with higher proportions of dissimilarity between fragment and target - show higher Flib scores and \gls{rmsd} values (\cref{fig:ample_flib_finalrelat}). Noticeably, a cluster of large fragments with the highest Flib scores in the set show a high similarity to their target structure (\cref{fig:ample_flib_finalrelat}). All fragments in this cluster were picked for the bacteriophage T4 glutaredoxin sequence (\gls{pdb} ID: 1aba) and extracted from the same region of the crystal structure of the actin-related protein ARP8 (\gls{pdb} ID: 4am6). 
 
-% - fragment examples
+Lastly, Flib fragments in the final set comprise a diverse set of short super-secondary structure motifs to small substructures (\cref{fig:ample_flib_search_models}). Depending on the target, the predominant secondary structure type in the fragment search models changes. Importantly, not a single super-secondary structure motif dominates the set, increasing the sampling diversity to be undertaken during \gls{mr}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=\textheight]{ample_flib_search_models1.png}
+\end{figure}
+
+\begin{figure}[H]\ContinuedFloat
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_search_models2.png}
+	\caption[Fragment search models derived from Flib]{Non-redundant sample of fragment search models selected for four different protein targets.}
+	\label{fig:ample_flib_search_models}
+\end{figure}
+
+% - fragment examples <-- figure showing diversity of fragments
+% - satisfaction of contact information <-- freq dist for no contacts satisfied
 % - fragment eLLG given calculated RMSD, and three estimated RMSD values
