@@ -1,15 +1,9 @@
-% \section{Introduction}
-%
-% - \texit{Ab initio} structure prediction is a balancing act between time spent to generate decoys and the quality of the final decoy set
-% - \texit{Ab initio} structure prediction can only predict accurate structures with a subselection of fragments collective capturing the overall target fold
-%
-% - AMPLE requires decoys with the overall accurate fold yet enough diversity in the set to truncate to the conserved core
-% - AMPLE typically succeeds with small to medium size fragments relative to the target sequence (20-50\%)
-%
-% This bares the question whether fragments extracted for \textit{ab initio} structure prediction are sufficient as \gls{mr} search models. This stems primarily on the assumption that fragment picking algorithms can identify fragments based on sequence features that are structurally similar to a sequence position in our target.
-%
-% - Something about the addition of contacts as unique feature for further identifying correct fragments
-% - Something about differences to other fragment-\gls{mr} approaches
+\section{Introduction}
+
+\textit{Ab initio} structure prediction algorithms typically start with a coarse grained search of conformational space through the assembly of previously picked structural fragments. As such, the accuracy of structure prediction is heavily dependent on the similarity of the distribution of fragments for a given position to the target fold \cite{Gront2011-ik}. Thus, most of the information necessary for accurate structure prediction must be encoded in the fragment library for a given target sequence. This raises the question whether \gls{mr} is possible without the intermediary combination of predicting protein structures and then truncating them back to fragments as it is implemented in \gls{ample}.
+
+BORGES is a pipeline which identifies, retrieves, refines and exploits general tertiary structural information from small fragments available in the \gls{pdb} \cite{Sammito2013-tt}. Structural fragments are selected using secondary-structure geometry, and thus libraries built to cover the structural landscape of local folds satisfying the geometrical restraints. Although this approach has proven successful \cite{Sammito2013-tt}, target-specific information generally available to crystallographers is being neglected. This information includes the primary sequence of the target, torsion angle predictions or contact information, which in theory should improve the generation of such fragment libraries by cross-validating the identified fragments.
+
 
 \section{Methods}
 \subsection{Target selection}
@@ -174,6 +168,5 @@ Lastly, Flib fragments in the final set comprise a diverse set of short super-se
 	\label{fig:ample_flib_search_models}
 \end{figure}
 
-% - fragment examples <-- figure showing diversity of fragments
 % - satisfaction of contact information <-- freq dist for no contacts satisfied
 % - fragment eLLG given calculated RMSD, and three estimated RMSD values
