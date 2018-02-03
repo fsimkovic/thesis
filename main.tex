@@ -35,7 +35,7 @@
 \usepackage{verbatim}
 
 \usepackage{csquotes}
-\usepackage[backend=bibtex]{biblatex}
+\usepackage[backend=bibtex,style=numeric-comp]{biblatex}
 \addbibresource{references.bib}
 
 \usepackage[acronym]{glossaries}
@@ -71,12 +71,15 @@
 
 % \chapter{Introduction}
 
+\chapter{Methodology}
+\input{chapters/methods}
+
 % \chapter{Residue contacts predicted by evolutionary covariance extend the application of \textit{ab initio} molecular replacement to larger and more challenging protein folds}
 
 % \chapter{Approaches to ab initio molecular replacement of \textalpha-helical transmembrane proteins}
 
-% \chapter{Evaluation of ROSETTA distance-restraint energy functions on contact-guided \textit{ab initio} structure prediction}
-% \input{chapters/ample_predictors}
+\chapter{Evaluation of ROSETTA distance-restraint energy functions on contact-guided \textit{ab initio} structure prediction}
+\input{chapters/ample_predictors}
 
 % \chapter{Decoy subselection using contact information to enhance MR search model creation}
 
@@ -84,8 +87,6 @@
 
 \chapter{Protein fragments as search models in Molecular Replacement}
 \input{chapters/ample_flib}
-
-% \chapter{Software developments}
 
 % \chapter{Conclusion}
 
