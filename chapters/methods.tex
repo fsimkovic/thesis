@@ -1,6 +1,5 @@
 
-\section{Dataset creation}
-
+\section{Datasets}
 \subsection{FLUME dataset}
 A test set if 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction. The test set covered the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta and \textbeta-sheet) and each target was grouped based on its secondary-structure content as defined by DSSP \cite{Kabsch1983-dy}. The chain length of the target sequences ranges from 62 to 221 residues and each crystal structure contained one molecule in the asymmetric unit. The resolutions of the crystal structures ranged from 1.0 to 2.3\AA. The FASTA sequences of each target, as provided by the RCSB \gls{pdb} (\url{www.rcsb.org}), were modelled, rather than the sequence that was visibly present in the crystallographic model. 
 
@@ -12,3 +11,50 @@ The Pfam v29.0 \cite{Finn2016-tz} database was filtered for all protein families
 The final set of 27 non-redundant targets was determined using further target characterisation and grouping of Pfam families. All targets were grouped using three criteria: domain fold, target chain length and alignment depth. The former consisted of the three fold classes all-\textalpha, all-\textbeta, and mixed \textalpha-\textbeta\ (\textalpha+\textbeta\ and \textalpha/\textbeta) and targets were group using the SCOPe assignment. The target chain lengths were obtained from the deposited information via the RESTful API of the RCSB \gls{pdb} web server and split into three bins, using 150 and 200 residues as bin edges. Furthermore, the alignment depth was calculated for the sequence alignment of each Pfam family and three bins established with bin edges of 100 and 200 sequences. Thus, all targets were classed in three bins for each of the three features. 
 
 The final selection of the 27 targets was performed by randomly selecting one target for each feature combination. To ensure even sampling across the three different fold categories, a target function was employed to identify roughly even target characteristics in each group. The alignment depth and chain length were used as metrics, and had to be within $\pm15$ units to the values of the other fold classes. This created two conditions that had to be met for a randomly chosen sample to be accepted.
+
+
+\section{Statistics}
+\textcolor{red}{This bit will almost certainly be moved to a better home ...}
+\subsection{Alignment depth} \label{sec:methods_alignment_depth}
+\begin{equation} 
+N_{eff}=\sum_{i}\frac{1}{\sum_{j}S_{i,j}}
+\label{eq:methods_alignment_depth}
+\end{equation}
+
+
+\subsection{Precision} \label{sec:methods_precision}
+The precision of a contact prediction is calculated by dividing the number of true positive (TP) contact pairs by the number of false positive (FP) ones. To determine if a given contact in a prediction is either true or false positive, contact pairs are compared to those contacts extracted from a reference protein structure. Two residues in a protein structure are considered to be in contact if their C\textbeta\ atoms (C\textalpha\ in case of Gly) are $<8$\AA\ apart.
+
+\begin{equation} 
+Prec = \frac{TP}{TP-FP}
+\label{eq:methods_precision}
+\end{equation}
+
+\subsection{Jaccard index} \label{sec:methods_jaccard_idx}
+The Jaccard index describes the similarity between two contact predictions by the proportion of contact pairs in the intersection compared to the union of the two predictions. The Jaccard index is calculated using \cref{eq:methods_jaccard_index}.
+
+\begin{equation} 
+J_{x,y}=\frac{\left |x \cap y\right |}{\left |x \cup y\right |}
+\label{eq:methods_jaccard_index}
+\end{equation}
+
+The variables $x$ and $y$ are two sets of contact pairs. $\left |x \cap y\right |$ is the number of elements in the intersection of $x$ and $y$, and the $\left |x \cup y\right |$ represents the number of elements in the union of $x$ and $y$.
+
+The Jaccard index falls in the range [0,1], with a value of 1 corresponding to identical sets of contact pairs and 0 to non-identical ones. It is worth noting that only exact matches are considered and the neighbourhood of a single contact ignored.
+
+\subsection{Singleton contacts} \label{sec:methods_singleton_contacts}
+\subsection{\acrlong{rmsd}} \label{sec:methods_rmsd}
+\subsection{\acrlong{tmscore}} \label{sec:methods_tmscore}
+The \gls{tmscore} is a metric to assess the similarity between two protein structures. Unlike the \gls{rmsd}, which is easily misled by major deviations in few parts between the two structures, the \gls{tmscore} assesses the global topology between the two folds more accurately \cite{Zhang2005-hx}. The key difference in achieving this is the weighting of the distances. The \gls{rmsd} weights all distances equally; in contrast, the \gls{tmscore} has a length-dependent weighting with shorter distances between residues obtaining stronger weights \cite{Zhang2005-hx}.
+
+\begin{align*}
+TMscore=\frac{1}{L}\left [ \sum_{i=1}^{L_{ali}}\frac{1}{1+\left (\frac{d_i}{d_0}\right )^2}\right ]_{max}\label{eq:methods_tmscore} \\
+d_0=1.24*\sqrt[3]{L-15}-1.8
+\end{align*}
+
+In \cref{eq:methods_tmscore}, $L$ is the length of the target protein and $L_{ali}$ the number of equivalent residues in the two protein structures. $di$ is the distance of the \textit{ith} pair of the equivalent residues between the two structures and depends on the superposition matrix. The $max$ term refers to the procedure which attempts to identify the optimal superposition matrix to maximize the sum. The scale factor $d0$ is introduced to normalise the TM-score so that the magnitude of the average \gls{tmscore} for random protein pairs is independent on the size of the proteins \cite{Zhang2005-hx}.
+
+The \gls{tmscore} always falls in range of (0, 1], whereby higher values correlate to higher degrees of similarity between the two protein structures. A \gls{tmscore} of $<0.17$ indicates that two structures have no similarity between them, whereas a value of $\geq0.50$ typically describes the same fold \cite{Xu2010-sw}.
+
+\subsection{\acrlong{rio}} \label{sec:methods_rio}
+The RIO score counts the number of C\textalpha atoms in the \gls{mr} result that are within 1.5\AA\ of a C\textalpha atom in the crystal structure (regardless of how the C\textalpha\ atoms are related in sequence), including only stretches where at least three consecutive C\textalpha\ atoms of the \gls{mr} result overlie matching C\textalpha atoms in the deposited structure. This quantifies how well the \gls{mr} result maps onto the crystal structure, without making any assumptions about the correctness of the model or the placement with respect to register. The total \gls{rio} score is composed of an in-register (i.e. residues in the placed \gls{mr} search model correctly overlay their counterparts in the crystal structure) $RIO_{in}$ component and a second $RIO_{out}$ component summing out-of-register overlays.
