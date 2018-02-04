@@ -32,8 +32,12 @@
 \usepackage{multirow}
 \usepackage{rotating}
 \usepackage{pdflscape}
-\usepackage{tabularx}
 \usepackage{verbatim}
+
+\usepackage{tabularx}
+\newcolumntype{b}{X}
+\newcolumntype{s}{>{\hsize=.5\hsize}X}
+\newcolumntype{t}{>{\hsize=.25\hsize}X}
 
 \usepackage{csquotes}
 \usepackage[backend=bibtex,style=numeric-comp]{biblatex}
@@ -79,15 +83,15 @@
 
 % \chapter{Approaches to ab initio molecular replacement of \textalpha-helical transmembrane proteins}
 
-\chapter{Evaluation of ROSETTA distance-restraint energy functions on contact-guided \textit{ab initio} structure prediction}
-\input{chapters/ample_predictors}
+% \chapter{Evaluation of ROSETTA distance-restraint energy functions on contact-guided \textit{ab initio} structure prediction}
+% \input{chapters/ample_predictors}
 
 % \chapter{Decoy subselection using contact information to enhance MR search model creation}
 
 % \chapter{Alternative \textit{ab initio} structure prediction algorithms for AMPLE}
 
-\chapter{Protein fragments as search models in Molecular Replacement}
-\input{chapters/ample_flib}
+% \chapter{Protein fragments as search models in Molecular Replacement}
+% \input{chapters/ample_flib}
 
 % \chapter{Conclusion}
 

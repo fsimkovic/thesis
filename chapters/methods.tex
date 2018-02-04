@@ -1,10 +1,44 @@
 
 \section{Datasets}
 \subsection{FLUME dataset}
-A test set if 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction. The test set covered the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta and \textbeta-sheet) and each target was grouped based on its secondary-structure content as defined by DSSP \cite{Kabsch1983-dy}. The chain length of the target sequences ranges from 62 to 221 residues and each crystal structure contained one molecule in the asymmetric unit. The resolutions of the crystal structures ranged from 1.0 to 2.3\AA. The FASTA sequences of each target, as provided by the RCSB \gls{pdb} (\url{www.rcsb.org}), were modelled, rather than the sequence that was visibly present in the crystallographic model. 
+A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:methods_flume_dataset}). The test set covered the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-dy} secondary-structure assignment. Target chain lengths fell in the range of [62, 221] residues. Each crystal structure contained one molecule per asymmetric unit and the resolutions of the experimental data was in range from 1.0 to 2.3\AA.
+
+\begin{sidewaystable}
+	\footnotesize
+	\centering
+	\caption{Summary of the FLUME dataset.}
+	\label{table:methods_flume_dataset}
+	\begin{tabularx}{\textheight}{ t b t t t t t t t s t }
+		\hline
+		\textbf{\gls{pdb} ID} & \textbf{Molecule}	& \textbf{Resolution (\AA)}	& \textbf{Space Group}	& \textbf{Chain ID}	& \textbf{Chain Length}	& \textbf{Molecules per ASU}	& \textbf{Matthew's Coefficient}	& \textbf{Solvent Content (\%)}	& \textbf{Fold}	& \textbf{Citation}	\\
+		\hline
+		1a6m		&	Oxy-myoglobin											&	1.00		&	P$2_1$			& A	&	151	&	1	&	1.90		&	36.00	&	all-\textalpha				& \cite{Vojtechovsky1999-oi}	\\
+		1aba		&	T4 glutaredoxin											&	1.45		&	P$2_1 2_1 2_1$	& A	&	87	&	1	&	2.22		&	44.62	&	mixed \textalpha/\textbeta	& \cite{Eklund1992-bj}		\\
+		1bdo		&	Biotinyl domain of acetyl-coenzyme A carboxylase			&	1.80		&	P$2_1 2_1 2$	& A	&	80	&	1	&	2.48		&	49.00	&	all-\textbeta				& \cite{Athappilly1995-pz}	\\
+		1bkr		&	Calponin Homology (CH) domain from \textbeta-spectrin		&	1.10		&	P$2_1$			& A	&	109	&	1	&	2.04		&	39.80	&	all-\textalpha				& \cite{Banuelos1998-bz}		\\
+		1chd		&	CheB methylesterase domain								&	1.75		&	P$3_2 2 1$		& A	&	203	&	1	&	2.35		&	47.65	&	mixed \textalpha/\textbeta	& \cite{West1995-sz}			\\
+		1e0s		&	G-protein Arf6-GDP										&	2.28		&	P$6_1 2 2$		& A	&	174	&	1	&	2.18		&	37.00	&	mixed \textalpha/\textbeta	& \cite{Menetrey2000-rk}		\\
+		1eaz		&	Phosphoinositol (3,4)-bisphosphate PH domain				&	1.40		&	C$2 2 2_1$		& A	&	125	&	1	&	2.48		&	48.00	&	mixed \textalpha+\textbeta	& \cite{Thomas2001-hz}		\\
+		1hh8		&	N-terminal region of P67Phox								&	1.80		&	P$3_1$			& A	&	213	&	1	&	2.71		&	45.00	&	all-\textalpha				& \cite{Grizot2001-wt}		\\
+		1kjl		&	Galectin-3 domain										&	1.40		&	P$2_1 2_1 2_1$	& A	&	146	&	1	&	2.15		&	42.68	&	all-\textbeta				& \cite{Sorme2005-hh}		\\
+		1kw4		&	Polyhomeotic SAM domain									&	1.75		&	P$6_5$			& A	&	89	&	1	&	2.25		&	45.27	&	all-\textalpha				& \cite{Kim2002-kl}			\\
+		1lo7		&	4-hydroxybenzoyl CoA thioesterase						&	1.50		&	I$2 2 2$		& A	&	141	&	1	&	2.06		&	40.22	&	mixed \textalpha+\textbeta	& \cite{Thoden2002-bl}		\\
+		1npu		&	Extracellular domain of murine PD-1						&	2.00		&	P$2_1 2_1 2_1$	& A	&	117	&	1	&	1.67		&	25.80	&	all-\textbeta				& \cite{Zhang2004-zt}		\\
+		1pnc		&	Poplar plastocyanin										&	1.60		&	P$2_1 2_1 2_1$	& A	&	99	&	1	&	1.82		&	32.48	&	all-\textbeta				& \cite{Fields1994-ab}		\\
+		1tjx		&	Synaptotagmin I C2B domain								&	1.04		&	P$3_2 2 1$		& A	&	159	&	1	&	2.40		&	48.00	&	mixed \textalpha+\textbeta	& \cite{Cheng2004-bg}		\\
+		1tlv		&	LicT PRD													&	1.95		&	P$3_2 2 1$		& A	&	221	&	1	&	2.80		&	50.00	&	all-\textalpha				& \cite{Graille2005-di}		\\
+		2nuz		&	\textalpha-spectrin SH3 domain							&	1.85		&	P$2_1 2_1 2_1$	& A	&	62	&	1	&	2.57		&	52.16	&	all-\textbeta				&							\\
+		2qyj		&	Ankyrin													&	2.05		&	P$6_1$			& A	&	166	&	1	&	2.28		&	45.99	&	all-\textalpha				& \cite{Merz2008-gu}			\\
+		3w56		&	C2 domain					 							&	1.60		&	I$2$			& A	&	131	&	1	&	2.05		&	40.10	&	all-\textbeta				& \cite{Traore2013-jy}		\\
+		4cl9		&	N-terminal bromodomain of Brd4							&	1.40		&	P$2_1 2_1 2_1$	& A	&	127	&	1	&	2.21		&	44.37	&	all-\textalpha				& \cite{Atkinson2014-he}		\\
+		4u3h		&	FN3con													&	1.98		&	P$4_1 3 2$		& A	&	100	&	1	&	2.47		&	50.27	&	all-\textbeta				& \cite{Porebski2015-hc}		\\
+		4w97		&	KstR2 													&	1.60		&	C$2$			& A	&	200	&	1	&	2.75		&	55.25	&	all-\textalpha				& \cite{Crowe2015-hm}		\\
+		\hline
+	\end{tabularx}
+\end{sidewaystable}
 
 \subsection{KEENO dataset} \label{sec:methods_keeno_dataset}
-An unbiased selection of 27 non-redundant protein targets was selected using the following protocol.
+An unbiased selection of 27 non-redundant protein targets was selected using the following protocol (\cref{table:methods_keeno_dataset}).
 
 The Pfam v29.0 \cite{Finn2016-tz} database was filtered for all protein families with at least one representative structure in the RCSB \gls{pdb} \cite{Berman2000-qj} database. Each representative had to have monomeric protein stoichiometry and its fold classified in the SCOPe v2.05 database \cite{Chandonia2017-bd}. Targets with fold assignments other than "a" (all-\textalpha), "b" (all-\textbeta), "c" (mixed \textalpha+\textbeta) or "d" (mixed \textalpha/\textbeta) were excluded to exclusively focus on regular globular protein folds. Each resulting protein target was screened against the RESTful API of the RCSB \gls{pdb} (\url{www.rcsb.org}) webserver to identify targets meeting the following criteria: experimental technique is X-ray crystallography; chain length is $\geq100$ residues and $\leq250$ residues; resolution is between 1.3 and 2.3\AA; structure factor amplitudes are deposited in the Protein Data Bank \cite{Berman2000-qj} database; and there is only a single molecule in the asymmetric unit. The resulting protein structures were cross-validated against the \acrlong{pdb} of Transmembrane Proteins \cite{Tusnady2005-lp} webserver to exclude any possible matches. Subsequently, one representative entry was randomly selected for each Pfam family.
 
@@ -12,6 +46,45 @@ The final set of 27 non-redundant targets was determined using further target ch
 
 The final selection of the 27 targets was performed by randomly selecting one target for each feature combination. To ensure even sampling across the three different fold categories, a target function was employed to identify roughly even target characteristics in each group. The alignment depth and chain length were used as metrics, and had to be within $\pm15$ units to the values of the other fold classes. This created two conditions that had to be met for a randomly chosen sample to be accepted.
 
+\begin{sidewaystable}
+	\footnotesize
+	\centering
+	\caption{Summary of the KEENO dataset.}
+	\label{table:methods_keeno_dataset}
+	\begin{tabularx}{\textheight}{ t b t t t t t t t s t }
+		\hline
+		\textbf{\gls{pdb} ID} & \textbf{Molecule}	& \textbf{Resolution (\AA)}	& \textbf{Space Group}	& \textbf{Chain ID}	& \textbf{Chain Length}	& \textbf{Molecules per ASU}	& \textbf{Matthew's Coefficient}	& \textbf{Solvent Content (\%)}	& \textbf{Fold}	& \textbf{Citation}	\\
+		\hline
+		1fcy		& Retinoic acid nuclear receptor HRAR						& 1.30	& P$4_1 2_1 2$		& A	& 236	& 1	&	&	&	all-\textalpha				& \cite{Klaholz2000-rd}		\\
+		1fvg		& Peptide methionine sulfoxide reductase						& 1.60	& C$1 2 1$			& A	& 199	& 1	&	&	&	mixed \textalpha+\textbeta	& \cite{Lowther2000-ik}		\\	
+		1gm4		& Cytochrome C3												& 2.05	& P$6_1 2 2$		& A	& 107	& 1	&	&	&	all-\textalpha				& \cite{Louro2001-cq}		\\
+		1gv8		& N-II domain of ovotransferrin								& 1.95	& P$3_1$			& A	& 159	& 1	&	&	&	mixed \textalpha/\textbeta	& \cite{Kuser2002-pr}		\\
+		1k40		& FAT domain of focal adhesion kinase						& 2.25	& C$1 2 1$			& A	& 126	& 1	&	&	&	all-\textalpha				& \cite{Hayashi2002-dc}		\\
+		1oee		& Hypothetical protein YodA 									& 2.10	& C$1 2 1$			& A	& 193	& 1	&	&	&	all-\textbeta				& \cite{David2003-rb}		\\
+		1oz9		& Hypothetical protein AQ\_1354								& 1.89	& P$4_3 2_1 2$		& A	& 150	& 1	&	&	&	mixed \textalpha+\textbeta	& \cite{Oganesyan2003-gc}	\\
+		1q8c		& Hypothetical protein MG027									& 2.00	& P$4_1$			& A	& 151	& 1	&	&	&	all-\textalpha				& \cite{Liu2004-ce}			\\
+		1rlh		& Conserved hypothetical protein								& 1.80	& P$6_3$			& A	& 173	& 1	&	&	&	mixed \textalpha+\textbeta	&							\\
+		1s2x		& Cag-Z														& 1.90	& P$2_1 2_1 2_1$	& A	& 206	& 1	&	&	&	all-\textalpha				& \cite{Cendron2004-jl}		\\
+		1u61		& Putative Ribonuclease III									& 2.15	& I$4_1 3 2$		& A	& 138	& 1	&	&	&	all-\textalpha				&							\\
+		1zxu		& At5g01750 protein											& 1.70	& P$2_1 2_1 2_1$	& A	& 217	& 1	&	&	&	mixed \textalpha+\textbeta	&							\\
+		2eum		& Glycolipid transfer protein								& 2.30	& C$1 2 1$			& A	& 209	& 1	&	&	&	all-\textalpha				& \cite{Malinina2006-ba}		\\
+		2ol8		& Outer surface protein A									& 1.90	& P$1 2_1 1$		& O	& 249	& 1	&	&	&	all-\textbeta				& \cite{Makabe2007-fr}		\\
+		2oqz		& Sortase B													& 1.60	& P$1 2_1 1$		& A	& 223	& 1	&	&	&	all-\textbeta				& \cite{Maresso2007-sm}		\\
+		2x6u		& T-Box transcription factor TBX5							& 1.90	& P$2_1 2_1 2_1$	& A	& 203	& 1	&	&	&	all-\textbeta				& \cite{Stirnimann2010-mm}	\\
+		2y64		& Xylanase													& 1.40	& P$2_1 2_1 2_1$	& A	& 167	& 1	&	&	&	all-\textbeta				& \cite{Von_Schantz2012-rh}	\\
+		2yjm		& TtrD														& 1.84	& C$1 2 1$			& A	& 176	& 1	&	&	&	all-\textalpha				& \cite{Coulthurst2012-cm}	\\
+		2yq9		& 2, 3-cyclic-nucleotide 3-phosphodiesterase					& 1.90	& P$2_1 2_1 2_1$	& A	& 221	& 1	&	&	&	mixed \textalpha+\textbeta	& \cite{Myllykoski2013-wf}	\\
+		3dju		& Protein BTG2												& 2.26	& P$2_1 2_1 2_1$	& B	& 122	& 1	&	&	&	mixed \textalpha+\textbeta	& \cite{Yang2008-iu}			\\
+		3g0m		& Cysteine desulfuration protein sufE						& 1.76	& P$1 2_1 1$		& A	& 141	& 1	&	&	&	mixed \textalpha+\textbeta	&							\\
+		3qzl		& Iron-regulated surface determinant protein A				& 1.30	& P$2_1 2_1 2$		& A	& 127	& 1	&	&	&	all-\textbeta				& \cite{Grigg2011-jh}		\\
+		4aaj		& N-(5-phosphoribosyl)anthranilate isomerase					& 1.75	& P$6_1$			& A	& 228	& 1	&	&	&	mixed \textalpha/\textbeta	& \cite{Repo2012-nc}			\\
+		4dbb		& Amyloid-\textbeta\ A4 precursor protein-binding family A1	& 1.90	& P$4_1 2_1 2$		& A	& 162	& 1	&	&	&	all-\textbeta				& \cite{Matos2012-wq}		\\
+		4e9e		& Methyl-CpG-binding domain protein 4						& 1.90	& H$3$				& A	& 161	& 1	&	&	&	all-\textalpha				& \cite{Morera2012-pd}		\\
+		4lbj		& Galectin-3													& 1.80	& P$2_1 2_1 2_1$	& A	& 138	& 1	&	&	&	all-\textbeta				& \cite{Collins2014-jb}		\\
+		4pgo		& Hypothetical protein PF0907								& 2.30	& P$6_5 2 2$		& A	& 116	& 1	&	&	&	all-\textbeta				& \cite{Weinert2015-te}		\\
+		\hline
+	\end{tabularx}
+\end{sidewaystable}
 
 \section{Statistics}
 \textcolor{red}{This bit will almost certainly be moved to a better home ...}
