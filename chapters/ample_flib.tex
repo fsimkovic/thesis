@@ -1,7 +1,7 @@
 \section{Introduction}
 \textit{Ab initio} structure prediction algorithms typically start with a coarse grained search of conformational space through the assembly of previously picked structural fragments. As such, the accuracy of structure prediction is heavily dependent on the similarity of the distribution of fragments for a given position to the target fold \cite{Gront2011-ik}. Thus, the necessary structural information for accurate structure prediction must be encoded in the fragment library for a given target sequence. Additionally, new protein folds are merely the assembly of already known building blocks, such as super-secondary structure motifs \cite{Fernandez-Fuentes2010-iu}. This idea is not novel and has been successfully applied in \gls{nmr} and X-ray crystallography studies \cite{Jones1986-kh,Delaglio2000-pu,Kontaxis2005-bz,Sammito2013-tt}. However, almost all implementations neglect target-specific information generally available to crystallographers through bioinformatics software. This information includes the primary sequence of the target, torsion angle predictions, predicted solvent accessibility or contact information. In theory, all additional information should improve the generation of such fragment libraries by aiding the selection process or cross-validating the identified fragments.
 
-Over the last decade, efforts have been made to improve the precision and coverage of structural fragment libraries used in \textit{ab initio} structure prediction \cite{Shen2013-ag,Li2008-fu,Kalev2011-te,Bhattacharya2016-bp,Wang2017-ox,De_Oliveira2015-ba,Gront2011-ik}. Various different algorithms have been developed to generate static and dynamic fragment libraries. Static fragment libraries are those pre-computed and generally consistent of common super-secondary structure motifs. In comparison, dynamic fragment libraries consist of fragments of variable lengths acknowledging the fragment-dependent optimal length. Most commonly used in \textit{ab initio} structure prediction are dynamic algorithms, such as Flib \cite{De_Oliveira2015-ba}, NNmake \cite{Gront2011-ik} or HHfrag \cite{Kalev2011-te}. All dynamic library producing algorithms differ in their definition of ideal fragment lengths, the default number of fragments used per position and they way in which fragments are extracted. However, these algorithms typically share the same additional sequence-based information used to aid the selection of target fragments, which usually includes sequence similarity, three-state secondary structure prediction and torsion angle prediction.
+Over the last decade, efforts have been made to improve the precision and coverage of structural fragment libraries used in \textit{ab initio} structure prediction \cite{Shen2013-ag,Li2008-fu,Kalev2011-te,Bhattacharya2016-bp,Wang2017-ox,De_Oliveira2015-ba,Gront2011-ik}. Various different algorithms have been developed to generate static and dynamic fragment libraries. Static fragment libraries are those pre-computed and generally consistent of common super-secondary structure motifs. In comparison, dynamic fragment libraries consist of fragments of variable lengths acknowledging the fragment-dependent optimal length. Most commonly used in \textit{ab initio} structure prediction are dynamic algorithms, such as FLIB \cite{De_Oliveira2015-ba}, NNmake \cite{Gront2011-ik} or HHfrag \cite{Kalev2011-te}. All dynamic library producing algorithms differ in their definition of ideal fragment lengths, the default number of fragments used per position and they way in which fragments are extracted. However, these algorithms typically share the same additional sequence-based information used to aid the selection of target fragments, which usually includes sequence similarity, three-state secondary structure prediction and torsion angle prediction.
 
 Given that fragment libraries selected to perform \textit{ab initio} structure prediction can contain high quality fragments or super-secondary structure motifs, those fragments must be suitable as \gls{mr} search models. Although the interplay between overall fragment library precision and coverage increases the false positive fragments in a set \cite{Kalev2011-te}, correct identification of true positives should allow for dynamic fragment selection to achieve \gls{mr} structure solution without the overhead of \textit{ab initio} structure prediction.
 
@@ -9,50 +9,57 @@ Given that fragment libraries selected to perform \textit{ab initio} structure p
 \subsection{Target selection}
 Four targets were manually selected for this study. The \gls{pdb} identifiers of these targets are: 1aba, 1lo7, 1u06, and 5nfc. The former were described in \cref{table:methods_flume_dataset}. Target 1u06 is a recently published structure of \textalpha-spectrin SH3 domain (PDB ID: 1kjl in \cref{table:methods_flume_dataset}) with a resolution of 1.49\AA. Target 5nfc is a recently published structure of Galectin-3 (PDB ID: 1kjl in \cref{table:methods_flume_dataset}) with a resolution of 1.59\AA. This resulted in a dataset with similar attributes for each target: a crystallographic data resolution of $~1.5$\AA with a single molecule in the asymmetric unit, and the target chain length of $<150$ residues.
 
-\subsection{Fragment picking using Flib}
+\subsection{Fragment picking using FLIB}
+Fragments for this study were picked using the FLIB algorithm \cite{De_Oliveira2015-ba}. 
 
-\subsection{Assessment of Flib data}
-% - MAE --> absolute difference between predicted and observed means
-% - Precision --> Fragments with $<1.5$\AA classed as \gls{tp} otherwise \gls{fp}
-% - Coverage --> Proportion of residues with at least one fragment
-% - RMSD --> link to main page
+FLIB requires four inputs: the predicted secondary structure, predicted torsion angles, predicted residue-residue contact prediction and a copy of the \gls{pdb}. The secondary structure for each target was predicted using PSIPRED v4.0 \cite{Jones1999-fi} with default parameters. The torsion angles were predicted using SPIDER2 \cite{Heffernan2015-wp} with default parameters, and residue-residue contact pairs using METAPSICOV v1.04 \cite{Jones2015-wp} with default parameters. HHBLITS v2.0.16 \cite{Remmert2011-ze} with database version \texttt{uniprot20\_2016\_02} was used by METAPSICOV to generate the \gls{msa} for contact prediction of each target sequence. BLASTP v2.2.31+ \cite{Altschul1990-nc,Camacho2009-ue} was used by PSIPRED with the UNIPROT database version \texttt{uniref90-2016\_06}. The local copy of the \gls{pdb} for fragment picking was downloaded on August 11, 2016.
 
-Fragments for this study were picked using the Flib algorithm \cite{De_Oliveira2015-ba}. 
-
-Flib requires four inputs: the predicted secondary structure, predicted torsion angles, predicted residue-residue contact prediction and a copy of the \gls{pdb}. The secondary structure for each target was predicted using PSIPRED v4.0 \cite{Jones1999-fi} with default parameters. The torsion angles were predicted using SPIDER2 \cite{Heffernan2015-wp} with default parameters, and residue-residue contact pairs using METAPSICOV v1.04 \cite{Jones2015-wp} with default parameters. HHBLITS v2.0.16 \cite{Remmert2011-ze} with database version \texttt{uniprot20\_2016\_02} was used by METAPSICOV to generate the \gls{msa} for contact prediction of each target sequence. BLASTp v2.2.31+ \cite{Altschul1990-nc,Camacho2009-ue} was used by PSIPRED with the UNIPROT database version \texttt{uniref90-2016\_06}. The local copy of the \gls{pdb} for fragment picking was downloaded on August 11, 2016.
-
-Two modifications were made to the default Flib v1.01 (\url{https://github.com/sauloho/Flib-Coevo}) protocol. The first focuses on exclusion of fragments with $>90$\% helical content (assigned by DSSP \cite{Frishman1995-ns}). The second modification was to allow fragments with \gls{rmsd} $>10.0$\AA\ to be considered.
+Two modifications were made to the default FLIB v1.01 (\url{https://github.com/sauloho/FLIB-Coevo}) protocol. The first focuses on exclusion of fragments with $>90$\% helical content (assigned by DSSP \cite{Frishman1995-ns}). The second modification was to allow fragments with \gls{rmsd} $>10.0$\AA\ to be considered.
 
 Two-hundred fragments were picked per target sequence position. Top-$L$ or $L/2$ contact pairs were considered from both METAPSICOV STAGE 1 and STAGE 2 predictions with a minimum sequence separation of either 6 or 12 residues. Helical fragments were either in- or excluded and only fragments with length between 6 or 12 residues up-to 63 residues considered. Overall, this generated 16 fragment libraries per target.
 
-Each fragment library was then filtered to remove homologs. Hereby, BLASTp and HHpred \cite{Soding2005-sx} searches were conducted to identify homologous PDB entries. The BLASTp search was performed identically to \cite{De_Oliveira2015-ba}. The HHpred search parameters were identical to the MPI-Toolkit \cite{Biegert2006-ny} webserver version (\url{https://toolkit.tuebingen.mpg.de/}). Fragments derived from PDB entries identified by BLASTp and HHpred (probability score of $\geq20.0$) were excluded from the fragment libraries.
+Each fragment library was then filtered to remove homologs. Hereby, BLASTP and HHPRED \cite{Soding2005-sx} searches were conducted to identify homologous PDB entries. The BLASTP search was performed identically to \cite{De_Oliveira2015-ba}. The HHPRED search parameters were identical to the MPI-Toolkit \cite{Biegert2006-ny} webserver version (\url{https://toolkit.tuebingen.mpg.de/}). Fragments derived from PDB entries identified by BLASTP and HHPRED (probability score of $\geq20.0$) were excluded from the fragment libraries.
 
-All fragments per target were then grouped by their length. Subsequently, they were ranked twice by Flib scores and \gls{rmsd} values, and the best fragment selected. Fragments of the same template structure consisting of the same region with varying flanking residues were kept, if they were ranked top for each fragment length group. Finally, the coordinates for the selected fragments were extracted and two files created for each, one containing the backbone atoms and the other containing all atoms.
+All fragments per target were then grouped by their length. Subsequently, they were ranked twice by FLIB scores and \gls{rmsd} values, and the best fragment selected. Fragments of the same template structure consisting of the same region with varying flanking residues were kept, if they were ranked top for each fragment length group. Finally, the coordinates for the selected fragments were extracted and two files created for each, one containing the backbone atoms and the other containing all atoms.
 
 \subsection{\acrlong{mr} in MrBUMP}
 The previously extracted fragments were subjected to the \gls{mr} pipeline MrBUMP \cite{Keegan2008-hk}. The latter uses PHASER \cite{McCoy2007-bf} for \gls{mr}, REFMAC5 \cite{Murshudov2011-we} for refinement and SHELXE \cite{Thorn2013-ir} for density modification and main-chain tracing. MrBUMP default parameters were used with exception of the PHASER RMS estimate. \gls{mr} was attempted for each coordinate file with a PHASER RMS value of 0.1, 0.6, and 1.0.
 
-The \gls{mr} success for each search model was assessed by SHELXE scores only, whereby a \gls{cc} score of $\geq25.0$ combined with an \gls{acl} score of $\geq10.0$ is required.
+\subsection{Assessment of FLIB fragments}
+FLIB fragments were assessed in this study in various ways. 
+
+Fragment torsion angles, predicted by SPIDER2 \cite{Heffernan2015-wp}, were assessed using the \gls{mae}, which evaluates the average absolute difference between the predicted and experimentally determined angles \cite{Heffernan2015-wp}. To account for the periodicity of an angle, the smaller value of the absolute difference $d_i$ and $360-d_i$ was used. 
+
+The coverage of a fragment library was assessed by the proportion of residues present in at least one fragment in the library.
+
+The precision of a fragment library was defined by the fraction of \gls{tp} fragments. All fragments with an \gls{rmsd} of $<1.5$\AA\ were considered \gls{tp} else \gls{fp}. The equation used to calculated the precision score is \cref{eq:methods_precision}.
+
+
+The coverage and precision of fragment libraries were evaluated using the procedure described in \cref{sec:methods_fragment_coverage} and \cref{sec:methods_fragment_precision}, respectively.
+
+The \gls{rmsd} value, as calculated by FLIB \cite{De_Oliveira2015-ba}, was computed between the aligned residues of the corresponding crystal structure and the fragment.
+
+\Gls{mr} success for each search model was solely assessed by SHELXE scores, whereby a \gls{cc} score of $\geq25.0$ combined with an \gls{acl} score of $\geq10.0$ was required.
 
 \section{Results}
-\subsection{Precision of Flib dependency data}
-The first part of this study is to analyse the data dependencies required by the Flib fragment picking algorithm. This analysis is important given that the Flib fragment picking heavily relies on the individual features in the selection and scoring of each individual fragment \cite{De_Oliveira2015-ba}. Poor data at this stage could lead to poor fragments unsuitable for \gls{mr} trials given that high accuracy, i.e. an low \gls{rmsd} value between the search model and target, is required.
+\subsection{Precision of FLIB dependency data}
+The first part of this study is to analyse the data dependencies required by the FLIB fragment picking algorithm. This analysis is important given that the FLIB fragment picking heavily relies on the individual features in the selection and scoring of each individual fragment \cite{De_Oliveira2015-ba}. Poor data at this stage could lead to poor fragments unsuitable for \gls{mr} trials given that high accuracy, i.e. an low \gls{rmsd} value between the search model and target, is required.
 
-The secondary structure prediction highlighted high precision between each target's prediction and the DSSP-assigned \cite{Frishman1995-ns} secondary structure of the target reference structure (\cref{fig:ample_flib_psipred}). The three targets with \gls{pdb} identifiers 1aba, 1lo7 and 1u06 have secondary structure predictions with a precision of $>72$\%. The fourth target, 5nfc, shows comparatively poor precision of 52.4\%. However, almost all secondary structure features are correctly identified.
+The secondary structure prediction highlighted high precision between each target's prediction and the DSSP-assigned \cite{Frishman1995-ns} secondary structure of the target reference structure (\cref{fig:ample_FLIB_psipred}). The three targets with \gls{pdb} identifiers 1aba, 1lo7 and 1u06 have secondary structure predictions with a precision of $>72$\%. The fourth target, 5nfc, shows comparatively poor precision of 52.4\%. However, almost all secondary structure features are correctly identified.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{ample_flib_psipred.pdf}
-	\caption[PSIPRED schema for Flib targets]{Schematic comparison of PSIPRED \cite{Jones1999-fi} secondary structure prediction and DSSP \cite{Frishman1995-ns} assignment. Percentage identity is provided next to each identifier.}
-	\label{fig:ample_flib_psipred}
+	\includegraphics[width=\textwidth]{ample_FLIB_psipred.pdf}
+	\caption[PSIPRED schema for FLIB targets]{Schematic comparison of PSIPRED \cite{Jones1999-fi} secondary structure prediction and DSSP \cite{Frishman1995-ns} assignment. Percentage identity is provided next to each identifier.}
+	\label{fig:ample_FLIB_psipred}
 \end{figure}
 
-The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demonstrate the high precision scores achievable by this algorithm (\cref{table:ample_flib_contact_precision}). In this study, the top contact pairs at cutoffs \textit{L} and \textit{L/2} were provided to the Flib algorithm. All targets have precision scores for both sets of predictions at both cutoff levels of $>0.6$ (\cref{table:ample_flib_contact_precision}).
+The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demonstrate the high precision scores achievable by this algorithm (\cref{table:ample_FLIB_contact_precision}). In this study, the top contact pairs at cutoffs \textit{L} and \textit{L/2} were provided to the FLIB algorithm. All targets have precision scores for both sets of predictions at both cutoff levels of $>0.6$ (\cref{table:ample_FLIB_contact_precision}).
 
 \begin{table}[H]
   \centering
-  \caption[Contact prediction summary for Flib targets]{Precision scores for METAPSICOV \cite{Jones2015-wp} STAGE 1 and STAGE 2 contact predictions. Jaccard index calculated for the same contact pairs between METAPSICOV STAGE 1 and STAGE 2 predictions.}
-  \label{table:ample_flib_contact_precision}
+  \caption[Contact prediction summary for FLIB targets]{Precision scores for METAPSICOV \cite{Jones2015-wp} STAGE 1 and STAGE 2 contact predictions. Jaccard index calculated for the same contact pairs between METAPSICOV STAGE 1 and STAGE 2 predictions.}
+  \label{table:ample_FLIB_contact_precision}
   \begin{tabularx}{\textwidth}{X X X X X X X}
       \hline
 	  \multirow{2}{*}{\textbf{Target}} & \multicolumn{3}{c}{\textbf{\textit{L/2} contact pairs}} & \multicolumn{3}{c}{\textbf{\textit{L} contact pairs}} 	\\ \cline{2-7}
@@ -67,113 +74,113 @@ The contact prediction data for METAPSICOV STAGE 1 and STAGE 2 predictions demon
 \end{table}
 
 Given the two prediction files, both show localised clusters of contact pairs suggesting
- secondary structure features found in the native protein structures (\cref{fig:ample_flib_cmaps}). However, METAPSICOV STAGE 1 predictions show a much higher frequency of singleton contact pairs, i.e. ones without a neighbouring contact pair.
+ secondary structure features found in the native protein structures (\cref{fig:ample_FLIB_cmaps}). However, METAPSICOV STAGE 1 predictions show a much higher frequency of singleton contact pairs, i.e. ones without a neighbouring contact pair.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{ample_flib_cmaps.pdf}
-	\caption[Contact map comparison for Flib targets]{Comparison of $L/2$ and $L$ correctly (gray) and incorrectly (pink) predicted contact pairs for four Flib targets. Contacts were predicted using METAPSICOV STAGE 1 (top left) and STAGE 2 (bottom right) \cite{Jones2015-wp}. True and false positive contact pairs were identified using a 8\AA cutoff between C\textalpha\ (C\textbeta\ in case of GLY) atoms of a reference crystal structure.}
-	\label{fig:ample_flib_cmaps}
+	\includegraphics[width=\textwidth]{ample_FLIB_cmaps.pdf}
+	\caption[Contact map comparison for FLIB targets]{Comparison of $L/2$ and $L$ correctly (gray) and incorrectly (pink) predicted contact pairs for four FLIB targets. Contacts were predicted using METAPSICOV STAGE 1 (top left) and STAGE 2 (bottom right) \cite{Jones2015-wp}. True and false positive contact pairs were identified using a 8\AA cutoff between C\textalpha\ (C\textbeta\ in case of GLY) atoms of a reference crystal structure.}
+	\label{fig:ample_FLIB_cmaps}
 \end{figure}
 
-An analysis of the absolute difference of torsion angles between the SPIDER2 \cite{Heffernan2015-wp} prediction and a corresponding reference crystal structure highlight accurate predictions for three of four targets (\cref{fig:ample_flib_spider2}). The largest \gls{mae} of \textphi-angles across the four target sequences is $24.347^{\circ}$, and the largest \gls{mae} of \textpsi-angles is $45.459^{\circ}$ (\gls{mae} values for \gls{pdb} entry 1u06). The smallest \textphi-\gls{mae} is $13.822^{\circ}$ (\gls{pdb}: 1aba) and smallest \textpsi-\gls{mae} is $17.273^{\circ}$ (\gls{pdb}: 1lo7). Segments in sequence space with regular secondary structure, as predicted by PSIPRED \cite{Jones1999-fi}, result primarily in low \gls{mae} of torsion angles. In contrast, unstructured regions highlight much larger \gls{mae} values indicating the difficulty of predicted these regions. Noticeably, the \textpsi-\gls{mae} appears to be much larger in those regions than the \textphi-\gls{mae} for the same residue.
+An analysis of the absolute difference of torsion angles between the SPIDER2 \cite{Heffernan2015-wp} prediction and a corresponding reference crystal structure highlight accurate predictions for three of four targets (\cref{fig:ample_FLIB_spider2}). The largest \gls{mae} of \textphi-angles across the four target sequences is $24.347^{\circ}$, and the largest \gls{mae} of \textpsi-angles is $45.459^{\circ}$ (\gls{mae} values for \gls{pdb} entry 1u06). The smallest \textphi-\gls{mae} is $13.822^{\circ}$ (\gls{pdb}: 1aba) and smallest \textpsi-\gls{mae} is $17.273^{\circ}$ (\gls{pdb}: 1lo7). Segments in sequence space with regular secondary structure, as predicted by PSIPRED \cite{Jones1999-fi}, result primarily in low \gls{mae} of torsion angles. In contrast, unstructured regions highlight much larger \gls{mae} values indicating the difficulty of predicted these regions. Noticeably, the \textpsi-\gls{mae} appears to be much larger in those regions than the \textphi-\gls{mae} for the same residue.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{ample_flib_spider2.pdf}
-	\caption[SPIDER2 torsion angle prediction analysis of Flib targets]{Comparison of \gls{mae} of torsion angles predicted by SPIDER2 and extracted from a corresponding \gls{pdb} structure. PSIPRED \cite{Jones1999-fi} secondary structure prediction provided alongside the \gls{mae} values.}
-	\label{fig:ample_flib_spider2}
+	\includegraphics[width=\textwidth]{ample_FLIB_spider2.pdf}
+	\caption[SPIDER2 torsion angle prediction analysis of FLIB targets]{Comparison of \gls{mae} of torsion angles predicted by SPIDER2 and extracted from a corresponding \gls{pdb} structure. PSIPRED \cite{Jones1999-fi} secondary structure prediction provided alongside the \gls{mae} values.}
+	\label{fig:ample_FLIB_spider2}
 \end{figure}
 
-\subsection{Flib fragment picking}
+\subsection{FLIB fragment picking}
+Sixteen FLIB fragment libraries were picked for each protein target in this study. Each fragment library consisted of one permutation given altering input paramaters and contact prediction files.
 
-Sixteen Flib fragment libraries were picked for each protein target in this study. Each fragment library consisted of one permutation given altering input paramaters and contact prediction files.
-
-Across all four targets, the Flib algorithm selected a total of 8,548,775 fragments (\cref{table:ample_flib_frag_summary}). The fragment libraries show similar statistics across the four protein targets despite the diversity in fold and chain lengths. The Flib score average falls at $~3,200$ Flib score units with an average 9.0\AA\ \gls{rmsd}. Fragments for the alpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) scored the lowest mean Flib score with 3035.50 units; however, the same target scored the worst by mean \gls{rmsd} with an average of 9.48\AA. In contrast, fragments picked for the sequence of the bacteriophage T4 glutaredoxin (\gls{pdb} ID: 1aba) achieved the best mean \gls{rmsd} of 7.85\AA\ given the second highest mean Flib score of 3217.49 units (\cref{table:ample_flib_frag_summary}).
+Across all four targets, the FLIB algorithm selected a total of 8,535,458 fragments (\cref{table:ample_FLIB_frag_summary}). The fragment libraries show similar statistics across the four protein targets despite the diversity in fold and chain lengths. The mean FLIB score is $~3,200$ FLIB score units with a mean \gls{rmsd} of 9.0\AA. Fragments for the alpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) scored the lowest mean FLIB score with 3034.03 units; however, the same target scored the worst by mean \gls{rmsd} with an average of 9.47\AA. In contrast, fragments picked for the sequence of the bacteriophage T4 glutaredoxin (\gls{pdb} ID: 1aba) achieved the best mean \gls{rmsd} of 7.85\AA\ given the second highest mean FLIB score of 3216.87 units (\cref{table:ample_FLIB_frag_summary}).
 
 \begin{table}[H]
   \centering
   \scriptsize
-  \caption[Flib fragment characterics across four protein targets]{Summary of fragment statistics for Flib libraries selected for four protein targets. Count\textsubscript{H} corresponds to the count of fragments extracted from homologs.}
-  \label{table:ample_flib_frag_summary}
+  \caption[FLIB fragment characterics across four protein targets]{Summary of fragment statistics for FLIB libraries selected for four protein targets. Count\textsubscript{H} corresponds to the count of fragments extracted from homologs.}
+  \label{table:ample_FLIB_frag_summary}
   \begin{tabularx}{\textwidth}{X X X X X X X X X}
       \hline
-      \multirow{2}{*}{\textbf{Target}} & \multirow{2}{*}{\textbf{Count}} & \multirow{2}{*}{\textbf{Count\textsubscript{H}}} & \multicolumn{3}{c}{\textbf{Flib score}} & \multicolumn{3}{c}{\textbf{\gls{rmsd}}} \\ \cline{4-9}
+      \multirow{2}{*}{\textbf{Target}} & \multirow{2}{*}{\textbf{Count}} & \multirow{2}{*}{\textbf{Count\textsubscript{H}}} & \multicolumn{3}{c}{\textbf{FLIB score}} & \multicolumn{3}{c}{\textbf{\gls{rmsd}}} \\ \cline{4-9}
       		&			&			& Median 	& Mean 		& Sigma 	& Median 	& Mean 	& Sigma \\
       \hline
-	  1aba	& 2,094,332	& 45,193	& 3061.05	& 3217.49	& 1405.71	& 7.70		& 7.85	& 3.81	\\
-  	  1lo7  & 2,501,675	& 23,416	& 3187.44	& 3372.06	& 1497.49	& 9.00		& 9.43	& 4.61  \\
-      1u06  & 1,136,435	& 60,456	& 2902.68	& 3035.50	& 1306.17	& 9.51		& 9.48	& 3.94	\\
-      5nfc  & 2,816,333	& 48,839	& 2982.69	& 3127.00	& 1316.56	& 8.89		& 9.16	& 4.18	\\ 
+      1aba	& 2,091,321	& 45,133		& 3,060.51	& 3,216.87	& 1,405.35	& 7.70	& 7.85	& 3.81	\\
+	  1lo7	& 2,497,813	& 23,396		& 3,186.61	& 3,370.99	& 1,496.80	& 9.00	& 9.43	& 4.61	\\
+      1u06	& 1,133,517	& 60,159		& 2,901.16	& 3,034.03	& 1,305.64	& 9.51	& 9.47	& 3.94	\\
+      5nfc	& 2,812,807	& 48,828		& 2,982.47	& 3,126.60	& 1,316.28	& 8.89	& 9.16	& 4.18	\\
       \hline
-      Total	& 8,548,775	& 177,904	& 3049.31	& 3208.72	& 1397.20	& 8.68		& 8.96	& 4.25	\\ 
+      Total	& 8,535,458	& 177516		& 3048.75	& 3207.94	& 1396.74	& 8.68	& 8.96	& 4.25	\\
       \hline
   \end{tabularx}
 \end{table}
 
-A split of the per-target fragment libraries into their distinct conditions highlights the improved library quality of certain conditions with regards to the mean Flib score and \gls{rmsd} (\cref{fig:ample_flib_flibcond}). In particular, top-$L$ (6 residues sequence separation) METAPSICOV STAGE 1 contact predictions yielded the lowest for both metrics across all targets, which suggests this condition to be the most favourable for picking fragments. A comparison of the sequence separation, i.e. using all contact pairs or medium- and long-range ones only, strongly suggests much lower and thus more favourable scores for using short-, medium- and long-range contact pairs. A very similar difference is noticeable for METAPSICOV STAGE 2 contact predictions (\cref{fig:ample_flib_flibcond}). Independent of the starting set of contact pairs, the most favourable condition for selecting fragments using Flib uses top-$L$ contact pairs with 6 residues sequence separation. The exclusion of idealised \textalpha-helical fragments did not affect the overall Flib score and \gls{rmsd} greatly ($max \Delta_{Flib}=25.87; max \Delta_{RMSD}=0.06$).
+A split of the per-target fragment libraries into their distinct conditions highlights the improved library quality of certain conditions with regards to the mean FLIB score and \gls{rmsd} (\cref{fig:ample_FLIB_FLIBcond}). In particular, top-$L$ (6 residues sequence separation) METAPSICOV STAGE 1 contact predictions yielded the lowest for both metrics across all targets, which suggests this condition to be the most favourable for picking fragments. A comparison of the sequence separation, i.e. using all contact pairs or medium- and long-range ones only, strongly suggests much lower and thus more favourable scores for using short-, medium- and long-range contact pairs. A very similar difference is noticeable for METAPSICOV STAGE 2 contact predictions (\cref{fig:ample_FLIB_FLIBcond}). Independent of the starting set of contact pairs, the most favourable condition for selecting fragments using FLIB uses top-$L$ contact pairs with 6 residues sequence separation. The exclusion of idealised \textalpha-helical fragments did not affect the overall FLIB score and \gls{rmsd} greatly ($max \Delta_{FLIB}=25.68; max \Delta_{RMSD}=0.06$).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{ample_flib_flibcond.pdf}
-	\caption[Flib fragment library comparison]{Flib fragment library comparison for four targets highlighting the differences in mean Flib score and \gls{rmsd} by starting with different subsets of contact predictions. $L$ refers to the number of residues per target sequence. $Y$ refers to idealised \textalpha-helical fragment exclusion during fragment picking; $N$ refers to treating those fragments like all others.}
-	\label{fig:ample_flib_flibcond}
+	\includegraphics[width=\textwidth]{ample_FLIB_FLIBcond.pdf}
+	\caption[FLIB fragment library comparison]{FLIB fragment library comparison for four targets highlighting the differences in mean FLIB score and \gls{rmsd} by starting with different subsets of contact predictions. $L$ refers to the number of residues per target sequence. $Y$ refers to idealised \textalpha-helical fragment exclusion during fragment picking; $N$ refers to treating those fragments like all others.}
+	\label{fig:ample_FLIB_FLIBcond}
 \end{figure}
 
-An analysis of each fragment with regards to its \gls{rmsd} to the target structure and a classification into true and false positives (by \gls{rmsd}-cutoff of 1.5\AA) further highlighted the best contact pairs for fragment picking to be top-$L$ short-, medium- and long-range contacts from the METAPSICOV STAGE 1 predictions (\cref{fig:ample_flib_fragtps}). The classification of fragments into true and false positives also highlights the localisation of true positives according to secondary structure elements in the target structure. Noticeably, no fragment library covers last 20\% of the target sequences with some not covering more than 50\%. ... why? :-O
+An analysis of each fragment with regards to its \gls{rmsd} to the target structure and a classification into true and false positives (by \gls{rmsd}-cutoff of 1.5\AA) further highlighted the best contact pairs for fragment picking to be top-$L$ short-, medium- and long-range contacts from the METAPSICOV STAGE 1 predictions (\cref{fig:ample_FLIB_fragtps}). The classification of fragments into true and false positives also highlights the localisation of true positives according to secondary structure elements in the target structure. 
+
+Noticeably, no fragment library covers last 20\% of the target sequences with some not covering more than 50\%. ... why? :-O
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{ample_flib_fragtps.pdf}
-	\caption[]{Flib fragment distribution of true (blue) and false (red) positive fragments per residue position in the target sequence. True and false positivity was assessed by a \gls{rmsd}-cutoff of 1.5\AA\ compared to the native structure. The predicted secondary structure of each target sequence is given at the top: \textalpha-helices (red), \textbeta-strands (blue), and loops (gray). The fragment frequency in each bin is presented using a log scale.}
-	\label{fig:ample_flib_fragtps}
+	\includegraphics[width=\textwidth]{ample_FLIB_fragtps.pdf}
+	\caption[]{FLIB fragment distribution of true (blue) and false (red) positive fragments per residue position in the target sequence. True and false positivity was assessed by a \gls{rmsd}-cutoff of 1.5\AA\ compared to the native structure. The predicted secondary structure of each target sequence is given at the top: \textalpha-helices (red), \textbeta-strands (blue), and loops (gray). The fragment frequency in each bin is presented using a log scale.}
+	\label{fig:ample_FLIB_fragtps}
 \end{figure}
 
-\subsection{Flib fragment selection for \acrlong{mr}}
-
-One of the most important aspects of bypassing \textit{ab initio} structure prediction and using the relevant fragments directly as \gls{mr} search models is the selection of the fragments with the highest similarity between fragment and target structure. The Flib score - a cumulative metric judging the quality of a fragment - is the most obvious feature; however, it is unknown to-date whether a correlation between the Flib score and the fragment \gls{rmsd} exists. Taking all non-homologous fragments in this study, a first attempt was made to identify a correlation between a fragment's Flib score and \gls{rmsd}. The results presented here indicate towards a positive correlation between the Flib score and the corresponding fragment \gls{rmsd} for almost all fragments across the different target fragment libraries (\cref{fig:ample_flib_flibrelat}). However, a small fraction of fragments appear as outliers, not fitting the correlation of lower Flib scores corresponding to lower \gls{rmsd} values. On average, 0.2\% of fragments per library are contained in this outlier set.
+\subsection{FLIB fragment selection for \acrlong{mr}}
+One of the most important aspects of bypassing \textit{ab initio} structure prediction and using the relevant fragments directly as \gls{mr} search models is the selection of the fragments with the highest similarity between fragment and target structure. The FLIB score - a cumulative metric judging the quality of a fragment - is the most obvious feature; however, it is unknown to-date whether a correlation between the FLIB score and the fragment \gls{rmsd} exists. Taking all non-homologous fragments in this study, a first attempt was made to identify a correlation between a fragment's FLIB score and \gls{rmsd}. The results presented here indicate towards a positive correlation between the FLIB score and the corresponding fragment \gls{rmsd} for almost all fragments across the different target fragment libraries (\cref{fig:ample_FLIB_FLIBrelat}). However, a small fraction of fragments appear as outliers, not fitting the correlation of lower FLIB scores corresponding to lower \gls{rmsd} values. On average, 0.2\% of fragments per library are contained in this outlier set.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{ample_flib_flibrelat.png}
-	\caption[Correlation analysis for Flib score and \gls{rmsd}]{Scatterplot highlighting the positive correlation between fragment Flib scores (x-axes) and \gls{rmsd} values (y-axes). Four targets are illustrated: 1aba (green), 1lo7 (yellow), 1u06 (orange), and 5nfc (purple). Each column represents a different fragment picking strategy, and no fragment illustrated correpsonds to an idealised \textalpha-helix.}
-	\label{fig:ample_flib_flibrelat}
+	\includegraphics[width=\textwidth]{ample_FLIB_FLIBrelat.png}
+	\caption[Correlation analysis for FLIB score and \gls{rmsd}]{Scatterplot highlighting the positive correlation between fragment FLIB scores (x-axes) and \gls{rmsd} values (y-axes). Four targets are illustrated: 1aba (green), 1lo7 (yellow), 1u06 (orange), and 5nfc (purple). Each column represents a different fragment picking strategy, and no fragment illustrated correpsonds to an idealised \textalpha-helix.}
+	\label{fig:ample_FLIB_FLIBrelat}
 \end{figure}
 
-An analysis of the outliers for characteristics that would allow for their exclusion showed the randomness of their occurrence. These fragments contain all secondary structure types, span the entire target sequence and consist of a gsreat range of peptide lengths. Furthermore, they occur in all fragment libraries, irrelevant of their original picking strategy. The only characteristic setting these outlier fragments apart from the remaining set is an \gls{rmsd} value of $>30$\AA. Nevertheless, it appears that these outlier fragments with unusually high \gls{rmsd} values are not to be included in the final fragment search model set, given that their overall minimum Flib score is 795.62 units, which is one order of magnitude more than the overall minimum for the remaining fragments. Indeed, an inspection of our final fragment set for \gls{mr} trials highlights the absence of any of these outlier fragments.
+An analysis of the outliers for characteristics that would allow for their exclusion showed the randomness of their occurrence. These fragments contain all secondary structure types, span the entire target sequence and consist of a gsreat range of peptide lengths. Furthermore, they occur in all fragment libraries, irrelevant of their original picking strategy. The only characteristic setting these outlier fragments apart from the remaining set is an \gls{rmsd} value of $>30$\AA. Nevertheless, it appears that these outlier fragments with unusually high \gls{rmsd} values are not to be included in the final fragment search model set, given that their overall minimum FLIB score is 795.62 units, which is one order of magnitude more than the overall minimum for the remaining fragments. Indeed, an inspection of our final fragment set for \gls{mr} trials highlights the absence of any of these outlier fragments.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{ample_flib_finalrelat.pdf}
-	\caption[Correlation analysis for final Flib \gls{mr} fragments]{Scatterplot highlighting the positive correlation between fragment Flib scores and \gls{rmsd} values. The plot contains all fragments independent of target or picking strategy. The colour of each scatter point illustrates the fragment length. Outlier fragments derived from \gls{pdb} entry 4am6 are highlighted.}
-	\label{fig:ample_flib_finalrelat}
+	\includegraphics[width=\textwidth]{ample_FLIB_finalrelat.pdf}
+	\caption[Correlation analysis for final FLIB \gls{mr} fragments]{Scatterplot highlighting the positive correlation between fragment FLIB scores and \gls{rmsd} values. The plot contains all fragments independent of target or picking strategy. The colour of each scatter point illustrates the fragment length. Outlier fragments derived from \gls{pdb} entry 4am6 are highlighted.}
+	\label{fig:ample_FLIB_finalrelat}
 \end{figure}
 
-A closer inspection of the fragment metrics in the final \gls{mr} set further supports the positively linear relationship between a fragment's Flib score and \gls{rmsd} (\cref{fig:ample_flib_finalrelat}). An increase in Flib score is related to a higher \gls{rmsd} value, thus a lower Flib score indicates less structural similarity between the fragment and the target fold. Furthermore, the size of the fragments also correlates as a third feature with the two aformentioned ones. Longer fragments - with higher proportions of dissimilarity between fragment and target - show higher Flib scores and \gls{rmsd} values (\cref{fig:ample_flib_finalrelat}). Noticeably, a cluster of large fragments with the highest Flib scores in the set show a high similarity to their target structure (\cref{fig:ample_flib_finalrelat}). All fragments in this cluster were picked for the bacteriophage T4 glutaredoxin sequence (\gls{pdb} ID: 1aba) and extracted from the same region of the crystal structure of the actin-related protein ARP8 (\gls{pdb} ID: 4am6). 
+A closer inspection of the fragment metrics in the final \gls{mr} set further supports the positively linear relationship between a fragment's FLIB score and \gls{rmsd} (\cref{fig:ample_FLIB_finalrelat}). An increase in FLIB score is related to a higher \gls{rmsd} value, thus a lower FLIB score indicates less structural similarity between the fragment and the target fold. Furthermore, the size of the fragments also correlates as a third feature with the two aformentioned ones. Longer fragments - with higher proportions of dissimilarity between fragment and target - show higher FLIB scores and \gls{rmsd} values (\cref{fig:ample_FLIB_finalrelat}). Noticeably, a cluster of large fragments with the highest FLIB scores in the set show a high similarity to their target structure (\cref{fig:ample_FLIB_finalrelat}). All fragments in this cluster were picked for the bacteriophage T4 glutaredoxin sequence (\gls{pdb} ID: 1aba) and extracted from the same region of the crystal structure of the actin-related protein ARP8 (\gls{pdb} ID: 4am6). 
 
 % - satisfaction of contact information <-- freq dist for no contacts satisfied <-- either a bug or a serious problem with discrepancies of contact information and satisfaction
 
 % \begin{figure}[H]
 % 	\centering
-% 	\includegraphics[width=\textwidth]{ample_flib_consatis.pdf}
-% 	\caption[Contact satisfaction of Flib-derived fragments]{Distribution of contact satisfaction given all \gls{mr} fragments per target.}
-% 	\label{fig:ample_flib_search_models}
+% 	\includegraphics[width=\textwidth]{ample_FLIB_consatis.pdf}
+% 	\caption[Contact satisfaction of FLIB-derived fragments]{Distribution of contact satisfaction given all \gls{mr} fragments per target.}
+% 	\label{fig:ample_FLIB_search_models}
 % \end{figure}
 
-Lastly, Flib fragments in the final set comprise a diverse set of short super-secondary structure motifs to small substructures (\cref{fig:ample_flib_search_models}). Depending on the target, the predominant secondary structure type in the fragment search models changes. Importantly, not a single super-secondary structure motif dominates the set, increasing the sampling diversity to be undertaken during \gls{mr}.
+Lastly, FLIB fragments in the final set comprise a diverse set of short super-secondary structure motifs to small substructures (\cref{fig:ample_FLIB_search_models}). Depending on the target, the predominant secondary structure type in the fragment search models changes. Importantly, not a single super-secondary structure motif dominates the set, increasing the sampling diversity to be undertaken during \gls{mr}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[height=\textheight]{ample_flib_search_models1.png}
+	\includegraphics[height=\textheight]{ample_FLIB_search_models1.png}
 \end{figure}
 
 \begin{figure}[H]\ContinuedFloat
 	\centering
-	\includegraphics[width=\textwidth]{ample_flib_search_models2.png}
-	\caption[Fragment search models derived from Flib]{Non-redundant sample of fragment search models selected for four different protein targets.}
-	\label{fig:ample_flib_search_models}
+	\includegraphics[width=\textwidth]{ample_FLIB_search_models2.png}
+	\caption[Fragment search models derived from FLIB]{Non-redundant sample of fragment search models selected for four different protein targets.}
+	\label{fig:ample_FLIB_search_models}
 \end{figure}
 
-\subsection{\acrlong{mr} using Flib fragments}
+\subsection{\acrlong{mr} using FLIB fragments}
 
 % - fragment eLLG given calculated RMSD, and three estimated RMSD values

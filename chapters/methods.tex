@@ -1,6 +1,6 @@
 
-\section{Datasets}
-\subsection{FLUME dataset} \label{sec:methods_flume_dataset}
+\section{Dataset selection}
+\subsection{FLUME dataset} \label{sec:methods_dataset_flume}
 A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:methods_flume_dataset}). The test set covered the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-dy} secondary-structure assignment. Target chain lengths fell in the range of [62, 221] residues. Each crystal structure contained one molecule per asymmetric unit and the resolutions of the experimental data was in range from 1.0 to 2.3\AA.
 
 \begin{sidewaystable}
@@ -37,7 +37,7 @@ A test set of 21 globular protein targets was manually selected to include a ran
 	\end{tabularx}
 \end{sidewaystable}
 
-\subsection{KEENO dataset} \label{sec:methods_keeno_dataset}
+\subsection{KEENO dataset} \label{sec:methods_dataset_keeno}
 An unbiased selection of 27 non-redundant protein targets was selected using the following protocol (\cref{table:methods_keeno_dataset}).
 
 The Pfam v29.0 \cite{Finn2016-tz} database was filtered for all protein families with at least one representative structure in the RCSB \gls{pdb} \cite{Berman2000-qj} database. Each representative had to have monomeric protein stoichiometry and its fold classified in the SCOPe v2.05 database \cite{Chandonia2017-bd}. Targets with fold assignments other than "a" (all-\textalpha), "b" (all-\textbeta), "c" (mixed \textalpha+\textbeta) or "d" (mixed \textalpha/\textbeta) were excluded to exclusively focus on regular globular protein folds. Each resulting protein target was screened against the RESTful API of the RCSB \gls{pdb} (\url{www.rcsb.org}) webserver to identify targets meeting the following criteria: experimental technique is X-ray crystallography; chain length is $\geq100$ residues and $\leq250$ residues; resolution is between 1.3 and 2.3\AA; structure factor amplitudes are deposited in the Protein Data Bank \cite{Berman2000-qj} database; and there is only a single molecule in the asymmetric unit. The resulting protein structures were cross-validated against the \gls{pdbtm} \cite{Tusnady2005-lp} to exclude any possible matches. Subsequently, one representative entry was randomly selected for each Pfam family.
@@ -86,13 +86,11 @@ The final selection of the 27 targets was performed by randomly selecting one ta
 	\end{tabularx}
 \end{sidewaystable}
 
-\subsection{ETHERWOOD dataset} \label{sec:methods_etherwood_dataset}
+\subsection{ETHERWOOD dataset} \label{sec:methods_dataset_etherwoo}
 
-The selection of this dataset was done by Dr. Jens MH Thomas. The following extract from \cite{Thomas2017-lq} outlines the selection process.
+% =====================================================================
 
-\begin{displayquote}
-	A set of 14 transmembrane protein structures was selected by firstly generating a list of all the \textalpha-helical proteins from the \gls{pdbtm} \cite{Tusnady2005-lp}. An advanced query was run against the \gls{pdb} to extract all structures corresponding to the \gls{pdbtm} list but containing a single protein entity (regardless of the number of copies in the crystallographic asymmetric unit), with a sequence length $<250$ and where the structure was resolved to a resolution of $<2.5$\AA. The resuluting selection was clustered with CD-HIT \cite{Li2006-kw} using a sequence-identity threshold of 0.4 and a word length of 2. For each cluster with more than one structure, the shortest, highest resolution structure was selected where there was a viable experimental dataset available. Structures with a chain length of $<30$ residues or $<800$ residues in the asymmetric unit were selected to create the final set. 
-\end{displayquote}
+The selection of this dataset was done by \cite{Thomas2017-lq}. In summary, 14 non-redundant transmembrane protein targets were selected from the \gls{pdbtm} \cite{Tusnady2005-lp}, with a chain length of $<250$ residues and resolution of $<2.5$\AA. The final selection is summarised in \cref{table:methods_keeno_dataset}.
 
 \begin{sidewaystable}
 	\footnotesize
@@ -122,24 +120,29 @@ The selection of this dataset was done by Dr. Jens MH Thomas. The following extr
 \end{sidewaystable}
 
 
-\section{Statistics}
-\textcolor{red}{This bit will almost certainly be moved to a better home ...}
-\subsection{Alignment depth} \label{sec:methods_alignment_depth}
+\section{Evaluation of data}
+\subsection{\acrlong{msa}}
+\subsubsection{Alignment depth} \label{sec:methods_alignment_depth}
+To be written ...
+
 \begin{equation} 
 N_{eff}=\sum_{i}\frac{1}{\sum_{j}S_{i,j}}
 \label{eq:methods_alignment_depth}
 \end{equation}
 
+\subsection{Contact prediction}
+\subsubsection{Coverage} \label{sec:methods_contact_coverage}
+To be written ...
 
-\subsection{Precision} \label{sec:methods_precision}
-The precision of a contact prediction is calculated by dividing the number of true positive (TP) contact pairs by the number of false positive (FP) ones. To determine if a given contact in a prediction is either true or false positive, contact pairs are compared to those contacts extracted from a reference protein structure. Two residues in a protein structure are considered to be in contact if their C\textbeta\ atoms (C\textalpha\ in case of Gly) are $<8$\AA\ apart.
+\subsubsection{Precision} \label{sec:methods_contact_precision}
+The precision of a set of contact pairs is equivalent to the the proportion of \gls{tp} contact pairs in the overall set (\cref{eq:methods_precision}). A contact pair was defined as \gls{tp} if the equivalent C\textbeta\ (C\textalpha\ in case of Gly) atoms in the native crystal structure were $<8$\AA\ apart.
 
 \begin{equation} 
 Prec = \frac{TP}{TP-FP}
 \label{eq:methods_precision}
 \end{equation}
 
-\subsection{Jaccard index} \label{sec:methods_jaccard_idx}
+\subsubsection{Jaccard index} \label{sec:methods_contact_jaccard_idx}
 The Jaccard index describes the similarity between two contact predictions by the proportion of contact pairs in the intersection compared to the union of the two predictions. The Jaccard index is calculated using \cref{eq:methods_jaccard_index}.
 
 \begin{equation} 
@@ -151,9 +154,13 @@ The variables $x$ and $y$ are two sets of contact pairs. $\left |x \cap y\right 
 
 The Jaccard index falls in the range [0,1], with a value of 1 corresponding to identical sets of contact pairs and 0 to non-identical ones. It is worth noting that only exact matches are considered and the neighbourhood of a single contact ignored.
 
-\subsection{Singleton contacts} \label{sec:methods_singleton_contacts}
-\subsection{\acrlong{rmsd}} \label{sec:methods_rmsd}
-\subsection{\acrlong{tmscore}} \label{sec:methods_tmscore}
+\subsection{Singleton contacts} \label{sec:methods_contact_singletons}
+To be written ...
+
+\subsection{\textit{Ab initio} decoys}
+\subsubsection{\acrlong{rmsd}} \label{sec:methods_abinitio_rmsd}
+To be written ...
+\subsubsection{\acrlong{tmscore}} \label{sec:methods_abinitio_tmscore}
 The \gls{tmscore} is a metric to assess the similarity between two protein structures. Unlike the \gls{rmsd}, which is easily misled by major deviations in few parts between the two structures, the \gls{tmscore} assesses the global topology between the two folds more accurately \cite{Zhang2005-hx}. The key difference in achieving this is the weighting of the distances. The \gls{rmsd} weights all distances equally; in contrast, the \gls{tmscore} has a length-dependent weighting with shorter distances between residues obtaining stronger weights \cite{Zhang2005-hx}.
 
 \begin{equation} \label{eq:methods_tmscore}
@@ -168,5 +175,10 @@ In \cref{eq:methods_tmscore,}, $L$ is the length of the target protein and $L_{a
 
 The \gls{tmscore} always falls in range of (0, 1], whereby higher values correlate to higher degrees of similarity between the two protein structures. A \gls{tmscore} of $<0.17$ indicates that two structures have no similarity between them, whereas a value of $\geq0.50$ typically describes the same fold \cite{Xu2010-sw}.
 
-\subsection{\acrlong{rio}} \label{sec:methods_rio}
+\subsection{\acrlong{mr} search models}
+\subsubsection{\acrlong{rio}} \label{sec:methods_mr_rio}
+To be written ...
+
+\subsection{Structure solution} \label{sec:methods_mr_success}
+The requirement for a successful \gls{mr} structure solution was defined by SHELXE \gls{cc} of $\geq25.0$ and \gls{acl} of $\geq10.0$ combined with post-SHELXE Buccaneer \cite{} or Arp/wArp \cite{} R-values of $\leq0.45$.
 The RIO score counts the number of C\textalpha atoms in the \gls{mr} result that are within 1.5\AA\ of a C\textalpha atom in the crystal structure (regardless of how the C\textalpha\ atoms are related in sequence), including only stretches where at least three consecutive C\textalpha\ atoms of the \gls{mr} result overlie matching C\textalpha atoms in the deposited structure. This quantifies how well the \gls{mr} result maps onto the crystal structure, without making any assumptions about the correctness of the model or the placement with respect to register. The total \gls{rio} score is composed of an in-register (i.e. residues in the placed \gls{mr} search model correctly overlay their counterparts in the crystal structure) $RIO_{in}$ component and a second $RIO_{out}$ component summing out-of-register overlays.
