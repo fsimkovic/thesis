@@ -1,7 +1,7 @@
 
 \section{Dataset selection}
 \subsection{FLUME dataset} \label{sec:methods_dataset_flume}
-A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:methods_flume_dataset}). The test set covered the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-dy} secondary-structure assignment. Target chain lengths fell in the range of [62, 221] residues. Each crystal structure contained one molecule per asymmetric unit and the resolutions of the experimental data was in range from 1.0 to 2.3\AA.
+A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:methods_dataset_flume}). The test set covered the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-dy} secondary-structure assignment. Target chain lengths fell in the range of [62, 221] residues. Each crystal structure contained one molecule per asymmetric unit and the resolutions of the experimental data was in range from 1.0 to 2.3\AA.
 
 \begin{sidewaystable}
 	\footnotesize
@@ -38,7 +38,7 @@ A test set of 21 globular protein targets was manually selected to include a ran
 \end{sidewaystable}
 
 \subsection{KEENO dataset} \label{sec:methods_dataset_keeno}
-An unbiased selection of 27 non-redundant protein targets was selected using the following protocol (\cref{table:methods_keeno_dataset}).
+An unbiased selection of 27 non-redundant protein targets was selected using the following protocol (\cref{table:methods_dataset_keeno}).
 
 The Pfam v29.0 \cite{Finn2016-tz} database was filtered for all protein families with at least one representative structure in the RCSB \gls{pdb} \cite{Berman2000-qj} database. Each representative had to have monomeric protein stoichiometry and its fold classified in the SCOPe v2.05 database \cite{Chandonia2017-bd}. Targets with fold assignments other than "a" (all-\textalpha), "b" (all-\textbeta), "c" (mixed \textalpha+\textbeta) or "d" (mixed \textalpha/\textbeta) were excluded to exclusively focus on regular globular protein folds. Each resulting protein target was screened against the RESTful API of the RCSB \gls{pdb} (\url{www.rcsb.org}) webserver to identify targets meeting the following criteria: experimental technique is X-ray crystallography; chain length is $\geq100$ residues and $\leq250$ residues; resolution is between 1.3 and 2.3\AA; structure factor amplitudes are deposited in the Protein Data Bank \cite{Berman2000-qj} database; and there is only a single molecule in the asymmetric unit. The resulting protein structures were cross-validated against the \gls{pdbtm} \cite{Tusnady2005-lp} to exclude any possible matches. Subsequently, one representative entry was randomly selected for each Pfam family.
 
@@ -90,13 +90,13 @@ The final selection of the 27 targets was performed by randomly selecting one ta
 
 % =====================================================================
 
-The selection of this dataset was done by \cite{Thomas2017-lq}. In summary, 14 non-redundant transmembrane protein targets were selected from the \gls{pdbtm} \cite{Tusnady2005-lp}, with a chain length of $<250$ residues and resolution of $<2.5$\AA. The final selection is summarised in \cref{table:methods_keeno_dataset}.
+The selection of this dataset was done by \cite{Thomas2017-lq}. In summary, 14 non-redundant transmembrane protein targets were selected from the \gls{pdbtm} \cite{Tusnady2005-lp}, with a chain length of $<250$ residues and resolution of $<2.5$\AA. The final selection is summarised in \cref{table:methods_dataset_etherwood}.
 
 \begin{sidewaystable}
 	\footnotesize
 	\centering
 	\caption{Summary of the ETHERWOOD dataset.}
-	\label{table:methods_keeno_dataset}
+	\label{table:methods_dataset_etherwood}
 	\begin{tabularx}{\textheight}{ t b t t t t t t t s t }
 		\hline
 		\textbf{\gls{pdb} ID} & \textbf{Molecule}	& \textbf{Resolution (\AA)}	& \textbf{Space Group}	& \textbf{Chain ID}	& \textbf{Chain Length}	& \textbf{Molecules per ASU}	& \textbf{Matthew's Coefficient}	& \textbf{Solvent Content (\%)}	& \textbf{Fold}	& \textbf{Citation}	\\
