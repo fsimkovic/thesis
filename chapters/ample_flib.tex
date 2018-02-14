@@ -158,7 +158,7 @@ An analysis of the outliers for characteristics that would allow for their exclu
 
 A closer inspection of the fragment metrics in the final \gls{mr} set further supports the positively linear relationship between a fragment's FLIB score and \gls{rmsd} (\cref{fig:ample_flib_finalrelat}). Thus, the FLIB score can be related to the similarity of a fragment with the target structure. Furthermore, the size of the fragments also positively correlates with the the FLIB scores and \gls{rmsd}. Longer fragments - with higher proportions of dissimilarity between fragment and target - show higher FLIB scores and \gls{rmsd} values (\cref{fig:ample_flib_finalrelat}). Noticeably, a cluster of large fragments with some of the highest FLIB scores in the set show a reasonable similarity to their target structure (\cref{fig:ample_flib_finalrelat}). All fragments in this cluster were picked for the bacteriophage T4 glutaredoxin sequence (\gls{pdb} ID: 1aba) and extracted from the same region of the crystal structure of the actin-related protein ARP8 (\gls{pdb} ID: 4am6). In comparison, some smaller fragments with peptide lengths $<50$ residues and lower FLIB scores of $<3000$ show the highest \gls{rmsd} values in the final set.
 
-One further unique aspect of this study compared to other fragment-\gls{mr} approaches is the use of residue-residue contact information to score fragments during picking, preferring those which satisfy at least one contact pair. In the final set 39\% of all fragments satisfy at least one, 26\% at least two and 20\% at least three contact pairs. Across the four targets, 50\% of fragments selected for 4-hydroxybenzoyl CoA thioesterase (PDB ID: 1lo7) (\cref{fig:ample_flib_consatis}). The fragments selected for the \textalpha-spectrin SH3 domain (PDB ID: 1u06) show the lowest contact pair satisfaction with 28\%.
+One further unique aspect of this study compared to other fragment-\gls{mr} approaches is the use of residue-residue contact information to score fragments during picking, preferring those which satisfy at least one contact pair. In the final set 39\% of all fragments satisfy at least one, 26\% at least two and 20\% at least three contact pairs. Across the four targets, 50\% of fragments selected for 4-hydroxybenzoyl CoA thioesterase (\gls{pdb} ID: 1lo7) (\cref{fig:ample_flib_consatis}). The fragments selected for the \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) show the lowest contact pair satisfaction with 28\%.
 
 \begin{figure}[H]
 	\centering
@@ -181,5 +181,24 @@ Lastly, FLIB fragments in the final set comprise a diverse set of short super-se
 	\label{fig:ample_flib_search_models}
 \end{figure}
 
-% \subsection{\acrlong{mr} using FLIB fragments}
-% - fragment eLLG given calculated RMSD, and three estimated RMSD values
+\subsection{\acrlong{mr} using FLIB fragments}
+FLIB fragments picked for four target sequences using a variety of FLIB input options generated $>6,500$ fragments, which were subjected to the \gls{mr} pipeline MRBUMP with their corresponding target experimental data. Given that each fragment was trialled with two different side-chain treatments and 3 different PHASER \gls{rmsd} values, a total of 39,432 \gls{mr} attempts were made to solve four target structures. Out of nearly 40,000 \gls{mr} attempts 598 (1.52\%) led to the structure solutions of two targets, namely the T4 glutaredoxin (\gls{pdb} ID: 1aba) and \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) (\cref{fig:ample_flib_mrsummary}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_mrsummary.pdf}
+	\caption[MR structure solutions by FLIB target]{Distribution of structure solutions by FLIB target. All \gls{mr} attempts total to 39,432, out of which 598 are structure solutions. Percentage values are given above each bar for values $>0$.}
+	\label{fig:ample_flib_mrsummary}
+\end{figure}
+
+An analysis of the binned results by fragment-ranking, side-chain treatment or PHASER \gls{rmsd} value confirms the expected outcome that \gls{rmsd}-sorted fragments result in more structure solutions than the FLIB-sorted counterparts (\cref{fig:ample_flib_mrbyconfig}). Nearly two-thirds of the trialled fragments were the best in their libraries when grouped by lengths and sorted by their \gls{rmsd} values. However, the structure of \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) was only solved with FLIB-ranked fragments. A further separation of the successful \gls{mr} fragments reveals no difference between the two side-chain treatments with identical numbers of successful fragment search model attempts. Furthermore, a separation of attempts by PHASER input \gls{rmsd} value suggests a value of 0.1 to be the most favourable.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_mrbyconfig.pdf}
+	\caption[MR structure solutions by input parameters]{Distribution of structure solutions by fragment and MRBUMP configuration.}
+	\label{fig:ample_flib_mrbyconfig}
+\end{figure}
+
+\section{Discussion}
+The main objective of this study was to investigate the application of FLIB fragments to \gls{mr}.
