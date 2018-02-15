@@ -167,28 +167,37 @@ One further unique aspect of this study compared to other fragment-\gls{mr} appr
 	\label{fig:ample_flib_consatis}
 \end{figure}
 
-Lastly, FLIB fragments in the final set comprise a diverse set of short super-secondary structure motifs to small substructures (\cref{fig:ample_flib_search_models}). Depending on the target, the predominant secondary structure type in the fragment search models changes. Importantly, not a single super-secondary structure motif dominates the set, increasing the sampling diversity to be undertaken during \gls{mr}.
+% Lastly, FLIB fragments in the final set comprise a diverse set of short super-secondary structure motifs to small substructures (\cref{fig:ample_flib_search_models}). Depending on the target, the predominant secondary structure  type in the fragment search models changes. Importantly, not a single super-secondary structure motif dominates the set, increasing the sampling diversity to be undertaken during \gls{mr}.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[height=\textheight]{ample_flib_search_models1.png}
-\end{figure}
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[height=\textheight]{ample_flib_search_models1.png}
+% \end{figure}
 
-\begin{figure}[H]\ContinuedFloat
-	\centering
-	\includegraphics[width=\textwidth]{ample_flib_search_models2.png}
-	\caption[Fragment search models derived from FLIB]{Non-redundant sample of fragment search models selected for four different protein targets.}
-	\label{fig:ample_flib_search_models}
-\end{figure}
+% \begin{figure}[H]\ContinuedFloat
+% 	\centering
+% 	\includegraphics[width=\textwidth]{ample_flib_search_models2.png}
+% 	\caption[Fragment search models derived from FLIB]{Non-redundant sample of fragment search models selected for four different protein targets.}
+% 	\label{fig:ample_flib_search_models}
+% \end{figure}
 
 \subsection{\acrlong{mr} using FLIB fragments}
-FLIB fragments picked for four target sequences using a variety of FLIB input options generated $>6,500$ fragments, which were subjected to the \gls{mr} pipeline MRBUMP with their corresponding target experimental data. Given that each fragment was trialled with two different side-chain treatments and 3 different PHASER \gls{rmsd} values, a total of 39,432 \gls{mr} attempts were made to solve four target structures. Out of nearly 40,000 \gls{mr} attempts 598 (1.52\%) led to the structure solutions of two targets, namely the T4 glutaredoxin (\gls{pdb} ID: 1aba) and \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) (\cref{fig:ample_flib_mrsummary}).
+FLIB fragments picked for four target sequences using a variety of FLIB input options generated $>6,500$ fragments, which were subjected to the \gls{mr} pipeline MRBUMP with their corresponding target experimental data. Given that each fragment was trialled with two different side-chain treatments and 3 different PHASER \gls{rmsd} values, a total of 39,432 \gls{mr} attempts were made across four target structures. Out of nearly 40,000 \gls{mr} attempts 598 led to the structure solutions of two targets, namely the T4 glutaredoxin (\gls{pdb} ID: 1aba) and \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) (\cref{fig:ample_flib_mrsummary}).
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ample_flib_mrsummary.pdf}
-	\caption[MR structure solutions by FLIB target]{Distribution of structure solutions by FLIB target. All \gls{mr} attempts total to 39,432, out of which 598 are structure solutions. Percentage values are given above each bar for values $>0$.}
+	\caption[MR structure solutions by FLIB target]{Distribution of structure solutions by FLIB target. All \gls{mr} attempts total to 39,432, out of which 598 are structure solutions. Values above each bar indicates percentage search models successful out of the corresponding set.}
 	\label{fig:ample_flib_mrsummary}
+\end{figure}
+
+A division of FLIB-fragment search models by their respective origin libraries provides further evidence that METAPSICOV STAGE 1 contact predictions allows for the selection of the most accurate fragments (\cref{fig:ample_flib_flibcond}), which directly translates into the structure solution count (\cref{fig:ample_flib_flibcondmr}). Furthermore, this division also highlights and supports the quality of fragment libraries picked with top-$L$ (min. 6 residues sequence separation) METAPSICOV STAGE 1 predictions. Trialling the optimal fragment picking strategy with and without helical fragments ($>90$\%-helical content assigned using DSSP) resulted in the library without to outperform the other (\cref{fig:ample_flib_flibcondmr}, 3rd and 4th bars). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_flibcondmr.pdf}
+	\caption[MR structure solutions by FLIB library]{Distribution of structure solutions by FLIB library configuration. The star above the third bar marks this bar as the most optimal by \gls{rmsd} and FLIB score after fragment picking.}
+	\label{fig:ample_flib_flibcondmr}
 \end{figure}
 
 An analysis of the binned results by fragment-ranking, side-chain treatment or PHASER \gls{rmsd} value confirms the expected outcome that \gls{rmsd}-sorted fragments result in more structure solutions than the FLIB-sorted counterparts (\cref{fig:ample_flib_mrbyconfig}). Nearly two-thirds of the trialled fragments were the best in their libraries when grouped by lengths and sorted by their \gls{rmsd} values. However, the structure of \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) was only solved with FLIB-ranked fragments. A further separation of the successful \gls{mr} fragments reveals no difference between the two side-chain treatments with identical numbers of successful fragment search model attempts. Furthermore, a separation of attempts by PHASER input \gls{rmsd} value suggests a value of 0.1 to be the most favourable.
@@ -199,6 +208,19 @@ An analysis of the binned results by fragment-ranking, side-chain treatment or P
 	\caption[MR structure solutions by input parameters]{Distribution of structure solutions by fragment and MRBUMP configuration.}
 	\label{fig:ample_flib_mrbyconfig}
 \end{figure}
+
+In \gls{mr}, the correct placement of very small structural fragment may not always be detectable by the output metrics of underlying software. In benchmarking exercises, the \gls{rio} metric has shown to be a very useful and powerful metric to detect such situations \cite{Thomas2015-ag,Simkovic2016-jx,Thomas2017-lq}. Given that the peptide lengths of FLIB fragments in this study range from 6 to 63 residues, the \gls{rio} score is most suitable in validating the correct placement of FLIB-fragment search models. Indeed, all fragments with SHELXE \gls{cc} $\geq25$ and \gls{acl} $\geq10$ contain at least 3 correctly placed C\textalpha\ atoms (i.e. a \gls{rio} score $\geq3$). Furthermore, the\gls{rio} metric indicates that more than 1,000 fragments have C\textalpha\ atoms placed within 1.5\AA\ of any atom in the target structure. However, only 4 residues are on average placed correctly, which is not enough to achieve structure solution (\cref{fig:ample_flib_mrrionorm}). All successful FLIB fragments have a minimum model- and target-normalised \gls{rio} scores of 29.7\% and 9.2\% (\cref{fig:ample_flib_mrrionorm}, green markers). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_flib_mrrionorm.pdf}
+	\caption[Relationship between fragment chain length and normalised RIO scores.]{Dependence of normalised \acrlong{rio} (RIO\textsubscript{norm}) score on the fragment chain length. The two plots show  \gls{rio} scores normalised by the chain lengths of (a) the fragment and (b) the target. Colour coding indicates if the FLIB-fragment search model resulted in a structure solution. Each plot contains 1,780 fragment points.}
+	\label{fig:ample_flib_mrrionorm}
+\end{figure}
+
+Sixty-six FLIB fragment have $>60$\% of their residues placed correctly yet did not lead to structure solution. These fragments were picked for the target sequences of T4 glutaredoxin (\gls{pdb} ID: 1aba) and 
+4-hydroxybenzoyl CoA thioesterase (\gls{pdb} ID: 1lo7), and contain between 10 and 23 amino acids. These 66 fragments were derived from 15 targets and contain 17 unique peptide sequences. The fragments' \gls{rmsd} values are in range [0.19 2.72)\AA\ with a mean \gls{rmsd} of 1.10\AA. Surprisingly, almost all of these fragments contain primarily \textalpha-helices.
+
 
 \section{Discussion}
 The main objective of this study was to investigate the application of FLIB fragments to \gls{mr}.
