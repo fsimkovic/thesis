@@ -10,7 +10,7 @@ This section will provide an overview of MR.
 #### 1.3 Ab initio structure prediction
 This section will provide an overview of fragment-based ab initio structure prediction of protein sequences.
 
-#### 1.4 Contact predictions
+#### 1.4 Contact prediction
 This section will discuss primarily covariance-based contact prediction. It will also ellaborate on latest developments
 of hybrid methods and in this context briefly describe ML-based algorithms.
 
