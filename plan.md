@@ -11,7 +11,8 @@ This section will provide an overview of MR.
 This section will provide an overview of fragment-based ab initio structure prediction of protein sequences.
 
 #### 1.4 Contact predictions
-This section will discuss primarily covariance-based contact prediction. It will also ellaborate on latest developments of hybrid methods and in this context briefly describe ML-based algorithms.
+This section will discuss primarily covariance-based contact prediction. It will also ellaborate on latest developments
+of hybrid methods and in this context briefly describe ML-based algorithms.
 
 ### 2. General methods
 This section will outline general methodologies used throughout multiple chapters in the thesis. It will outline any
@@ -20,22 +21,15 @@ software developments done as part of the PhD to create, enhance or fix software
 #### 2.1 Dataset creation
 This section will describe proceedures of selecting target datasets.
 
-#### 2.2 Automated computation of TMscore values in AMPLE
-This section will outline the procedure implemented in AMPLE to automatically calculate RIO scores for full decoys and
-truncated structures.
+#### 2.2 Evaluation of data
+This section will outline and explain all mathematical and statistical definitions used throughout all chapters to
+assess various information.
 
-#### 2.3 Computation of RIO scoring
-This section will expand on the Thomas et al (2015) RIO scoring algorithm to explain the sequence-independent
-computation.
+##### 2.2.1 Co-evolution data
 
-#### 2.4 ConKit
-This section will describe the ConKit package, and any algorithms implemented to assess contact and sequence information. It will expand on Simkovic et al (2017) and describe the package in more detail.
+##### 2.2.2 Structure prediction data
 
-#### 2.5 Integration of ConKit in AMPLE
-This section will briefly outline the integration of ConKit in AMPLE
-
-#### 2.6 Truncation fo single models in AMPLE
-This section will outline the algorithm implemented into AMPLE to truncate single decoys
+##### 2.2.3 Crystallographic data
 
 ### 3. Residue contacts predicted by evolutionary covariance extend the application of ab initio Molecular Replacement to larger and more challenging protein folds
 This chapter will contain all work described in Simkovic et al (2016)
@@ -55,5 +49,17 @@ This chapter will briefly discuss the use of two alternate ab initio structure p
 
 ### 8. Protein fragments as search models in Molecular Replacement
 This chapter will discuss the use of ab initio structure prediction fragments directly as search models.
+
+### 9. Software developments
+
+#### 9.1 ConKit
+This section will describe the ConKit package, and any algorithms implemented to assess contact and sequence information. 
+It will expand on Simkovic et al (2017) and describe the package in more detail.
+
+#### 9.2 Integration of ConKit in AMPLE
+This section will briefly outline the integration of ConKit in AMPLE
+
+#### 9.3 Truncation of single models in AMPLE
+This section will outline the algorithm implemented into AMPLE to truncate single decoys
 
 ### 9. Discussion
