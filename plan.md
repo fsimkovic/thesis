@@ -62,4 +62,4 @@ This section will briefly outline the integration of ConKit in AMPLE
 #### 9.3 Truncation of single models in AMPLE
 This section will outline the algorithm implemented into AMPLE to truncate single decoys
 
-### 9. Discussion
+### 10. Discussion
