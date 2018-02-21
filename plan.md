@@ -25,7 +25,7 @@ This section will describe proceedures of selecting target datasets.
 This section will outline and explain all mathematical and statistical definitions used throughout all chapters to
 assess various information.
 
-##### 2.2.1 Co-evolution data
+##### 2.2.1 Contact prediction data
 
 ##### 2.2.2 Structure prediction data
 
