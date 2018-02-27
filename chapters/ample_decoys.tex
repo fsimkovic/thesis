@@ -8,7 +8,7 @@
 %
 % \subsection{Decoy subselection}
 %
-% The precision score of long-range contact pairs ($\geq24$ residues sequence separation) was calculated for every decoy in every decoy set using ConKit (see Chapter XYZ). Subsequently, decoy sets were reduced for Molecular Replacement trials. Four different algorithms were used: \textit{NONE}, \textit{LINEAR}, \textit{SCALED}, and \textit{CUTOFF}. The \textit{NONE} algorithm accepted all 1,000 decoys and left the original set unchanged, which is identical to the current AMPLE approach. The \textit{LINEAR} algorithm sliced a decoy list removing the 500 decoys satisfying the least number of long-range contacts. For the \textit{SCALED} algorithm, each long-range satisfaction score was divided by the set's average score, and only decoys with scores $\geq0.5$ kept. The \textit{CUTOFF} algorithm excluded all decoys with a long-range satisfaction score of $<0.287$, a hard-coded threshold identified by \cite{De_Oliveira2017-yf} Thus, for every starting decoy set, we obtained four different decoy sets for Molecular Replacement trials using AMPLE.
+% The precision score of long-range contact pairs ($\geq24$ residues sequence separation) was calculated for every decoy in every decoy set using ConKit (see Chapter XYZ). Subsequently, decoy sets were reduced for Molecular Replacement trials. Four different algorithms were used: \textit{NONE}, \textit{LINEAR}, \textit{SCALED}, and \textit{CUTOFF}. The \textit{NONE} algorithm accepted all 1,000 decoys and left the original set unchanged, which is identical to the current AMPLE approach. The \textit{LINEAR} algorithm sliced a decoy list removing the 500 decoys satisfying the least number of long-range contacts. For the \textit{SCALED} algorithm, each long-range contact precision score was divided by the set's average score, and only decoys with scores $\geq0.5$ kept. The \textit{CUTOFF} algorithm excluded all decoys with a long-range contact precision score of $<0.287$, a hard-coded threshold identified by \cite{De_Oliveira2017-yf} Thus, for every starting decoy set, we obtained four different decoy sets for Molecular Replacement trials using AMPLE.
 %
 % \subsection{Molecular Replacement}
 %
@@ -18,11 +18,11 @@
 
 \section{Results}
 
-In this experiment, we assessed the value of subselecting sets of 1,000 decoys to AMPLE's cluster-and-truncate approach. Decoys were subselected using one of four algorithms, namely \textit{NONE}, \textit{LINEAR}, \textit{SCALED} or \textit{CUTOFF}. Each algorithm considered the long-range contact satisfaction in a decoy and used it to exclude different numbers from the original set.
+In this experiment, we assessed the value of subselecting sets of 1,000 decoys to AMPLE's cluster-and-truncate approach. Decoys were subselected using one of four algorithms, namely \textit{NONE}, \textit{LINEAR}, \textit{SCALED} or \textit{CUTOFF}. Each algorithm considered the long-range contact precision in a decoy and used it to exclude different numbers from the original set.
 
-\subsection{Long-range contact prediction satisfaction and its relationship to decoy quality}
+\subsection{Long-range contact precision and its relationship to decoy quality}
 
-The underlying principle of this study is the positive linear relationship between long-range contact satisfaction and the decoy quality. Here, we can validate previous findings of this relationship \cite{} given the satisfaction of long-ralong-range contact prediction and the decoy quality.
+The underlying principle of this study is the positive linear relationship between long-range contact precision and the decoy quality. Here, we can validate previous findings of this relationship \cite{} given the precision of long-ralong-range contact prediction and the decoy quality.
 
 Almost all targets across four contact prediction algorithm show positive linear relationships (Fig \ref{fig:ample_decoys_lrprectm}). This relationship applies to globular and transmembrane protein folds.
 
@@ -54,7 +54,7 @@ Almost all targets across four contact prediction algorithm show positive linear
 %         \caption{}
 %         \label{fig:ample_decoys_pconsc2_lrprectm}
 %     \end{subfigure}
-%     \caption{Long-range contact satisfaction and TM-score comparison for decoys generated with (a) CCMPRED, (b)
+%     \caption{Long-range contact precision and TM-score comparison for decoys generated with (a) CCMPRED, (b)
 %     MEMBRAIN, (c) METAPSICOV, and (d) PCONSC2 contact predictions.}
 %     \label{fig:ample_decoys_lrprectm}
 % \end{figure}
