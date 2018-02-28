@@ -20,7 +20,7 @@ Each fragment library was then filtered to remove homologs. Hereby, BLASTP and H
 
 All per-target fragments were then binned by their peptide lengths. Subsequently, they were ranked by FLIB scores and \gls{rmsd} values, and the best fragment from each length-dependent bin selected. Fragments of the same template structure consisting of the same region with varying flanking residues were kept, if they were ranked top for each fragment length group. Finally, the coordinates for the selected fragments were extracted and two files created for each, one containing the backbone atoms and the other containing all atoms.
 
-\subsection{\acrlong{mr} in MRBUMP}
+\subsection{Molecular Replacement in MRBUMP}
 The previously extracted fragments were subjected to the \gls{mr} pipeline MRBUMP \cite{Keegan2008-hk}. The latter uses PHASER \cite{McCoy2007-bf} for \gls{mr}, REFMAC5 \cite{Murshudov2011-we} for refinement and SHELXE \cite{Thorn2013-ir} for density modification and main-chain tracing. MRBUMP default parameters were used with exception of the PHASER \gls{rmsd} estimate. Each fragment was subjected to MRBUMP using PHASER \gls{rmsd} values of 0.1, 0.6 and 1.0\AA.
 
 \subsection{Assessment of FLIB fragments}
@@ -126,7 +126,7 @@ An analysis of the coverage of the target sequence with respect to each picking 
 
 Given that FLIB uses co-evolution data to validate fragments, it is little surprise that higher degrees of \gls{tp} contacts co-localise with high-density contact pair regions along the target sequence (\cref{fig:ample_flib_fragtps}). This characteristic explains a lesser frequency of \gls{tp} contacts in top-$L/2$ fragment libraries not necessarily because of worse contact predictions but to validate fragments against thus rejecting them. Therefore, the co-localisation of \gls{tp} FLIB fragments in high-density contact regions highlights the importance of adding this additional source of information to validate picked fragments. 
 
-\subsection{FLIB fragment selection for \acrlong{mr}}
+\subsection{FLIB fragment selection for Molecular Replacement}
 One of the most important aspects of bypassing \textit{ab initio} structure prediction and using the relevant fragments directly as \gls{mr} search models is the selection of the fragments with the highest similarity between fragment and target structure. The FLIB score --- a metric judging the quality of a fragment --- is the most obvious feature; however, it is unknown to-date whether a correlation between the FLIB score and the fragment \gls{rmsd} exists. 
 
 Taking all non-homologous fragments in this study, a first attempt was made to identify a correlation between a fragment's FLIB score and \gls{rmsd}. The Spearman's rank-order correlation coefficient analysis shows positive correlations between a fragment's FLIB and \gls{rmsd} scores (\cref{fig:ample_flib_flibspearman}). However, the strength of the correlation varies greatly between different fragment libraries and targets. The optimal fragment picking strategy --- top-$L$ (6 residues sequence separation) METAPSICOV STAGE 1 --- results in the strongest correlations across all targets. The same contact pair selection with METAPSICOV STAGE 2 predictions results in the second greatest correlations. Noticeably, the bacteriophage T4 glutaredoxin (\gls{pdb} ID: 1aba) fragment libraries show much more positive correlations than the remaining targets. The fragments selected for \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) show the overall weakest correlations.
@@ -169,7 +169,7 @@ Thus, the final set of FLIB fragment \gls{mr} search models spans a wide range o
 	\label{fig:ample_flib_search_models}
 \end{figure}
 
-\subsection{\acrlong{mr} using FLIB fragments}
+\subsection{Molecular Replacement using FLIB fragments}
 FLIB fragments picked for four target sequences using a variety of FLIB input options generated $>6,500$ fragments, which were subjected to the \gls{mr} pipeline MRBUMP with their corresponding target experimental data. Given that each fragment was trialled with two different side-chain treatments and 3 different PHASER \gls{rmsd} values, a total of 39,432 \gls{mr} attempts were made across four target structures. Out of nearly 40,000 \gls{mr} attempts, 598 led to the structure solutions of two targets, namely the T4 glutaredoxin (\gls{pdb} ID: 1aba) and \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) (\cref{fig:ample_flib_mrsummary}).
 
 \begin{figure}[H]

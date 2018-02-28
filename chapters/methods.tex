@@ -161,7 +161,7 @@ Almost all sliced sets of residue-residue contact pairs contain a fraction of co
 To identify singleton contact pairs in a set of contacts, the neighbourhood of each pair was searched for the presence of other contacts. The search radius was defined by $\pm2$ residues in a 2D-representation of the contact map. If no other contact pair was identified under such constraint, the contact pair was classified as singleton.
 
 \subsection{Structure prediction data}
-\subsubsection{\acrlong{rmsd}}
+\subsubsection{Root Mean Squared Deviatio}
 The \gls{rmsd} is a measure to quantify the average atomic distance between two protein structures (\cref{eq:methods_rmsd}). The \gls{rmsd} is sequence-independent, and measures the distance between C\textalpha\ atoms.
 
 \begin{equation}
@@ -169,7 +169,7 @@ RMSD=\sqrt{\frac{1}{n}\sum_{i,j}{(x_i-x_j)^2+(y_i-y_j)^2+(z_i-z_j)^2}}
 \label{eq:methods_rmsd}
 \end{equation}
 
-\subsubsection{\acrlong{tmscore}}
+\subsubsection{Template-Modelling score}
 The \gls{tmscore} is a more accurate measure of structure similarity between two protein structures than the \gls{rmsd} \cite{Zhang2004-nn}. Unlike the \gls{rmsd}, the \gls{tmscore} score assigns a lenght-dependent weight to the distances between atoms, with shorter distances getting assigned stronger weights \cite{Zhang2004-nn}. The \gls{tmscore} has widely been accepted as a standard for assessing the similarity between two structures, particularly in the field of \textit{ab initio} structure prediction.
 
 \begin{equation}
@@ -183,7 +183,7 @@ $d_i$ describes the distance between the ith pair of residues. The distance scal
 The long-range contact precision score is computed identically to the precision of sets of contact pairs (\cref{sec:methods_contact_map_prec}). However, the precision score is computed solely for long-range contacts ($>23$ residues sequence separation).
 
 \subsection{Molecular Replacement data}
-\subsubsection{\acrlong{rio}}
+\subsubsection{Register-Independent Overlap}
 The \gls{rio} score \cite{Thomas2015-ag} is a measure of structural similarity between two protein structures considering the total number of atoms within $<1.5$\AA. The \gls{rio} can be separated into the in- (\gls{rio}\textsubscript{in}) and out-of-register (\gls{rio}\textsubscript{out}) score considering the sequence register between the model and the target. The \gls{rio} score is primarily a measure for post-\gls{mr} search models to assess the placement of search model atoms with respect to the previously solved crystal structure. To avoid the addition of single atoms place correctly purely by chance, the \gls{rio} metric requires at least three consecutive C\textalpha\ atoms to be within th 1.5\AA\ threshold.
 
 \subsubsection{Structure solution}
