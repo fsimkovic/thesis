@@ -1,4 +1,3 @@
-
 \section{Dataset creation}
 \subsection{FLUME dataset} \label{sec:methods_dataset_flume}
 A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:methods_dataset_flume}). The test set covered the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-dy} secondary-structure assignment. Target chain lengths fell in the range of [62, 221] residues. Each crystal structure contained one molecule per asymmetric unit and the resolutions of the experimental data was in range from 1.0 to 2.3\AA.
@@ -180,8 +179,8 @@ TMscore=max\left[\frac{1}{L_{target}}\sum_{i}^{L_{aligned}}{\frac{1}{1+\left(\fr
 
 $d_i$ describes the distance between the ith pair of residues. The distance scale $d_0$ to normalise the distances is defined by the equation $1.24\sqrt[3]{L_{target}-15}-1.8$. The \gls{tmscore} value falls in the range (0, 1]. A \gls{tmscore} value of $<0.2$ indicates two random unrelated structures, and a value $>0.5$ roughly the same fold \cite{Xu2010-sw}
 
-\subsubsection{Long-range contact satisfaction}
-The long-range contact satisfaction score is computed identically to the precision of sets of contact pairs (\cref{sec:methods_contact_map_prec}). However, the precision score is computed solely for long-range contacts ($>23$ residues sequence separation).
+\subsubsection{Long-range contact precision}
+The long-range contact precision score is computed identically to the precision of sets of contact pairs (\cref{sec:methods_contact_map_prec}). However, the precision score is computed solely for long-range contacts ($>23$ residues sequence separation).
 
 \subsection{Molecular Replacement data}
 \subsubsection{\acrlong{rio}}
