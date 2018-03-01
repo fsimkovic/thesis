@@ -7,7 +7,7 @@ Given that fragment libraries selected to perform \textit{ab initio} structure p
 
 \section{Methods}
 \subsection{Target selection}
-Four targets were manually selected for this study. The crystallographic data needed a resolution of around 1.5A with a single molecule in the asymmetric unit. The target chain length needed to be below 150 residues, and the fold of the protein structure to be either mixed \textalpha-\textbeta or all-\textbeta.
+Four targets were manually selected for this study. The crystallographic data needed a resolution of around 1.5A with a single molecule in the asymmetric unit. The target chain length needed to be below 150 residues, and the fold of the protein structure to be either mixed \textalpha-\textbeta or all-\textbeta. A further target selection criterion was the availability of precise contact information for fragment selection.
 
 The \gls{pdb} identifiers of the selected targets are: 1aba, 1lo7, 1u06, and 5nfc. The former two are described in \cref{table:methods_dataset_flume}. Target 1u06 is a recently published structure of \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1kjl in \cref{table:methods_dataset_flume}) with a resolution of 1.49\AA. Target 5nfc is a recently published structure of Galectin-3 (\gls{pdb} ID: 1kjl in \cref{table:methods_dataset_flume}) with a resolution of 1.59\AA. This resulted in a dataset with similar attributes for each target: crystallographic data resolution of $~1.5$\AA\ with a single molecule in the asymmetric unit, and the target chain length of $<150$ residues. Each fold class, mixed \textalpha-\textbeta and all-\textbeta, contained two targets.
 
@@ -34,12 +34,12 @@ In this study, the main objective was to determine if peptide fragments derived 
 \subsection{Precision of FLIB input data}
 The FLIB algorithm requires two sets of input data --- the predicted secondary structure and per-residue torsion angles --- for each target sequence alongside an optional third source of information in form of co-evolution data. The first part of the analysis in this study focuses on these data given that the FLIB fragment picking heavily relies on the individual features in the selection and scoring of each individual fragment \cite{De_Oliveira2015-ba}. Poor data at this stage could lead to poor fragments that would be unsuitable for \gls{mr} trials given that high accuracy, i.e. a low \gls{rmsd} value between the search model and target, is required.
 
-The secondary structure prediction highlighted high precision between each target's prediction and the DSSP-assigned \cite{Frishman1995-ns} secondary structure of the target reference structure (\cref{fig:ample_flib_psipred}). The three targets with \gls{pdb} identifiers 1aba, 1lo7 and 1u06 have secondary structure predictions with a precision of $>72$\%. The fourth target, 5nfc, shows comparatively poor precision of 52.4\%. However, 11 out of 13 secondary structure features are correctly predicted, suggesting successful fragment picking is possible.
+The secondary structure prediction highlighted high precision between each target's prediction and the DSSP-assigned \cite{Frishman1995-ns} secondary structure of the target reference structure (\cref{fig:ample_flib_psipred}). The three targets with \gls{pdb} identifiers 1aba, 1lo7 and 1u06 have secondary structure predictions with a precision of $>89$\%. The fourth target, 5nfc, shows comparatively poor precision of 50.7\% over all residues in the PSIPRED prediction and the DSSP assignment using the reference crystal structure. However, 11 out of 13 secondary structure features are correctly predicted, suggesting successful fragment picking is possible.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ample_flib_psipred.pdf}
-	\caption[PSIPRED schema for FLIB targets]{Schematic comparison of PSIPRED \cite{Jones1999-fi} secondary structure prediction and DSSP \cite{Frishman1995-ns} assignment. Percentage identity is provided next to each identifier.}
+	\caption[PSIPRED schema for FLIB targets]{Schematic comparison of PSIPRED \cite{Jones1999-fi} secondary structure prediction and DSSP \cite{Frishman1995-ns} assignment. Percentage identity is provided next to each identifier. The identitiy was computing using the Hamming distance over all positions present in the target sequence and reference structure.}
 	\label{fig:ample_flib_psipred}
 \end{figure}
 
@@ -166,7 +166,7 @@ Thus, the final set of FLIB fragment \gls{mr} search models spans a wide range o
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ample_flib_search_models2.png}
-	\caption[Fragment search models derived from FLIB]{Non-redundant sample of FLIB fragment search models selected for four different protein targets.}
+	\caption[Fragment search models derived from FLIB]{Non-redundant sample of FLIB fragment search models selected for four different protein targets. Secondary structure defined by and visualisation done in PyMOL (\cite{Schrodinger_LLC2015-jz}). Unpaired \textbeta-strands rendered using the loop style.}
 	\label{fig:ample_flib_search_models}
 \end{figure}
 
@@ -180,23 +180,23 @@ FLIB fragments picked for four target sequences using a variety of FLIB input op
 	\label{fig:ample_flib_mrsummary}
 \end{figure}
 
-The total of 598 \gls{mr} structure solutions were achieved by 70 unique fragments. Sixty-nine of those unique fragments were picked from 60 unique structures for the T4 glutaredoxin (\gls{pdb} ID: 1aba) leading to 97\% of all structure solutions. In comparison, a single unique fragment, selected from three different fragment libraries, led to 18 structure solutions of the \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06). The largest FLIB fragment leading to a structure solution contained 37 residues and the smallest 10.
+The total of 598 \gls{mr} structure solutions were achieved by 70 sequence-unique fragments. Sixty-nine of those fragments were picked from 60 unique structures for the T4 glutaredoxin (\gls{pdb} ID: 1aba) leading to 97\% of all structure solutions. In comparison, a single fragment, selected from three different fragment libraries, led to 18 structure solutions of the \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06). The largest FLIB fragment leading to a structure solution contained 37 residues and the smallest 10.
 
 A division of FLIB-fragment search models by their respective origin libraries provides strong evidence that METAPSICOV STAGE 1 contact predictions allows for the selection of the most accurate fragments (\cref{fig:ample_flib_flibcond}), which directly translates into the structure solution count (\cref{fig:ample_flib_flibcondmr}). Furthermore, this division also highlights and supports the quality of fragment libraries picked with top-$L$ (6 residues sequence separation) METAPSICOV STAGE 1 predictions. Trialling the optimal fragment picking strategy with and without helical fragments ($>90$\% \textalpha-helical content assigned using DSSP) resulted in the library without outperforming the other (\cref{fig:ample_flib_flibcondmr}, 3\textsuperscript{rd} and 4\textsuperscript{th} bars). 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ample_flib_flibcondmr.pdf}
-	\caption[MR structure solutions by FLIB library]{Distribution of structure solutions by FLIB library configuration. The optimal fragment picking strategy, as assessed by FLIB values, is highlighted with a red diamond.}
+	\caption[MR structure solutions by FLIB library]{Distribution of structure solutions by FLIB library configuration. The optimal fragment picking strategy, as assessed by FLIB values, is highlighted with a red diamond to illustrate that the method that picks the best fragments is close to, but not the absolute best for ultimate structure solution. Fragment picking strategies leading to solutions of \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) are highlighted with red crosses.}
 	\label{fig:ample_flib_flibcondmr}
 \end{figure}
 
-An analysis of the binned results by fragment-ranking, side-chain treatment or PHASER \gls{rmsd} value confirms the expected outcome that \gls{rmsd}-sorted fragments result in more structure solutions than the FLIB-sorted counterparts (\cref{fig:ample_flib_mrbyconfig}). Nearly two-thirds of the trialled fragments were the best in their libraries when grouped by lengths and sorted by their \gls{rmsd} values. However, the structure of \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) was only solved with FLIB-ranked fragments. A further separation of the successful \gls{mr} fragments reveals no difference between the two side-chain treatments with identical numbers of successful fragment search model attempts. Furthermore, a separation of attempts by PHASER input \gls{rmsd} value suggests a value of 0.1 to be the most favourable.
+An analysis of the binned results by fragment-ranking, side-chain treatment or PHASER \gls{rmsd} value confirms the expected outcome that \gls{rmsd}-sorted fragments result in more structure solutions than the FLIB-sorted counterparts (\cref{fig:ample_flib_mrbyconfig}). To reiterate, all FLIB fragments were grouped by their peptide length, and the top fragment in each group selected when sorted by either FLIB or \gls{rmsd} values. When separating the total number of structure solutions by the score that made each fragment the best in its original library, it becomes clear that two-thirds of solutions were achieved with fragments scoring best by \gls{rmsd}. However, the structure of \textalpha-spectrin SH3 domain (\gls{pdb} ID: 1u06) was only solved with fragments that scored best in their FLIB fragment libraries by FLIB score. A further separation of the successful \gls{mr} fragments reveals no difference between the two side-chain treatments with identical numbers of successful fragment search model attempts. Furthermore, a separation of attempts by PHASER input \gls{rmsd} value suggests a value of 0.1 to be the most favourable.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ample_flib_mrbyconfig.pdf}
-	\caption[MR structure solutions by input parameters]{Distribution of structure solutions by fragment and MRBUMP configuration.}
+	\caption[MR structure solutions by input parameters]{Distribution of structure solutions by fragment and MRBUMP configuration. The structure solution count is provided above each bar.}
 	\label{fig:ample_flib_mrbyconfig}
 \end{figure}
 
@@ -205,7 +205,7 @@ In \gls{mr}, the correct placement of very small structural fragment may not alw
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ample_flib_mrrionorm.pdf}
-	\caption[Relationship between fragment chain length and normalised RIO scores.]{Dependence of normalised \acrlong{rio} (RIO\textsubscript{norm}) score on the fragment chain length. The two plots show  \gls{rio} scores normalised by the chain lengths of (a) the fragment and (b) the target. Colour coding indicates if the FLIB-fragment search model resulted in a structure solution. Each plot contains 1,780 fragment points.}
+	\caption[Relationship between fragment chain length and normalised RIO scores.]{Dependence of normalised \acrlong{rio} (RIO\textsubscript{norm}) score on the fragment chain length. The two plots show  \gls{rio} scores normalised by the chain lengths of (a) the fragment and (b) the target. Colour coding indicates if the FLIB-fragment search model resulted in a structure solution. Each plot contains 1,780 fragment points; however, not all points are visible due to the superposition of individual scatter points because the same fragment was scored under different \gls{mr} conditions.}
 	\label{fig:ample_flib_mrrionorm}
 \end{figure}
 
