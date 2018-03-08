@@ -4,10 +4,14 @@ This thesis is concerned with the application of residue-residue contact predict
 
 % \subsection{Macromolecular Crystallography}
 
-
 \subsection{Protein structure prediction}
 \subsubsection{Protein folding problem}
+\subsubsection{Comparative modelling and threading}
+\subsubsection{\textit{Ab initio} structure prediction}
+If no known homolog is available, the prediction of the tertiary structure of a protein fold \textit{ab initio} is a popular alternative to comparative modelling. \textit{Ab initio} structure prediction --- commonly also termed free-modelling or \textit{de novo} structure prediction --- starts with the target sequence and no prior knowledge about the target's tertiary fold. 
 
+The most popular and successful \textit{ab initio} structure prediction algorithms use fragment-assembly to predict the tertiary fold of the target. Numerous variations of the basic concept exist; however, all use a similar underlying concept: The target sequence is screened against a database of known protein structures to extract fragments of varying lengths to construct fragment libraries. These fragment libraries are used to sample the tertiary fold by typically starting with an elongated target sequence modelled in 3-dimensional space. Fragments are randomly inserted at various positions, and each move accepted or rejected based on a pre-defined target function. After a certain number of steps (\textcolor{red}{Maybe convergence of the model, i.e no improvement in energy??}), i.e. fragment insertions, a final result is provided by the folding algorithm. In some routines, energy minimisation with forcefields is additionally run on the final result, to achieve a more physiochemically sound result. Given the nature of the problem, i.e. looking for the unknown, a single predicted model ("decoy") is usually not enough. Thus, a general structure prediction routine includes the generation of 10,000s or 100,000s of decoys. Finally, to identify which of the generated decoys is the native fold, a cluster analysis of all decoys can be conducted. The idea is the following: if the prediction algorithm succeeded, it is very likely to having achieved this multiple times. Therefore, if after the precition run a proportionally large cluster exists, one can be relatively confident in the correct fold.
 
+Various different fragment-assembly based structure prediction routines exist. They are all similar in their general protocol. Nevertheless, some algorithms incorporate unique features in an attempt to boost accuracy or performance of the prediction procedure \cite{Jones2001,Rohl2004,Ellis2010,Adhikari2018}.
 
 % \subsection{Residue-residue contact prediction}
