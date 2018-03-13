@@ -10,7 +10,19 @@
 
 ##### 1.2.1 X-ray scattering
 
+- X-rays are high-energy electromagnetic waves with wavelength of 0.1nm (visible light 400-670nm)
+- X-rays interact with matter primarily through the oscillating electric field vector and to a much lesser extent with
+  magnetic field vector [Figure of scattering vector]
+- X-rays have a refractive index practically identical for all materials, which prevents any use of lenses.
+- X-rays are scattered by electrons in matter 
+
 ##### 1.2.2 X-ray crystallography 
+
+- X-ray scattering is either elastic (Thomson scattering) or inelastic (Crompton scattering); however, in MX inelastic is irrelevant because they do not contribute to discrete scattering (diffraction)
+    - Elastic scattering means there is no energy loss and emiiting photon has the same frequence as the incoming photon [validate]
+    - Elastic scattering means scattered/emitted photon appears in discrete direction with probability depending on scattering probability of free electron
+    - Only 0.1 - 1.0% of all X-ray photons are scattered
+
 
 ##### 1.2.3 The phase problem
 
