@@ -1,5 +1,47 @@
 \section{Introduction}
 % \subsection{General introduction}
-% \subsection{Macromolecular Crystallography}
+
+\subsection{Macromolecular Crystallography}
+
+\subsubsection{X-ray scattering}
+
+The scattering of X-ray photons is either elastic (Thomson scattering) or inelastic (Crompton scattering) \cite{Rupp2010-nc}. Crompton scattering results in the free electron to accept some momentum of the incoming photon, resulting in reduced energy of the emitted photon. This form of scattering does not contribute to discrete scattering (or diffraction), and thus is deemed irrelevant to \gls{mx}. In comparison, Thomson scattering maintains all energy in emitting photon, which causes the emitting photon to maintain its frequency and appear in a discrete direction with a probability distribution dependent on the scattering probability of the free electron. Nevertheless, only a small fraction (0.1-1.0\%) of all X-ray photons is scattered \cite{Rupp2010-nc}.
+
+\subsubsection{X-ray crystallography}
+
+In X-ray crystallography, the ultimate goals is to derive the electron density of one or more atoms by exposing those atoms to X-ray radiation. Given the electron density of a molecule, one can reconstruct a model of the molecule of interest by fitting equivalent atoms into the hollow electron density map. In order to achieve such task, one has to make certain assumptions: (i) the movement of electrons around an atom's nucleus occurs in stable defined orbitals, (ii) the electron density of an atom approximates a sphere, and (iii) the atomic scattering factor curves are Gaussian distributions with decreasing probabilities for increasing scattering angles.
+
+Under the assumptions outlined above and the task of exposing a single atom to X-ray radiation, certain observations can be made. The amplitude of the scattered wave emanating from the atom depends on the distribution of electrons. Furthermore, the phase difference between the incoming and emitting X-ray photon wave is 
+
+
+\begin{equation}
+    \label{eq:phase_difference}
+    \Delta\varphi=2\pi\left(\vec{s_1}-\vec{s_0}\right)\vec{r}=2\pi\vec{S}\vec{r}
+\end{equation}
+
+\begin{equation}
+    \label{eq:atomic_scattering_factor}
+    f_s=\int\limits_{\vec{r}}^{V(atoms)}\rho\left(\vec{r}\right)e^{2\pi\\i\vec{S}\vec{r}}d\vec{r}=FT\left[\rho\left(\vec{r}\right)\right]
+\end{equation}
+
+\begin{equation}
+    \label{eq:laue_equations}
+    \vec{S}\vec{a}=n_1; \vec{S}\vec{b}=n_2; \vec{S}\vec{c}=n_3
+\end{equation}
+
+\begin{equation}
+    \label{eq:bragg_law}
+    n\lambda=2d_{hkl}sin\theta
+\end{equation}
+
+\begin{equation}
+    \label{eq:structure_factors}
+    F_s=\sum_{j=1}^{atoms}f_{s,j}^0*e^{2\pi\\i\vec{S}\vec{r}_j}=\sum_{j=1}^{atoms}f_{s,j}^0*e^{2\pi\\i\vec{h}\vec{x}_j}
+\end{equation}
+
+\subsubsection{The Phase problem}
+\subsubsection{Molecular Replacement}
+\subsubsection{Issues and limitations in Macromolecular Crystallography}
+
 % \subsection{Protein structure prediction}
 % \subsection{Residue-residue contact prediction}
