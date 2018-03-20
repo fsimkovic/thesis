@@ -8,36 +8,13 @@
 
 #### 1.2 Macromolecular Crystallography 
 
-##### 1.2.1 X-ray scattering
+##### <s>1.2.1 X-ray scattering</s>
 
-- X-rays are high-energy electromagnetic waves with wavelength of 0.1nm (visible light 400-670nm)
-- X-rays interact with matter primarily through the oscillating electric field vector and to a much lesser extent with
-  magnetic field vector [Figure of scattering vector]
-- X-rays have a refractive index practically identical for all materials, which prevents any use of lenses.
-- X-rays are scattered by electrons in matter 
+##### 1.2.2 Structure determination 
 
-##### 1.2.2 X-ray crystallography 
+##### 1.2.3 Molecular Replacement 
 
-- X-ray scattering by single electron is either elastic (Thomson scattering) or inelastic (Crompton scattering); however, in MX inelastic is irrelevant because it does not contribute to discrete scattering (diffraction)
-    - Elastic scattering means there is no energy loss and emiiting photon has the same frequence as the incoming photon [validate]
-    - Elastic scattering means scattered/emitted photon appears in discrete direction with probability depending on scattering probability of free electron
-    - Only 0.1 - 1.0% of all X-ray photons are scattered, which explains low refractive index
-
-- In scenario of single atom, X-ray photons interact with the electrons orbiting around the atom's nucleus
-- Orbitals of electrons can be described by probability distributions, which described the electron density of an atom
-- Electron density is approximately spherical, which is sufficient for atom scattering factor calculation
-- Wavelength of scattering X-rays of same order of magnitude as diameter of atoms
-- Phase difference of scattered wave in reference to incoming wave is defined by [equation]
-- If assumption is made that electron density is spherical (and thus centrosymmetrical), the atomic scattering factor is described by [equation], where the magnitude corresponds to the electron density in the volume element
-- Under this assumption, the scattering probability increases proportionally with the number of electrons in the atom.
-  The scattering function becomes symmetrical (like Gaussian) because of the centrosymmetry of the electron density. The atomic scattering factor becomes the Fourier transform of the electron density.
-- Nevertheless, worth noting that intensity of scattered X-rays always decreases with increasing scattering angle, which is independent of crystal diffraction quality (remember, Gaussian distribution)
-
-##### 1.2.3 The phase problem
-
-##### 1.2.4 Molecular Replacement 
-
-##### 1.2.5 Issues and limitations
+##### 1.2.4 Issues and limitations
 
 #### 1.3 Ab initio structure prediction
 
