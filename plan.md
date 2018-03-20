@@ -27,8 +27,8 @@
 #### <s>2.1 Dataset creation</s>
 <s>This section will describe procedures of selecting target datasets.</s>
 
-#### 2.2 Combination of contact maps for restraint enhancement
-This section will outline the combination of contact maps with bbcontacts specifically to enhance the restraint weight in ROSETTA energy functions.
+#### <s>2.2 Combination of contact maps for restraint enhancement</s>
+<s>This section will outline the combination of contact maps with bbcontacts specifically to enhance the restraint weight in ROSETTA energy functions.</s>
 
 #### <s>2.3 Evaluation of data</s>
 <s>This section will outline and explain all mathematical and statistical definitions used throughout all chapters to assess various information.</s>
