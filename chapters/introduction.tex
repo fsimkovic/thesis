@@ -61,4 +61,11 @@ The structure factor equation defines the scattering power from a crystal in a g
 
 It should be noted that \cref{eq:structure_factors} is a simplification of the problem at hand. In reality, instrument and experimental corrections need to be applied to the structure factor equation. A correction factor for each experiment-dependent parameter needs to be applied to the structure factor equation. However, in the scope of this work the details of such correction factors do not need to be discussed.
 
+\begin{equation}
+    \rho(x,y,z)=\frac{1}{V}\sum_{h=-\infty}^{+\infty}\sum_{k=-\infty}^{+\infty}\sum_{l=-\infty}^{+\infty}\vec{F}(hkl)\cdot e^{-2\pi\\i(hx+ky+lz)}
+    \label{eq:electron_density}
+\end{equation}
+
+Since complex structure factors describe the molecular structure in the reciprocal space domain, the conversion to the real space domain in form of electron density is required. This can be conveniently done through the bijective Fourier transform, which allows to convert complex structure factors to electron density and vice versa without the loss of any information \cite{Rupp2010-nc}. Thus, electron density can be obtained from the complex structure factors using \cref{eq:electron_density}. The normalisation factor $1/V$ provides the correct units for the electron density $\rho(x,y,z)$.
+
 \subsection{Structure determination}
