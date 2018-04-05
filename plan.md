@@ -12,8 +12,6 @@
 
 ##### 1.2.2 Structure determination 
 
-##### 1.2.3 Molecular Replacement 
-
 ##### 1.2.4 Issues and limitations
 
 #### 1.3 Ab initio structure prediction
