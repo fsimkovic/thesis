@@ -43,7 +43,7 @@ Such determination is possible through the findings made by \textcite{Bragg1913-
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{introduction_bragg.pdf}
+    \includegraphics[width=0.7\textwidth]{introduction_bragg.pdf}
     \caption{Schematic of Bragg scattering.}
     \label{fig:introduction_bragg}
 \end{figure}
@@ -82,3 +82,18 @@ A second approach to improving the initial electron density is termed Refinement
 Once initial phase information is improved through refinement and density modification, attempts can be made to build atomic model coordinates into the electron density map. This process is typically coupled with refinement or density modification to iteratively improve the quality of the partially built model and the electron density map \cite{Rupp2010-nc}. A small number of distinct algorithms are currently used to automatically build atomic coordinates into electron density: main-chain autotracing \cite{Sheldrick2010-cx}, fitting pseudo-atoms into electron density \cite{Lamzin2001-cn}, or fitting reference coordinates with similar electron density maps \cite{Terwilliger2004-ig,Cowtan2006-xv}. In essence, all algorithms attempt to maximise the number of correctly identified and placed atomic coordinates into available electron density. Whilst autotracing solely builds main-chain peptides, the other two approaches rely on sequence information to also build side-chains. Independent of the complexity of the model building task, the higher the resolution and the more complete the initial starting model, the less ambiguous and challenging this overall task becomes \cite{Rupp2010-nc}. 
 
 \subsection{Unconventional Molecular Replacement}
+The process of macromolecular structure determination via conventional \gls{mr} has been outlined previously. Search models are typically derived from structural homologs identified by sequence similarity to the crystallised target \cite{Rupp2010-nc}. However, with decreasing sequence similarity between homologs, it becomes more challenging to identify structural templates suitable for \gls{mr}. Furthermore, experimental phasing approaches to circumvent the absence of \gls{mr} templates can be expensive, unsuccessful and very challenging for certain protein targets, and thus remain unfeasable to pursue at times. Under such circumstances, alternative approaches are required, which are referred to as ``unconventional'' \gls{mr} approaches from here onwards. The unconventional \gls{mr} approach most relevant to the work presented in this thesis utilises the 3-dimensional structure prediction of a protein target starting from its sequence \cite{Qian2007-vo,Rigden2008-vo,Das2009-uz}. 
+ 
+\section{\textit{Ab initio} protein structure prediction}
+\textit{Ab initio} protein structure prediction is the process of predicting a protein's tertiary structure from its primary structure alone.
+
+The folding of protein structures in energy landscape theory is termed the folding funnel hypothesis \cite{Leopold1992-yf}. It assumes that the native state of a protein fold corresponds to its global minimum free energy state along a landscape of local free energy minima (\cref{fig:introduction_foldingfunnel}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{introduction_foldingfunnel.png}
+    \caption{Schematic of the folding funnel hypothesis \cite{Leopold1992-yf}. Diagram produced by \textcite{Wikipedia-FoldingFunnel} contributors.}
+    \label{fig:introduction_foldingfunnel}
+\end{figure}
+
+
