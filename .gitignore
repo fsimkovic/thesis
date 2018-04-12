@@ -7,6 +7,7 @@
 *.blg 
 *.dvi
 *.gl[gos]
+*.glsdefs
 *.ist
 *.lo[fgt] 
 *.out 

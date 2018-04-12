@@ -49,8 +49,9 @@
 \usepackage[nottoc]{tocbibind}
 \addbibresource{library.bib}
 
-\usepackage[acronym]{glossaries}
+\usepackage[acronym,nomain,toc,order=letter,nonumberlist]{glossaries}
 \input{glossary}
+
 \makeglossaries
 
 % \title{Thesis Title}
@@ -58,6 +59,8 @@
 % \date{31 July 2018}
 
 \begin{document}
+
+\pagenumbering{roman}
 
 % \input{titlepage}
 
@@ -72,44 +75,45 @@
 % \chapter*{Acknowledgements}
 % I want to thank...
 
-% \tableofcontents
+\tableofcontents
+\listoffigures
+\listoftables
+\printglossary[title=List of Abbreviations, toctitle=List of Abbreviations]
 
-% \listoffigures
-
-% \listoftables
-
-% \printglossary
+\clearpage
+\pagenumbering{arabic}
 
 \chapter{Introduction}
-\newpage
+\clearpage
 \input{chapters/introduction}
 
-% \chapter{General methodology}
-% \newpage
-% \input{chapters/methods}
+\chapter{General methodology}
+\clearpage
+\input{chapters/methods}
 
 % \chapter{Residue contacts predicted by evolutionary covariance extend the application of \textit{ab initio} molecular replacement to larger and more challenging protein folds}
-% \newpage
+% \clearpage
 
 % \chapter{Evaluation of ROSETTA distance-restraint energy functions on contact-guided \textit{ab initio} structure prediction}
-% \newpage
+% \clearpage
 % \input{chapters/ample_predictors}
 
 % \chapter{Alternative \textit{ab initio} structure prediction algorithms for AMPLE}
-% \newpage
+% \clearpage
 
 % \chapter{Decoy subselection using contact information to enhance MR search model creation}
-% \newpage
+% \clearpage
 
 % \chapter{Protein fragments as search models in Molecular Replacement}
-% \newpage
+% \clearpage
 % \input{chapters/ample_flib}
 
 % \chapter{Conclusion}
-% \newpage
+% \clearpage
 
 % \appendix
 % \chapter{Appendix Title}
+% \clearpage
 % \input{chapters/appendix}
 
 \printbibliography[heading=bibintoc]
