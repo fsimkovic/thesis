@@ -12,6 +12,7 @@ If we expand the example to include all electrons in an atom and expose the atom
     \Delta\varphi=2\pi\left(\boldsymbol{s_1}-\boldsymbol{s_0}\right)\boldsymbol{r}=2\pi \cdot \boldsymbol{S}\boldsymbol{r}
     \label{eq:phase_difference}
 \end{equation}
+\equations{Phase difference equation}
 
 If more than one electron in an atom's electron density scatter the incoming X-ray wave, then the emitting partial waves can be described by the atomic scattering function $f_s$ (\cref{eq:atomic_scattering_factor}), which describes the interference of all scattered waves \cite{Rupp2010-nc}. The total scattering power of an atom is proportional to the number of electrons and element-specific with heavier atoms scattering more strongly. Given the approximation of a centrosymmetric electron density, the atomic scattering function is also symmetric.
 
@@ -19,6 +20,7 @@ If more than one electron in an atom's electron density scatter the incoming X-r
     f_s=\int\limits_{\boldsymbol{r}}^{V(atoms)}\rho\left(\boldsymbol{r}\right) \cdot e^{2\pi\\i\boldsymbol{S}\boldsymbol{r}} \cdot d\boldsymbol{r}
     \label{eq:atomic_scattering_factor}
 \end{equation}
+\equations{Atomic Scattering Factor equation}
 
 With an enhanced understanding of X-ray scattering of electrons orbiting a single atom, it is important to consider X-ray scattering of adjacent atoms, such as it is typically found in molecules. If the electromagnetic wave of a X-ray photon excites all electrons of adjacent atoms, then the resulting partial waves result in constructive or destructive interference. Maximal interference can be obtained when all partial waves are in phase, and maximal destructive interference when out-of-phase. This leads to varying intensities of the emitting X-ray photon at different points in space. To obtain the overall scattering power $F_s$ of all contributing atoms, \cref{eq:atomic_scattering_factor} needs to be modified to include the sum over all atoms $j$ as described in \cref{eq:total_scattering_power}.
 
@@ -26,6 +28,7 @@ With an enhanced understanding of X-ray scattering of electrons orbiting a singl
     F_s=\sum_{j=1}^{atoms}f_{s,j}^0 \cdot e^{2\pi\\i\boldsymbol{S}\boldsymbol{r}_j}
     \label{eq:total_scattering_power}
 \end{equation}
+\equations{Total Scattering Power equation}
 
 If we now translate our hypothetical experiment into a crystal lattice then our understanding described in \cref{eq:total_scattering_power} needs to be expanded from a 1-dimensional distance vector $\boldsymbol{r}$ to the three dimensional lattice translation vectors $\boldsymbol{a}$, $\boldsymbol{b}$ and $\boldsymbol{c}$. The Laue equations (\cref{eq:laue_equations}) do exactly that and ultimately determine the positions of the diffraction peaks in 3-dimensional space.
 
@@ -33,11 +36,13 @@ If we now translate our hypothetical experiment into a crystal lattice then our 
     \boldsymbol{S} \cdot \boldsymbol{a}=n_1, \quad \quad \boldsymbol{S} \cdot \boldsymbol{b}=n_2, \quad \quad \boldsymbol{S} \cdot \boldsymbol{c}=n_3
     \label{eq:laue_equations}
 \end{equation}
+\equations{Laue equations}
 
 \begin{equation}
     n\lambda=2d_{hkl}sin\theta
     \label{eq:bragg_equation}
 \end{equation}
+\equations{Bragg equation}
 
 Such determination is possible through the findings made by \textcite{Bragg1913-cx}, who identified the relationship between the scattering vector $\boldsymbol{S}$ and the planes in the crystal lattice. Today, this relationship is defined by the Bragg equation (\cref{eq:bragg_equation}) \cite{Bragg1913-cx}, which allows us to interpret X-ray diffraction as reflections on discrete lattice planes, which relates the diffraction angle $\theta$ to the lattice spacing $d_{hkl}$ (\cref{fig:introduction_bragg}) \cite{Rupp2010-nc}. For maximum diffraction $n$ needs to be integer multiples to result in maximum constructive interference of wavelength $\lambda$.
 
@@ -54,6 +59,7 @@ Lastly, if the hypothetical model is expanded to molecular crystals, then the to
     F_h=\sum_{j=1}^{atoms}f_{s,j}^0 \cdot e^{2\pi\\i\boldsymbol{h}\boldsymbol{x}_j}
     \label{eq:structure_factors}
 \end{equation}
+\equations{Structure Factor equation}
 
 The structure factor equation defines the scattering power from a crystal in a given reciprocal lattice direction $\boldsymbol{h}$. The scattering is enhanced by the number of repeating units of lattice translation vectors $\boldsymbol{a}$, $\boldsymbol{b}$ and $\boldsymbol{c}$, and thus the overall scattering power is proportional to the number of unit cells in the crystal.
 
@@ -63,6 +69,7 @@ It should be noted that \cref{eq:structure_factors} is a simplification of the p
     \rho(x,y,z)=\frac{1}{V}\sum_{h=0}^{+\infty}\sum_{k=-\infty}^{+\infty}\sum_{l=-\infty}^{+\infty}\boldsymbol{F}(hkl)\cdot e^{-2\pi\\i(hx+ky+lz)}
     \label{eq:electron_density}
 \end{equation}
+\equations{Electron Density equation}
 
 Since complex structure factors describe the molecular structure in the reciprocal space domain, the conversion to the real space domain in form of electron density is required. This can be conveniently done through the bijective Fourier transform, which allows to convert complex structure factors to electron density and vice versa without the loss of any information \cite{Rupp2010-nc}. Thus, electron density can be obtained from the complex structure factors using \cref{eq:electron_density}. The normalisation factor $1/V$ provides the correct units for the electron density $\rho(x,y,z)$.
 
@@ -104,4 +111,7 @@ The most successful \textit{ab initio} structure prediction protocols use knowle
 
 In order to identify the correct fold amongst the thousands of generated decoys, clustering approaches are commonly in combination with \textit{ab initio} protocols. \textcite{Shortle1998-fq} identified that the most-similar decoy to the native structure is most often the centroid (decoy with most neighbours in the cluster) of the largest cluster. Further studies showed that the selection of those centroid decoys helps to identify the most native-like folds amongst the many thousands generated \cite{Zhang2004-uz,Bradley2005-lw,Oldziej2005-qp}. Some protocols use clustering as an intermediate or final step to identify decoys for which it will perform more computationally demanding all-atom refinement \cite{Bradley2005-lw} or other decoy hybridisation \cite{Zhang2004-uc,Xu2012-jf,Yang2015-oc} approaches to further approach the native-like fold \cite{Kryshtafovych2016-aq}.
 
+Despite active research in \textit{ab initio} protein structure prediction over decades, all approaches cannot reliable predict high-resolution structures for anything but small globular folds \cite{Bradley2005-lw,Tai2014-rz, He2013-gm, Kinch2011-py}. The major issue arises from the sampling of the conformation space since incorrect local changes influence the global structure. Furthermore, \textbeta-sheets are inheritely difficult to predict give that strands in fragment-based approaches are inserted one at a time yet rely on the hydrogen bonds to reduce the overall energy of the decoy. To address this issue, \textcite{Lange2012-yh,Raman2010-xv,Gobl2014-gc} started to use \gls{noe} data as residue-residue distance restraints to reduce the sampling space of conformations, which enabled high-resolution of structure predictions for larger protein structures. Nevertheless, it was not until the use of predicted residue-residue contact information that successful \textit{ab initio} protein structure prediction for polypeptide chains with more than 150 residues in length was made possible.
+
 \section{Residue-residue contact prediction} \label{sec:intro_contact_prediction}
+

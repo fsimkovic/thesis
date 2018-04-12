@@ -6,6 +6,7 @@
 *-blx.bib
 *.blg 
 *.dvi
+*.equ
 *.gl[gos]
 *.glsdefs
 *.ist

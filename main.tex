@@ -2,11 +2,9 @@
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=15mm]{geometry}
 \usepackage[Sonny]{fncychap}
 
-\usepackage{setspace}
-\doublespacing
-
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage[doublespacing]{setspace}
 
 \usepackage{graphicx}
 \graphicspath{{images/}}
@@ -34,6 +32,7 @@
 \usepackage{multirow}
 \usepackage{rotating}
 \usepackage{pdflscape}
+\usepackage{tocloft}
 \usepackage{verbatim}
 
 \setcounter{secnumdepth}{4}
@@ -49,10 +48,12 @@
 \usepackage[nottoc]{tocbibind}
 \addbibresource{library.bib}
 
-\usepackage[acronym,nomain,toc,order=letter,nonumberlist]{glossaries}
+\usepackage[acronym,toc,nomain,order=letter,nonumberlist,nopostdot,style=super]{glossaries}
 \input{glossary}
-
 \makeglossaries
+\setlength{\glsdescwidth}{0.8\textwidth}
+
+\AtBeginBibliography{\small}
 
 % \title{Thesis Title}
 % \author{Felix Simkovic}
@@ -64,32 +65,49 @@
 
 % \input{titlepage}
 
-% \input{abstract}
-
-% \chapter*{Dedication}
-% To whom this may concern ...
-
 % \chapter*{Declaration}
 % I declare that..
+
+% \input{abstract}
 
 % \chapter*{Acknowledgements}
 % I want to thank...
 
-\tableofcontents
-\listoffigures
-\listoftables
-\printglossary[title=List of Abbreviations, toctitle=List of Abbreviations]
+% \chapter*{Dedication}
+% To whom this may concern ...
 
+\tableofcontents
 \clearpage
+
+\listoffigures
+\clearpage
+
+\listoftables
+\clearpage
+
+\phantomsection
+\newcommand{\listequationsname}{List of Equations}
+\newlistof{equations}{equ}{\listequationsname}
+\newcommand{\equations}[1]{%
+\addcontentsline{equ}{equations}{\protect\numberline{\theequation}#1}\par}
+\setlength{\cftequationsindent}{1.5em}
+\setlength{\cftequationsnumwidth}{2.3em}
+\addcontentsline{toc}{chapter}{List of Equations}
+\listofequations
+\clearpage
+
+\printglossary[title={List of Abbreviations}, toctitle={List of Abbreviations}]
+\clearpage
+
 \pagenumbering{arabic}
 
 \chapter{Introduction}
 \clearpage
 \input{chapters/introduction}
 
-\chapter{General methodology}
-\clearpage
-\input{chapters/methods}
+% \chapter{General methodology}
+% \clearpage
+% \input{chapters/methods}
 
 % \chapter{Residue contacts predicted by evolutionary covariance extend the application of \textit{ab initio} molecular replacement to larger and more challenging protein folds}
 % \clearpage
@@ -116,6 +134,8 @@
 % \clearpage
 % \input{chapters/appendix}
 
+\singlespacing
 \printbibliography[heading=bibintoc]
+\doublespacing
 
 \end{document}
