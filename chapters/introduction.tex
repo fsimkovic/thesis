@@ -126,3 +126,29 @@ The use of residue-residue contact information to reduce the conformational sear
 \end{figure}
 
 \textcite{Lapedes1999-cg} proposed the use of a global statistical model to infer coevolution of residue pairs to circument the main problem of decoupling causal and transitive correlations. However, it was not until a decade later before first implementations of the global statistical model surfaced to successfully disentangle these types of correlations by considering all amino acid pair positions simultaneously (instead of independently, such as in the local statistical model) \cite{Weigt2009-sx,Burger2010-ee,Balakrishnan2011-wh,Marks2011-os,Morcos2011-lk,Jones2012-ks,Ekeberg2013-ay}. 
+
+% temporary stuff I need later
+\begin{equation}
+    P(\boldsymbol{\sigma})=\frac{1}{Z}exp\left(\sum_{i=1}^{N}\mathbf{h}_i\left(\sigma_i\right)+\sum_{i=1}^{N-1}\sum_{j=i+1}^{N}\mathbf{J}_{ij}\left(\sigma_i, \sigma_j\right)\right)
+    \label{eq:potts_model}
+\end{equation}
+\equations{Potts model}
+
+\begin{equation}
+    Z=\sum_{\boldsymbol{\sigma}}^{ } exp\left(\sum_{i=1}^{N}\mathbf{h}_i\left(\sigma_i\right)+\sum_{i=1}^{N-1}\sum_{j=i+1}^{N}\mathbf{J}_{ij}\left(\sigma_i, \sigma_j\right)\right)
+    \label{eq:potts_model_partition_function}
+\end{equation}
+\equations{Potts Model Partition function}
+
+\begin{equation}
+    \mathcal{L}\left(\mathbf{b},\mathbf{J}\right)=P\left(\Sigma\rvert\mathbf{b},\mathbf{J}\right)=\prod_{\sigma\in\Sigma}P\left(\sigma\rvert\mathbf{b},\mathbf{J}\right)
+    \label{eq:covariance_likelihood_function}
+\end{equation}
+\equations{Covariance likelihood function}
+
+\begin{equation}
+    \prod_{\sigma\in\Sigma}P\left(\sigma\rvert\mathbf{b},\mathbf{J}\right)\approx\prod_{i=1}^{N}P\left(\sigma_i\rvert\sigma\backslash\sigma_i,\mathbf{b},\mathbf{J}\right)
+    \label{eq:covariance_pseudolikelihood_approximation}
+\end{equation}
+\equations{Covariance pseudo-likelihood approximation}
+
