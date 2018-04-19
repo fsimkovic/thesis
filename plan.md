@@ -4,32 +4,25 @@
 
 ### 1. Introduction
 
-#### 1.1 General introduction
+#### <s>1.1 Macromolecular Crystallography</s>
 
-#### 1.2 Macromolecular Crystallography 
+#### 1.2 Ab initio structure prediction
 
-##### <s>1.2.1 X-ray scattering</s>
+#### 1.3 Contact prediction
 
-##### 1.2.2 Structure determination 
+#### 1.4 AMPLE
 
-##### 1.2.4 Issues and limitations
-
-#### 1.3 Ab initio structure prediction
-
-#### 1.4 Contact prediction
+#### 1.5 Aims 
 
 ---
 
 ### 2. General methods
 
 #### <s>2.1 Dataset creation</s>
-<s>This section will describe procedures of selecting target datasets.</s>
 
 #### <s>2.2 Combination of contact maps for restraint enhancement</s>
-<s>This section will outline the combination of contact maps with bbcontacts specifically to enhance the restraint weight in ROSETTA energy functions.</s>
 
 #### <s>2.3 Evaluation of data</s>
-<s>This section will outline and explain all mathematical and statistical definitions used throughout all chapters to assess various information.</s>
 
 ##### <s>2.3.1 Contact prediction data</s>
 
@@ -45,7 +38,6 @@ This chapter will contain all work described in Simkovic et al (2016) and the co
 ---
 
 ### <s>4. Evaluation of ROSETTA distance-restraint energy functions on contact-guided ab initio structure prediction</s>
-<s>This chapter will contain all work related to the evaluation of two ROSETTA energy functions given three separate metapredictor contact predictions.</s>
 
 ---
 
@@ -60,7 +52,6 @@ This chapter will briefly discuss the use of two alternate ab initio structure p
 This sub-chapter will discuss the use of contact information to score ab initio decoys, how this information could be used to enhance ensemble search model quality and ultimately MR success.
 
 ### <s>6.2. Protein fragments as search models in Molecular Replacement</s>
-<s>This sub-chapter will discuss the use of ab initio structure prediction fragments directly as search models.</s>
 
 ---
 
