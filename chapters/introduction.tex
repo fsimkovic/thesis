@@ -153,7 +153,7 @@ Over the last decade, numerous approximations for the parameter inference of $P(
 
 \Cref{eq:covariance_pseudolikelihood_approximation} describes the conditional probability of observing amino acid ($\sigma_i$) in position $i$ given all other amino acids ($\sigma\backslash\sigma_i$) in $\boldsymbol{\sigma}$. This leads to the cancellation of the partition function $Z$, and instead normalises locally over all possible 20 amino acid configurations at each site $i$. The parameters $\mathbf{h}$ and $\mathbf{J}$, which minimise \cref{eq:covariance_pseudolikelihood_approximation}, are identified using iterative optimisation algorithms \cite{Hopf2017-pp}. Typically, regularisation terms are also added to \cref{eq:covariance_pseudolikelihood_approximation} to avoid overfitting of the input data \cite{Hopf2017-pp}.
 
-The positional constraint matrices $J_{ij}$ for all amino acid ($k$) pairs across all combinations of $\sigma_i$ and $\sigma_j$ in $\boldsymbol{\sigma}$ need be summarised to a coupling score between $\sigma_i$ and $\sigma_j$. The Frobenius norm is the preferred summary statistic (\cref{eq:frobenius_norm}), and applied to a row- and column-means-centered coupling matrix $J'_{ij}$ (\cref{eq:row_column_cent_mat}). Furthermore, \gls{apc} is applied to remove background coupling that arises due to noise from phylogentic relationships between sequences (\cref{eq:average_product_correction}) \cite{Dunn2008-ao,Jones2012-ks,Ekeberg2013-ay,Kamisetty2013-le,Seemayer2014-zp}.
+The positional constraint matrices $J_{ij}$ for all amino acid ($k$) pairs across all combinations of $\sigma_i$ and $\sigma_j$ in $\boldsymbol{\sigma}$ need be summarised to a coupling score between $\sigma_i$ and $\sigma_j$. The Frobenius norm is the preferred summary statistic (\cref{eq:frobenius_norm}), and applied to a row- and column-means-centered coupling matrix $J'_{ij}$ (\cref{eq:row_column_cent_mat}). Furthermore, \gls{apc} is applied to remove background coupling that arises due to noise from phylogentic relationships between sequences to provide the final evolutionary coupling \gls{ec} score (\cref{eq:evolutionary_coupling_score}) \cite{Dunn2008-ao,Jones2012-ks,Ekeberg2013-ay,Kamisetty2013-le,Seemayer2014-zp}.
 
 \begin{equation}
     J'_{ij}=J_{ij}(k,l)-J_{ij}(\cdot,l)-J_{ij}(k,\cdot)+J_{ij}(\cdot,\cdot)
@@ -169,7 +169,7 @@ The positional constraint matrices $J_{ij}$ for all amino acid ($k$) pairs acros
 
 \begin{equation}
     EC(i,j)=FN(i,j)-\frac{FN(i,\cdot)FN(\cdot,j)}{FN(\cdot,\cdot)}
-    \label{eq:average_product_correction}
+    \label{eq:evolutionary_coupling_score}
 \end{equation}
 \equations{Evolutionary coupling score}
 
