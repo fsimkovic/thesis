@@ -23,7 +23,7 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-\usepackage{amsmath}
+\usepackage{amssymb,amsmath}
 \usepackage[artemisia]{textgreek}
 \usepackage{color}
 \usepackage{hyperref}
@@ -34,6 +34,11 @@
 \usepackage{pdflscape}
 \usepackage{tocloft}
 \usepackage{verbatim}
+
+\usepackage{mathtools}
+\creflabelformat{equation}{#2#1#3}
+\newtagform{noparen}{}{}
+\usetagform{noparen}
 
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}

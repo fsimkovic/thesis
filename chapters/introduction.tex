@@ -116,6 +116,7 @@ Despite active research in \textit{ab initio} protein structure prediction over 
 \section{Residue-residue contact prediction} \label{sec:intro_contact_prediction}
 The use of residue-residue contact information to reduce the conformational search space in protein structure prediction relies on the identification of amino acids in close spatial proximity. Today, such identification can be detected from sequence information alone by either \gls{dca} or \gls{sml} algorithms.
 
+\subsection{Direct Coupling Analysis}
 \Acrlong{dca} relies on the use of protein sequence information to identify coordinated changes of amino acids in sequences of a protein family (\cref{fig:introduction_covariance}). These coordinated changes are caused by evolutionary pressure to maintain residue interactions important for protein structure and function. However, original attempts to detect covariation signal from sequences in a protein family were unsuccessful for many years \cite{Taylor1994-es,Gobel1994-rp,Neher1994-qn,Shindyalov1994-yp}. The applied (local) statistical model suffered from numerous drawbacks, including the loss of covariation signal due to phylogenetic dependencies, limited availability of sequence data, and the potentially false assumption that truly coevolved residues are in close proximity \cite{Pollock1997-os,Lapedes1999-cg,Lapedes2012-tu}. Implementations of the local statistical model used raw covariation frequencies between pairs of positions in the sequence alignment. This further poses issues since successful distinction between ``direct'' casual (A-B and B-C) and ``indirect'' transitive (A-C) correlations is essential for successful protein structure prediction. 
 
 \begin{figure}[H]
@@ -127,31 +128,53 @@ The use of residue-residue contact information to reduce the conformational sear
 
 \textcite{Lapedes1999-cg} proposed the use of a global statistical model to infer correlations of residue pairs to circument the main problem of decoupling causal and transitive correlations. However, it was not until a decade later before first implementations of the global statistical model surfaced to successfully disentangle these types of correlations \cite{Weigt2009-sx,Burger2010-ee,Balakrishnan2011-wh,Marks2011-os,Morcos2011-lk,Jones2012-ks,Ekeberg2013-ay,Kamisetty2013-le,Seemayer2014-zp}. Global statistical models achieve successul disentanglement by inferring a probabilistic description of the sequence alignment that best explains observed correlations using underlying causal couplings between positions \cite{Hopf2017-pp}. Such couplings can be inferred by maximising the likelihood of observing the sequences in the alignment under the maximum entropy probability model. In other words, by considering all amino acid pair positions simultaneously, causal and transitive couplings can be successfully disentangled \cite{Ekeberg2013-ay}.
 
-The pairwise probabilistic model $P(\boldsymbol{\sigma})$ of the amino acid sequence $\sigma=\left(\sigma_1,\sigma_2,\dots,\sigma_N\right)$ of length $N$ is defined in \cref{eq:potts_model}, which contains the amino acid configuration constraints $\sigma_i$ and $\sigma_j$ at positions $i$ and $j$, the single-site conservation bias term $h_i$, and co-conservation term $J_{ij}$ between position pairs $i,j$. The partition function $Z$ in \cref{eq:potts_model} is described in \cref{eq:potts_model_partition_function}, which is used as a normalising constant, and additionally has the property to maximise the entropy in the probabilistic model. However, the computation of $Z$ is intractable for the feature space typically found in \gls{dca} and the solution to this problem is to approximate of $Z$.
+The pairwise probabilistic model $P(\boldsymbol{\sigma})$ of the amino acid sequence $\boldsymbol{\sigma}=\left(\sigma_1,\sigma_2,\dots,\sigma_N\right)$ of length $N$ is defined in \cref{eq:potts_model}, which contains the amino acid configuration constraints $\sigma_i$ and $\sigma_j$ at positions $i$ and $j$, the single-site conservation bias term $h_i$, and co-conservation term $J_{ij}$ between position pairs $i,j$. 
 
 \begin{equation}
-    P(\boldsymbol{\sigma})=\frac{1}{Z}\exp\left(\sum_{i=1}^{N}h_i\left(\sigma_i\right)+\sum_{1 \leq i < j \leq N}J_{ij}\left(\sigma_i, \sigma_j\right)\right)
+    P(\boldsymbol{\sigma})=\frac{1}{Z}\exp\left(\sum_{i=1}^{N}h_i\left(\sigma_i\right)+\sum_{1 \leqslant i < j \leqslant N}J_{ij}\left(\sigma_i, \sigma_j\right)\right)
     \label{eq:potts_model}
 \end{equation}
 \equations{Potts model}
 
+The partition function $Z$ (\cref{eq:potts_model_partition_function}) acts as normalising constant, and additionally has the property to maximise the entropy in the probabilistic model. However, the computation of $Z$ is intractable for the feature space found in \gls{dca} since the number of summations in $Z$ exponentially increases with $N$ for all 20 amino acid configurations. Thus, approximations of $Z$ are typically used, which were shown lead to precise covariance predictions \cite{Ekeberg2013-ay}.
+
 \begin{equation}
-    Z=\sum_{\boldsymbol{\sigma}}^{ }\exp\left(\sum_{i=1}^{N}h_i\left(\sigma_i\right)+\sum_{1 \leq i < j \leq N}J_{ij}\left(\sigma_i, \sigma_j\right)\right)
+    Z=\sum_{\boldsymbol{\sigma}}^{ }\exp\left(\sum_{i=1}^{N}h_i\left(\sigma_i\right)+\sum_{1 \leqslant i < j \leqslant N}J_{ij}\left(\sigma_i, \sigma_j\right)\right)
     \label{eq:potts_model_partition_function}
 \end{equation}
 \equations{Partition function of Potts model}
 
-Today, the most successful implementations of the global statistical model employ a pseudolikelihood maximisation approach to approximate the computationally intractable partition function \textit{Z} (\cref{eq:potts_model_partition_function} \cite{Ekeberg2013-ay,Kamisetty2013-le,Seemayer2014-zp}.
+Over the last decade, numerous approximations for the parameter inference of $P(\boldsymbol{\sigma})$ have been implemented, which include gradient ascent with Monte Carlo sampling \cite{Lapedes2012-tu}, message passing \cite{Weigt2009-sx}, mean-field \cite{Marks2011-os,Morcos2011-lk,Jones2012-ks,Stein2015-cw}, and pseudolikelihood maximisation \cite{Balakrishnan2011-wh,Ekeberg2013-ay,Kamisetty2013-le,Seemayer2014-zp,Hopf2015-vf}. However, it is the latter that has proven to be most successful, and thus it is commonly used in most applications. In pseudolikehood maximisation \gls{dca} approaches, the full likelihood for each sequence position $i$ in $\boldsymbol{\sigma}$ across all sequences in the alignment is approximated by a product of conditional likelihoods (\cref{eq:covariance_pseudolikelihood_approximation}) \cite{Hopf2017-pp}.
 
 \begin{equation}
-    \mathcal{L}\left(\mathbf{b},\mathbf{J}\right)=P\left(\Sigma\rvert\mathbf{b},\mathbf{J}\right)=\prod_{\sigma\in\Sigma}P\left(\sigma\rvert\mathbf{b},\mathbf{J}\right)
-    \label{eq:covariance_likelihood_function}
-\end{equation}
-\equations{Covariance likelihood function}
-
-\begin{equation}
-    \prod_{\sigma\in\Sigma}P\left(\sigma\rvert\mathbf{b},\mathbf{J}\right)\approx\prod_{i=1}^{N}P\left(\sigma_i\rvert\sigma\backslash\sigma_i,\mathbf{b},\mathbf{J}\right)
+    \mathcal{L}\left(\mathbf{h},\mathbf{J}\right)=\prod_{\sigma\in\Sigma}P\left(\sigma\rvert\mathbf{h},\mathbf{J}\right)\approx\prod_{i=1}^{N}P\left(\sigma_i\rvert\sigma\backslash\sigma_i,\mathbf{h},\mathbf{J}\right)
     \label{eq:covariance_pseudolikelihood_approximation}
 \end{equation}
 \equations{Covariance pseudo-likelihood approximation}
+
+\Cref{eq:covariance_pseudolikelihood_approximation} describes the conditional probability of observing amino acid $\sigma_i$ in position $i$ given all other amino acids $\sigma\backslash\sigma_i$ in $\boldsymbol{\sigma}$. This leads to the cancellation of the partition function $Z$, and instead normalises locally over all possible 20 amino acid configurations at each site $i$. The parameters $\mathbf{h}$ and $\mathbf{J}$, which minimise \cref{eq:covariance_pseudolikelihood_approximation}, are identified using iterative optimisation algorithms \cite{Hopf2017-pp}. 
+
+The positional constraint matrices $J_{ij}$ for all amino acid pairs across all combinations of $\sigma_i$ and $\sigma_j$ in $\boldsymbol{\sigma}$ need be summarised to a coupling score between $\sigma_i$ and $\sigma_j$. The Frobenius norm is the preferred summary statistic (\cref{eq:frobenius_norm}), and applied to a row- and column-means-centered coupling matrix $J'_{ij}$ (\cref{eq:row_column_cent_mat}). Furthermore, \gls{apc} is applied to remove background coupling that arises due to noise from phylogentic relationships between sequences (\cref{eq:average_product_correction}) \cite{Jones2012-ks,Ekeberg2013-ay,Seemayer2014-zp}.
+
+\begin{equation}
+    J'_{ij}=J_{ij}(k,l)-J_{ij}(\cdot,l)-J_{ij}(k,\cdot)+J_{ij}(\cdot,\cdot)
+    \label{eq:row_column_cent_mat}
+\end{equation}
+\equations{Matrix centering}
+
+\begin{equation}
+    FN(i,j)=\sqrt{\sum_{k}\sum_{l}J'_{ij}(k,l)^2}
+    \label{eq:frobenius_norm}
+\end{equation}
+\equations{Frobenius norm}
+
+\begin{equation}
+    EC(i,j)=FN(i,j)-\frac{FN(i,\dot)FN(\dot,j)}{FN(\dot,\dot)}
+    \label{eq:average_product_correction}
+\end{equation}
+\equations{Average Product Correction}
+
+Lastly, To avoid overfitting of the data, regularisation is typically applied \cite{Hopf2017-pp}. Furthermore, all sequences in the input alignment are commonly re-weighted by a redundacy describing factor, since a key assumption of \cref{eq:potts_model} rests on the basis that all sequences evolved independently \cite{Ekeberg2013-ay}.
+
+\subsection{Supervised Machine Learning}
 
