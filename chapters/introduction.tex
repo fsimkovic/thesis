@@ -97,7 +97,7 @@ The folding of protein structures is commonly described by the folding funnel hy
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{introduction_foldingfunnel.png}
-    \caption{Schematic of the folding funnel hypothesis \cite{Leopold1992-yf}. Diagram produced by \textcite{Wikipedia-FoldingFunnel} contributors.}
+    \caption[Schematic of the folding funnel hypothesis.]{Schematic of the folding funnel hypothesis \cite{Leopold1992-yf}. Diagram produced by \textcite{Wikipedia-FoldingFunnel} contributors.}
     \label{fig:introduction_foldingfunnel}
 \end{figure}
 
@@ -122,7 +122,7 @@ The use of residue-residue contact information to reduce the conformational sear
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{introduction_covariance.pdf}
-    \caption{Schematic of inference of covariance signal originating from evolutionary pressure in protein tertiary structures and encoded in its family's sequence alignment (adapted from \cite{Simkovic2017-xs}).}
+    \caption[Schematic of inference of covariance signal]{Schematic of inference of covariance signal originating from evolutionary pressure in protein tertiary structures and encoded in its family's sequence alignment (adapted from \cite{Simkovic2017-xs}).}
     \label{fig:introduction_covariance}
 \end{figure}
 
@@ -154,7 +154,7 @@ Over the last decade, numerous approximations for the parameter inference of $P(
 
 \Cref{eq:covariance_pseudolikelihood_approximation} describes the conditional probability of observing amino acid $\sigma_i$ in position $i$ given all other amino acids $\sigma\backslash\sigma_i$ in $\boldsymbol{\sigma}$. This leads to the cancellation of the partition function $Z$, and instead normalises locally over all possible 20 amino acid configurations at each site $i$. The parameters $\mathbf{h}$ and $\mathbf{J}$, which minimise \cref{eq:covariance_pseudolikelihood_approximation}, are identified using iterative optimisation algorithms \cite{Hopf2017-pp}. 
 
-The positional constraint matrices $J_{ij}$ for all amino acid pairs across all combinations of $\sigma_i$ and $\sigma_j$ in $\boldsymbol{\sigma}$ need be summarised to a coupling score between $\sigma_i$ and $\sigma_j$. The Frobenius norm is the preferred summary statistic (\cref{eq:frobenius_norm}), and applied to a row- and column-means-centered coupling matrix $J'_{ij}$ (\cref{eq:row_column_cent_mat}). Furthermore, \gls{apc} is applied to remove background coupling that arises due to noise from phylogentic relationships between sequences (\cref{eq:average_product_correction}) \cite{Jones2012-ks,Ekeberg2013-ay,Seemayer2014-zp}.
+The positional constraint matrices $J_{ij}$ for all amino acid pairs across all combinations of $\sigma_i$ and $\sigma_j$ in $\boldsymbol{\sigma}$ need be summarised to a coupling score between $\sigma_i$ and $\sigma_j$. The Frobenius norm is the preferred summary statistic (\cref{eq:frobenius_norm}), and applied to a row- and column-means-centered coupling matrix $J'_{ij}$ (\cref{eq:row_column_cent_mat}). Furthermore, \gls{apc} is applied to remove background coupling that arises due to noise from phylogentic relationships between sequences (\cref{eq:average_product_correction}) \cite{Dunn2008-ao,Jones2012-ks,Ekeberg2013-ay,Kamisetty2013-le,Seemayer2014-zp}.
 
 \begin{equation}
     J'_{ij}=J_{ij}(k,l)-J_{ij}(\cdot,l)-J_{ij}(k,\cdot)+J_{ij}(\cdot,\cdot)
@@ -169,7 +169,7 @@ The positional constraint matrices $J_{ij}$ for all amino acid pairs across all 
 \equations{Frobenius norm}
 
 \begin{equation}
-    EC(i,j)=FN(i,j)-\frac{FN(i,\dot)FN(\dot,j)}{FN(\dot,\dot)}
+    EC(i,j)=FN(i,j)-\frac{FN(i,\cdot)FN(\cdot,j)}{FN(\cdot,\cdot)}
     \label{eq:average_product_correction}
 \end{equation}
 \equations{Average Product Correction}
