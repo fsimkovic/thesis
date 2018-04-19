@@ -176,5 +176,9 @@ The positional constraint matrices $J_{ij}$ for all amino acid pairs across all 
 
 Lastly, To avoid overfitting of the data, regularisation is typically applied \cite{Hopf2017-pp}. Furthermore, all sequences in the input alignment are commonly re-weighted by a redundacy describing factor, since a key assumption of \cref{eq:potts_model} rests on the basis that all sequences evolved independently \cite{Ekeberg2013-ay}.
 
-\subsection{Supervised Machine Learning}
+Residue-residue contact prediction through \gls{dca} methods are heavily dependent on the availability of homologous sequences. \ldots
 
+\subsection{Supervised Machine Learning}
+Unlike \gls{dca} approaches, \acrlong{sml} algorithms do not rely on the availability of homologous sequences to predict residue-residue contacts. Instead, \gls{sml} models are trained on a variety of sequence-dependent and sequence-independent features to infer contacting residue pairs \cite{Du2016-hl,Gonzalez2013-wg,Shackelford2007-iz,Cheng2005-da,Zhang2016-px,Wang2013-wi}. Broadly speaking, such \gls{sml} algorithms rely on the analysis of sequence-based features, such as secondary structure, and sequence profiles. In general, covariance-based algorithms outperform pure \gls{sml} algorithms for protein families with many homologous sequences. However, \gls{sml} algorithms do outperform \gls{dca} algorithms for families with fewer homologous sequences \cite{Skwark2014-qp,Wang2013-wi,Ma2015-vo}. It is worth noting though that \gls{sml} algorithms suffer from a similar inability to distinguish between residue pairs that form direct and indirect contact pairs, similar to earlier implementations of covariance-based methods.
+
+\subsection{Metapredictors to combine DCA and SML}
