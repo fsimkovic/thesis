@@ -198,6 +198,7 @@ The most recent approaches in residue-residue contact prediction use combinatori
 %
 % AMPLE
 %
+
 \section{AMPLE}
 The major challenge in unconventional \gls{mr} is to reliably identify local or global folds from existing structures to derive phase information complementary to the experimentally determined structure factor amiplitudes. The ensemble search model preparation pipeline AMPLE (Ab initio Modelling of Proteins for moLEcular replacement) --- based on the work of \textcite{Rigden2008-vo} --- attempts to tackle this challenge by utelising structural information from a variety of sources, such as \textit{ab initio} structure predictions \cite{Bibby2012-lm,Keegan2015-zb,Simkovic2016-wk,Thomas2015-wu,Thomas2017-sh}, \gls{nmr} ensembles \cite{Bibby2013-cp}, and single \cite{Rigden2018-zt} or multiple distant homologs \cite{Bruhn2014-aa,Hotta2014-me}. 
 
@@ -208,10 +209,12 @@ The major challenge in unconventional \gls{mr} is to reliably identify local or 
     \label{fig:introduction_ample}
 \end{figure}
 
-AMPLE attempts to identify a conserved core amongst the initial starting structures. The idea is simple, if a conserved core is present amongst a set of many structures, the likelihood of its presence in the unknown target is high. AMPLE attempts to identify such a conserved core by employing a cluster-and-truncate approach (\cref{fig:introduction_ample}) \cite{Bibby2012-lm}. The latter can be separated into three main parts: (i) clustering of starting models to identify subsets of similar folds, (ii) incremental truncation of each cluster by its structural variance, and (iii) sub-clustering of each truncated set of models to further identify sub-groups. 
-
-% Describe the three steps further
-
-Ultimately, this leads to the unbiased generation of a large number of ensemble search models. These ensemble search models cover a great diversity of its original structural information, and hopefully capture in one or more the conserved core necessary for successful structure solution. 
+AMPLE attempts to identify a conserved core amongst the initial starting structures. The idea is simple, if a conserved core is present amongst a set of many structures, the likelihood of its presence in the unknown target is high. AMPLE attempts to identify such a conserved core by employing a cluster-and-truncate approach (\cref{fig:introduction_ample}) \cite{Bibby2012-lm}. The latter can be separated into three main parts: (i) clustering of starting models to identify subsets of similar folds, (ii) incremental truncation of each cluster by its structural variance, and (iii) sub-clustering of each truncated set of models to further identify sub-groups. The incremental truncation of each cluster is typically done at 20 different levels (i.e. 5\% intervals) based on the inter-residue variance score \cite{Theobald2006-qj}. Sub-clustering is performed under three different \gls{rmsd} thresholds (1, 2 and 3\AA). AMPLE requires each ensemble search model to contain at least two starting structures, and if this requirement is satisfied each ensemble search model is stripped to poly-alanine side-chains (all-atom and reliably-modelled side-chain \cite{Krivov2009-ex} treatments are also available and were used by default in previous versions). This leads to the unbiased generation of a large number of ensemble search models. These ensemble search models cover a great diversity of its original structural information, and hopefully capture in one or more the conserved core necessary for successful structure solution. 
 
 Beyond the generation of ensemble search models for \gls{mr}, AMPLE also integrates the automated \gls{mr} pipeline MRBUMP \cite{Keegan2018-kn}. In AMPLE, MRBUMP's structure determination features are of particular interest. It employs PHASER \cite{McCoy2007-mp} and MOLREP \cite{Vagin2010-ux} for \gls{mr}, refines the \gls{mr} solutions with REFMAC5 \cite{Murshudov2011-ww}, uses SHELXE for density modification and main-chain tracing \cite{Thorn2013-le}, and attempts automated model building with ARP/wARP \cite{Cohen2007-wg} and BUCCANEER \cite{Cowtan2006-xv}. These features enable the sampling of each AMPLE-generated ensembl for its suitability as \gls{mr} search model.
+
+%
+% Aims
+%
+
+\section{Aims}
