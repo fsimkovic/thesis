@@ -11,6 +11,13 @@ X-rays are high energy photons part of the electromagnetic spectrum with a wavel
 
 In its simplest form, scattering of X-ray radiation can be explained in the scenario of exposure to a single free electron. The resulting scattering can be classed as elastic (Thomson scattering) or inelastic (Crompton scattering) \cite{Rupp2010-nc}. The latter --- scattering that results in a loss of energy of the emitting photon due to energy transfer onto the electron --- does not contribute to discrete scattering, the type of scattering X-ray diffraction relies on. In comparison, Thomson scattering does not result in a loss of energy of the emitting photon. This has significant effects, the incoming photon emits with the same frequency causing the electron to oscillate identically further enhancing the signal.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{introduction_bragg.pdf}
+    \caption{Schematic of Bragg scattering.}
+    \label{fig:introduction_bragg}
+\end{figure}
+
 If we expand the example to include all electrons in an atom and expose the atom to X-ray radiation, our theory needs to be slightly expanded. Given that one or more electrons in an atom are not free but orbit around the atom's nucleus in a stable and defined manner, the distribution of these electrons around the nucleus determines the scattering of the incoming X-ray photons. The distribution of scattered photon waves is thus an overall representation of the probability distributions of each electron in the atom and is refered to as electron density $\rho(\boldsymbol{r})$. In X-ray scattering, it suffices to approximate the shape of the electron density to a sphere. If we now consider the emitting wave $\boldsymbol{s_1}$ of an X-ray photon scattered by any position $\boldsymbol{r}$ in the electron density of an atom, then the phase difference $\Delta\varphi$ to the incoming wave $\boldsymbol{s_0}$ can be described by \cref{eq:phase_difference} \cite{Rupp2010-nc}.
 
 \begin{equation}
@@ -50,13 +57,6 @@ Such determination is possible through the findings made by \textcite{Bragg1913-
     \label{eq:bragg_equation}
 \end{equation}
 \equations{Bragg equation}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{introduction_bragg.pdf}
-    \caption{Schematic of Bragg scattering.}
-    \label{fig:introduction_bragg}
-\end{figure}
 
 If the hypothetical model is expanded to molecular crystals, then the total scattering from the unit cell is merely a summation of all molecular unit cell scattering contributions in the crystal. Mathematically, this results in \cref{eq:total_scattering_power} being generalised to \cref{eq:structure_factors} through the application of the Laue equations (\cref{eq:laue_equations}). This allows us to express the scattering vector $\boldsymbol{S}\boldsymbol{r}_j$ as Miller indices of the reflection planes $\boldsymbol{h}\boldsymbol{x}_j$.
 
