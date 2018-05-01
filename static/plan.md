@@ -32,17 +32,17 @@
 
 ---
 
-#### 3. Software developments
+### 3. Software developments
 
 #### 3.1 ConKit
-This section will describe the ConKit package, and any algorithms implemented to assess contact and sequence information. 
-It will expand on Simkovic et al (2017) and describe the package in more detail.
 
-#### 3.2 Integration of ConKit in AMPLE
-This section will briefly outline the integration of ConKit in AMPLE
+#### 3.2 SIMBAD
 
-#### 3.3 Truncation of single models in AMPLE
-This section will outline the algorithm implemented into AMPLE to truncate single decoys
+#### 3.3 AMPLE
+
+#### 3.3.1 Integration of ConKit 
+
+#### 3.3.2 Integration of single model truncation 
 
 ---
 
