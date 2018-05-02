@@ -1,65 +1,30 @@
-% \section{Introduction}
-%
-% \section{Methods}
-%
-% \subsection{Target selection}
-%
-% The dataset for this experiment was compiled of all modelling runs from all targets used in previous studies. All decoy sets restrained with contact predictions from either CCMPRED \cite{Seemayer2014-ml}, MEMBRAIN \cite{Yang2013-lv}, METAPSICOV \cite{Jones2015-wp} or PCONSC2 \cite{Skwark2014-mu} and the FADE energy function were considered. In total, this gave a set of 56 targets with a maximum of four contact predictions each. However, not all predictors were applicable to all targets, such as the \textalpha-helical transmembrane predictor MEMBRAIN \cite{Yang2013-lv} to globular targets. Thus, a final dataset of 113 decoy sets (1,000 decoys each) was created.
-%
-% \subsection{Decoy subselection}
-%
-% The precision score of long-range contact pairs ($\geq24$ residues sequence separation) was calculated for every decoy in every decoy set using ConKit (see Chapter XYZ). Subsequently, decoy sets were reduced for Molecular Replacement trials. Four different algorithms were used: \textit{NONE}, \textit{LINEAR}, \textit{SCALED}, and \textit{CUTOFF}. The \textit{NONE} algorithm accepted all 1,000 decoys and left the original set unchanged, which is identical to the current AMPLE approach. The \textit{LINEAR} algorithm sliced a decoy list removing the 500 decoys satisfying the least number of long-range contacts. For the \textit{SCALED} algorithm, each long-range contact precision score was divided by the set's average score, and only decoys with scores $\geq0.5$ kept. The \textit{CUTOFF} algorithm excluded all decoys with a long-range contact precision score of $<0.287$, a hard-coded threshold identified by \cite{De_Oliveira2017-yf} Thus, for every starting decoy set, we obtained four different decoy sets for Molecular Replacement trials using AMPLE.
-%
-% \subsection{Molecular Replacement}
-%
-% For the Molecular Replacement trials, a modified version of AMPLE was used. The modified version created ensemble search models for all 10 clusters. Trialling decoys from all 10 clusters was aimed to broaden the search space by including more conformations. Simultaneously, previous results suggested that polyalanine side-chain treatment by itself was nearly as good as all three side-chain treatments. Thus, to reduce the number of ensemble search models to trial, the most-reliable side-chain treatment was excluded. Similarly, the 2\AA subclustering radius appeared to be redundant in almost all cases, and thus this set of ensembles was also removed. Additionally, clustering was performed using a modified version of Spicker, which clusters decoys using TMscore values instead of RMSD values. Although at an increased runtime, this modification has shown to be beneficial to the clustering step (Jens MH Thomas; PhD Thesis). All modifications explained here were made publicly available in AMPLE v1.2.0 and CCP4 v7.0.32.
-%
-% To trial the different subselection algorithms, we decided to trial one contact prediction decoy set for 21 targets, which created a total of 63 AMPLE runs (three for each set). The target and resulting decoy sets were identical to the one published by @Simkovic2016. Besides the modifications outlined above, AMPLE was run with default settings.
+\section{Introduction}
+% - something about high decoy accuracy but little success
+% - identification of best decoys challenging and long-range contact pairs useful
+% - attempt to remove worst decoys to improve overall set accuracy
 
-\section{Results}
+\section{Materials \& Methods}
+\subsection{Target selection}
+The dataset for this study consisted of 35 ROSETTA decoy sets generated in previous chapters. The 35 decoy sets covered all targets in the ORIGINAL (\cref{table:appendix_dataset_original}) and TRANSMEMBRANE (\cref{table:appendix_dataset_transmembrane}) datasets. Top-$L$ (min. sequence separation of 5 residues) CCMPRED \cite{Seemayer2014-zp} and PCONSC2 \cite{Skwark2014-qp} contact pairs were used in combination with the \textit{FADE} energy function to restrain the \textit{ab initio} structure prediction process (see \textcolor{red}{Chapter with PCONSFOLD}).
 
-In this experiment, we assessed the value of subselecting sets of 1,000 decoys to AMPLE's cluster-and-truncate approach. Decoys were subselected using one of four algorithms, namely \textit{NONE}, \textit{LINEAR}, \textit{SCALED} or \textit{CUTOFF}. Each algorithm considered the long-range contact precision in a decoy and used it to exclude different numbers from the original set.
+\subsection{Decoy subselection}
+The precision of long-range contact pairs ($>23$ residues sequence separation; see \cref{sec:methods_longrange_precision}) was computed for each decoy in each set. Hereby, the long-range contact pairs of the original set of contact pairs used to restrain the \textit{ab initio} structure prediction protocol were extracted, and their precision evaluated with reference to the predicted decoy. This long-range contact pair precision thus quantifies the satisfaction of long-range contact pairs.
 
-\subsection{Long-range contact precision and its relationship to decoy quality}
+Each set of decoys was then ranked in descending order by their long-range contact pairs precision and the $n$ decoys with the lowest scores removed from the set. The number of decoys to remove $n$ were selected using a number of different strategies:
 
-The underlying principle of this study is the positive linear relationship between long-range contact precision and the decoy quality. Here, we can validate previous findings of this relationship \cite{} given the precision of long-ralong-range contact prediction and the decoy quality.
+\begin{itemize}
+    \item \textit{NONE}: leave the original set unchanged
+    \item \textit{LINEAR}: remove the worst 500 decoys
+    \item \textit{CUTOFF}: remove all decoys with a score of $<0.287$ 
+    \item \textit{SCALED}: remove all decoys with a scaled score of $<0.5$, where the scaled score is score divided by set average
+\end{itemize}
 
-Almost all targets across four contact prediction algorithm show positive linear relationships (Fig \ref{fig:ample_decoys_lrprectm}). This relationship applies to globular and transmembrane protein folds.
+The fixed definition in the \textit{CUTOFF} strategy was determined by \textcite{De_Oliveira2017-gj}. The scaled score used by the \textit{SCALED} strategy was computed by dividing each decoy's long-range contact pair precision by the set's average.
 
-% \begin{figure}[H]
-%     \centering
-%     \begin{subfigure}[b]{\textwidth}
-%         \includegraphics[width=\textwidth]{ample_decoys_ccmpred_lrprectm.pdf}
-%         \caption{}
-%         \label{fig:ample_decoys_ccmpred_lrprectm}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{\textwidth}
-%         \includegraphics[width=\textwidth]{ample_decoys_membrain_lrprectm.pdf}
-%         \caption{}
-%         \label{fig:ample_decoys_membrain_lrprectm}
-%     \end{subfigure}
-% \end{figure}
-% \begin{figure}[H]
-%     \ContinuedFloat
-%     \begin{subfigure}[b]{\textwidth}
-%         \includegraphics[width=\textwidth]{ample_decoys_metapsicovstage1_lrprectm.pdf}
-%         \caption{}
-%         \label{fig:ample_decoys_metapsicovstage1_lrprectm}
-%     \end{subfigure}
-% \end{figure}
-% \begin{figure}[H]
-%     \ContinuedFloat
-%     \begin{subfigure}[b]{\textwidth}
-%         \includegraphics[width=\textwidth]{ample_decoys_pconsc2_lrprectm.pdf}
-%         \caption{}
-%         \label{fig:ample_decoys_pconsc2_lrprectm}
-%     \end{subfigure}
-%     \caption{Long-range contact precision and TM-score comparison for decoys generated with (a) CCMPRED, (b)
-%     MEMBRAIN, (c) METAPSICOV, and (d) PCONSC2 contact predictions.}
-%     \label{fig:ample_decoys_lrprectm}
-% \end{figure}
+\subsection{Molecular Replacement}
+The decoy sets generated in the previous step were subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with few exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to poly-Ala only. This change in protocol was shown to be advantageous in most cases by Jens Thomas (PhD Thesis), and thus trialled in this context. 
 
+To allow comparability of these results to previous AMPLE runs, an additional condition was added, namely \textit{NONE\_classic}. The decoy set from the \textit{NONE} strategy was hereby subjected to the AMPLE protocol with default settings.
 
-% \subsection{Different subselection modes yield different final decoy sets}
-%
-% \section{Discussion}
+Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_mr_success}.
+

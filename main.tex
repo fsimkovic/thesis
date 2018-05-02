@@ -16,12 +16,13 @@
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[LO,CE]{Chapter \thechapter}
-\setlength{\headheight}{14pt}
-\setlength{\parskip}{1em}
+\fancyhead[LE,RO]{\thepage}
 \fancyfoot{}
-\fancyfoot[LE,RO]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
+% \fancyfoot[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+% \renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{12pt}
+\setlength{\parskip}{1em}
 
 \usepackage{amssymb,amsmath}
 \usepackage[artemisia]{textgreek}
@@ -67,6 +68,7 @@
 \begin{document}
 
 \pagenumbering{roman}
+\singlespacing
 
 % \input{titlepage}
 
@@ -109,32 +111,35 @@
 % \end{center}
 
 \pagenumbering{arabic}
+\doublespacing
 
 \chapter{Introduction}
 \clearpage
-\input{chapters/introduction}
+% \input{chapters/introduction}
 
 \chapter{Materials \& Methods}
 \clearpage
-\input{chapters/methods}
+% \input{chapters/methods}
 
 \chapter{Residue contacts predicted by evolutionary covariance extend the application of \textit{ab initio} molecular replacement to larger and more challenging protein folds} \label{chap:proof_of_principle}
 \clearpage
 
 \chapter{Evaluation of ROSETTA distance-restraint energy functions on contact-guided \textit{ab initio} structure prediction} \label{chap:rosetta_energy_functions}
 \clearpage
-\input{chapters/ample_predictors}
+% \input{chapters/ample_predictors}
 
 \chapter{Alternative \textit{ab initio} structure prediction algorithms for AMPLE} \label{chap:alternate_abinitio_protocols}
 \clearpage
 
-\chapter{New approaches to search model generation for unconventional Molecular Replacement} \label{chap:alternate_search_models}
+% \chapter{New approaches to search model generation for unconventional Molecular Replacement} \label{chap:alternate_search_models}
+% \clearpage
+\chapter{Decoy subselection using contact information to enhance MR search model creation}
 \clearpage
-% \chapter{Decoy subselection using contact information to enhance MR search model creation}
-% \clearpage
-% \chapter{Protein fragments as search models in Molecular Replacement}
-% \clearpage
-\input{chapters/ample_flib}
+\input{chapters/ample_decoys}
+
+\chapter{Protein fragments as search models in Molecular Replacement}
+\clearpage
+% \input{chapters/ample_flib}
 
 \chapter{Conclusion}
 \clearpage
@@ -142,10 +147,9 @@
 \appendix
 \chapter{Appendix}
 \clearpage
-\input{chapters/appendix}
+% \input{chapters/appendix}
 
 \singlespacing
 \printbibliography[heading=bibintoc]
-\doublespacing
 
 \end{document}

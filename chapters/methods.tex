@@ -95,7 +95,7 @@ The \gls{tmscore} is a more accurate measure of structure similarity between two
 
 $d_i$ describes the distance between the ith pair of residues. The distance scale $d_0$ to normalise the distances is defined by the equation $1.24\sqrt[3]{L_{target}-15}-1.8$. The \gls{tmscore} value falls in the range (0, 1]. A \gls{tmscore} value of $<0.2$ indicates two random unrelated structures, and a value $>0.5$ roughly the same fold \cite{Xu2010-kr}
 
-\subsubsection{Long-range contact precision}
+\subsubsection{Long-range contact precision} \label{sec:methods_longrange_precision}
 The long-range contact precision score is computed identically to the precision of sets of contact pairs (\cref{sec:methods_contact_map_prec}). However, the precision score is computed solely for long-range contacts ($>23$ residues sequence separation).
 
 \subsection{Molecular Replacement data}
@@ -103,7 +103,6 @@ The long-range contact precision score is computed identically to the precision 
 The \gls{rio} score \cite{Thomas2015-wu} is a measure of structural similarity between two protein structures considering the total number of atoms within $<1.5$\AA. The \gls{rio} can be separated into the in- (\gls{rio}\textsubscript{in}) and out-of-register (\gls{rio}\textsubscript{out}) score considering the sequence register between the model and the target. The \gls{rio} score is primarily a measure for post-\gls{mr} search models to assess the placement of search model atoms with respect to the previously solved crystal structure. To avoid the addition of single atoms place correctly purely by chance, the \gls{rio} metric requires at least three consecutive C\textalpha\ atoms to be within th 1.5\AA\ threshold.
 
 \subsubsection{Structure solution} \label{sec:methods_mr_success}
-
 \gls{mr} structure solutions were assessed throughout all works presented in this thesis by the \gls{cc} \cite{Fujinaga1987-vh} and \gls{acl} scores computed by SHELXE. SHELXE performs density modification and main-chain tracing of the refined \gls{mr} solution \cite{Thorn2013-le}. \textcite{Thorn2013-le} highlighted in their work that a \gls{cc} of $\geq25$\% indicates a successful structure solution. Additionally, previous research with AMPLE \cite{Thomas2015-wu} has shown that an \gls{acl} of the trace needs to be $\geq10$ residues.
 
 In most studies in this thesis, additionally to the SHELXE metrics the post-SHELXE auto-built structures needed R values of $\leq0.45$. The R values had to be acquired by at least one of the Buccaneer \cite{Cowtan2006-xv} or ARP/wARP \cite{Cohen2007-wg} solutions.
