@@ -1,43 +1,9 @@
 \section{Selection of datasets}
 \subsection{ORIGINAL dataset} \label{sec:methods_dataset_original}
-A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:methods_dataset_original}). The test set covered the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-rr} secondary-structure assignment. Target chain lengths fell in the range of [62, 221] residues. Each crystal structure contained one molecule per asymmetric unit and the resolutions of the experimental data was in range from 1.0 to 2.3\AA.
-
-\begin{sidewaystable}
-	\footnotesize
-	\centering
-	\caption{Summary of the ORIGINAL dataset.}
-	\label{table:methods_dataset_original}
-	\begin{tabularx}{\textheight}{ t b t t t t t t t s t }
-		\hline
-		\textbf{\gls{pdb} ID} & \textbf{Molecule}	& \textbf{Resolution (\AA)}	& \textbf{Space Group}	& \textbf{Chain ID}	& \textbf{Chain Length}	& \textbf{Molecules per ASU}	& \textbf{Matthew's Coefficient}	& \textbf{Solvent Content (\%)}	& \textbf{Fold}	& \textbf{Citation}	\\
-		\hline
-		1a6m		&	Oxy-myoglobin											&	1.00		&	P$2_1$			& A	&	151	&	1	&	1.90		&	36.00	&	all-\textalpha				& \cite{Vojtechovsky1999-nn}	\\
-		1aba		&	T4 glutaredoxin											&	1.45		&	P$2_1 2_1 2_1$	& A	&	87	&	1	&	2.22		&	44.62	&	mixed \textalpha/\textbeta	& \cite{Eklund1992-gz}			\\
-		1bdo		&	Biotinyl domain of acetyl-coenzyme A carboxylase		&	1.80		&	P$2_1 2_1 2$	& A	&	80	&	1	&	2.48		&	49.00	&	all-\textbeta				& \cite{Athappilly1995-yu}		\\
-		1bkr		&	Calponin Homology (CH) domain from \textbeta-spectrin	&	1.10		&	P$2_1$			& A	&	109	&	1	&	2.04		&	39.80	&	all-\textalpha				& \cite{Banuelos1998-jk}		\\
-		1chd		&	CheB methylesterase domain								&	1.75		&	P$3_2 2 1$		& A	&	203	&	1	&	2.35		&	47.65	&	mixed \textalpha/\textbeta	& \cite{West1995-dp}			\\
-		1e0s		&	G-protein Arf6-GDP										&	2.28		&	P$6_1 2 2$		& A	&	174	&	1	&	2.18		&	37.00	&	mixed \textalpha/\textbeta	& \cite{Menetrey2000-nw}		\\
-		1eaz		&	Phosphoinositol (3,4)-bisphosphate PH domain			&	1.40		&	C$2 2 2_1$		& A	&	125	&	1	&	2.48		&	48.00	&	mixed \textalpha+\textbeta	& \cite{Thomas2001-uf}			\\
-		1hh8		&	N-terminal region of P67Phox							&	1.80		&	P$3_1$			& A	&	213	&	1	&	2.71		&	45.00	&	all-\textalpha				& \cite{Grizot2001-ju}			\\
-		1kjl		&	Galectin-3 domain										&	1.40		&	P$2_1 2_1 2_1$	& A	&	146	&	1	&	2.15		&	42.68	&	all-\textbeta				& \cite{Sorme2005-ln}			\\
-		1kw4		&	Polyhomeotic SAM domain									&	1.75		&	P$6_5$			& A	&	89	&	1	&	2.25		&	45.27	&	all-\textalpha				& \cite{Kim2002-vg}				\\
-		1lo7		&	4-hydroxybenzoyl CoA thioesterase						&	1.50		&	I$2 2 2$		& A	&	141	&	1	&	2.06		&	40.22	&	mixed \textalpha+\textbeta	& \cite{Thoden2002-id}			\\
-		1npu		&	Extracellular domain of murine PD-1						&	2.00		&	P$2_1 2_1 2_1$	& A	&	117	&	1	&	1.67		&	25.80	&	all-\textbeta			& \cite{Zhang2004-zt}			\\
-		1pnc		&	Poplar plastocyanin										&	1.60		&	P$2_1 2_1 2_1$	& A	&	99	&	1	&	1.82		&	32.48	&	all-\textbeta				& \cite{Fields1994-zx}			\\
-		1tjx		&	Synaptotagmin I C2B domain								&	1.04		&	P$3_2 2 1$		& A	&	159	&	1	&	2.40		&	48.00	&	mixed \textalpha+\textbeta	& \cite{Cheng2004-es}			\\
-		1tlv		&	LicT PRD												&	1.95		&	P$3_2 2 1$		& A	&	221	&	1	&	2.80		&	50.00	&	all-\textalpha				& \cite{Graille2005-at}			\\
-		2nuz		&	\textalpha-spectrin SH3 domain							&	1.85		&	P$2_1 2_1 2_1$	& A	&	62	&	1	&	2.57		&	52.16	&	all-\textbeta				&								\\
-		2qyj		&	Ankyrin													&	2.05		&	P$6_1$			& A	&	166	&	1	&	2.28		&	45.99	&	all-\textalpha				& \cite{Merz2008-aa}			\\
-		3w56		&	C2 domain					 							&	1.60		&	I$2$			& A	&	131	&	1	&	2.05		&	40.10	&	all-\textbeta				& \cite{Traore2013-ul}			\\
-		4cl9		&	N-terminal bromodomain of Brd4							&	1.40		&	P$2_1 2_1 2_1$	& A	&	127	&	1	&	2.21		&	44.37	&	all-\textalpha				& \cite{Atkinson2014-he}		\\
-		4u3h		&	FN3con													&	1.98		&	P$4_1 3 2$		& A	&	100	&	1	&	2.47		&	50.27	&	all-\textbeta				& \cite{Porebski2015-jl}		\\
-		4w97		&	KstR2 													&	1.60		&	C$2$			& A	&	200	&	1	&	2.75		&	55.25	&	all-\textalpha				& \cite{Crowe2015-wt}			\\
-		\hline
-	\end{tabularx}
-\end{sidewaystable}
+A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:appendix_dataset_original}). The test set covers the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-rr} secondary-structure assignment. Target chain lengths fall in the range of [62, 221] residues. Each crystal structure contains one molecule per asymmetric unit and the resolutions of the experimental data is in range from 1.0 to 2.3\AA.
 
 \subsection{PREDICTORS dataset} \label{sec:methods_dataset_predictors}
-An unbiased selection of 27 non-redundant protein targets was selected using the following protocol (\cref{table:methods_dataset_predictors}).
+An unbiased selection of 27 non-redundant protein targets was selected using the following protocol (\cref{table:appendix_dataset_predictors}).
 
 The Pfam v29.0 \cite{Finn2016-zo} database was filtered for all protein families with at least one representative structure in the RCSB \gls{pdb} \cite{Berman2000-ua} database. Each representative had to have monomeric protein stoichiometry and its fold classified in the SCOPe v2.05 database \cite{Chandonia2017-vf}. Targets with fold assignments other than "a" (all-\textalpha), "b" (all-\textbeta), "c" (mixed \textalpha+\textbeta) or "d" (mixed \textalpha/\textbeta) were excluded to exclusively focus on regular globular protein folds. Each resulting protein target was screened against the RESTful API of the RCSB \gls{pdb} (\url{www.rcsb.org}) webserver to identify targets meeting the following criteria: experimental technique is X-ray crystallography; chain length is $\geq100$ residues and $\leq250$ residues; resolution is between 1.3 and 2.3\AA; structure factor amplitudes are deposited in the Protein Data Bank \cite{Berman2000-ua} database; and there is only a single molecule in the asymmetric unit. The resulting protein structures were cross-validated against the \gls{pdbtm} \cite{Tusnady2005-ns} to exclude any possible matches. Subsequently, one representative entry was randomly selected for each Pfam family.
 
@@ -45,75 +11,8 @@ The final set of 27 non-redundant targets was determined using further target ch
 
 The final selection of the 27 targets was performed by randomly selecting one target for each feature combination. To ensure even sampling across the three different fold categories, a target function was employed to identify roughly even target characteristics in each group. The alignment depth and chain length were used as metrics, and had to be within $\pm15$ units to the values of the other fold classes. This created two conditions that had to be met for a randomly chosen sample to be accepted.
 
-\begin{sidewaystable}
-	\footnotesize
-	\centering
-	\caption{Summary of the PREDICTORS dataset.}
-	\label{table:methods_dataset_predictors}
-	\begin{tabularx}{\textheight}{ t b t t t t t t t s t }
-		\hline
-		\textbf{\gls{pdb} ID} & \textbf{Molecule}	& \textbf{Resolution (\AA)}	& \textbf{Space Group}	& \textbf{Chain ID}	& \textbf{Chain Length}	& \textbf{Molecules per ASU}	& \textbf{Matthew's Coefficient}	& \textbf{Solvent Content (\%)}	& \textbf{Fold}	& \textbf{Citation}	\\
-		\hline
-		1fcy		& Retinoic acid nuclear receptor HRAR						& 1.30	& P$4_1 2_1 2$		& A	& 236	& 1	& 2.25	& 45.50	&	all-\textalpha				& \cite{Klaholz2000-ux}		\\
-		1fvg		& Peptide methionine sulfoxide reductase					& 1.60	& C$1 2 1$			& A	& 199	& 1	& 2.10	& 41.55	&	mixed \textalpha+\textbeta	& \cite{Lowther2000-pp}		\\	
-		1gm4		& Cytochrome C3												& 2.05	& P$6_1 2 2$		& A	& 107	& 1	& 2.48	& 50.43	&	all-\textalpha				& \cite{Louro2001-pm}		\\
-		1gv8		& N-II domain of ovotransferrin								& 1.95	& P$3_1$			& A	& 159	& 1	& 2.24	& 45.00	&	mixed \textalpha/\textbeta	& \cite{Kuser2002-gh}		\\
-		1k40		& FAT domain of focal adhesion kinase						& 2.25	& C$1 2 1$			& A	& 126	& 1	& 2.21	& 44.40	&	all-\textalpha				& \cite{Hayashi2002-gj}		\\
-		1oee		& Hypothetical protein YodA 								& 2.10	& C$1 2 1$			& A	& 193	& 1	& 2.30	& 46.20	&	all-\textbeta				& \cite{David2003-jk}		\\
-		1oz9		& Hypothetical protein AQ\_1354								& 1.89	& P$4_3 2_1 2$		& A	& 150	& 1	& 2.76	& 55.07	&	mixed \textalpha+\textbeta	& \cite{Oganesyan2003-rh}	\\
-		1q8c		& Hypothetical protein MG027								& 2.00	& P$4_1$			& A	& 151	& 1	& 2.42	& 49.25	&	all-\textalpha				& \cite{Liu2004-nx}			\\
-		1rlh		& Conserved hypothetical protein							& 1.80	& P$6_3$			& A	& 173	& 1	& 2.12	& 41.98	&	mixed \textalpha+\textbeta	&							\\
-		1s2x		& Cag-Z														& 1.90	& P$2_1 2_1 2_1$	& A	& 206	& 1	& 2.74	& 54.70	&	all-\textalpha				& \cite{Cendron2004-sn}		\\
-		1u61		& Putative Ribonuclease III									& 2.15	& I$4_1 3 2$		& A	& 138	& 1	& 6.50	& 80.80	&	all-\textalpha				&							\\
-		1zxu		& At5g01750 protein											& 1.70	& P$2_1 2_1 2_1$	& A	& 217	& 1	& 2.50	& 50.20	&	mixed \textalpha+\textbeta	&							\\
-		2eum		& Glycolipid transfer protein								& 2.30	& C$1 2 1$			& A	& 209	& 1	& 2.25	& 45.39	&	all-\textalpha				& \cite{Malinina2006-px}	\\
-		2ol8		& Outer surface protein A									& 1.90	& P$1 2_1 1$		& O	& 249	& 1	& 2.19	& 43.87	&	all-\textbeta				& \cite{Makabe2007-ea}		\\
-		2oqz		& Sortase B													& 1.60	& P$1 2_1 1$		& A	& 223	& 1	& 2.07	& 40.71	&	all-\textbeta				& \cite{Maresso2007-vi}		\\
-		2x6u		& T-Box transcription factor TBX5							& 1.90	& P$2_1 2_1 2_1$	& A	& 203	& 1	& 2.20	& 44.21	&	all-\textbeta				& \cite{Stirnimann2010-ak}	\\
-		2y64		& Xylanase													& 1.40	& P$2_1 2_1 2_1$	& A	& 167	& 1	& 2.15	& 43.00	&	all-\textbeta				& \cite{Von_Schantz2012-wr}	\\
-		2yjm		& TtrD														& 1.84	& C$1 2 1$			& A	& 176	& 1	& 2.08	& 40.80	&	all-\textalpha				& \cite{Coulthurst2012-qj}	\\
-		2yq9		& 2, 3-cyclic-nucleotide 3-phosphodiesterase				& 1.90	& P$2_1 2_1 2_1$	& A	& 221	& 1	& 2.10	& 41.70	&	mixed \textalpha+\textbeta	& \cite{Myllykoski2013-wf}	\\
-		3dju		& Protein BTG2												& 2.26	& P$2_1 2_1 2_1$	& B	& 122	& 1	& 1.98	& 37.73	&	mixed \textalpha+\textbeta	& \cite{Yang2008-ef}		\\
-		3g0m		& Cysteine desulfuration protein sufE						& 1.76	& P$1 2_1 1$		& A	& 141	& 1	& 1.88	& 34.58	&	mixed \textalpha+\textbeta	&							\\
-		3qzl		& Iron-regulated surface determinant protein A				& 1.30	& P$2_1 2_1 2$		& A	& 127	& 1	& 2.42	& 49.12	&	all-\textbeta				& \cite{Grigg2011-uj}		\\
-		4aaj		& N-(5-phosphoribosyl)anthranilate isomerase				& 1.75	& P$6_1$			& A	& 228	& 1	& 2.38	& 48.30	&	mixed \textalpha/\textbeta	& \cite{Repo2012-po}		\\
-		4dbb		& Amyloid-\textbeta\ A4 precursor protein-binding family A1	& 1.90	& P$4_1 2_1 2$		& A	& 162	& 1	& 3.25	& 62.10	&	all-\textbeta				& \cite{Matos2012-ao}		\\
-		4e9e		& Methyl-CpG-binding domain protein 4						& 1.90	& H$3$				& A	& 161	& 1	& 2.42	& 49.23	&	all-\textalpha				& \cite{Morera2012-sk}		\\
-		4lbj		& Galectin-3												& 1.80	& P$2_1 2_1 2_1$	& A	& 138	& 1	& 2.09	& 41.01	&	all-\textbeta				& \cite{Collins2014-uu}		\\
-		4pgo		& Hypothetical protein PF0907								& 2.30	& P$6_5 2 2$		& A	& 116	& 1	& 3.25	& 62.10	&	all-\textbeta				& \cite{Weinert2015-dp}		\\
-		\hline
-	\end{tabularx}
-\end{sidewaystable}
-
 \subsection{TRANSMEMBRANE dataset} \label{sec:methods_dataset_transmembrane}
-The selection of this dataset was done by \cite{Thomas2017-sh}. In summary, 14 non-redundant transmembrane protein targets were selected from the \gls{pdbtm} \cite{Tusnady2005-ns}, with a chain length of $<250$ residues and resolution of $<2.5$\AA. The final selection is summarised in \cref{table:methods_dataset_transmembrane}.
-
-\begin{sidewaystable}
-	\footnotesize
-	\centering
-	\caption{Summary of the TRANSMEMBRANE dataset.}
-	\label{table:methods_dataset_transmembrane}
-	\begin{tabularx}{\textheight}{ t b t t t t t t t s t }
-		\hline
-		\textbf{\gls{pdb} ID} & \textbf{Molecule}	& \textbf{Resolution (\AA)}	& \textbf{Space Group}	& \textbf{Chain ID}	& \textbf{Chain Length}	& \textbf{Molecules per ASU}	& \textbf{Matthew's Coefficient}	& \textbf{Solvent Content (\%)}	& \textbf{Fold}	& \textbf{Citation}	\\
-		\hline
-		1gu8	& Sensory rhodopsin II					& 2.27	& C$2 2 2_1$	& A	& 239	& 1	& 2.75	& 53.00	&	all-\textalpha	& \cite{Edman2002-ci}		\\
-		2bhw	& Chlorophyll A-B binding protein AB80	& 2.50	& C$1 2 1$		& A	& 232	& 3	& 4.10	& 69.00	&	all-\textalpha	& \cite{Standfuss2005-eq}	\\
-		2evu	& Aquaporin aqpM						& 2.30	& I$4$			& A	& 246	& 1	& 3.38	& 63.57	&	all-\textalpha	& \cite{Lee2005-dl}			\\
-		2o9g	& Aquaporin Z							& 1.90	& I$4$			& A	& 234	& 1	& 3.34	& 63.19	&	all-\textalpha	& \cite{Savage2007-hg}		\\
-		2wie	& ATP synthase C chain					& 2.13	& P$6_3 2 2$	& A	& 82	& 5	& 3.41	& 68.00	&	all-\textalpha	& \cite{Pogoryelov2009-uq}	\\
-		2xov	& Rhomboid protease GLPG				& 1.65	& H$3 2$		& A	& 181	& 1	& 3.50	& 64.92	&	all-\textalpha	& \cite{Vinothkumar2010-dm}	\\
-		3gd8	& Aquaporin 4							& 1.80	& P$4 2_1 2$	& A	& 223	& 1	& 2.73	& 54.97	&	all-\textalpha	& \cite{Ho2009-sx}			\\
-		3hap	& Bacteriorhodopsin						& 1.60	& C$2 2 2_1$	& A	& 249	& 1	& 2.73	& 54.99	&	all-\textalpha	& \cite{Joh2009-ek}			\\
-		3ldc	& Calcium-gated potassium channel mthK	& 1.45	& P$4 2_1 2$	& A	& 82	& 1	& 2.48	& 50.44	&	all-\textalpha	& \cite{Ye2010-fm}			\\
-		3ouf	& Potassium channel protein				& 1.55	& I$2$			& A	& 97	& 2	& 2.40	& 48.76	&	all-\textalpha	& \cite{Derebe2011-bp}		\\
-		3pcv	& Leukotriene C4 synthase				& 1.90	& F$2 3$		& A	& 156	& 1	& 4.91	& 74.77	&	all-\textalpha	& \cite{Saino2011-qq}		\\
-		3rlb	& ThiT									& 2.00	& C$1 2 1$		& A	& 192	& 2	& 3.89	& 68.39	&	all-\textalpha	& \cite{Erkens2011-vs}		\\
-		3u2f	& ATP synthase subunit C				& 2.00	& P$4_2 2 2$	& K	& 76	& 5	& 2.32	& 46.92	&	all-\textalpha	& \cite{Symersky2012-su}	\\
-		4dve	& Biotin transporter BioY				& 2.09	& C$1 2 1$		& A	& 198	& 3	& 3.27	& 62.40	&	all-\textalpha	& \cite{Berntsson2012-lc}	\\
-		\hline
-	\end{tabularx}
-\end{sidewaystable}
+The selection of this dataset was done by \cite{Thomas2017-sh}. In summary, 14 non-redundant transmembrane protein targets were selected from the \gls{pdbtm} \cite{Tusnady2005-ns}, with a chain length of $<250$ residues and resolution of $<2.5$\AA. The final selection is summarised in \cref{table:appendix_dataset_transmembrane}.
 
 \section{Enhancement of \textbeta-sheet restraints} \label{sec:methods_bbcontacts_addition}
 Structure prediction of \textbeta-strand containing protein targets \textit{ab initio} is a notoriously challenging task. \textbeta-strands, potentially far in sequence space, form a \textbeta-sheet in 3-dimensions. Since fragment-assembly algorithms work on the basis of randomly inserting one fragment at the time, the probability of \textbeta-strand formation is much lower compared to \textalpha-helices. 
@@ -131,9 +30,10 @@ This section defines and describes concepts used throughout this thesis to asses
 Co-evolution based residue-residue contact prediction is dependent on an input \gls{msa} ideally containing all homolohous sequences found in the queried database. However, the \gls{msa} needs a certain level of sequence diversity amongst the homologs to accurately capture the co-evolution signal. The alignment depth --- often also referred to as \gls{meff} --- captures this diversity by computing the number of non-redundant sequences in the \gls{msa}.
 
 \begin{equation}
-M_{eff}=\sum_{i}\frac{1}{\sum_{j}S_{i,j}}
-\label{eq:methods_meff}
+    M_{eff}=\sum_{i}\frac{1}{\sum_{j}S_{i,j}}
+    \label{eq:methods_meff}
 \end{equation}
+\equations{Multiple Sequence Alignment depth}
 
 Various approaches exist for computing \gls{meff} \cite{Morcos2011-lk,Jones2012-ks,Jones2015-vq} yielding similar results \cite{Skwark2014-qp}. In this thesis, the approach defined by \textcite{Morcos2011-lk} is used. \textcite{Morcos2011-lk} first described the approach by which sequence weights are computed by means of Hamming distances between all possible sequence combinations in the \gls{msa} (\cref{eq:methods_meff}). If a Hamming distance was $<0.2$ (sequence identity of 80\%), the binary value $S_{i,j}$ was assigned 1 and otherwise a 0. The sum of fractional weights of the similarity of each sequence compared to all others ultimately describes the alignment depth.
 
@@ -142,26 +42,29 @@ Various approaches exist for computing \gls{meff} \cite{Morcos2011-lk,Jones2012-
 The fraction of residues covered by a set of contact pairs (N\textsubscript{map}) out of the total number of residues in the target sequence (N\textsubscript{sequence}) (\cref{eq:methods_contact_coverage}).
 
 \begin{equation}
-Cov=\frac{N_{map}}{N_{sequence}}
-\label{eq:methods_contact_coverage}
+    Cov=\frac{N_{map}}{N_{sequence}}
+    \label{eq:methods_contact_coverage}
 \end{equation}
+\equations{Contact map coverage}
 
 \subsubsection{Contact map precision} \label{sec:methods_contact_map_prec}
 The precision of a set of contact pairs is equivalent to the the proportion of \gls{tp} contact pairs in the overall set (\cref{eq:methods_contact_precision}). A contact pair was defined as \gls{tp} if the equivalent C\textbeta\ (C\textalpha\ in case of Gly) atoms in the native crystal structure were $<8$\AA\ apart. The precision value is in range [0, 1], whereby a value of 1 means all contact pairs are \gls{tp}s. 
 
 \begin{equation} 
-Prec = \frac{TP}{TP-FP}
-\label{eq:methods_contact_precision}
+    Prec=\frac{TruePositives}{TruePositives-FalsePositives}
+    \label{eq:methods_contact_precision}
 \end{equation}
+\equations{Precision score}
 
 If contacts were unmatched between the target sequence and reference structure, they were not taken into account in the calculation of the precision score.
 \subsubsection{Contact map Jaccard index}
 The Jaccard index quantifies the similarity between two sets of contact pairs. It describes the proportion of contact pairs in the intersection compared to the union between the two sets \cite{Wuyun2016-hh} (\cref{eq:methods_jaccard_index}).
 
 \begin{equation}
-J_{x,y}=\frac{\left |x \cap y\right |}{\left |x \cup y\right |}
-\label{eq:methods_jaccard_index}
+    J_{x,y}=\frac{\left |x \cap y\right |}{\left |x \cup y\right |}
+    \label{eq:methods_jaccard_index}
 \end{equation}
+\equations{Jaccard index}
 
 The variables $x$ and $y$ are two sets of contact pairs. $\left |x \cap y\right |$ is the number of elements in the intersection of $x$ and $y$, and the $\left |x \cup y\right |$ represents the number of elements in the union of $x$ and $y$. The Jaccard index falls in the range [0,1], with a value of 1 corresponding to identical sets of contact pairs and 0 to non-identical ones. It is worth noting that only exact matches are considered and the neighbourhood of a single contact ignored.
 \subsubsection{Contact map singleton content}
@@ -170,21 +73,23 @@ Almost all sliced sets of residue-residue contact pairs contain a fraction of co
 To identify singleton contact pairs in a set of contacts, the neighbourhood of each pair was searched for the presence of other contacts. The search radius was defined by $\pm2$ residues in a 2D-representation of the contact map. If no other contact pair was identified under such constraint, the contact pair was classified as singleton.
 
 \subsection{Structure prediction data}
-\subsubsection{Root Mean Squared Deviatio}
+\subsubsection{Root-Mean-Square Deviation of atomic positions}
 The \gls{rmsd} is a measure to quantify the average atomic distance between two protein structures (\cref{eq:methods_rmsd}). The \gls{rmsd} is sequence-independent, and measures the distance between C\textalpha\ atoms.
 
 \begin{equation}
-RMSD=\sqrt{\frac{1}{n}\sum_{i,j}{(x_i-x_j)^2+(y_i-y_j)^2+(z_i-z_j)^2}}
-\label{eq:methods_rmsd}
+    RMSD=\sqrt{\frac{1}{n}\sum_{i,j}{(x_i-x_j)^2+(y_i-y_j)^2+(z_i-z_j)^2}}
+    \label{eq:methods_rmsd}
 \end{equation}
+\equations{Root-Mean-Square Deviation}
 
 \subsubsection{Template-Modelling score}
 The \gls{tmscore} is a more accurate measure of structure similarity between two protein structures than the \gls{rmsd} \cite{Zhang2004-ha}. Unlike the \gls{rmsd}, the \gls{tmscore} score assigns a lenght-dependent weight to the distances between atoms, with shorter distances getting assigned stronger weights \cite{Zhang2004-ha}. The \gls{tmscore} has widely been accepted as a standard for assessing the similarity between two structures, particularly in the field of \textit{ab initio} structure prediction.
 
 \begin{equation}
-TMscore=max\left[\frac{1}{L_{target}}\sum_{i}^{L_{aligned}}{\frac{1}{1+\left(\frac{d_i}{d_0}\right)^2}}\right]
-\label{eq:methods_tmscore}
+    TMscore=max\left[\frac{1}{L_{target}}\sum_{i}^{L_{aligned}}{\frac{1}{1+\left(\frac{d_i}{d_0}\right)^2}}\right]
+    \label{eq:methods_tmscore}
 \end{equation}
+\equations{Template-Modelling score}
 
 $d_i$ describes the distance between the ith pair of residues. The distance scale $d_0$ to normalise the distances is defined by the equation $1.24\sqrt[3]{L_{target}-15}-1.8$. The \gls{tmscore} value falls in the range (0, 1]. A \gls{tmscore} value of $<0.2$ indicates two random unrelated structures, and a value $>0.5$ roughly the same fold \cite{Xu2010-kr}
 
