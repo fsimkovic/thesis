@@ -1,16 +1,18 @@
 \section{Introduction}
-% - something about high decoy accuracy but little success
-% - identification of best decoys challenging and long-range contact pairs useful
-% - attempt to remove worst decoys to improve overall set accuracy
+Work presented in previous chapters highlighted the much improved \textit{ab initio} decoy quality achievable by restraining the conformational search space with residue-residue contact information. Furthermore, the data also highlighted that this improvement extends AMPLE's tractability of achieving structure solution for more challenging targets. However, the data also indicated that AMPLE's current protocol is not tailored towards decoy sets with overall much higher accuracy. Decoy sets with correctly predicted folds (average \gls{tmscore} $>0.5$ per 1,000 decoys) did not generate any or many ensemble search models leading to \gls{mr} structure solution. It also became apparent that certain decoy sets contained few high-quality decoys that were lost in the process of clustering, since non of the top-10 SPICKER clusters contained that fold.
+
+Beyond the limitations observed in AMPLE, \textit{ab initio} decoy similarity in exceptional cases approaches a near-identical fold (RMSD $<1.5$\AA) to the crystallised one. Although challenging by current means to identify these decoys, it is of great interest since these decoys might be sufficient by themselves as \gls{mr} search models. Contact information, which was used to restrain the folding protocol, might provide enough information to drive such filtering. Indeed, \textcite{De_Oliveira2017-gj} found that long-range residue-residue contact pair satisfaction correlates well with decoy quality. Additionally, \textcite{Adhikari2018-lj} use long-range contact satisfaction routinely in CONFOLD2 to exclude the worst decoys amongst the set predicted ones.
+
+Thus, this chapter focuses on exploring alternative strategies of decoy selection in AMPLE, and if contact information can be used beyond the distance-restraint domain.
 
 \section{Materials \& Methods}
 \subsection{Target selection}
-The dataset for this study consisted of 35 ROSETTA decoy sets generated in previous chapters. The 35 decoy sets covered all targets in the ORIGINAL (\cref{table:appendix_dataset_original}) and TRANSMEMBRANE (\cref{table:appendix_dataset_transmembrane}) datasets. Top-$L$ (min. sequence separation of 5 residues) CCMPRED \cite{Seemayer2014-zp} and PCONSC2 \cite{Skwark2014-qp} contact pairs were used in combination with the \textit{FADE} energy function to restrain the \textit{ab initio} structure prediction process (see \textcolor{red}{Chapter with PCONSFOLD}).
+The dataset for this study consisted of 35 ROSETTA decoy sets generated in previous chapters. The 35 decoy sets covered all targets in the ORIGINAL (\cref{table:appendix_dataset_original}) and TRANSMEMBRANE (\cref{table:appendix_dataset_transmembrane}) datasets. Top-$L$ ($>5$ residues sequence separation) CCMPRED \cite{Seemayer2014-zp} and PCONSC2 \cite{Skwark2014-qp} contact pairs were used in combination with the \textit{FADE} energy function to restrain the \textit{ab initio} structure prediction process.
 
 \subsection{Decoy subselection}
-The precision of long-range contact pairs ($>23$ residues sequence separation; see \cref{sec:methods_longrange_precision}) was computed for each decoy in each set. Hereby, the long-range contact pairs of the original set of contact pairs used to restrain the \textit{ab initio} structure prediction protocol were extracted, and their precision evaluated with reference to the predicted decoy. This long-range contact pair precision thus quantifies the satisfaction of long-range contact pairs.
+The satisfaction of long-range contact pairs ($>23$ residues sequence separation; see \cref{sec:methods_longrange_satisfaction}) was computed for each decoy in each set. Hereby, the long-range contact pairs of the original set of contact pairs used to restrain the \textit{ab initio} structure prediction protocol were extracted, and their satisfaction evaluated with reference to the predicted decoy. This long-range contact pair satisfaction thus quantifies the satisfaction of long-range contact pairs.
 
-Each set of decoys was then ranked in descending order by their long-range contact pairs precision and the $n$ decoys with the lowest scores removed from the set. The number of decoys to remove $n$ were selected using a number of different strategies:
+Each set of decoys was then ranked in descending order by their long-range contact pairs satisfaction and the $n$ decoys with the lowest scores removed from the set. The number of decoys to remove $n$ were selected using a number of different strategies:
 
 \begin{itemize}
     \item \textit{NONE}: leave the original set unchanged
@@ -19,7 +21,7 @@ Each set of decoys was then ranked in descending order by their long-range conta
     \item \textit{SCALED}: remove all decoys with a scaled score of $<0.5$, where the scaled score is score divided by set average
 \end{itemize}
 
-The fixed definition in the \textit{CUTOFF} strategy was determined by \textcite{De_Oliveira2017-gj}. The scaled score used by the \textit{SCALED} strategy was computed by dividing each decoy's long-range contact pair precision by the set's average.
+The fixed definition in the \textit{CUTOFF} strategy was determined by \textcite{De_Oliveira2017-gj}. The scaled score used by the \textit{SCALED} strategy was computed by dividing each decoy's long-range contact pair satisfaction by the set's average.
 
 \subsection{Molecular Replacement}
 The decoy sets generated in the previous step were subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with few exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to poly-Ala only. This change in protocol was shown to be advantageous in most cases by Jens Thomas (PhD Thesis), and thus trialled in this context. 
@@ -27,4 +29,7 @@ The decoy sets generated in the previous step were subjected to AMPLE v1.2.0 and
 To allow comparability of these results to previous AMPLE runs, an additional condition was added, namely \textit{NONE\_classic}. The decoy set from the \textit{NONE} strategy was hereby subjected to the AMPLE protocol with default settings.
 
 Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_mr_success}.
+
+
+\section{Results}
 

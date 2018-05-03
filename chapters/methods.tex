@@ -95,8 +95,8 @@ The \gls{tmscore} is a more accurate measure of structure similarity between two
 
 $d_i$ describes the distance between the ith pair of residues. The distance scale $d_0$ to normalise the distances is defined by the equation $1.24\sqrt[3]{L_{target}-15}-1.8$. The \gls{tmscore} value falls in the range (0, 1]. A \gls{tmscore} value of $<0.2$ indicates two random unrelated structures, and a value $>0.5$ roughly the same fold \cite{Xu2010-kr}
 
-\subsubsection{Long-range contact precision} \label{sec:methods_longrange_precision}
-The long-range contact precision score is computed identically to the precision of sets of contact pairs (\cref{sec:methods_contact_map_prec}). However, the precision score is computed solely for long-range contacts ($>23$ residues sequence separation).
+\subsubsection{Long-range contact precision} \label{sec:methods_longrange_satisfaction}
+The long-range contact pair satisfaction score is computed identically to the precision of sets of contact pairs (\cref{sec:methods_contact_map_prec}). However, the satisfaction score is computed solely for long-range contacts ($>23$ residues sequence separation).
 
 \subsection{Molecular Replacement data}
 \subsubsection{Register-Independent Overlap}
