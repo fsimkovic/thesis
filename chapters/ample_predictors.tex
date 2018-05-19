@@ -204,12 +204,12 @@ The number of structure solutions obtained from the decoy sets subjected to the 
 
 Naturally, one would expect the best decoys to result in the most accurate ensemble search models, which in turn yield the highest number of structure solutions per target. However, here we demonstrate that the most accurate decoys do not guarantee structure solution, and in contrast some poorly predicted decoy sets achieve structure solution. Thus, it is essential to investigate the stage in AMPLE's cluster-and-truncate approach at which the higher decoy quality results in less suitable ensemble search models for \gls{mr}.
 
-The data generated as part of this study reveals a positive correlation ($\rho_{Spearman}=0.78$; $p<0.001$) between the decoy quality and the number of resulting AMPLE ensemble search models (\cref{fig:ample_predictor_ensdep}). The plotted data alongside a fitted LOWESS function further illustrate that small differences in decoy quality in the lower TM-score regions increases the total number of generated ensemble search models dramatically. However, once the threshold of 0.5 TM-score units \cite{Xu2010-kr} is surpassed the number of generated ensemble search models plateaus at around ~350-400 ensemble search models, approaching the maximum number of search models generatable by AMPLE. Furthermore, the data suggests that sets containing fewer than 100 ensemble search models do not lead to structure solution, although this result needs to be considered with care given the difficulty of predicting which search model will lead to structure solution.
+The data generated as part of this study reveals a positive correlation ($\rho_{Spearman}=0.78$; $p<0.001$) between the decoy quality and the number of resulting AMPLE ensemble search models (\cref{fig:ample_predictor_ensdep}). The plotted data alongside a line of best fit further illustrate that small differences in decoy quality in the lower TM-score regions increases the total number of generated ensemble search models dramatically. However, once the threshold of 0.5 TM-score units \cite{Xu2010-kr} is surpassed the number of generated ensemble search models plateaus at around ~350-400 ensemble search models, approaching the maximum number of search models generatable by AMPLE. Furthermore, the data suggests that sets containing fewer than 100 ensemble search models do not lead to structure solution, although this result needs to be considered with care given the difficulty of predicting which search model will lead to structure solution.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_predictors_ensdep.pdf}
-    \caption[Relationship between median TM-score and search model size of AMPLE ensembles]{Comparison of median TM-score (per 1,000 decoys) against the resulting AMPLE ensemble search model count. LOWESS function fitted to data to illustrate relationship. Red dots indicate successful ensemble sets.}
+    \caption[Relationship between median TM-score and search model size of AMPLE ensembles]{Comparison of median TM-score (per 1,000 decoys) against the resulting AMPLE ensemble search model count. The equation of the line of best fit is defined by $y=228.50*\ln\left(20.96*x\right)-227.95$. Red dots indicate successful ensemble sets.}
     \label{fig:ample_predictor_ensdep}
 \end{figure}
 
@@ -218,7 +218,7 @@ Besides looking at the relationship between entire decoy sets and the resulting 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_predictors_clusizetm.pdf}
-    \caption[Relationship between median TM-score and decoy count in SPICKER cluster]{Relationship between cluster median TM-score and the number of cluster decoys. Blue line represents LOWESS relationship fitted to data.}
+    \caption[Relationship between median TM-score and decoy count in SPICKER cluster]{Relationship between cluster median TM-score and the number of cluster decoys. Blue line represents line of best fit with equation $y=148.85*\exp\left(2.90*x\right)-225.76$.}
     \label{fig:ample_predictor_clusizetm}
 \end{figure}
 
