@@ -3,7 +3,7 @@ Work presented in previous chapters highlighted the much improved \textit{ab ini
 
 Beyond the limitations observed in AMPLE, \textit{ab initio} decoy similarity in exceptional cases approaches a near-identical fold (RMSD $<1.5$\AA) to the crystallised one. Although challenging by current means to identify these decoys, it is of great interest since these decoys might be sufficient by themselves as \gls{mr} search models. Contact information, which was used to restrain the folding protocol, might provide enough information to drive such filtering. Indeed, \textcite{De_Oliveira2017-gj} found that long-range residue-residue contact pair satisfaction correlates well with decoy quality. Additionally, \textcite{Adhikari2018-lj} use long-range contact satisfaction routinely in CONFOLD2 to exclude the worst decoys amongst the set predicted ones.
 
-Thus, this chapter focuses on exploring alternative strategies of decoy selection in AMPLE, and if contact information can be used beyond the distance-restraint domain.
+Thus, this chapter focuses on exploring alternative strategies of decoy selection in AMPLE, and if contact information can be used beyond the distance-restraint application in \textit{ab initio} protein structure prediction.
 
 \section{Materials \& Methods}
 \subsection{Target selection}
@@ -25,7 +25,7 @@ Each set of decoys was then ranked in descending order by their long-range conta
 The fixed definition in the \textit{CUTOFF} strategy was determined by \textcite{De_Oliveira2017-gj}. The scaled score used by the \textit{SCALED} strategy was computed by dividing each decoy's long-range contact pair satisfaction by the set's average.
 
 \subsection{Molecular Replacement}
-To evaluate the benefits of such subselection to \gls{mr} in AMPLE, a subset of 35 decoy sets (spanning all targets) were processed as described above and subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with few exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to poly-Ala only. This change in protocol was shown to be advantageous in most cases by Jens Thomas (PhD Thesis), and thus trialled in this context. 
+To evaluate the benefits of such subselection to \gls{mr} in AMPLE, a subset of 35 decoy sets (spanning 35 unique targets) were processed as described above and subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with few exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to \texttt{polyala} only. This change in protocol was shown to be advantageous in most cases by Jens Thomas (PhD Thesis), and thus trialled in this context. 
 
 To allow comparability of these results to previous AMPLE runs, an additional condition was added, namely \textit{NONE\_classic}. The decoy set from the \textit{NONE} strategy was hereby subjected to the AMPLE protocol with default settings.
 
@@ -33,3 +33,14 @@ Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_m
 
 \section{Results}
 
+
+% - Is there a correlation between contact satisfaction and model quality?
+% --- strong positive correlation demonstrated by \textcite{Kosciolek2014-bt} although performed on PSICOV dataset (150 small globular targets)
+% - Does this correlation hold for all targets or a particular fold only?
+% - Are there situations where the correlation is non-existant or negative? 
+
+% - How many decoys do we exclude for the different selection criteria?
+% - How does the correlation affect the selection of decoys?
+% - How do the exclusion conditions affect the quality measures of our decoy sets?
+% - How does the selection impact AMPLE ensemble search model generation?
+% - How does decoy exclusion impact MR?
