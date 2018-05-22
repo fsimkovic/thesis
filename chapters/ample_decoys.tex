@@ -32,12 +32,53 @@ To allow comparability of these results to previous AMPLE runs, an additional co
 Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_mr_success}.
 
 \section{Results}
+This chapter focuses on identifying further uses of predicted residue-residue contact pairs in unconventional \gls{mr}. In particular, the exclusion of \textit{ab initio} decoys by their contact satisfaction scores is under investigation. A total of 113 decoy datasets were used to identify potential means of identifying the best or worst decoys. Furthermore, three strategies were trialled alongside two standards to test the viability of excluding the worst decoys in ensemble search model preparation in AMPLE.
 
+\subsection{Satisfaction of long-range contact pairs evaluates decoy quality}
+\textcite{Kosciolek2014-bt} previously identified a correlation between the TM-score of a decoy and its fraction of satisfied contact pairs. Albeit the striking positive correlations (short-range:$\rho=0.50$; medium-range:$\rho=0.57$; long-range:$\rho=0.87$) for top-1 decoys, the study by \textcite{Kosciolek2014-bt} was limited to 10 representative targets with a maximum chain length of 158 residues. Furthermore, FRAGFOLD \cite{Jones2001-mc} was used for \textit{ab initio} protein structure prediction, a method with inferior performance to ROSETTA \cite{Rohl2004-dj} when using the decoys in unconventional \gls{mr} (see \cref{chap:alternate_abinitio_protocols}). Thus, the more diverse set of decoys generated in this study might be more representative in determining a correlation between decoy TM-scores and contact pair satisfaction.
 
-% - Is there a correlation between contact satisfaction and model quality?
-% --- strong positive correlation demonstrated by \textcite{Kosciolek2014-bt} although performed on PSICOV dataset (150 small globular targets)
-% - Does this correlation hold for all targets or a particular fold only?
-% - Are there situations where the correlation is non-existant or negative? 
+A correlation analysis with 35 ROSETTA decoy sets representing 35 globular and transmembrane targets shows a positive linear correlations between a decoy's TM-score and short-, medium- and long-range contact satisfaction (\cref{table:ample_decoys_tmscore_consat}). Furthermore, separating the correlation analysis of all targets by fold classification reveals that all-\textalpha, mixed \textalpha-\textbeta\ and transmembrane protein targets show the strongest positive correlations for long-range contact satisfaction (\cref{table:ample_decoys_tmscore_consat}). All-\textbeta\ and mixed \textalpha-\textbeta\ decoy sets show the strongest correlations for short- and medium-range contact satisfaction, whereby the former shows a stronger positive correlation between the decoy's TM-score and its medium-range contact satisfaction than its long-range contact satisfaction (medium-range:$\rho=0.54$; long-range:$\rho=0.50$) (\cref{table:ample_decoys_tmscore_consat}). Notably, the decoys of transmembrane protein targets show no correlation between TM-score and short-range contact satisfaction ($\rho=0.08$; \cref{table:ample_decoys_tmscore_consat}).
+
+\begin{table}[H]
+  \centering
+  \caption[Correlation analysis between decoy TM-score and contact satisfaction]{Pearson's \gls{cc} analysis between a ROSETTA decoy's TM-score and short-, medium- and long-range contact satisfaction. Probability values for all \textrho coefficients is $<0.01$.}
+  \label{table:ample_decoys_tmscore_consat}
+  \begin{tabularx}{\textwidth}{X X X X}
+      \hline
+      \multirow{2}{*}{\textbf{Target class}} & \multicolumn{3}{c}{\textbf{Pearson's \gls{cc}}} \\ \cline{2-4}
+      & Short-range   & Medium-range  & Long-range \\
+      \hline
+      all                               & 0.11          & 0.18          & 0.64 \\
+      all-\textalpha                    & 0.30          & 0.44          & 0.69 \\
+      all-\textbeta                     & 0.40          & 0.54          & 0.50 \\
+      mixed \textalpha-\textbeta        & 0.42          & 0.55          & 0.69 \\
+      transmembrane                     & 0.08          & 0.48          & 0.70 \\
+      \hline
+  \end{tabularx}
+\end{table}
+
+Following on from the correlation analysis, a linear regression model was fitted to individual subsets of the data used for the correlation analysis to see if a decoy's TM-score could be predicted from its contact satisfaction score. However, weak coefficients of determination indicate that only some cases show models with reasonably good fits to the data (\cref{fig:ample_decoys_smlrcstmfold}). Nevertheless, all models further support the positive linear correlations between a decoy's TM-score and its range-dependent contact satisfaction. Interestingly, the strongest and best fits of the linear regression model to its corresponding data is for long-range contact pairs, where the linear regression models are also near identical between the different fold categories (\cref{fig:ample_decoys_smlrcstmfold}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_decoys_smlrcstmfold.pdf}
+        \caption[Linear regression model between decoy TM-score and contact satisfaction]{Linear regression model fitted to decoy TM-scores and corresponding fractions of satisfied, range-dependent contacts. Targets were further separated by fold classification. Ceofficients of determination ($R^2$-values) added alongside each regression model.}
+	\label{fig:ample_decoys_smlrcstmfold}
+\end{figure}
+
+An analysis of the correlation between the TM-score and long-range contact satisfaction of individual decoy sets further highlights the potential to subselect decoy sets by their long-range contact satisfaction. Thirty decoy sets show statistically significant positive correlations between decoy TM-scores and their long-range contact satisfaction ($\rho$-values in range of 0.09 to 0.97 with p-value $<0.01$). A singleton ROSETTA decoy set, derived for the Glycolipid transfer protein with \gls{pdb} ID 2eum and restrained with METAPSICOV STAGE 1 contact data, shows a weak negative correlation ($\rho=-0.10$, $p<0.01$). The remaining four decoy sets, derived for targets with \gls{pdb} IDs 1chd, 1gm4, 2x6u and 3ouf and restrained with METAPSICOV STAGE 1 contact data except for 2x6u (PCONSC2), show no statistically significant correlation between the TM-score and long-range contact satisfaction of the decoy sets. 
+
+A further subdivide of the previously presented data by metapredictor highlights that no predictor outperforms the others. Decoy sets from all metapredictors result in decoy sets with stronger and weaker correlations. Similarly, target chain length and fold do not show overall stronger or weaker correlations. 
+
+So far, all analyses focused on entire sets of decoys (1,000 decoys per set); however, it is often desirable to know if we could better estimate the accuracy of the best decoy by some measure. \textcite{Kosciolek2014-bt} demonstrated strong positive correlations for short-, medium- and long-range contact satisfaction with a decoy's corresponding TM-score. In this work, these findings are confirmed albeit the strength of the correlation for long-range contact satisfaction is much weaker than observed previously (short-range: no correlation; medium-range:$\rho=0.52$; long-range:$\rho=0.69$) (\cref{fig:ample_decoys_smlrcstmtop1}). The weak positive correlation for short-range contact satisfaction is statistically non-significant, and thus cannot be validated. 
+
+\begin{figure}[H]
+	\centering
+        \includegraphics[width=0.7\textwidth]{ample_decoys_smlrcstmtop1.pdf}
+        \caption[Top-1 decoy TM-score and contact satisfaction analysis]{Analysis of the relationship between TM-score and contact satisfaction for the top-1 decoy (as ranked by TM-score) in each decoy set.}
+	\label{fig:ample_decoys_smlrcstmtop1}
+\end{figure}
+
 
 % - How many decoys do we exclude for the different selection criteria?
 % - How does the correlation affect the selection of decoys?
