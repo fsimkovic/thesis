@@ -12,7 +12,7 @@ The dataset for this study consisted of 113 ROSETTA decoy sets generated through
 \subsection{Computation of range-specific satisfaction scores}
 The satisfaction of short- ($>6$ residues sequence separation), medium- ($>12$ residues sequence separation) and long-range contact pairs ($>23$ residues sequence separation; see \cref{sec:methods_longrange_satisfaction}) were computed for each decoy in each set. Hereby, the contact pairs of the original set of contact pairs used to restrain the \textit{ab initio} structure prediction protocol were extracted, matched against the contact pairs extracted from individual decoys and the contact pair range-specific satisfaction score evaluated. 
 
-\subsection{Decoy subselection}
+\subsection{Decoy subselection} \label{sec:ample_decoys_decoy_selection}
 Each set of decoys was then ranked in descending order by their long-range contact pair satisfaction scores and the $n$ decoys with the lowest scores removed from each set. The number of decoys to remove $n$ were selected using a number of different strategies:
 
 \begin{itemize}
@@ -34,7 +34,7 @@ Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_m
 \section{Results}
 This chapter focuses on identifying further uses of predicted residue-residue contact pairs in unconventional \gls{mr}. In particular, the exclusion of \textit{ab initio} decoys by their contact satisfaction scores is under investigation. A total of 113 decoy datasets were used to identify potential means of identifying the best or worst decoys. Furthermore, three strategies were trialled alongside two standards to test the viability of excluding the worst decoys in ensemble search model preparation in AMPLE.
 
-\subsection{Satisfaction of long-range contact pairs evaluates decoy quality}
+\subsection{Contact pair satisfaction correlates with decoy quality}
 \textcite{Kosciolek2014-bt} previously identified a correlation between the TM-score of a decoy and its fraction of satisfied contact pairs. Albeit the striking positive correlations (short-range:$\rho=0.50$; medium-range:$\rho=0.57$; long-range:$\rho=0.87$) for top-1 decoys, the study by \textcite{Kosciolek2014-bt} was limited to 10 representative targets with a maximum chain length of 158 residues. Furthermore, FRAGFOLD \cite{Jones2001-mc} was used for \textit{ab initio} protein structure prediction, a method with inferior performance to ROSETTA \cite{Rohl2004-dj} when using the decoys in unconventional \gls{mr} (see \cref{chap:alternate_abinitio_protocols}). Thus, the more diverse set of decoys generated in this study might be more representative in determining a correlation between decoy TM-scores and contact pair satisfaction.
 
 A correlation analysis with 35 ROSETTA decoy sets representing 35 globular and transmembrane targets shows a positive linear correlations between a decoy's TM-score and short-, medium- and long-range contact satisfaction (\cref{table:ample_decoys_tmscore_consat}). Furthermore, separating the correlation analysis of all targets by fold classification reveals that all-\textalpha, mixed \textalpha-\textbeta\ and transmembrane protein targets show the strongest positive correlations for long-range contact satisfaction (\cref{table:ample_decoys_tmscore_consat}). All-\textbeta\ and mixed \textalpha-\textbeta\ decoy sets show the strongest correlations for short- and medium-range contact satisfaction, whereby the former shows a stronger positive correlation between the decoy's TM-score and its medium-range contact satisfaction than its long-range contact satisfaction (medium-range:$\rho=0.54$; long-range:$\rho=0.50$) (\cref{table:ample_decoys_tmscore_consat}). Notably, the decoys of transmembrane protein targets show no correlation between TM-score and short-range contact satisfaction ($\rho=0.08$; \cref{table:ample_decoys_tmscore_consat}).
@@ -80,8 +80,27 @@ So far, all analyses focused on entire sets of decoys (1,000 decoys per set); ho
 \end{figure}
 
 
+
+
 % - How many decoys do we exclude for the different selection criteria?
 % - How does the correlation affect the selection of decoys?
 % - How do the exclusion conditions affect the quality measures of our decoy sets?
 % - How does the selection impact AMPLE ensemble search model generation?
 % - How does decoy exclusion impact MR?
+
+\subsection{Long-range contact satisfaction metric to select decoys}
+In the previous section, the data highlighted that decoy quality correlates positively with contact satisfaction. In particular, a strong positive correlation between long-range contact satisfaction and decoy quality could be established for almost all decoy sets in this study. A key ambition in this work is to determine, if this correlation could be used to include or exclude decoys prior to submission to the AMPLE processing pipeline to enrich the quality and number of ensemble search models trialled in \gls{mr}. 
+
+The difference in mean TM-score of each decoy set before and after applying a subselection strategy (see \cref{sec:ample_decoys_decoy_selection}) is shown in \cref{fig:ample_decoys_deltatmsub}. Estimating a decoy's quality by short-range contact satisfaction results in marginal mean TM-score changes of decoy sets ($\Delta_{CUTOFF}=-0.003$; $\Delta_{LINEAR}=0.008$; $\Delta_{CUTOFF}=0.001$). In comparison, medium- ($\Delta_{CUTOFF}=0.005$; $\Delta_{LINEAR}=0.015$; $\Delta_{CUTOFF}=0.002$) and long-range ($\Delta_{CUTOFF}=0.025$; $\Delta_{LINEAR}=0.032$; $\Delta_{CUTOFF}=0.005$) contact satisfaction are better estimates to improve the mean TM-score values of each decoy set. Notably, per-decoy long-range contact satisfaction provides the best estimate for identifying and excluding the least accurate decoys independent of the subselection strategy. 
+
+A comparison of \textDelta TM-scores between subselection strategies shows that the \textit{LINEAR} strategy results in the largest improvements across all contact range categories. Nevertheless, such great changes are expected compared to other strategies since the \textit{LINEAR} strategy removes on average the most decoys from each set (\textit{CUTOFF}=280; \textit{LINEAR}=500; \textit{SCALED}=66). However, the sample-dependent strategies (\textit{CUTOFF} and \textit{SCALED}) may remove a much greater number of decoys from a set if the corresponding satisfaction scores fall below a certain threshold.
+
+In certain cases, the certain subselection strategies greatly changed the overall size and quality of the starting decoy set. The METAPSICOV STAGE 1 decoy set of the ankyrin sequence (\gls{pdb} ID: 2qyj) shows overall quality improvements from 0.006 (short-range \textit{SCALED}; $n_{models}=958$) to 0.213 (long-range \textit{CUTOFF}; $n_{models}=218$). The CCMPRED decoy set of sensory rhodopsin II sequence (\gls{pdb} ID: 1gu8) shows overall changes from -0.155 (short-range \textit{CUTOFF}; $n_{models}=2$) to 0.06 (long-range \textit{LINEAR}; $n_{models}=500$).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_decoys_deltatmsub.pdf}
+        \caption[TM-score comparison pre- and post-decoy subselection]{Differences in mean TM-score  for decoy sets pre- and post-decoy subselection. Each subselection strategy is stated in each subplot along with the contact range used to establish decoy inclusion in the final set.}
+	\label{fig:ample_decoys_deltatmsub}
+\end{figure}
+
