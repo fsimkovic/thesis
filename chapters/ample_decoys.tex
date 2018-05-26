@@ -88,14 +88,10 @@ So far, all analyses focused on entire sets of decoys (1,000 decoys per set); ho
 % - How does the selection impact AMPLE ensemble search model generation?
 % - How does decoy exclusion impact MR?
 
-\subsection{Long-range contact satisfaction metric to select decoys}
+\subsection{Long-range contact satisfaction metric to filter decoy sets}
 In the previous section, the data highlighted that decoy quality correlates positively with contact satisfaction. In particular, a strong positive correlation between long-range contact satisfaction and decoy quality could be established for almost all decoy sets in this study. A key ambition in this work is to determine, if this correlation could be used to include or exclude decoys prior to submission to the AMPLE processing pipeline to enrich the quality and number of ensemble search models trialled in \gls{mr}. 
 
 The difference in mean TM-score of each decoy set before and after applying a subselection strategy (see \cref{sec:ample_decoys_decoy_selection}) is shown in \cref{fig:ample_decoys_deltatmsub}. Estimating a decoy's quality by short-range contact satisfaction results in marginal mean TM-score changes of decoy sets ($\Delta_{CUTOFF}=-0.003$; $\Delta_{LINEAR}=0.008$; $\Delta_{CUTOFF}=0.001$). In comparison, medium- ($\Delta_{CUTOFF}=0.005$; $\Delta_{LINEAR}=0.015$; $\Delta_{CUTOFF}=0.002$) and long-range ($\Delta_{CUTOFF}=0.025$; $\Delta_{LINEAR}=0.032$; $\Delta_{CUTOFF}=0.005$) contact satisfaction are better estimates to improve the mean TM-score values of each decoy set. Notably, per-decoy long-range contact satisfaction provides the best estimate for identifying and excluding the least accurate decoys independent of the subselection strategy. 
-
-A comparison of \textDelta TM-scores between subselection strategies shows that the \textit{LINEAR} strategy results in the largest improvements across all contact range categories. Nevertheless, such great changes are expected compared to other strategies since the \textit{LINEAR} strategy removes on average the most decoys from each set (\textit{CUTOFF}=280; \textit{LINEAR}=500; \textit{SCALED}=66). However, the sample-dependent strategies (\textit{CUTOFF} and \textit{SCALED}) may remove a much greater number of decoys from a set if the corresponding satisfaction scores fall below a certain threshold.
-
-In certain cases, the certain subselection strategies greatly changed the overall size and quality of the starting decoy set. The METAPSICOV STAGE 1 decoy set of the ankyrin sequence (\gls{pdb} ID: 2qyj) shows overall quality improvements from 0.006 (short-range \textit{SCALED}; $n_{models}=958$) to 0.213 (long-range \textit{CUTOFF}; $n_{models}=218$). The CCMPRED decoy set of sensory rhodopsin II sequence (\gls{pdb} ID: 1gu8) shows overall changes from -0.155 (short-range \textit{CUTOFF}; $n_{models}=2$) to 0.06 (long-range \textit{LINEAR}; $n_{models}=500$).
 
 \begin{figure}[H]
 	\centering
@@ -103,4 +99,44 @@ In certain cases, the certain subselection strategies greatly changed the overal
         \caption[TM-score comparison pre- and post-decoy subselection]{Differences in mean TM-score  for decoy sets pre- and post-decoy subselection. Each subselection strategy is stated in each subplot along with the contact range used to establish decoy inclusion in the final set.}
 	\label{fig:ample_decoys_deltatmsub}
 \end{figure}
+
+A comparison of \textDelta TM-scores between subselection strategies shows that the \textit{LINEAR} strategy results in the largest improvements across all contact range categories. Nevertheless, such great changes are expected compared to other strategies since the \textit{LINEAR} strategy removes on average the most decoys from each set (\textit{CUTOFF}=280; \textit{LINEAR}=500; \textit{SCALED}=66). However, the sample-dependent strategies (\textit{CUTOFF} and \textit{SCALED}) may remove a much greater number of decoys from a set if the corresponding satisfaction scores fall below a certain threshold.
+
+In certain cases, some subselection strategies greatly changed the overall size and quality of the starting decoy set. The METAPSICOV STAGE 1 decoy set of the ankyrin sequence (\gls{pdb} ID: 2qyj) shows overall quality improvements from 0.006 (short-range \textit{SCALED}; $n_{models}=958$) to 0.213 (long-range \textit{CUTOFF}; $n_{models}=218$). The CCMPRED decoy set of sensory rhodopsin II sequence (\gls{pdb} ID: 1gu8) shows overall changes from -0.155 (short-range \textit{CUTOFF}; $n_{models}=2$) to 0.06 (long-range \textit{LINEAR}; $n_{models}=500$).
+
+Overall, the optimal strategy to select or exclude decoys from a starting set of structures appears to be long-range contact satisfaction given the improved similarity metric of the set compared to the reference crystal structure. 
+
+
+\subsection{AMPLE's cluster-and-truncate approach with filtered decoy sets}
+The original dataset was limited to a sub-sample of 35 decoy sets spanning 35 unique targets (21 globular and 14 transmembrane targets) for \gls{mr} trials. The contact prediction algorithms generating the restraints for the \textit{ab initio} structure predictions were PCONSC2 (globular targets) and CCMPRED (transmembrane targets). Each decoy set was subjected to the AMPLE pipeline with certain decoys removed according to one of five subselection strategies.
+
+The initial step in the AMPLE pipeline is the clustering of decoys. A comparison of SPICKER clusters between the \textit{NONE} default strategy and the \textit{CUTOFF}, \textit{LINEAR} and \textit{SCALED} subselection strategies highlights an important difference. Larger clusters --- those ranked higher --- show higher similarity between a subselection strategy and the default (\cref{fig:ample_decoys_jaccluster}). The top SPICKER cluster shows high similarities between the \textit{NONE} strategy and all other subselection ones, whereby it has to be noted that the \textit{LINEAR} strategy contains only 50\% of the starting decoys and thus can at most show a Jaccard index of 0.5. With increasing cluster index, the overall similarity degrades and most of the decoys in cluster 10 are non-identical between each subselection strategy and the default. Furthermore, a similar analysis to compare the overall quality of each cluster compared to the target structure revealed less difference between the default and each subselection strategy for higher-order SPICKER clusters (\cref{fig:ample_decoys_tmcluster}). With decreasing SPICKER cluster index, the difference in median TM-scores starts to alternate without any particular pattern. Thus, pre-selecting decoys prior to AMPLE's cluster-and-truncate approach most certainly preserves the top cluster for the \textit{CUTOFF} and \textit{SCALED} subselection strategies, whereby lower clusters show more deviation from the default.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{ample_decoys_jaccluster.pdf}
+        \caption{}
+        \label{fig:ample_decoys_jaccluster}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]\ContinuedFloat
+    \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{ample_decoys_tmcluster.pdf}
+        \caption{}
+        \label{fig:ample_decoys_tmcluster}
+    \end{subfigure}
+    \caption[Effect of decoy subselection on SPICKER clusters]{Effect of decoy subselection on SPICKER clusters. Effect illustrated by (a) the Jaccard Index and (b) median TM-score difference. Values were calculated for clusters resulting from the full starting set of decoys and the \textit{CUTOFF}, \textit{LINEAR} and \textit{SCALED} subselection strategies.}
+\end{figure}
+
+The mean of the inter-decoy variance computed by THESEUS --- used in AMPLE to guide truncation --- is reduced in lower clusters compared to the \textit{NONE} default strategy (\cref{fig:ample_decoys_vardeltacluster}). The clusters of decoys based on the galectin-3 domain (\gls{pdb} ID: 1kjl) sequence show overall the highest reduction in mean inter-decoy variance up to -15\AA compared to the default strategy. Similarly, clusters 4 and 8 of the K\textsuperscript{+}-channel protein domain (\gls{pdb} ID: 3ouf) show reductions in mean inter-decoy variance of up to -20\AA. In general and also true for the aforementioned examples, clusters starting from \textit{CUTOFF}-subselected decoys show mean inter-decoy variance reductions, followed by \textit{LINEAR} and then \textit{SCALED}-subselected decoys sets.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ample_decoys_vardeltacluster.pdf}
+    \caption[Effect of decoy subselection on THESEUS variance]{Effect of decoy subselection on mean inter-decoy THESEUS variance. Difference in mean variance calculated between the default and the three decoy subselection strategies \textit{CUTOFF}, \textit{LINEAR} and \textit{SCALED}. Data for clusters 1, 5 and 10 shown as examples.}
+    \label{fig:ample_decoys_vardeltacluster}
+\end{figure}
+
 
