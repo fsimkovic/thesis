@@ -20,11 +20,12 @@ Each set of decoys was ranked in descending order by their long-range contact pa
     \item[\textit{LINEAR}] remove the worst 500 decoys
     \item[\textit{CUTOFF}] remove all decoys with a score of $<0.287$ 
     \item[\textit{SCALED}] remove all decoys with a scaled score of $<0.5$, where the scaled score is score divided by set average
+    \item[\textit{INDIVIDUAL}] keep the top-5 decoys only
 \end{description}
 
 The fixed definition in the \textit{CUTOFF} strategy was determined by \textcite{De_Oliveira2017-gj}. The scaled score used by the \textit{SCALED} strategy was computed by dividing each decoy's long-range contact pair satisfaction by the set's average.
 
-Furthermore, an \textit{INDIVIDUAL} subselection strategy was employed, which differed substantially from the others. The top-5 decoys by long-range contact satisfaction were selected and subjected to treatment outside of AMPLE. The per-decoy treatments were the following:
+The \textit{INDIVIDUAL} subselection strategy differs substantially from the others. The top-5 decoys by long-range contact satisfaction were selected and subjected to treatment outside of AMPLE. The per-decoy treatments were the following:
 
 \begin{description}[style=multiline,leftmargin=3cm]
     \item[default] leave the decoy unchanged
@@ -156,6 +157,10 @@ A comparisons of intermediate stages in AMPLE pipeline resulting from differentl
 
 Further inspection of the number of AMPLE-generated ensemble search models by target reveal near identical numbers between the \textit{NONE}, \textit{LINEAR} and \textit{SCALED} strategies (\cref{fig:ample_decoys_mrsuccesstarget}). In fact, only few outliers for each of those methods distinguish them from the others. The \textit{CUTOFF} strategy shows greater deviation from the other three, especially for certain targets with differences up to approximately 200 ensemble search models (\cref{fig:ample_decoys_mrsuccesstarget}). If we compare all these strategies to the previous default processing in AMPLE (\textit{NONE\_classic}; further details in \cref{subsec:ample_decoys_methods_mr}), we can see that the number of search models is greatly reduced (\cref{fig:ample_decoys_mrsuccesstarget}). A comparison of the previous default (\textit{NONE\_classic}) with the new one (\textit{NONE}) shows on average 144 fewer ensemble search models, whilst sampling a larger range of folds through all 10 clusters.
 
+
+\subsection{Processing of single decoys}
+
+
 \subsection{Decoy subselection extends AMPLE's performance}
 The final step in this study is the assessment of AMPLE-generate ensemble search models in \gls{mr}. In particular, the comparison of different decoy subselection strategies is of great interest since it might allow us to extend AMPLE's performance beyond that described in previous chapters.
 
@@ -164,7 +169,7 @@ A comparison of the total number of targets solved by each subselection strategy
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_decoys_mrsuccesstarget.pdf}
-\caption[Molecular Replacement summary of decoy-subselected AMPLE ensembles]{Molecular Replacement summary of decoy-subselected AMPLE ensembles. AMPLE-generated ensemble counts illustrated at the top with Molecular Replacement results in grid below: red cell equates to no solution; orange to a singleton solution; and green to multiple solutions. The number in the orange and green cells indicates the percentage of ensemble search models leading to structure solutions. One letter code above each column indicates the target fold: ``T'' for transmembrane; ``A'' for all-\textalpha; ``B'' for all=\textbeta; ``M'' for mixed \textalpha-\textbeta). Percentage alongside each row indicates the number of targets with solutions by each strategy. Targets are sorted from left to right with increasing median TM-score of the starting decoy set. The black lines highlight TM-score thresholds from 0.3 to 0.7 from left to right. The subselection strategy \textit{IDEALH} refers AMPLE's ideal helix library.}
+\caption[Molecular Replacement summary of decoy-subselected AMPLE ensembles]{Molecular Replacement summary of decoy-subselected AMPLE ensembles. AMPLE-generated ensemble counts illustrated at the top with Molecular Replacement results in grid below: red cell equates to no solution; orange to a singleton solution; and green to multiple solutions. All \textit{INDIVIDUAL} attempts were compressed to a single row per decoy set. The number in the orange and green cells indicates the percentage of ensemble search models leading to structure solutions. One letter code above each column indicates the target fold: ``T'' for transmembrane; ``A'' for all-\textalpha; ``B'' for all=\textbeta; ``M'' for mixed \textalpha-\textbeta). Percentage alongside each row indicates the number of targets with solutions by each strategy. Targets are sorted from left to right with increasing median TM-score of the starting decoy set. The black lines highlight TM-score thresholds from 0.3 to 0.7 from left to right. The subselection strategy \textit{IDEALH} refers AMPLE's ideal helix library.}
     \label{fig:ample_decoys_mrsuccesstarget}
 \end{figure}
 
@@ -174,6 +179,8 @@ In few exceptions, only a singleton AMPLE search model lead to a structure solut
 
 The rank order of targets by median TM-score of the initial starting decoy set in \cref{fig:ample_decoys_mrsuccesstarget} shows that no decoy set with median TM-score of less than 0.3 score units lead to structure solution albeit only two such cases exist in the dataset. With increasing median TM-score, i.e. increasing similarity between the decoy set and its reference target struture, the chances appear to increase to achieve structure solution. Beyond a threshold of 0.4 TM-score units, structure solutions are much more likely (over 50\% of targets solved with one of the four subselection strategies), which highlights AMPLE's success in processing such accurate decoy sets appropriately.
 
-Finally, a comparison of decoy-derived search models and AMPLE's simplistic ideal helix library \cite{Thomas2015-wu} in \gls{mr} was done. Ideal helices achieved the most structure solutions solving nearly 46\% of all targets (\cref{fig:ample_decoys_mrsuccesstarget}). In particular, ideal helices achieved structure solutions for more transmembrane targets. Eight out of 14 transmembrane targets were solved with at least one ideal helix, which compares to six out of 14 for all decoy-based search models combined. Ideal helices also managed to near identical results for all-\textalpha\ and mixed \textalpha-\textbeta\ targets in the set compared to decoy-derived search models. However, three structure solutions for all-\textbeta\ targets are intractable.
+The work in this study further explored, if individual decoys could be selected via their long-range contact satisfaction and trialled directly as \gls{mr} search models. The \textit{INDIVIDUAL} subselection strategy explored this aspect with numerous post-selection processing steps. However, structure solutions for only three targets could be obtained using this approach (\cref{fig:ample_decoys_mrsuccesstarget}). All processing steps obtained lead to structure solutions based on the PCONSC2 decoy set of the \textalpha-spectrin SH3 domain (\gls{pdb} ID: 2nuz). The other two targets with solutions, \gls{pdb} IDs 2qyj and 4u3h with PCONSC2 decoy sets, acquired at least one structure solutions with a single decoy and processing with the ``domain'', ``DSSP'', ``residue'' and ``variance'' treatments. Across the three targets, only five decoys (three based on the sequence of \gls{pdb} ID 2nuz) with a minimum TM-score of 0.682 resulted in the 20 structure solutions (\gls{pdb} 2nuz: 16 solutions; \gls{pdb} 2qyj: 2 solutions; \gls{pdb} 4u3h: 2 solutions).
+
+A comparison of decoy-derived search models and AMPLE's simplistic ideal helix library \cite{Thomas2015-wu} in \gls{mr} was done. Ideal helices achieved the most structure solutions solving nearly 46\% of all targets (\cref{fig:ample_decoys_mrsuccesstarget}). In particular, ideal helices achieved structure solutions for more transmembrane targets. Eight out of 14 transmembrane targets were solved with at least one ideal helix, which compares to six out of 14 for all decoy-based search models combined. Ideal helices also managed to near identical results for all-\textalpha\ and mixed \textalpha-\textbeta\ targets in the set compared to decoy-derived search models. However, three structure solutions for all-\textbeta\ targets are intractable.
 
 \section{Discussion}
