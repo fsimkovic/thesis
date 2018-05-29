@@ -29,10 +29,9 @@ The \textit{INDIVIDUAL} subselection strategy differs substantially from the oth
 
 \begin{description}[style=multiline,leftmargin=3cm]
     \item[default] leave the decoy unchanged
-    \item[bfactor] remove all residues with a CONCOORD \cite{De_Groot1997-gb} B-factor of less than 30\AA\textsuperscript{2}
     \item[domain] remove all residues with $kde<\frac{1}{2}max_{kde}$, where $kde$ corresponds to the \gls{kde} and $max_{kde}$ to the maximum \gls{kde} obtained by applying the algorithm described by \textcite{Sadowski2013-zu} to the top-5$L$ contact map
-    \item[dssp] remove all residues that were assigned secondary structure by DSSP \cite{Frishman1995-si} not in \{$H, B, E, G, I$\}
-    \item[residue] remove all residues that do not form a consecutive fragment of at least 3 residues in the top-$L$ contact map
+    \item[dssp] remove all residues with DSSP-assigned secondary structure \cite{Frishman1995-si} not in \{$H, B, E, G, I$\}
+    \item[fragment] remove all residues that do not form a consecutive fragment of at least 3 residues in the contact map extracted from the decoy, where a contact between two atoms was existend if its C\textbeta\ (C\textalpha\ in case of Gly) were within 8\AA
     \item[variance] remove all residues with cluster variance computed by THESEUS \cite{Theobald2006-qj} of more than 5\AA\ (cluster variance determined from \textit{NONE} strategy)
 \end{description}
 
@@ -103,9 +102,15 @@ So far, all analyses focused on entire sets of decoys (1,000 decoys per set); ho
 % - How does decoy exclusion impact MR?
 
 \subsection{Long-range contact satisfaction metric to filter decoy sets}
-In the previous section, the data highlighted that decoy quality correlates positively with contact satisfaction. In particular, a strong positive correlation between long-range contact satisfaction and decoy quality could be established for almost all decoy sets in this study. A key ambition in this work is to determine, if this correlation could be used to include or exclude decoys prior to submission to the AMPLE processing pipeline to enrich the quality and number of ensemble search models trialled in \gls{mr}. 
+In the previous section, the data highlighted that decoy quality correlates positively with contact satisfaction. In particular, a strong positive correlation between long-range contact satisfaction and decoy quality could be established for almost all decoy sets in this study. A key ambition in this work is to determine, if this correlation could be used to include or exclude decoys prior to submission to the AMPLE processing pipeline to enrich the quality and number of ensemble search models trialled in \gls{mr}.
 
 The difference in mean TM-score of each decoy set before and after applying a subselection strategy (see \cref{sec:ample_decoys_decoy_selection}) is shown in \cref{fig:ample_decoys_deltatmsub}. Estimating a decoy's quality by short-range contact satisfaction results in marginal mean TM-score changes of decoy sets ($\Delta_{CUTOFF}=-0.003$; $\Delta_{LINEAR}=0.008$; $\Delta_{CUTOFF}=0.001$). In comparison, medium- ($\Delta_{CUTOFF}=0.005$; $\Delta_{LINEAR}=0.015$; $\Delta_{CUTOFF}=0.002$) and long-range ($\Delta_{CUTOFF}=0.025$; $\Delta_{LINEAR}=0.032$; $\Delta_{CUTOFF}=0.005$) contact satisfaction are better estimates to improve the mean TM-score values of each decoy set. Notably, per-decoy long-range contact satisfaction provides the best estimate for identifying and excluding the least accurate decoys independent of the subselection strategy. 
+
+A comparison of \textDelta TM-scores between subselection strategies shows that the \textit{LINEAR} strategy results in the largest improvements across all contact range categories. Nevertheless, such great changes are expected compared to other strategies since the \textit{LINEAR} strategy removes on average the most decoys from each set (\textit{CUTOFF}=280; \textit{LINEAR}=500; \textit{SCALED}=66). However, the sample-dependent strategies (\textit{CUTOFF} and \textit{SCALED}) may remove a much greater number of decoys from a set if the corresponding satisfaction scores fall below a certain threshold.
+
+In certain cases, some subselection strategies greatly changed the overall size and quality of the starting decoy set. The METAPSICOV STAGE 1 decoy set of the ankyrin sequence (\gls{pdb} ID: 2qyj) shows overall quality improvements from 0.006 (short-range \textit{SCALED}; $n_{models}=958$) to 0.213 (long-range \textit{CUTOFF}; $n_{models}=218$). The CCMPRED decoy set of sensory rhodopsin II sequence (\gls{pdb} ID: 1gu8) shows overall changes from -0.155 (short-range \textit{CUTOFF}; $n_{models}=2$) to 0.06 (long-range \textit{LINEAR}; $n_{models}=500$).
+
+Overall, the optimal strategy to select or exclude decoys from a starting set of structures appears to be long-range contact satisfaction given the improved similarity metric of the set compared to the reference crystal structure. 
 
 \begin{figure}[H]
 	\centering
@@ -114,11 +119,26 @@ The difference in mean TM-score of each decoy set before and after applying a su
 	\label{fig:ample_decoys_deltatmsub}
 \end{figure}
 
-A comparison of \textDelta TM-scores between subselection strategies shows that the \textit{LINEAR} strategy results in the largest improvements across all contact range categories. Nevertheless, such great changes are expected compared to other strategies since the \textit{LINEAR} strategy removes on average the most decoys from each set (\textit{CUTOFF}=280; \textit{LINEAR}=500; \textit{SCALED}=66). However, the sample-dependent strategies (\textit{CUTOFF} and \textit{SCALED}) may remove a much greater number of decoys from a set if the corresponding satisfaction scores fall below a certain threshold.
+\subsection{Processing of single decoys}
+This study attempts to identify single decoys of sufficient quality to be used directly as \gls{mr} search model in addition to the decoy set subselection. The top-5 decoys, as judged by long-range contact satisfaction, were selected from each decoy set. Four distinct processing approaches were applied to each decoy and compared against the unmodified initial decoy.
 
-In certain cases, some subselection strategies greatly changed the overall size and quality of the starting decoy set. The METAPSICOV STAGE 1 decoy set of the ankyrin sequence (\gls{pdb} ID: 2qyj) shows overall quality improvements from 0.006 (short-range \textit{SCALED}; $n_{models}=958$) to 0.213 (long-range \textit{CUTOFF}; $n_{models}=218$). The CCMPRED decoy set of sensory rhodopsin II sequence (\gls{pdb} ID: 1gu8) shows overall changes from -0.155 (short-range \textit{CUTOFF}; $n_{models}=2$) to 0.06 (long-range \textit{LINEAR}; $n_{models}=500$).
+A comparison of \gls{rmsd} value changes indicated that the ``fragment'' and ``variance'' metrics provide the best approximation to identifying less-reliable regions in each decoy. The average \gls{rmsd} change compared to the original decoys is just under 4.0\AA. This compares to a slightly lower \gls{rmsd} change of 2.1\AA\ for ``DSSP''-treated decoys and 1.5\AA\ for the ``domain'' treatment. Although almost all decoys were improved by either of the treatment, a small number of decoys worsed in terms of \gls{rmsd} compared to its native structure. All treatments except the ``fragment'' one had worsened decoys in the final set, with changes up to -1.6\AA. 
 
-Overall, the optimal strategy to select or exclude decoys from a starting set of structures appears to be long-range contact satisfaction given the improved similarity metric of the set compared to the reference crystal structure. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ample_decoys_individualrmsd.pdf}
+        \caption[Difference in RMSD for individually processed decoys]{Distribution of differences in \gls{rmsd} values between the initial and modified decoys under four different treatments.}
+	\label{fig:ample_decoys_individualrmsd}
+\end{figure}
+
+A comparison of the range of \gls{rmsd} values revealed much greater changes for the ``fragment'' and ``variance'' conditions (\cref{fig:ample_decoys_individualrmsd}). However, these changes are not reflected in the fraction of residues retained in each decoy. Most residues were removed by the ``domain'' treatment (\textmu=61.6\%), whilst the ``fragment'' one saw the least removal (\textmu=34.5\%). Similarly to the range in \gls{rmsd} values, the ``fragment'' and ``variance'' treatments resulted in the greatest spreads of fraction of residues in the treated decoy. The values range for both treatments from retaining less than 5\% of the initial decoy up to 100\%.
+
+% \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=\textwidth]{ample_decoys_individualcorr.pdf}
+%         \caption[Relationship between fraction of decoy residues and change in RMSD]{Scatter plots of fraction of residues retained from original decoy and the associated change in \gls{rmsd} for four different residue removal treatments.}
+%         \label{fig:ample_decoys_individualcorr}
+% \end{figure}
 
 
 \subsection{AMPLE's cluster-and-truncate approach with filtered decoy sets}
@@ -158,9 +178,6 @@ A comparisons of intermediate stages in AMPLE pipeline resulting from differentl
 Further inspection of the number of AMPLE-generated ensemble search models by target reveal near identical numbers between the \textit{NONE}, \textit{LINEAR} and \textit{SCALED} strategies (\cref{fig:ample_decoys_mrsuccesstarget}). In fact, only few outliers for each of those methods distinguish them from the others. The \textit{CUTOFF} strategy shows greater deviation from the other three, especially for certain targets with differences up to approximately 200 ensemble search models (\cref{fig:ample_decoys_mrsuccesstarget}). If we compare all these strategies to the previous default processing in AMPLE (\textit{NONE\_classic}; further details in \cref{subsec:ample_decoys_methods_mr}), we can see that the number of search models is greatly reduced (\cref{fig:ample_decoys_mrsuccesstarget}). A comparison of the previous default (\textit{NONE\_classic}) with the new one (\textit{NONE}) shows on average 144 fewer ensemble search models, whilst sampling a larger range of folds through all 10 clusters.
 
 
-\subsection{Processing of single decoys}
-
-
 \subsection{Decoy subselection extends AMPLE's performance}
 The final step in this study is the assessment of AMPLE-generate ensemble search models in \gls{mr}. In particular, the comparison of different decoy subselection strategies is of great interest since it might allow us to extend AMPLE's performance beyond that described in previous chapters.
 
@@ -179,8 +196,7 @@ In few exceptions, only a singleton AMPLE search model lead to a structure solut
 
 The rank order of targets by median TM-score of the initial starting decoy set in \cref{fig:ample_decoys_mrsuccesstarget} shows that no decoy set with median TM-score of less than 0.3 score units lead to structure solution albeit only two such cases exist in the dataset. With increasing median TM-score, i.e. increasing similarity between the decoy set and its reference target struture, the chances appear to increase to achieve structure solution. Beyond a threshold of 0.4 TM-score units, structure solutions are much more likely (over 50\% of targets solved with one of the four subselection strategies), which highlights AMPLE's success in processing such accurate decoy sets appropriately.
 
-The work in this study further explored, if individual decoys could be selected via their long-range contact satisfaction and trialled directly as \gls{mr} search models. The \textit{INDIVIDUAL} subselection strategy explored this aspect with numerous post-selection processing steps. However, structure solutions for only three targets could be obtained using this approach (\cref{fig:ample_decoys_mrsuccesstarget}). All processing steps obtained lead to structure solutions based on the PCONSC2 decoy set of the \textalpha-spectrin SH3 domain (\gls{pdb} ID: 2nuz). The other two targets with solutions, \gls{pdb} IDs 2qyj and 4u3h with PCONSC2 decoy sets, acquired at least one structure solutions with a single decoy and processing with the ``domain'', ``DSSP'', ``residue'' and ``variance'' treatments. Across the three targets, only five decoys (three based on the sequence of \gls{pdb} ID 2nuz) with a minimum TM-score of 0.682 resulted in the 20 structure solutions (\gls{pdb} 2nuz: 16 solutions; \gls{pdb} 2qyj: 2 solutions; \gls{pdb} 4u3h: 2 solutions).
+The work in this study further explored, if individual decoys could be selected via their long-range contact satisfaction and trialled directly as \gls{mr} search models. The \textit{INDIVIDUAL} subselection strategy explored this aspect with numerous post-selection processing steps. However, structure solutions for only three targets could be obtained using this approach (\cref{fig:ample_decoys_mrsuccesstarget}). All processing steps obtained lead to structure solutions based on the PCONSC2 decoy set of the \textalpha-spectrin SH3 domain (\gls{pdb} ID: 2nuz). The other two targets with solutions, \gls{pdb} IDs 2qyj and 4u3h with PCONSC2 decoy sets, acquired at least one structure solutions with a single decoy and processing with the ``domain'', ``DSSP'', ``fragment'' and ``variance'' treatments. Across the three targets, only five decoys (three based on the sequence of \gls{pdb} ID 2nuz) with a minimum TM-score of 0.682 resulted in the 20 structure solutions (\gls{pdb} 2nuz: 16 solutions; \gls{pdb} 2qyj: 2 solutions; \gls{pdb} 4u3h: 2 solutions).
 
 A comparison of decoy-derived search models and AMPLE's simplistic ideal helix library \cite{Thomas2015-wu} in \gls{mr} was done. Ideal helices achieved the most structure solutions solving nearly 46\% of all targets (\cref{fig:ample_decoys_mrsuccesstarget}). In particular, ideal helices achieved structure solutions for more transmembrane targets. Eight out of 14 transmembrane targets were solved with at least one ideal helix, which compares to six out of 14 for all decoy-based search models combined. Ideal helices also managed to near identical results for all-\textalpha\ and mixed \textalpha-\textbeta\ targets in the set compared to decoy-derived search models. However, three structure solutions for all-\textbeta\ targets are intractable.
 
-\section{Discussion}
