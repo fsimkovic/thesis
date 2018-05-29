@@ -13,21 +13,34 @@ The dataset for this study consisted of 113 ROSETTA decoy sets generated through
 The satisfaction of short- ($>6$ residues sequence separation), medium- ($>12$ residues sequence separation) and long-range contact pairs ($>23$ residues sequence separation; see \cref{sec:methods_longrange_satisfaction}) were computed for each decoy in each set. Hereby, the contact pairs of the original set of contact pairs used to restrain the \textit{ab initio} structure prediction protocol were extracted, matched against the contact pairs extracted from individual decoys and the contact pair range-specific satisfaction score evaluated. 
 
 \subsection{Decoy subselection} \label{sec:ample_decoys_decoy_selection}
-Each set of decoys was then ranked in descending order by their long-range contact pair satisfaction scores and the $n$ decoys with the lowest scores removed from each set. The number of decoys to remove $n$ were selected using a number of different strategies:
+Each set of decoys was ranked in descending order by their long-range contact pair satisfaction scores and the $n$ decoys with the lowest scores removed from each set. The number of decoys to remove $n$ was selected using a number of different strategies:
 
-\begin{itemize}
-    \item \textit{NONE}: leave the original set unchanged
-    \item \textit{LINEAR}: remove the worst 500 decoys
-    \item \textit{CUTOFF}: remove all decoys with a score of $<0.287$ 
-    \item \textit{SCALED}: remove all decoys with a scaled score of $<0.5$, where the scaled score is score divided by set average
-\end{itemize}
+\begin{description}[style=multiline,leftmargin=3cm]
+    \item[\textit{NONE}] leave the original set unchanged
+    \item[\textit{LINEAR}] remove the worst 500 decoys
+    \item[\textit{CUTOFF}] remove all decoys with a score of $<0.287$ 
+    \item[\textit{SCALED}] remove all decoys with a scaled score of $<0.5$, where the scaled score is score divided by set average
+\end{description}
 
 The fixed definition in the \textit{CUTOFF} strategy was determined by \textcite{De_Oliveira2017-gj}. The scaled score used by the \textit{SCALED} strategy was computed by dividing each decoy's long-range contact pair satisfaction by the set's average.
 
-\subsection{Molecular Replacement} \label{subsec:ample_decoys_methods_mr}
-To evaluate the benefits of such subselection to \gls{mr} in AMPLE, a subset of 35 decoy sets (spanning 35 unique targets) were processed as described above and subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with few exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to \texttt{polyala} only. This change in protocol was shown to be advantageous in most cases by Jens Thomas (PhD Thesis), and thus trialled in this context. 
+Furthermore, an \textit{INDIVIDUAL} subselection strategy was employed, which differed substantially from the others. The top-5 decoys by long-range contact satisfaction were selected and subjected to treatment outside of AMPLE. The per-decoy treatments were the following:
 
-To allow comparability of these results to previous AMPLE runs, an additional condition was added, namely \textit{NONE\_classic}. The decoy set from the \textit{NONE} strategy was hereby subjected to the AMPLE protocol with default settings.
+\begin{description}[style=multiline,leftmargin=3cm]
+    \item[default] leave the decoy unchanged
+    \item[bfactor] remove all residues with a CONCOORD \cite{De_Groot1997-gb} B-factor of less than 30\AA\textsuperscript{2}
+    \item[domain] remove all residues with $kde<\frac{1}{2}max_{kde}$, where $kde$ corresponds to the \gls{kde} and $max_{kde}$ to the maximum \gls{kde} obtained by applying the algorithm described by \textcite{Sadowski2013-zu} to the top-5$L$ contact map
+    \item[dssp] remove all residues that were assigned secondary structure by DSSP \cite{Frishman1995-si} not in \{$H, B, E, G, I$\}
+    \item[residue] remove all residues that do not form a consecutive fragment of at least 3 residues in the top-$L$ contact map
+    \item[variance] remove all residues with cluster variance computed by THESEUS \cite{Theobald2006-qj} of more than 5\AA\ (cluster variance determined from \textit{NONE} strategy)
+\end{description}
+
+\subsection{Molecular Replacement} \label{subsec:ample_decoys_methods_mr}
+To evaluate the benefits of such subselection to \gls{mr} in AMPLE, a subset of 35 decoy sets (spanning 35 unique targets) were processed as described above and subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with few exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to \texttt{polyala} only. This change in protocol was shown to be advantageous in most cases by \textcite{Thomas2017-qu}, and thus trialled in this context. 
+
+To allow comparability of these results to previous AMPLE runs, an additional condition was added, namely \textit{NONE\_classic}. The decoy set from the \textit{NONE} strategy was hereby subjected to the AMPLE protocol with default settings except \texttt{-num\_clusters}, which was set to sample the three largest clusters.
+
+All individual decoys created under \textit{INDIVIDUAL} strategy were subjected as poly-Alanine decoys to MRBUMP \cite{Keegan2018-kn} with identical settings to those used in AMPLE. 
 
 Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_mr_success}.
 
