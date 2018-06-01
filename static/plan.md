@@ -32,40 +32,25 @@
 
 ---
 
-### 3. Software developments
-
-#### 3.1 ConKit
-
-#### 3.2 SIMBAD
-
-#### 3.3 AMPLE
-
-#### 3.3.1 Integration of ConKit 
-
-#### 3.3.2 Integration of single model truncation 
-
----
-
-### 4. Residue contacts predicted by evolutionary covariance extend the application of ab initio Molecular Replacement to larger and more challenging protein folds
+### 3. Residue contacts predicted by evolutionary covariance extend the application of ab initio Molecular Replacement to larger and more challenging protein folds
 This chapter will contain all work described in Simkovic et al (2016) and the contact-related work described in Thomas et al (2017).
 
 ---
 
-### <s>5. Evaluation of ROSETTA distance-restraint energy functions on contact-guided ab initio structure prediction</s>
+### <s>4. Evaluation of ROSETTA distance-restraint energy functions on contact-guided ab initio structure prediction</s>
 
 ---
 
-### 6. Alternative ab initio structure prediction algorithms for AMPLE
+### 5. Alternative ab initio structure prediction algorithms for AMPLE
 This chapter will briefly discuss the use of two alternate ab initio structure prediction algorithms and the (dis-)advantages of using the output decoys in AMPLE
 
 ---
 
-### 7. New approaches to search model selection for unconventional MR
+### <s>6. Decoy subselection using contact information to enhance MR search model creation</s>
 
-### 7.1 Decoy subselection using contact information to enhance MR search model creation
-This sub-chapter will discuss the use of contact information to score ab initio decoys, how this information could be used to enhance ensemble search model quality and ultimately MR success.
+---
 
-### <s>7.2. Protein fragments as search models in Molecular Replacement</s>
+### <s>7. Protein fragments as search models in Molecular Replacement</s>
 
 ---
 
@@ -73,4 +58,4 @@ This sub-chapter will discuss the use of contact information to score ab initio 
 
 ---
 
-
+### 9. Appendix
