@@ -22,13 +22,15 @@ Residue-residue contact information for 18 out of 27 targets were predicted usin
 
 Secondary structure and solvent exposure were predicted using PSIPRED v4.0 \cite{Jones1999-ed} and SOLVPRED (shipped with METAPSICOV v1.04), respectively. The \gls{msa} for coevolution-based contact prediction was generated using HHBLITS \cite{Remmert2011-kt} against the \texttt{uniprot20\_2016\_02} database. CCMPRED v0.3.2 \cite{Seemayer2014-zp}, FREECONTACT v1.0.21 \cite{Kajan2014-bx} and PSICOV v2.1b3 \cite{Jones2012-ks} were used by METAPSICOV to generate contact predictions.
 \subsection{\textit{Ab initio} structure prediction}
-The ROSETTA 3- and 9-residue fragment libraries for each target were generated using the ROBETTA online server (\url{http://robetta.bakerlab.org/}). The option to ``Exclude Homologues'' was selected to avoid inclusion of homologous fragments. Each target sequence and its fragments were subjected to ROSETTA v2015.22.57859 \cite{Rohl2004-dj} and 1,000 decoys per target generated with AMPLE v1.2.0 ROSETTA default options. 
+The ROSETTA 3- and 9-residue fragment libraries for each target were generated using the ROBETTA online server (\url{http://robetta.bakerlab.org/}). The option to ``Exclude Homologues'' was selected to avoid inclusion of homologous fragments. Each target sequence and its fragments were subjected to ROSETTA v2015.22.57859 \cite{Rohl2004-dj} and 1,000 decoys per target generated with AMPLE v1.2.0 ROSETTA default options. Top-$L$ contact pairs were used in combination with the \textit{FADE} ROSETTA energy function, identical to the benchmark outlined in \cref{chap:alternate_abinitio_protocols}.
 
-The CONFOLD2 decoys were generated using CONFOLD2 v2.0 \cite{Adhikari2018-lj} and \gls{cns} v1.3 \cite{Brunger1998-sz} with default options.
+The CONFOLD2 decoys were generated using CONFOLD2 v2.0 \cite{Adhikari2018-lj} and \gls{cns} v1.3 \cite{Brunger1998-sz}. Default parameters were used except for the number of decoys per run, which was increased from 20 to 25 with \texttt{-mcount 25}. This resulted in 40 seperated runs differing only in the number contact pairs used, which was increased by 0.1 from $L/10$ to $4L$.
 
-The FRAGFOLD decoys were generated using FRAGFOLD v4.80 \cite{Jones2001-mc} with default options. Homologous fragments were removed from the shipped library  by excluding all entries with \gls{pdb} identifiers identical to those retrieved from the ROBETTA server.
+The FRAGFOLD decoys were generated using FRAGFOLD v4.80 \cite{Jones2001-mc} with default options. Homologous fragments were removed from the shipped library  by excluding all entries with \gls{pdb} identifiers identical to those retrieved from the ROBETTA server. All contact pairs were used according to FRAGFOLD's internal protocol.
 
-The SAINT2 decoys \ldots \textit{wait for Saulo}.
+The SAINT2 decoys \ldots \textit{wait for Saulo}. \textcolor{red}{Saulo did not generate 1,000 decoys per target but slightly less \ldots}
 
 \subsection{Molecular Replacement}
 All decoy sets were subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with the following exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to \texttt{polyala} only. This change in protocol from AMPLE's initial mode of operation \cite{Bibby2012-lm} was shown to be advantageous in most cases by \textcite{Thomas2017-qu}, and thus trialled in this context.  Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_mr_success}.
+\section{Results}
+
