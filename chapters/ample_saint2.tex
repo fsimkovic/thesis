@@ -1,0 +1,34 @@
+% \textit{I would like to acknowledge Dr Saulo de Oliveira for his contributions to this chapter. His efforts and expertise focused on all modelling work related to SAINT2 decoys, which included fragment picking and structure prediction.}
+
+\section{Introduction}
+To-date, the recommended \textit{ab initio} protein structure prediction protocol for optimal AMPLE performance is ROSETTA \cite{Keegan2015-zb, Thomas2017-sh, Thomas2015-wu, Bibby2012-lm}. This recommendation is based primarily on the superiority of the decoy quality compared to other modelling algorithms, which was recently reaffirmed by the lastest CASP12 experiments \cite{Abriata2018-lu,Ovchinnikov2017-wp}. However, \textcite{Keegan2015-zb} demonstrated that the alternative \textit{ab initio} structure prediction protocol QUARK provides a suitable alternative to ROSETTA. Although inferior in the total number of structure solutions, QUARK decoys are a suitable ROSETTA alternative in most cases \cite{Keegan2015-zb}. In particular, given ROSETTA's challenging installation procedure, availability limited to POSIX operating systems, requirement for large disk space and computationally expensive algorithm, QUARK's online server has been a very suitable alternative for AMPLE users.
+
+Whilst ROSETTA and QUARK are amongst the best \textit{ab initio} structure prediction algorithms currently available \cite{Abriata2018-lu}, other algorithms have been developed over the last two decades \cite[e.g.,][]{Jones2001-mc,Ellis2010-zs,Adhikari2015-lb,Xu2012-jf,Marks2011-os,Wang2016-ar}. Although most of these algorithms utelise fragment-assembly algorithms similar to ROSETTA and QUARK, their procedure to fragment selection or assembly is substantially different \cite{Ellis2010-zs,Jones2001-mc}. Furthermore, predicted contact information has recently seen a spike in accuracy. This invaluable source of information is introduced differently in each protocol, and thus might have profound effects on the resulting decoy quality. In particular, physics-based algorithms relying entirely on this information are an interesting alternative to fragment-based approaches \cite{Adhikari2015-lb,Marks2011-os,Wang2016-ar}.
+
+CONFOLD2 \cite{Adhikari2018-lj}, a distance-geometry based algorithm, utelises predicted secondary structure and contact information to rapidly generate \textit{ab initio} decoys. Unlike other algorithms, CONFOLD2's algorithm is driven almost entirely by the contact information to explore the fold space. Different contact selection thresholds are used to not limit the search space to a pre-defined selection. CONFOLD2 generates slightly inferior decoys compared to ROSETTA, however outperforms it in speed and simplicity of installation \cite{Adhikari2018-lj,Michel2017-xh}.
+
+FRAGFOLD \cite{Jones2001-mc}, a fragment-assembly based algorithm, generates decoys in a similar fashion to ROSETTA and QUARK. However, FRAGFOLD does not rely on large structural libraries for fragment extraction. Instead, it provides a relatively small library of supersecondary structural fragments and short length fragments, which were extracted from high resolution protein structures. Since the generalised fragment library is shipped with FRAGFOLD and target-specific fragments extracted based on secondary structure and a sequence-based threading score, it enables fast and easy fragment library generation compared to ROSETTA \cite{Kosciolek2014-bt}.
+
+SAINT2 \cite{De_Oliveira2017-sg}, a further fragment-assembly based algorithm is substantially different to most others. SAINT2 attempts \textit{ab initio} structure prediction sequentially, starting from either either terminus of the target sequence \cite{De_Oliveira2017-sg}. Furthermore, SAINT2 uses FLIB \cite{De_Oliveira2015-kb} for fragment picking, an algorithm shown to outperform ROSETTA's equivalent NNMake \cite{Gront2011-sv} in precision with very similar coverage. 
+
+Since some of these algorithms are readily available and often easier to install without the overhead of large databases for fragment picking, the work in this study focused on exploring three alternative \textit{ab initio} structure prediction algorithms and their value in unconventional \gls{mr}. The \textit{ab initio} structure prediction protocols CONFOLD2 \cite{Adhikari2018-lj}, FRAGFOLD \cite{Jones2001-mc} and SAINT2 \cite{De_Oliveira2017-sg}, were explored given their substantially different approaches to AMPLE's current default ROSETTA \cite{Rohl2004-dj}.
+\section{Materials \& Methods}
+\subsection{Target selection}
+This study was conducted using all 27 targets from the PREDICTORS dataset (\cref{sec:methods_dataset_predictors}). 
+
+
+\subsection{Contact prediction}
+Residue-residue contact information for 18 out of 27 targets were predicted using METAPSICOV v1.04 \cite{Jones2015-vq}. 
+
+Secondary structure and solvent exposure were predicted using PSIPRED v4.0 \cite{Jones1999-ed} and SOLVPRED (shipped with METAPSICOV v1.04), respectively. The \gls{msa} for coevolution-based contact prediction was generated using HHBLITS \cite{Remmert2011-kt} against the \texttt{uniprot20\_2016\_02} database. CCMPRED v0.3.2 \cite{Seemayer2014-zp}, FREECONTACT v1.0.21 \cite{Kajan2014-bx} and PSICOV v2.1b3 \cite{Jones2012-ks} were used by METAPSICOV to generate contact predictions.
+\subsection{\textit{Ab initio} structure prediction}
+The ROSETTA 3- and 9-residue fragment libraries for each target were generated using the ROBETTA online server (\url{http://robetta.bakerlab.org/}). The option to ``Exclude Homologues'' was selected to avoid inclusion of homologous fragments. Each target sequence and its fragments were subjected to ROSETTA v2015.22.57859 \cite{Rohl2004-dj} and 1,000 decoys per target generated with AMPLE v1.2.0 ROSETTA default options. 
+
+The CONFOLD2 decoys were generated using CONFOLD2 v2.0 \cite{Adhikari2018-lj} and \gls{cns} v1.3 \cite{Brunger1998-sz} with default options.
+
+The FRAGFOLD decoys were generated using FRAGFOLD v4.80 \cite{Jones2001-mc} with default options. Homologous fragments were removed from the shipped library  by excluding all entries with \gls{pdb} identifiers identical to those retrieved from the ROBETTA server.
+
+The SAINT2 decoys \ldots \textit{wait for Saulo}.
+
+\subsection{Molecular Replacement}
+All decoy sets were subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with the following exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to \texttt{polyala} only. This change in protocol from AMPLE's initial mode of operation \cite{Bibby2012-lm} was shown to be advantageous in most cases by \textcite{Thomas2017-qu}, and thus trialled in this context.  Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_mr_success}.
