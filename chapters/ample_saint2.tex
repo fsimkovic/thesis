@@ -21,16 +21,58 @@ This study was conducted using all 27 targets from the PREDICTORS dataset (\cref
 Residue-residue contact information for 18 out of 27 targets were predicted using METAPSICOV v1.04 \cite{Jones2015-vq}. 
 
 Secondary structure and solvent exposure were predicted using PSIPRED v4.0 \cite{Jones1999-ed} and SOLVPRED (shipped with METAPSICOV v1.04), respectively. The \gls{msa} for coevolution-based contact prediction was generated using HHBLITS \cite{Remmert2011-kt} against the \texttt{uniprot20\_2016\_02} database. CCMPRED v0.3.2 \cite{Seemayer2014-zp}, FREECONTACT v1.0.21 \cite{Kajan2014-bx} and PSICOV v2.1b3 \cite{Jones2012-ks} were used by METAPSICOV to generate contact predictions.
-\subsection{\textit{Ab initio} structure prediction}
+
+METAPSICOV STAGE 1 contact predictions were used in \textit{ab initio} structure prediction since those result in more accurate structure predictions \cite{Jones2015-vq}.
+\subsection{\textit{Ab initio} structure prediction} \label{sec:ample_saint2_modelling}
 The ROSETTA 3- and 9-residue fragment libraries for each target were generated using the ROBETTA online server (\url{http://robetta.bakerlab.org/}). The option to ``Exclude Homologues'' was selected to avoid inclusion of homologous fragments. Each target sequence and its fragments were subjected to ROSETTA v2015.22.57859 \cite{Rohl2004-dj} and 1,000 decoys per target generated with AMPLE v1.2.0 ROSETTA default options. Top-$L$ contact pairs were used in combination with the \textit{FADE} ROSETTA energy function, identical to the benchmark outlined in \cref{chap:alternate_abinitio_protocols}.
 
 The CONFOLD2 decoys were generated using CONFOLD2 v2.0 \cite{Adhikari2018-lj} and \gls{cns} v1.3 \cite{Brunger1998-sz}. Default parameters were used except for the number of decoys per run, which was increased from 20 to 25 with \texttt{-mcount 25}. This resulted in 40 seperated runs differing only in the number contact pairs used, which was increased by 0.1 from $L/10$ to $4L$.
 
 The FRAGFOLD decoys were generated using FRAGFOLD v4.80 \cite{Jones2001-mc} with default options. Homologous fragments were removed from the shipped library  by excluding all entries with \gls{pdb} identifiers identical to those retrieved from the ROBETTA server. All contact pairs were used according to FRAGFOLD's internal protocol.
 
-The SAINT2 decoys \ldots \textit{wait for Saulo}. \textcolor{red}{Saulo did not generate 1,000 decoys per target but slightly less \ldots}
+The fragment libraries for SAINT2 were generated using FLIB \cite{De_Oliveira2015-kb}, which generates on average ~30 fragments per target position that are 6 to 20 residues long. Homologous fragments were removed from the final fragment list using the \gls{pdb} identifiers obtained from the ROBETTA online server. The secondary structure prediction and solvent accessibility scores were also obtained from the ROBETTA server. SAINT2 was used for decoy generation, and ~1,000 decoys generated per target. The procedure and parameters were identical to those described in Supplementary Information (p. 16) by \textcite{De_Oliveira2017-sg}.
 
 \subsection{Molecular Replacement}
 All decoy sets were subjected to AMPLE v1.2.0 and CCP4 v7.0.28. Default options were chosen with the following exceptions: decoys in all 10 clusters were used, subcluster radii thresholds were set to 1 and 3\AA, and side-chain treatments were set to \texttt{polyala} only. This change in protocol from AMPLE's initial mode of operation \cite{Bibby2012-lm} was shown to be advantageous in most cases by \textcite{Thomas2017-qu}, and thus trialled in this context.  Each \gls{mr} run was assessed using the criteria defined in \cref{sec:methods_mr_success}.
 \section{Results}
+The purpose of this study was to investigate the usefulness of alternative \textit{ab initio} structure prediction in AMPLE. Three promising leads widely used in the \textit{ab initio} modelling experiments were examined and compared against AMPLE's current algorithm of choice. This led to a direct comparison of the algorithms ROSETTA \cite{Rohl2004-dj}, CONFOLD2 \cite{Adhikari2018-lj}, FRAGFOLD \cite{Jones2001-mc} and SAINT2 \cite{De_Oliveira2017-sg}. All four algorithms have recently seen great improvements through the use of residue-residue contact information, which predicted using the METAPSICOV \cite{Jones2015-vq} algorithm.
 
+\subsection{Alignment depth and contact prediction precision}
+The first step in this study was the prediction of residue-residue contacts using the metapredictor METAPSICOV for 18 targets in the PREDICTORS dataset \cite{Jones2015-vq}. Since we attempted to test each of the structure prediction boundaries in extreme cases, a variety of targets with different alignment depths were chosen. The alignment depth of METAPSICOV-generated HHBLITS alignments ranges from 6 to 6,186 across all targets (\cref{fig:ample_saint2_alndepth}). Five targets contain alignments with a depth of less than 200, a rough threshold to indicate suitability of a \gls{msa} for coevolution-based contact prediction (\cite{Simkovic2017-xs}). A further six targets contain at least 200 and less than 1000 sufficiently-diverse sequences, whilst for the remaining 16 targets the \gls{msa} depth is at least 1,000.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ample_saint2_alndepth.pdf}
+    \caption[Distribution of alignment depth for subset of targets in the PREDICTORS dataset.]{Distribution of HHBLITS alignment depth for subset of targets in the PREDICTORS dataset. Red line indicates alignment depth threshold of 200 sequences.}
+    \label{fig:ample_saint2_alndepth}
+\end{figure}
+
+Coevolution-based contact predictors rely heavily on the alignment depth for accurate contact predictions. In this work, these findings are further confirmed. Sequence alignments with depths of less than 1000 sequences highlight lower precision scores across a number of cutoffs compared to those with deeper alignments (\cref{fig:ample_saint2_conprec}). Given the alignment depths and top-$L$ contact predictions, a significant positive correlation between the two is found (Spearman's $\rho=0.57$, p-value $<0.02$). A moving average analysis shows that those contact predictions based on alignments with more than 1000 effective sequences yield better precision scores of at least 0.09 units up to 0.34 units. The difference between the two moving average curves highlights that the difference is greater at lower cutoff values, i.e. only the very best contacts are included in the selection. This difference declines more drastically for targets with deeper alignments (\cref{fig:ample_saint2_conprec}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ample_saint2_conprec.pdf}
+    \caption[Contact predicion analysis for numerous contact selection cutoffs]{Contact precision analysis for numerous contact selection cutoffs for targets with alignment depths of more than 200 and more than 1000 sequences. Lines indicate moving averages for both categories with a window size of three residues. $M_{eff}$ refers to the alignment depth (number of effective sequences).}
+    \label{fig:ample_saint2_conprec}
+\end{figure}
+
+\subsection{Comparison of decoy quality}
+One main interest of the work presented in this chapter is the comparison of the quality of decoys predicted with four \textit{ab initio} structure prediction algorithms. To-date, no such direct comparison exists on the same dataset, and thus might provide direct insights into the performance of each.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ample_saint2_tmscoredist.pdf}
+    \caption[Distribution of decoy TM-scores for four modelling algorithms]{Kernel Density Estimate of decoy TM-scores for four different \textit{ab initio} structure prediction algorithms, namely ROSETTA, CONFOLD2, FRAGFOLD and SAINT2. CONFOLD2 contains 9,000 less decoys than the remaining algorithms (for further details refer to \cref{sec:ample_saint2_modelling}).}
+    \label{fig:ample_saint2_tmscoredist}
+\end{figure}
+
+An initial comparison of overall performance highlights that ROSETTA generates the highest quality decoys (\cref{fig:ample_saint2_tmscoredist}). In all cases, the distributions of TM-scores by modelling algorithm are right-skewed indicating a higher proportion of non-native-like folds. A TM-score quantile evaluation of each decoy set by algorithm shows that ROSETTA and CONFOLD2 contain only a single set with a lower quantile of less than 0.2 TM-score units. In comparison, FRAGFOLD predicted three and SAINT2 eight decoy sets with a lower quantile of less than the aforementioned threshold. In comparison, ROSETTA, CONFOLD2 and FRAGFOLD predicted six, seven and five decoy sets with upper quantiles greater than 0.5 TM-score units, whilst SAINT2 predicted zero. A direct comparison of the methods by median TM-score of each decoy set reaffirms ROSETTA's superiority in predicting \textit{ab initio} decoys accurately. Across 27 targets, ROSETTA decoy sets contain the best median TM-score for 18 targets (CONFOLD2 in seven and FRAGFOLD in two). This is further strengthened when comparing the top-1 decoy for which ROSETTA predicts the best in 20 cases (CONFOLD2 and FRAGFOLD in three and SAINT2 in one) (\cref{fig:ample_saint2_tmscoredata}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{ample_saint2_tmscoredata.pdf}
+    \caption[Per-target TM-score analysis for four modelling algorithms]{Per-target TM-score analysis across four \textit{ab initio} structure prediction algorithms by (a) median TM-score of all decoys in each set and (b) TM-score of the top-1 decoy in each set.}
+    \label{fig:ample_saint2_tmscoredata}
+\end{figure}
+
+\textcite{Abriata2018-lu} recently attributed the success in the CASP12 experiments to improved accuracy of coevolution-based contact predictors and the availability of many more sequence homologs than ever before. Thus, it is of great interest to explore the structure prediction algorithms in this study with regards to their dependence on the availability of sequence homologs and precise contact predictions.
