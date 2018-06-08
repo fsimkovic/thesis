@@ -1,4 +1,4 @@
-% \textit{I would like to acknowledge Dr Saulo de Oliveira for his contributions to this chapter. His efforts and expertise focused on all modelling work related to SAINT2 decoys, which included fragment picking and structure prediction.}
+\textit{I would like to acknowledge Dr Saulo de Oliveira for his contributions to this chapter. His efforts and expertise focused on all modelling work related to SAINT2 decoys, which included fragment picking and structure prediction.}
 
 \section{Introduction}
 To-date, the recommended \textit{ab initio} protein structure prediction protocol for optimal AMPLE performance is ROSETTA \cite{Keegan2015-zb, Thomas2017-sh, Thomas2015-wu, Bibby2012-lm}. This recommendation is based primarily on the superiority of the decoy quality compared to other modelling algorithms, which was recently reaffirmed by the lastest CASP12 experiments \cite{Abriata2018-lu,Ovchinnikov2017-wp}. However, \textcite{Keegan2015-zb} demonstrated that the alternative \textit{ab initio} structure prediction protocol QUARK provides a suitable alternative to ROSETTA. Although inferior in the total number of structure solutions, QUARK decoys are a suitable ROSETTA alternative in most cases \cite{Keegan2015-zb}. In particular, given ROSETTA's challenging installation procedure, availability limited to POSIX operating systems, requirement for large disk space and computationally expensive algorithm, QUARK's online server has been a very suitable alternative for AMPLE users.
@@ -12,6 +12,7 @@ FRAGFOLD \cite{Jones2001-mc}, a fragment-assembly based algorithm, generates dec
 SAINT2 \cite{De_Oliveira2017-sg}, a further fragment-assembly based algorithm is substantially different to most others. SAINT2 attempts \textit{ab initio} structure prediction sequentially, starting from either either terminus of the target sequence \cite{De_Oliveira2017-sg}. Furthermore, SAINT2 uses FLIB \cite{De_Oliveira2015-kb} for fragment picking, an algorithm shown to outperform ROSETTA's equivalent NNMake \cite{Gront2011-sv} in precision with very similar coverage. 
 
 Since some of these algorithms are readily available and often easier to install without the overhead of large databases for fragment picking, the work in this study focused on exploring three alternative \textit{ab initio} structure prediction algorithms and their value in unconventional \gls{mr}. The \textit{ab initio} structure prediction protocols CONFOLD2 \cite{Adhikari2018-lj}, FRAGFOLD \cite{Jones2001-mc} and SAINT2 \cite{De_Oliveira2017-sg}, were explored given their substantially different approaches to AMPLE's current default ROSETTA \cite{Rohl2004-dj}.
+
 \section{Materials \& Methods}
 \subsection{Target selection}
 This study was conducted using all 27 targets from the PREDICTORS dataset (\cref{sec:methods_dataset_predictors}). 
@@ -67,9 +68,9 @@ One main interest of the work presented in this chapter is the comparison of the
     \label{fig:ample_saint2_tmscoredist}
 \end{figure}
 
-An initial comparison of overall performance highlights that ROSETTA generates the highest quality decoys (\cref{fig:ample_saint2_tmscoredist}). In all cases, the distributions of TM-scores by modelling algorithm are right-skewed indicating a higher proportion of non-native-like folds. A TM-score quantile evaluation of each decoy set by algorithm shows that ROSETTA and CONFOLD2 contain only a single set with a lower quantile of less than 0.2 TM-score units. In comparison, FRAGFOLD predicted three and SAINT2 eight decoy sets with a lower quantile of less than the aforementioned threshold. In comparison, ROSETTA, CONFOLD2 and FRAGFOLD predicted six, seven and five decoy sets with upper quantiles greater than 0.5 TM-score units, whilst SAINT2 predicted zero. 
+An initial comparison of overall performance highlights that ROSETTA generates the highest quality decoys (\cref{fig:ample_saint2_tmscoredist}). Across all modelling algorithms the distribution of TM-scores right-skewed, which indicates a higher proportion of non-native-like folds within the sets. A TM-score quantile evaluation of each decoy set by algorithm shows that ROSETTA and CONFOLD2 contain only a single set with a lower quantile of less than 0.2 TM-score units. In comparison, FRAGFOLD predicted three and SAINT2 eight decoy sets with a lower quantile of less than the aforementioned threshold. In comparison, ROSETTA, CONFOLD2 and FRAGFOLD predicted six, seven and five decoy sets with upper quantiles greater than 0.5 TM-score units, whilst SAINT2 predicted zero. 
 
-A direct comparison of the methods by median TM-score of each contact-assisted decoy set reaffirms ROSETTA's superiority in predicting \textit{ab initio} decoys accurately. Across 18 targets, ROSETTA decoy sets contain the best median TM-score for 11 targets (CONFOLD2 for remaining seven targets). This is further strengthened when comparing the top-1 decoy for which ROSETTA predicts the best in 13 cases (CONFOLD2 in three cases, FRAGFOLD and SAINT2 in one) (\cref{fig:ample_saint2_tmscoredataincl}).
+A direct comparison of the methods by median TM-score of each contact-assisted decoy set reaffirms ROSETTA's performance in predicting \textit{ab initio} decoys accurately. Across 18 targets, ROSETTA decoy sets contain the best median TM-score for 11 targets (CONFOLD2 for remaining seven targets). This is further strengthened when comparing the top-1 decoy for which ROSETTA predicts the best in 13 cases (CONFOLD2 in three cases, FRAGFOLD and SAINT2 in one) (\cref{fig:ample_saint2_tmscoredataincl}).
 
 \begin{figure}[H]
     \centering
@@ -80,7 +81,7 @@ A direct comparison of the methods by median TM-score of each contact-assisted d
 
 \textcite{Abriata2018-lu} recently attributed the success in the CASP12 experiments to improved accuracy of coevolution-based contact predictors and the availability of many more sequence homologs than ever before. Thus, it is of great interest to explore the structure prediction algorithms in this study with regards to their dependence on the availability of sequence homologs and precise contact predictions.
 
-The results obtained in this study further support the conclusions made by \textcite{Abriata2018-lu} but only for the ROSETTA algorithm. A Spearman's rank-order correlation coefficient analysis of alignment depth and median TM-score shows a significant positive correlation for ROSETTA-generated decoy sets (Spearman's $\rho=0.68$, $p<0.01$). This positive correlation is also found for ROSETTA-generated decoy sets with regards to their top-$L$ precision and median TM-score (Spearman's $\rho=0.61$, $p<0.01$). All other modelling algorithms do not a significant correlation, although better decoy sets are generally obtained with greater alignment depths and more precise top-$L$ contacts (\cref{fig:ample_saint2_neffprectm}).
+The results obtained in this study further support the conclusions made by \textcite{Abriata2018-lu} but only for the ROSETTA algorithm. A Spearman's rank-order \gls{cc} analysis of alignment depth and median TM-score shows a significant positive correlation for ROSETTA-generated decoy sets (Spearman's $\rho=0.68$, $p<0.01$). This positive correlation is also found for ROSETTA-generated decoy sets with regards to their top-$L$ precision and median TM-score (Spearman's $\rho=0.61$, $p<0.01$). All other modelling algorithms do not a significant correlation, although better decoy sets are generally obtained with greater alignment depths and more precise top-$L$ contacts (\cref{fig:ample_saint2_neffprectm}).
 
 \begin{figure}[H]
     \centering
@@ -89,7 +90,9 @@ The results obtained in this study further support the conclusions made by \text
     \label{fig:ample_saint2_neffprectm}
 \end{figure}
 
-Beyond the use of contact information, parts of this study explored the performance of ROSETTA, FRAGFOLD and SAINT2 when no contact information is provided as distance restraints in \textit{ab initio} structure prediction (CONFOLD2 requires contact information, and thus was excluded). ROSETTA performs best for seven of the nine contact-free decoy sets based on median TM-score of the entire decoy set and the TM-score of the top-1 decoy (\cref{fig:ample_saint2_tmscoredataexcl}). 
+Beyond the use of contact information, parts of this study explored the performance of ROSETTA, FRAGFOLD and SAINT2 when no contact information is provided as distance restraints in \textit{ab initio} structure prediction (CONFOLD2 requires contact information, and thus was excluded). ROSETTA performs best for seven of the nine contact-free decoy sets based on median TM-score of the entire decoy set and the TM-score of the top-1 decoy (\cref{fig:ample_saint2_tmscoredataexcl}). However, the difference is marginal for the majority of cases. The median values for eight ROSETTA and FRAGFOLD decoy sets differ by less than 0.10 TM-score units (seven ROSETTA and SAINT2 sets by less than 0.10 units). Furthermore, the top-1 decoys for only three targets differ greatly between the modelling algorithms, whilst the rest is near identical between algorithms (\cref{fig:ample_saint2_tmscoredataexcl}). 
+
+The top decoy predicted by ROSETTA and SAINT2 based on the sequence of the FAT domain of focal adhesion kinase (\gls{pdb} ID: 1k40) differs by 0.35 TM-score units. More significantly though, the top decoy predicted by ROSETTA for the outer surface protein A (\gls{pdb} ID: 2ol8) is considered native-like (TM-score $=0.59$), whilst the FRAGFOLD (TM-score $=0.35$) and SAINT2 (TM-score $=0.24$) counterparts predict incorrect folds. A near-identical scenario applies to the top decoys of the Hypothetical protein PF0907 (\gls{pdb} ID: 4pgo) (ROSETTA TM-score $=0.68$; FRAGFOLD TM-score $=0.27$; SAINT2 TM-score $=0.39$).
 
 \begin{figure}[H]
     \centering
@@ -97,3 +100,5 @@ Beyond the use of contact information, parts of this study explored the performa
     \caption[Per-target TM-score analysis for four modelling algorithms without contacts]{Per-target TM-score analysis for targets modelled without contact information and four separate \textit{ab initio} structure prediction algorithms. Analysis is subdivided by (a) median TM-score of all decoys in each set and (b) TM-score of the top-1 decoy in each set.}
     \label{fig:ample_saint2_tmscoredataexcl}
 \end{figure}
+
+
