@@ -101,4 +101,13 @@ The top decoy predicted by ROSETTA and SAINT2 based on the sequence of the FAT d
     \label{fig:ample_saint2_tmscoredataexcl}
 \end{figure}
 
+\subsection{Molecular Replacement}
 
+Each \textit{ab initio} structure prediction algorithm generated decoy sets, which are sufficient for structure solution (\cref{fig:ample_saint2_mrsuccess}). ROSETTA and SAINT2 decoy sets led to five structure solutions each, whilst FRAGFOLD decoys to four and CONFOLD2 decoys to two. All four algorithms predicted decoys of good enough quality to solve the structures of the Hypothetical protein AQ\_1354 (\gls{pdb} ID: 1oz9) and Putative Ribonuclease III (\gls{pdb} ID: 1u61), although SAINT2-based AMPLE search models yielded the highest ratio of successful search models in both cases (\cref{fig:ample_saint2_mrsuccess}). Besides these two targets, little consensus exists amongst the targets for which structure solutions were obtained.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ample_saint2_mrsuccess.pdf}
+    \caption[Summary of MR success with AMPLE ensemble search models.]{Summary of MR success with AMPLE ensemble search models. Search models are based on decoy sets generated with different \textit{ab initio} structure prediction protocols. The colour coding indicates structure solution: no solution (red), one solution (orange), more than one solution (green). The number in cells with at least one solution states the percentage successful search models.}
+    \label{fig:ample_saint2_mrsuccess}
+\end{figure}
