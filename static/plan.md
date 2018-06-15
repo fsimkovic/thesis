@@ -41,8 +41,7 @@ This chapter will contain all work described in Simkovic et al (2016) and the co
 
 ---
 
-### 5. Alternative ab initio structure prediction algorithms for AMPLE
-This chapter will briefly discuss the use of two alternate ab initio structure prediction algorithms and the (dis-)advantages of using the output decoys in AMPLE
+### <s>5. Alternative ab initio structure prediction algorithms for AMPLE</s>
 
 ---
 
