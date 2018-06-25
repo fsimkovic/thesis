@@ -1,19 +1,18 @@
-\textbf{Note: }\textit{The majority of the work presented in this chapter was published in two independent pieces of work. All work relating to the globular targets was published by \textcite{Simkovic2016-wk}, and a great majority of work relating to the transmembrane targets by \textcite{Thomas2017-sh}. As such, this chapter consists of extracts from both publications with additional information where appropriate.}
+\textbf{Note: }\textit{The majority of the work presented in this chapter was published in two independent pieces of work. All work relating to the globular targets was published by \textcite{Simkovic2016-wk}, and a great majority of work relating to the transmembrane targets by \textcite{Thomas2017-sh}. As such, this chapter consists of extracts from both publications with additional information where appropriate. Text duplicated from either publication was written by Felix Simkovic, all other elements were adapted.}
+
+\section{Introduction}
+The introduction of residue-residue contacts as distance restraints in \textit{ab initio} protein structure prediction has proven to be a highly successful approach to limiting the conformation search space thereby enabling successful fold prediction of larger and more \textbeta-rich protein structures \cite[e.g.,][]{Marks2011-os,Michel2014-eg,Kosciolek2014-bt,Ovchinnikov2015-tn,Ovchinnikov2016-jj,Michel2017-xh,De_Oliveira2017-sg,Ovchinnikov2017-nd,Wang2017-rx}. In AMPLE, these two domains are the major limitation for a more successful approach \cite{Bibby2012-lm}. This typically results in user success being limited to small globular and primarily \textalpha-helical folds, or time- and resource-demanding attempts most likely going to be unsuccessful for larger targets
+
+With the advent of contact information, is has thus become essential to identify the extend to which this invaluable bit of information is going to help AMPLE users in the future. 
 
 \section{Materials \& Methods}
 \subsection{Target selection}
-\subsubsection{ORIGINAL dataset} \label{sec:methods_dataset_original}
-A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:appendix_dataset_original}). The test set covers the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-rr} secondary-structure assignment. Target chain lengths fall in the range of [62, 221] residues. Each crystal structure contains one molecule per asymmetric unit and the resolutions of the experimental data is in range from 1.0 to 2.3\AA.
-
-
-\subsubsection{TRANSMEMBRANE dataset} \label{sec:methods_dataset_transmembrane}
-The selection of this dataset was done by \cite{Thomas2017-sh}. In summary, 14 non-redundant transmembrane protein targets were selected from the \gls{pdbtm} \cite{Tusnady2005-ns}, with a chain length of $<250$ residues and resolution of $<2.5$\AA. The final selection is summarised in \cref{table:appendix_dataset_transmembrane}.
+In this study, targets from the ORIGINAL and TRANSMEMBRANE datasets were used. For further details refer to \cref{sec:methods_dataset_original} \cref{sec:methods_dataset_transmembrane}.
 
 \subsection{Contact prediction}
 For the 21 globular targets, one contact map was predicted with the fully automated metapredictor PCONSC2 \cite{Skwark2014-qp}. In summary, each \gls{msa} was generated with each of JACKHMMER  \cite{Johnson2010-uz} against the \texttt{uniref100} database and HHBLITS v2.0.15 \cite{Remmert2011-kt} against the \texttt{uniprot20} database v2013.03 \cite{Bateman2017-pb} at E-value cutoffs of 10\textsuperscript{-40}, 10\textsuperscript{-10}, 10\textsuperscript{-4} and 1. Each \gls{msa} was analysed with PSICOV \cite{Jones2012-ks} and PLMDCA \cite{Ekeberg2014-kf} to produce 16 individual sets of contact predictions. All 16 predictions, combined with a secondary structure prediction, solvent accessibility information and sequence profile were then provided to a deep learning algorithm \cite{Skwark2014-qp} to identify protein-like contact patterns. The latter produced a final contact map for each target sequence. 
 
 An additional contact map for \textbeta-structure containing targets was predicted using CCMPRED \cite{Seemayer2014-zp} and reduced to \textbeta-sheet contact pairs using the CCMPRED-specific filtering protocol BBCONTACTS \cite{Andreani2015-qn}. Each \gls{msa} for CCMPRED contact prediction was obtained using HHBLITS v2.0.15 \cite{Remmert2011-kt}. This entailed two sequence search iterations with an E-value cutoff of 10\textsuperscript{-3} against the \texttt{uniprot20} database v2013.03 \cite{Bateman2017-pb} and filtering to 90\% sequence identity using HHFILTER v2.0.15 \cite{Remmert2011-kt} to reduce sequence redundancy in the \gls{msa}. Besides the contact matrix as input, BBCONTACTS requires a secondary structure prediction and a factor describing the range of predicted contacts in the \gls{msa}. The latter was shown to depend on the sequence count in the \gls{msa} ($N$) and the target chain length ($L$). Thus, the factor describing this \gls{msa}-specific diversity was calculated using \cref{eq:bbcontacts_diversity} \cite{Andreani2015-qn}. 
-
 \begin{equation}
     \eta=N/L 
     \label{eq:bbcontacts_diversity}
@@ -24,6 +23,15 @@ The secondary structure for each sequence was predicted using the \texttt{addss.
 
 For each transmembrane protein target, a \gls{msa} was generated using the HHBLITS v2.0.16 \cite{Remmert2011-kt} against \texttt{uniprot20} database v2016\_02 \cite{Bateman2017-pb}. A contact meta-prediction using METAPSICOV v1.04 \cite{Jones2015-vq} was generated, which in turn used the contact prediction algorithms CCMPRED v0.3.2 \cite{Seemayer2014-zp}, FREECONTACT v1.0.21 \cite{Kajan2014-bx} and PSICOV v2.1b3 \cite{Jones2012-ks}. The predictions from METAPSICOV STAGE 1 were used and STAGE 2 discarded since the former yields more accurate structure predictions \cite{Jones2015-vq}. The CCMPRED predictions generated by METAPSICOV were used as the CCMPRED predictions. A set of contacts was also generated using the MEMBRAIN server (\href{http://www.csbio.sjtu.edu.cn/bioinf/MemBrain}{http://www.csbio.sjtu.edu.cn/bioinf/MemBrain}) v2015-03-15 \cite{Yang2013-bf}.
 
-\subsection{Contact-to-restraint conversion}
+\subsection{Contact-to-restraint conversion} \label{sec:bbcontacts_addition}
+For all targets, the predicted PCONSC2 contact maps were converted to ROSETTA restraints to guide \textit{ab initio} structure prediction. The \texttt{FADE} energy function was used to introduce a restraint in ROSETTA’s folding protocol. The implementation described by \textcite{Michel2014-eg} was used, which defined a contact to be formed during folding if the participating C\textbeta\ atoms (C\textalpha\ in case of glycine) were within 9\AA\ of one another. The top-$L$ ($L$ corresponds to the number of residues in the target sequence) contact pairs were converted to ROSETTA restraints, and if satisfied a ``squared-well'' bonus of -15.00 added to the energy function.
+
+Additionally to above, all \textbeta-containing targets were subjected to a further conversion step in a separate condition. The approach of adding BBCONTACTS restraints to a previous prediction is outlined in \cref{sec:methods_bbcontacts_addition}. 
+
 \subsection{\textit{Ab initio} structure prediction}
+For each target, 1,000 decoys were predicted using ROSETTA \cite{Rohl2004-dj}. The restraint lists outlined above formed a separate condition for each target: \ldots
+
 \subsection{Molecular Replacement in AMPLE}
+
+\section{Results}
+
