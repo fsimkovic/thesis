@@ -1,64 +1,78 @@
 \section{Selection of datasets}
 \subsection{ORIGINAL dataset} \label{sec:methods_dataset_original}
-A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:appendix_dataset_original}). The test set covers the three fold classes (\textalpha-helical, mixed \textalpha-\textbeta\ and \textbeta-sheet) and targets were grouped using their DSSP \cite{Kabsch1983-rr} secondary-structure assignment. Target chain lengths fall in the range of [62, 221] residues. Each crystal structure contains one molecule per asymmetric unit and the resolutions of the experimental data is in range from 1.0 to 2.3\AA.
+A test set of 21 globular protein targets was manually selected to include a range of chain lengths, fold architectures, X-ray diffraction data resolutions and \gls{msa} depths for contact prediction  (\cref{table:appendix_dataset_original}). The targets were chosen to include the three main fold classes: all-\textalpha, all-\textbeta, and mixed \textalpha-\textbeta\ (\textalpha/\textbeta\ and \textalpha+\textbeta). The target chain lengths cover a range from 62 to 221 residues. Each crystal structure contains a single molecule per asymmetric unit and the resolution of the experimental data is in range of 1.0 to 2.3\AA.
 
 \subsection{PREDICTORS dataset} \label{sec:methods_dataset_predictors}
-An unbiased selection of 27 non-redundant protein targets was selected using the following protocol (\cref{table:appendix_dataset_predictors}).
+An unbiased selection of 27 non-redundant protein targets was selected using the following protocol. For target-specific details, please refer to \cref{table:appendix_dataset_predictors}.
 
-The Pfam v29.0 \cite{Finn2016-zo} database was filtered for all protein families with at least one representative structure in the RCSB \gls{pdb} \cite{Berman2000-ua} database. Each representative had to have monomeric protein stoichiometry and its fold classified in the SCOPe v2.05 database \cite{Chandonia2017-vf}. Targets with fold assignments other than "a" (all-\textalpha), "b" (all-\textbeta), "c" (mixed \textalpha+\textbeta) or "d" (mixed \textalpha/\textbeta) were excluded to exclusively focus on regular globular protein folds. Each resulting protein target was screened against the RESTful API of the RCSB \gls{pdb} (\url{www.rcsb.org}) webserver to identify targets meeting the following criteria: experimental technique is X-ray crystallography; chain length is $\geq100$ residues and $\leq250$ residues; resolution is between 1.3 and 2.3\AA; structure factor amplitudes are deposited in the Protein Data Bank \cite{Berman2000-ua} database; and there is only a single molecule in the asymmetric unit. The resulting protein structures were cross-validated against the \gls{pdbtm} \cite{Tusnady2005-ns} to exclude any possible matches. Subsequently, one representative entry was randomly selected for each Pfam family.
+The Pfam v29.0 \cite{Finn2016-zo} database was filtered for all protein families with at least one representative structure in the RCSB \gls{pdb} \cite{Berman2000-ua} database. Each representative had to have monomeric protein stoichiometry and its fold classified in the SCOPe v2.05 database \cite{Chandonia2017-vf}. Targets with fold assignments other than "a" (all-\textalpha), "b" (all-\textbeta), "c" (mixed \textalpha+\textbeta) or "d" (mixed \textalpha/\textbeta) were excluded to focus on regular globular protein folds. Each resulting protein target was screened against the RESTful API of the RCSB \gls{pdb} (\url{www.rcsb.org}) webserver to identify targets meeting the following criteria: experimental technique is X-ray crystallography; chain length is $\geq100$ residues and $\leq250$ residues; resolution is between 1.3 and 2.3\AA; structure factor amplitudes are deposited in the \gls{pdb} \cite{Berman2000-ua} database; and there is only a single molecule in the asymmetric unit. The resulting protein structures were cross-validated against the \gls{pdbtm} \cite{Tusnady2005-ns} to exclude any possible matches. Subsequently, one representative entry was randomly selected for each Pfam family.
 
-The final set of 27 non-redundant targets was determined using further target characterisation and grouping of Pfam families. All targets were grouped using three criteria: domain fold, target chain length and alignment depth. The former consisted of the three fold classes all-\textalpha, all-\textbeta, and mixed \textalpha-\textbeta\ (\textalpha+\textbeta\ and \textalpha/\textbeta) and targets were group using the SCOPe assignment. The target chain lengths were obtained from the deposited information via the RESTful API of the RCSB \gls{pdb} web server and split into three bins, using 150 and 200 residues as bin edges. Furthermore, the alignment depth was calculated for the sequence alignment of each Pfam family and three bins established with bin edges of 100 and 200 sequences. Thus, all targets were classed in three bins for each of the three features. 
+The final set of 27 non-redundant targets was determined using further target characterisation and grouping of Pfam families. All targets were grouped using three criteria: domain fold, target chain length and alignment depth. The former consisted of the three fold classes all-\textalpha, all-\textbeta, and mixed \textalpha-\textbeta\ (\textalpha+\textbeta\ and \textalpha/\textbeta) and targets were group using the SCOPe assignment. The target chain lengths were obtained from the deposited information via the RESTful API of the RCSB \gls{pdb} webserver and split into three bins with bin centres of 125, 175 and 225 residues. Furthermore, the alignment depth was calculated for the sequence alignment of each Pfam family and three bins established with bin edges of 0, 100 and 200 sequences. Thus, all targets were classed in three bins for each of the three features. 
 
 The final selection of the 27 targets was performed by randomly selecting one target for each feature combination. To ensure even sampling across the three different fold categories, a target function was employed to identify roughly even target characteristics in each group. The alignment depth and chain length were used as metrics, and had to be within $\pm15$ units to the values of the other fold classes. This created two conditions that had to be met for a randomly chosen sample to be accepted.
 
 \subsection{TRANSMEMBRANE dataset} \label{sec:methods_dataset_transmembrane}
-The selection of this dataset was done by \cite{Thomas2017-sh}. In summary, 14 non-redundant transmembrane protein targets were selected from the \gls{pdbtm} \cite{Tusnady2005-ns}, with a chain length of $<250$ residues and resolution of $<2.5$\AA. The final selection is summarised in \cref{table:appendix_dataset_transmembrane}.
+The selection of this dataset was done by \textcite{Thomas2017-sh}. In summary, 14 non-redundant transmembrane protein targets were selected from the \gls{pdbtm} \cite{Tusnady2005-ns}, with a chain length of $<250$ residues and resolution of $<2.5$\AA. The final selection is summarised in \cref{table:appendix_dataset_transmembrane}.
 
 \section{Enhancement of \textbeta-sheet restraints} \label{sec:methods_bbcontacts_addition}
 Structure prediction of \textbeta-strand containing protein targets \textit{ab initio} is a notoriously challenging task. \textbeta-strands, potentially far in sequence space, form a \textbeta-sheet in 3-dimensions. Since fragment-assembly algorithms work on the basis of randomly inserting one fragment at the time, the probability of \textbeta-strand formation is much lower compared to \textalpha-helices. 
 
 Recent advances in \textit{ab initio} structure prediction have seen great improvements in structure prediction quality through the use of predicted residue-residue contacts as distance restraints (see \cref{sec:introduction_contact_prediction}). However, only a single approach specifically focused on improvements to the structure prediction of \textbeta-sheet formation \cite{Hayat2015-ut}. To enhance the probability of \textbeta-sheet formation in \textit{ab initio} structure prediction, part of this thesis focused on a more general model to enrich restraints between \textbeta-strands to attempt better super-secondary quality in the final decoys.
 
-A more general approach, compared to \cite{Hayat2015-ut} focusing on \textbeta-barrel proteins, was developed combining a starting set of contact pairs with a specifically-prepared set obtained from BBCONTACTS \cite{Andreani2015-qn}. A HHBLITS \cite{Remmert2011-kt} \gls{msa} was constructed using two sequence-search iterations with an E-value cutoff of $10^{-3}$ against the \texttt{uniprot20} database \cite{Bateman2017-pb}. Redundant sequences were removed from the \gls{msa} to 90\% sequence identity using HHFILTER \cite{Remmert2011-kt}. Subsequently, the \gls{msa} was subjected to CCMPRED \cite{Seemayer2014-zp} for co-evolution based contact prediction. The BBCONTACTS algorithms also requires a secondary-structure prediction, which was obtained using the ADDSS.PL script \cite{Remmert2011-kt} distributed with the HHSUITE \cite{Soding2005-hw}. Both input files were subjected to BBCONTACTS to obtain a final set of \textbeta-strand specific contact pairs.
+A more general approach, compared to \cite{Hayat2015-ut} focusing on \textbeta-barrel proteins, was developed combining a starting set of contact pairs with a specifically-prepared set obtained from BBCONTACTS \cite{Andreani2015-qn}. A HHBLITS \cite{Remmert2011-kt} \gls{msa} was constructed using two sequence-search iterations with an E-value cutoff of $10^{-3}$ against the \texttt{uniprot20} database \cite{Bateman2017-pb}. Redundant sequences were removed from the \gls{msa} to 90\% sequence identity using HHFILTER \cite{Remmert2011-kt}. Subsequently, the \gls{msa} was subjected to CCMPRED \cite{Seemayer2014-zp} for co-evolution based contact prediction. The BBCONTACTS algorithms also requires a secondary-structure prediction, which was obtained using the \texttt{addss.pl} script \cite{Remmert2011-kt} distributed with the HHSUITE \cite{Soding2005-hw}. Lastly, BBCONTACTS requires a descriptor for the diversity of the input sequence alignment \cite{Andreani2015-qn}, which was calculated using \cref{eq:methods_alndiversity}. All three inputs were subjected to BBCONTACTS to obtain a set of \textbeta-strand specific contact pairs.
 
-The BBCONTACTS contact pairs were added to a base set of contact pairs usually obtained from a separate (meta-)predictor. The combination of the two sets of contact pairs was done by simple union of the lists; however, if a contact pair was in the intersection, a contact-pair related weight was doubled to allow subsequent modifications of the energy term in distance restraint creation. Furthermore, additional contact pairs were inferred if not present in the base set of contact pairs. The inference worked on the basis that any neighbouring contacts (i.e. $i,j\pm1$; $i,j\pm2$; $i\pm  1,j$; $i\pm2,j$) to contact $i,j$ must be present, and thus any missing were automatically added to the final list. Again, any already present contact pair was assigned double the weight compared to the rest.
+The BBCONTACTS contact pairs were added to a base set of contact pairs usually obtained from a separate (meta-)predictor. The combination of the two sets of contact pairs was done by simple union of the lists; however, if a contact pair was in the intersection, a contact-pair related weight was doubled to allow subsequent modifications of the energy term in distance restraint creation. Furthermore, additional contact pairs were inferred if not present in the base set of contact pairs. The inference worked on the basis that any neighbouring contacts (i.e. $i,j\pm1$; $i,j\pm2$; $i\pm  1,j$; $i\pm2,j$) to contact $i,j$ must be present, and thus any missing were automatically added to the final set of contact pairs. 
 
 \section{Evaluation of data}
-This section defines and describes concepts used throughout this thesis to assess and/or validate various data. 
+This section defines and describes data validation and verification procudures and equations used throughout one or more studies presented in this thesis. These definitions server as a reference and define naming conventions where appropriate. All of the sequence- and contact-related analysis routines are implemented in CONKIT \cite{Simkovic2017-us}.
+
 \subsection{Sequence alignment data}
-\subsubsection{Seqeuence alignment depth}
-Co-evolution based residue-residue contact prediction is dependent on an input \gls{msa} ideally containing all homolohous sequences found in the queried database. However, the \gls{msa} needs a certain level of sequence diversity amongst the homologs to accurately capture the co-evolution signal. The alignment depth --- often also referred to as \gls{meff} --- captures this diversity by computing the number of non-redundant sequences in the \gls{msa}.
+\subsubsection{Sequence alignment diversity}
+The sequence diversity in a \gls{msa} can be described by the number of sequences ($M$) it contains proportionatily to the sequence length of the target ($L$). The diversity metric is used in BBCONTACTS as input parameter \cite{Andreani2015-qn}. The \gls{msa} diversity \texteta is defined in \cref{eq:methods_alndiversity}.
+
+\begin{equation}
+    \eta=\frac{M}{L}
+    \label{eq:methods_alndiversity}
+\end{equation}
+\equations{Sequence Alignment diversity}
+
+\subsubsection{Sequence alignment depth}
+Co-evolution based residue-residue contact prediction is dependent on an input \gls{msa} ideally containing all homologous sequences found in the queried database. However, the \gls{msa} needs a certain level of sequence diversity amongst the homologs to accurately capture the co-evolution signal. The alignment depth --- often also referred to as \gls{meff} --- captures this diversity by computing the number of non-redundant sequences in the \gls{msa}.
 
 \begin{equation}
     M_{eff}=\sum_{i}\frac{1}{\sum_{j}S_{i,j}}
     \label{eq:methods_meff}
 \end{equation}
-\equations{Multiple Sequence Alignment depth}
+\equations{Sequence Alignment depth}
 
-Various approaches exist for computing \gls{meff} \cite{Morcos2011-lk,Jones2012-ks,Jones2015-vq} yielding similar results \cite{Skwark2014-qp}. In this thesis, the approach defined by \textcite{Morcos2011-lk} is used. \textcite{Morcos2011-lk} first described the approach by which sequence weights are computed by means of Hamming distances between all possible sequence combinations in the \gls{msa} (\cref{eq:methods_meff}). If a Hamming distance was $<0.2$ (sequence identity of 80\%), the binary value $S_{i,j}$ was assigned 1 and otherwise a 0. The sum of fractional weights of the similarity of each sequence compared to all others ultimately describes the alignment depth.
+Various approaches exist for computing \gls{meff} \cite{Morcos2011-lk,Jones2012-ks,Jones2015-vq} yielding similar results \cite{Skwark2014-qp}. In this thesis, the approach defined by \textcite{Morcos2011-lk} is used. \textcite{Morcos2011-lk} first described the approach by which sequence weights are computed by means of Hamming distances between all possible sequence combinations in the \gls{msa} (\cref{eq:methods_meff}). If a Hamming distance is $<0.2$ (sequence identity of 80\%), the binary value $S_{i,j}$ was assigned 1 and otherwise 0. The sum of fractional weights of the similarity of each sequence compared to all others ultimately describes the alignment depth.
 
 \subsection{Contact prediction data}
 \subsubsection{Contact map coverage}
-The fraction of residues covered by a set of contact pairs (N\textsubscript{map}) out of the total number of residues in the target sequence (N\textsubscript{sequence}) (\cref{eq:methods_contact_coverage}).
+In the interpretation of a truncated contact map it is often of interest to identify the sequence coverage by the final set of contact pairs. In this particular context, coverage is defined by the number of residues ($N_{map}$) for which at least one contact pair exists proportional to the total number of residues in the target chain ($L$). Thus, the contact map coverage can be defined by \cref{eq:methods_contact_coverage}.
 
 \begin{equation}
-    Cov=\frac{N_{map}}{N_{sequence}}
+    Coverage=\frac{N_{map}}{L}
     \label{eq:methods_contact_coverage}
 \end{equation}
 \equations{Contact map coverage}
 
-\subsubsection{Contact map precision} \label{sec:methods_contact_map_prec}
-The precision of a set of contact pairs is equivalent to the the proportion of \gls{tp} contact pairs in the overall set (\cref{eq:methods_contact_precision}). A contact pair was defined as \gls{tp} if the equivalent C\textbeta\ (C\textalpha\ in case of Gly) atoms in the native crystal structure were $<8$\AA\ apart. The precision value is in range [0, 1], whereby a value of 1 means all contact pairs are \gls{tp}s. 
+\subsubsection{Contact map precision} \label{sec:methods_contact_map_prec} 
+The precision of a set of contact pairs is equivalent to the the proportion of \gls{tp} contact pairs compared to the number of \gls{tp} and \gls{fp} ones (\cref{eq:methods_contact_precision}). A contact pair was considered a \gls{tp} if the equivalent C\textbeta\ (C\textalpha\ for glycine) atoms in the native structure were $<8$\AA\ apart, otherwise a \gls{fp}. The precision value ranges from 0 to 1 with a value of 1 indicating all contact pairs are \gls{tp}s. 
 
 \begin{equation} 
-    Prec=\frac{TruePositives}{TruePositives-FalsePositives}
+    Precision=\frac{TP}{TP-FP}
     \label{eq:methods_contact_precision}
 \end{equation}
 \equations{Precision score}
 
-If contacts were unmatched between the target sequence and reference structure, they were not taken into account in the calculation of the precision score.
+If contacts were unmatched between the target sequence and reference structure, they were not taken into account in the calculation of the precision score. This might affect a precision value; however, it also avoids inference of distances for residues absent in the native structure and therefore potentially incorrect results.
+
+\subsubsection{Range-dependent contact satisfaction} \label{sec:methods_longrange_satisfaction}
+The range-dependent contact pair satisfaction score is computed identically to the precision of sets of contact pairs (\cref{sec:methods_contact_map_prec}). The main difference is that contact pairs are grouped by their sequence separation: short-range with $<12$, medium-range with $<24$ and long-range with $\geq23$ residues.
+
 \subsubsection{Contact map Jaccard index}
-The Jaccard index quantifies the similarity between two sets of contact pairs. It describes the proportion of contact pairs in the intersection compared to the union between the two sets \cite{Wuyun2016-hh} (\cref{eq:methods_jaccard_index}).
+The Jaccard index quantifies the similarity between two sets of contact pairs. It describes the proportion of contact pairs in the intersection compared to the union between the two sets (\cref{eq:methods_jaccard_index}) \cite{Wuyun2016-hh}.
 
 \begin{equation}
     J_{x,y}=\frac{\left |x \cap y\right |}{\left |x \cup y\right |}
@@ -66,9 +80,11 @@ The Jaccard index quantifies the similarity between two sets of contact pairs. I
 \end{equation}
 \equations{Jaccard index}
 
-The variables $x$ and $y$ are two sets of contact pairs. $\left |x \cap y\right |$ is the number of elements in the intersection of $x$ and $y$, and the $\left |x \cup y\right |$ represents the number of elements in the union of $x$ and $y$. The Jaccard index falls in the range [0,1], with a value of 1 corresponding to identical sets of contact pairs and 0 to non-identical ones. It is worth noting that only exact matches are considered and the neighbourhood of a single contact ignored.
+The variables $x$ and $y$ are two sets of contact pairs. $\left |x \cap y\right |$ is the number of elements in the intersection of $x$ and $y$, and the $\left |x \cup y\right |$ represents the number of elements in the union of $x$ and $y$. The Jaccard index falls in the range [0,1], with a value of 1 corresponding to identical sets of contact pairs and 0 to non-identical ones. 
+
+It is worth noting that only exact matches are considered and the neighbourhood of a single contact is ignored.
 \subsubsection{Contact map singleton content}
-Almost all sliced sets of residue-residue contact pairs contain a fraction of contact pairs not co-localising with others. These contact pairs --- referred to as singleton contact pairs from here onwards --- typically show a high \gls{fp} rate and could be considered noise (although sometimes they encode \gls{tp} contacts in an oligomeric interface). To quantify this fraction, a distance-based clustering analysis was defined to identify singleton contact pairs, and thus describe the level of noise in the prediction, or alternatively how well contact pairs co-localise typically between secondary structure features.
+Almost all sliced sets of residue-residue contact pairs contain a fraction of contact pairs that do not co-localise with others. These contact pairs --- referred to as singleton contacts from here onwards --- typically show a high \gls{fp} rate and could be considered noise (although sometimes they encode \gls{tp} contacts in an oligomeric interface) \cite{Skwark2014-qp}. Such contacts are also often the ones to be down-weighted by neural network architectures of metapredictors, such as PCONSC2 \cite{Skwark2014-qp} or METAPSICOV \cite{Jones2015-vq}. To quantify fraction singleton contacts, a distance-based clustering routine was defined to isolate singleton contact pairs, and thus describe the level of noise in the prediction, or alternatively how well contact pairs co-localise typically between secondary structure features.
 
 To identify singleton contact pairs in a set of contacts, the neighbourhood of each pair was searched for the presence of other contacts. The search radius was defined by $\pm2$ residues in a 2D-representation of the contact map. If no other contact pair was identified under such constraint, the contact pair was classified as singleton.
 
@@ -92,9 +108,6 @@ The \gls{tmscore} is a more accurate measure of structure similarity between two
 \equations{Template-Modelling score}
 
 $d_i$ describes the distance between the ith pair of residues. The distance scale $d_0$ to normalise the distances is defined by the equation $1.24\sqrt[3]{L_{target}-15}-1.8$. The \gls{tmscore} value falls in the range (0, 1]. A \gls{tmscore} value of $<0.2$ indicates two random unrelated structures, and a value $>0.5$ roughly the same fold \cite{Xu2010-kr}
-
-\subsubsection{Long-range contact precision} \label{sec:methods_longrange_satisfaction}
-The long-range contact pair satisfaction score is computed identically to the precision of sets of contact pairs (\cref{sec:methods_contact_map_prec}). However, the satisfaction score is computed solely for long-range contacts ($>23$ residues sequence separation).
 
 \subsection{Molecular Replacement data}
 \subsubsection{Register-Independent Overlap}
