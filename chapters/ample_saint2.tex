@@ -15,12 +15,12 @@ Since some of these algorithms are readily available and often easier to install
 
 \section{Materials \& Methods}
 \subsection{Target selection}
-This study was conducted using all 27 targets from the PREDICTORS dataset (\cref{sec:methods_dataset_predictors}).
+This study was conducted using all 27 targets from the PREDICTORS dataset (\cref{sec:methods_dataset_predictors} and \cref{table:appendix_dataset_predictors}).
 
 \subsection{Contact prediction}
 Residue-residue contact information was predicted for 18 out of 27 targets using METAPSICOV v1.04 \cite{Jones2015-vq}.
 
-Secondary structure and solvent exposure were predicted using PSIPRED v4.0 \cite{Jones1999-ed} and SOLVPRED (shipped with METAPSICOV v1.04), respectively. The \gls{msa} for coevolution-based contact prediction was generated using HHBLITS \cite{Remmert2011-kt} against the \texttt{uniprot20\_2016\_02} database. CCMPRED v0.3.2 \cite{Seemayer2014-zp}, FREECONTACT v1.0.21 \cite{Kajan2014-bx} and PSICOV v2.1b3 \cite{Jones2012-ks} were used by METAPSICOV to generate contact predictions.
+Secondary structure and solvent exposure were predicted using PSIPRED v4.0 \cite{Jones1999-ed} and SOLVPRED (shipped with METAPSICOV v1.04), respectively. The \gls{msa} for coevolution-based contact prediction was generated using HHBLITS v2.0.16 \cite{Remmert2011-kt} against the \texttt{uniprot20} v2016-02 database. CCMPRED v0.3.2 \cite{Seemayer2014-zp}, FREECONTACT v1.0.21 \cite{Kajan2014-bx} and PSICOV v2.1b3 \cite{Jones2012-ks} were used by METAPSICOV to generate contact predictions.
 
 METAPSICOV STAGE 1 contact predictions were used in \textit{ab initio} structure prediction since they result in more accurate structure predictions than METAPSICOV STAGE 2 results \cite{Jones2015-vq}.
 
