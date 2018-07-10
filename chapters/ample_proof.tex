@@ -36,13 +36,17 @@ All \gls{mr} solutions were assessed for success using the criteria described in
 \section{Results}
 \textcolor{red}{Some fancy summary of methods \ldots}
 
-\subsection{Alignment depth}
-Accurate coevolution-based residue-residue contact prediction highly depends on the availability of enough divergent homologous sequences. As such, it is important to validate that the selected targets in this study satisfy such requirement.
+\subsection{Analysis of sequence alignments}
+Accurate coevolution-based residue-residue contact prediction highly depends on the availability of many divergent homologous sequences. As such, it is important to validate that the selected targets in this study satisfy such requirement.
+
+The depth of alignments obtained for each target sequence shows sufficient numbers of divergent homologous sequences \cref{fig:ample_proof_alndepthcov}. A threshold of 200 sequences is often considered a minimum to infer precise contact predictions by coevolution methods \cite{Simkovic2017-xs}. In this study, all targets exceed this threshold at least 3-fold up to 33-fold \cref{fig:ample_proof_alndepthcov}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{ample_proof_alndepth.pdf}
-    \caption{Alignment depth across a diverse set of globular and transmembrane protein targets. The red line indicates the threshold of 200 effective sequences, which is often considered a minimum for accurate coevolution-based contact prediction \cite{Simkovic2016-wk}.}
-    \label{fig:ample_proof_alndepth}
+    \includegraphics[width=\textwidth]{ample_proof_alndepthcov.pdf}
+    \caption[Alignment depth and coverage across a diverse set of globular and transmembrane protein targets.]{Alignment depth and coverage across a diverse set of globular and transmembrane protein targets. (a) The red line indicates the threshold of 200 effective sequences, which is often considered a minimum for accurate coevolution-based contact prediction \cite{Simkovic2016-wk}. (b) The coverage is calculated as fraction of residues in each \gls{msa} with coverage of more than $5L$ (gray) and $20L$ (red).}
+    \label{fig:ample_proof_alndepthcov}
 \end{figure}
+
+Equally important is the coverage of a \gls{msa} since the alignment depth might only describe the diversity not how well each residue is covered.  
 
