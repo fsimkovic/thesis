@@ -34,19 +34,43 @@ All globular protein targets were subjected to AMPLE with two deviations from th
 All \gls{mr} solutions were assessed for success using the criteria described in \cref{sec:methods_mr_success}.
 
 \section{Results}
-\textcolor{red}{Some fancy summary of methods \ldots}
+In this study, the application of residue-residue contact predictions to \textit{ab initio} protein structure prediction and subsequently \gls{mr} was investigated. This proof-of-concept work is based on two datasets covering a range of globular and transmembrane protein targets. At the time of conducting this study, state-of-the-art contact prediction algorithms were applied to obtain the best possible contact predictions to identify the extend of pushing the boundaries previously incurred in AMPLE studies \cite{Bibby2012-lm}.
 
-\subsection{Analysis of sequence alignments}
+\subsection{Residue-residue contact prediction}
 Accurate coevolution-based residue-residue contact prediction highly depends on the availability of many divergent homologous sequences. As such, it is important to validate that the selected targets in this study satisfy such requirement.
 
-The depth of alignments obtained for each target sequence shows sufficient numbers of divergent homologous sequences \cref{fig:ample_proof_alndepthcov}. A threshold of 200 sequences is often considered a minimum to infer precise contact predictions by coevolution methods \cite{Simkovic2017-xs}. In this study, all targets exceed this threshold at least 3-fold up to 33-fold \cref{fig:ample_proof_alndepthcov}.
+The depth of \gls{msa}s obtained for each target sequence suggests that sufficient numbers of divergent homologous sequences are available. Across all globular targets, the minimum alignment depth is obtained for Galectin-3 domain (\gls{pdb} ID: 1kjl) with 679 effective sequences and the maximum for G-protein Arf6-GDP (\gls{pdb} ID: 1e0s) with 1,897 effective sequences (\cref{fig:ample_proof_globpreccomp}). The median alignment depth for all globular targets is over 1,000, which is beyond the often suggested threshold of 200 sequences \cite{Simkovic2017-xs}. The \gls{msa}s for all transmembrane protein targets also surpass this threshold comfortably. The median alignment depth is much higher than for globular targets with 1,878 sequences (\cref{fig:ample_proof_tmpreccomp}). The minimum, which was obtained for Sensory rhodopsin II (\gls{pdb} ID: 1gu8), is 692 sequences and the maximum for the sequence of Rhomboid protease GLPG (\gls{pdb} ID: 2xov) is 6,583.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{ample_proof_alndepthcov.pdf}
-    \caption[Alignment depth and coverage across a diverse set of globular and transmembrane protein targets.]{Alignment depth and coverage across a diverse set of globular and transmembrane protein targets. (a) The red line indicates the threshold of 200 effective sequences, which is often considered a minimum for accurate coevolution-based contact prediction \cite{Simkovic2016-wk}. (b) The coverage is calculated as fraction of residues in each \gls{msa} with coverage of more than $5L$ (gray) and $20L$ (red).}
-    \label{fig:ample_proof_alndepthcov}
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ample_proof_globpreccomp.pdf}
+        \caption{}
+        \label{fig:ample_proof_globpreccomp}
+    \end{subfigure}
+    
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ample_proof_tmpreccomp.pdf}
+        \caption{}
+        \label{fig:ample_proof_tmpreccomp}
+    \end{subfigure}
+    
+    \caption[Alignment depth and contact precision analysis of globular and transmembrane protein targets]{Alignment depth and contact precision analysis of (a) globular and (b) transmembrane protein targets. Contact predictions were obtained with four different contact prediction algorithms. Precision scores were calculated for the top-$L$ contact pairs. For illustrative purposes the marker size has been altered to indicate target chain length.}
+    \label{fig:ample_proof_preccomp}
 \end{figure}
 
-Equally important is the coverage of a \gls{msa} since the alignment depth might only describe the diversity not how well each residue is covered.  
+The precision of coevolution-based contact prediction depends on alignment depth. However, results in this study suggest that alignment depth is not exclusively the key to precise contact prediction. The data shows that four targets have precision values for top-$L$ contact pairs of less than 50\% correctly predicted contact pairs whilst six targets contain at least 80\% (\cref{fig:ample_proof_globpreccomp}). This contrasts transmembrane protein targets where eleven CCMPRED and METAPSICOV STAGE1 top-$L$ contact pairs contain less than 50\% correct predictions whilst no set contains more than 80\% correct ones (\cref{fig:ample_proof_tmpreccomp}). MEMBRAIN predictions are slightly more precise, with a single set containing more than 80\% and nine less than 50\% correct contact pairs (\cref{fig:ample_proof_tmpreccomp}). However, one noticable difference between MEMBRAIN and CCMPRED/METAPSICOV STAGE1 contact predictions is that the former performs much better for transmembrane protein targets with less than 2,000 effective sequences, whilst the latter perform better for most other targets (\cref{fig:ample_proof_tmpreccomp}).
+
+CCMPRED is one of three raw contact predictions that METAPSICOV uses \cite{Jones2015-vq}. Thus, it is of interest to identify if the addition of the remaining two and the first stage filtering of the METAPSICOV algorithm results in more accurate contact predictions compared to CCMPRED. However, only in about half of the cases under investigation does METAPSICOV STAGE1 top-$L$ contact pairs outperform CCMPRED ones (\cref{fig:ample_proof_tmpreccomp}).
+
+\subsection{Protein structure prediction}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ample_proof_comproscon.pdf}
+    \caption[Effect of contact distance restraints on \textit{ab initio} decoy quality]{Effect of contact distance restraints on \textit{ab initio} decoy quality by comparison of unrestrained (\textit{no contacts}) and contact-restrained (\textit{contacts}) median TM-scores for 1,000 decoys per target. Colours indicate the target fold and symbols the contact prediction algorithm.}
+    \label{fig:ample_proof_comproscon}
+\end{figure}
 
