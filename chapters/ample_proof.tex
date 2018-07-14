@@ -57,15 +57,43 @@ The depth of \gls{msa}s obtained for each target sequence suggests that sufficie
         \label{fig:ample_proof_tmpreccomp}
     \end{subfigure}
     
-    \caption[Alignment depth and contact precision analysis of globular and transmembrane protein targets]{Alignment depth and contact precision analysis of (a) globular and (b) transmembrane protein targets. Contact predictions were obtained with four different contact prediction algorithms. Precision scores were calculated for the top-$L$ contact pairs. For illustrative purposes the marker size has been altered to indicate target chain length.}
+    \caption[Alignment depth and contact precision analysis of globular and transmembrane protein targets]{Alignment depth and contact precision analysis of (a) globular and (b) transmembrane protein targets. Contact predictions were obtained with several contact prediction algorithms. Precision scores were calculated for the top-$L$ contact pairs. JACKHMMER and HHBLITS alignments for PSICOV and PLMDCA contact predictions in (a) were obtained with E-value $1e^{-4}$.} 
     \label{fig:ample_proof_preccomp}
 \end{figure}
 
-The precision of coevolution-based contact prediction depends on alignment depth. However, results in this study suggest that alignment depth is not exclusively the key to precise contact prediction. The data shows that four targets have precision values for top-$L$ contact pairs of less than 50\% correctly predicted contact pairs whilst six targets contain at least 80\% (\cref{fig:ample_proof_globpreccomp}). This contrasts transmembrane protein targets where eleven CCMPRED and METAPSICOV STAGE1 top-$L$ contact pairs contain less than 50\% correct predictions whilst no set contains more than 80\% correct ones (\cref{fig:ample_proof_tmpreccomp}). MEMBRAIN predictions are slightly more precise, with a single set containing more than 80\% and nine less than 50\% correct contact pairs (\cref{fig:ample_proof_tmpreccomp}). However, one noticable difference between MEMBRAIN and CCMPRED/METAPSICOV STAGE1 contact predictions is that the former performs much better for transmembrane protein targets with less than 2,000 effective sequences, whilst the latter perform better for most other targets (\cref{fig:ample_proof_tmpreccomp}).
+In coevolution-based contact prediction, the precision depends on alignment depth. Despite sufficient number of effective sequences across all targets, findings in this study suggest that some (meta-)predictors cannot fully utelise greater alignment depths to correct contact pairs (\cref{fig:ample_proof_preccomp}). 
 
-CCMPRED is one of three raw contact predictions that METAPSICOV uses \cite{Jones2015-vq}. Thus, it is of interest to identify if the addition of the remaining two and the first stage filtering of the METAPSICOV algorithm results in more accurate contact predictions compared to CCMPRED. However, only in about half of the cases under investigation does METAPSICOV STAGE1 top-$L$ contact pairs outperform CCMPRED ones (\cref{fig:ample_proof_tmpreccomp}).
+PCONSC2 --- a metapredictor using numerous starting alignments and two contact predictors --- outperforms its individual parts for almost all globular targets (\cref{fig:ample_proof_globpreccomp}). Despite only a fraction of all generated contact predictions illustrated in \cref{fig:ample_proof_globpreccomp}, the pattern translates across all 16 predictions per target, which suggests that precision greatly depends on the tool to generate the input alignment. A closer inspection of mean precision scores resulting from HHBLITS- and JACKHMMER-based alignments shows higher precision scores for top-$L$ contact pairs based on the former alignments (\cref{table:ample_proof_pconsc2}). Nevertheless, the Machine Learning approach in PCONSC2 to combine more and less precise individual predictions results in superior precision in the output (\cref{table:ample_proof_pconsc2}). No correlation could be established between alignment depth and precision for either individual predictors or the metapredictor PCONSC2 (\cref{fig:ample_proof_globpreccomp}). 
+
+\begin{table}[H]
+    \centering
+    \caption[Summary of raw conact prediction precision values in PCONSC2]{Summary of mean PCONSC2 raw contact prediction precision based on JACKHMMER and HHBLITS alignments and PSICOV, PLMDCA and PCONSC2 coevolution-based contact prediction.}
+    \label{table:ample_proof_pconsc2}
+    \begin{tabularx}{\textwidth}{b b s s s s}
+        \hline
+        \multicolumn{2}{c}{\textbf{Contact prediction}} & \multicolumn{4}{c}{\textbf{Alignment E-value cutoff}} \\
+        \cline{3-6} & & $1e^{0}$ & $1e^{-4}$ & $1e^{-10}$ & $1e^{-40}$ \\ 
+
+        \hline
+        \multirow{2}{1em}{PSICOV} & JACKHMMER  & 0.240 & 0.239 & 0.213 & 0.167 \\
+                                  & HHBLITS    & 0.439 & 0.435 & 0.354 & 0.209 \\
+        \hline
+        \multirow{2}{1em}{PLMDCA} & JACKHMMER  & 0.293 & 0.288 & 0.252 & 0.140 \\ 
+                                  & HHBLITS    & 0.545 & 0.530 & 0.447 & 0.224 \\
+        \hline
+        \hline
+        PCONSC2                   &            & \multicolumn{4}{c}{0.667}     \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+Contacts for transmembrane protein targets in this study were predicted with the metapredictor METAPSICOV and the transmembrane-specific predictor MEMBRAIN. METAPSICOV STAGE 1 and STAGE 2 predictions outperform MEMBRAIN in nine and ten cases, respectively, whilst MEMBRAIN outperforms METAPSICOV for the rest (\cref{fig:ample_proof_tmpreccomp}). The METAPSICOV algorithm utelises the raw predictions by CCMPRED, FREECONTACT and PSICOV to generate its STAGE 1 and STAGE 2 predictions. METAPSICOV STAGE 1 predictions are near identical to CCMPRED, whereby 15 of 17 targets show an absolute $\Delta_{TMscore}$ of less than 0.05 (\cref{fig:ample_proof_tmpreccomp}). This similarity traverses not to METAPSICOV STAGE 2 predictions with only a single target showing such similar \gls{tmscore} values (\cref{fig:ample_proof_tmpreccomp}). Amongst the three raw predictors used by METAPSICOV, FREECONTACT performs by far the worst with a mean \gls{tmscore} of 0.09 across all transmembrane targets. PSICOV shows similar trend to CCMPRED when assessed by target, which results in an mean absolute $\Delta_{TMscore}$ of 0.10.
 
 \subsection{Protein structure prediction}
+
+Predicted contact information is particularly useful to limit the conformation search space in \textit{ab initio} protein structure prediction. Since such predictions are the basis for AMPLE studies presented in this thesis, it is important to analyse the improvement in decoy quality.
+
+Globular protein targets benefit greatly from the addition of PCONSC2 residue contacts. All but one target see median \gls{tmscore} improvements of at least 0.05 when comparing contact-guided PCONSC2 decoys with simple ROSETTA decoys (\cref{fig:ample_proof_comproscon}). The greatest improvement over 1,000 decoys was achieved for the Oxy-myoglobin (\gls{pdb} ID: 1a6m) with an improvement in median \gls{tmscore} of 0.42.  The decoys for Ankyrin (\gls{pdb} ID: 2qyj) shows a minor decrease of 0.04; however, the median \gls{tmscore} for ROSETTA decoys is 0.78, and thus a minor decrease in decoy quality may be negligible. 
 
 \begin{figure}[H]
     \centering
@@ -73,4 +101,15 @@ CCMPRED is one of three raw contact predictions that METAPSICOV uses \cite{Jones
     \caption[Effect of contact distance restraints on \textit{ab initio} decoy quality]{Effect of contact distance restraints on \textit{ab initio} decoy quality by comparison of unrestrained (\textit{no contacts}) and contact-restrained (\textit{contacts}) median TM-scores for 1,000 decoys per target. Colours indicate the target fold and symbols the contact prediction algorithm.}
     \label{fig:ample_proof_comproscon}
 \end{figure}
+
+Previously, \textit{ab initio} protein structure prediction for globular targets was greatly limited by target fold and chain length. The addition of residue-residue contacts enhances decoy quality primarily for \textalpha-helical and mixed \textalpha-\textbeta\ protein targets (\cref{fig:ample_proof_globtmcomp}). Whilst only one all-\textalpha\ target has more than 50\% native-like decoys based on ROSETTA decoys, five targets surpass this threshold when PCONSC2 contact data is used to restrain the folding procedure. Similarly, no mixed \textalpha-\textbeta\ target decoy set surpasses the \gls{tmscore} threshold of 0.5 with ROSETTA decoys compared to one for PCONSC2 decoys with three further ones greater than 0.4. All-\textbeta\ targets also benefit from the addition of contact restraints, although decoy sets do not surpass the native-like threshold by median \gls{tmscore} (\cref{fig:ample_proof_globtmcomp}). Larger targets do not benefit any more than smaller targets from the addition of residue contacts to the structure prediction protocol. The only real exception to this are the decoys for the CheB methylesterase domain (\gls{pdb} ID: 1chd), for which the majority of ROSETTA decoys are almost random-like whilst PCONSC2 decoys are native-like (\cref{fig:ample_proof_globtmcomp}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ample_proof_globtmcomp.pdf}
+    \caption[TM-score comparison for globular targets separated by fold]{\gls{tmscore} comparison for globular targets separated by fold and ordered by target chain length. Median \gls{tmscore}s for 1,000 decoys generated with simple ROSETTA (orange) or contact-guided ROSETTA (blue) runs. White numbers in each row correspond to the target chain length. Bars surpassing the dark gray line indicate that the majority of structures are better than random, whilst the light gray line indicates that the majority of structures are native-like \cite{Xu2010-kr}.}
+    \label{fig:ample_proof_globtmcomp}
+\end{figure}
+
+One further important aspect in this study is the addition of BBCONTACTS contact pairs to improve structure prediction accuracy for \textbeta-structure containing targets. 
 
