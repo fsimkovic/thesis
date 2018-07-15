@@ -89,6 +89,15 @@ PCONSC2 --- a metapredictor using numerous starting alignments and two contact p
 
 Contacts for transmembrane protein targets in this study were predicted with the metapredictor METAPSICOV and the transmembrane-specific predictor MEMBRAIN. METAPSICOV STAGE 1 and STAGE 2 predictions outperform MEMBRAIN in nine and ten cases, respectively, whilst MEMBRAIN outperforms METAPSICOV for the rest (\cref{fig:ample_proof_tmpreccomp}). The METAPSICOV algorithm utelises the raw predictions by CCMPRED, FREECONTACT and PSICOV to generate its STAGE 1 and STAGE 2 predictions. METAPSICOV STAGE 1 predictions are near identical to CCMPRED, whereby 15 of 17 targets show an absolute $\Delta_{TMscore}$ of less than 0.05 (\cref{fig:ample_proof_tmpreccomp}). This similarity traverses not to METAPSICOV STAGE 2 predictions with only a single target showing such similar \gls{tmscore} values (\cref{fig:ample_proof_tmpreccomp}). Amongst the three raw predictors used by METAPSICOV, FREECONTACT performs by far the worst with a mean \gls{tmscore} of 0.09 across all transmembrane targets. PSICOV shows similar trend to CCMPRED when assessed by target, which results in an mean absolute $\Delta_{TMscore}$ of 0.10.
 
+The addition of BBCONTACTS contact pairs to improve structure prediction accuracy for \textbeta-structure containing targets is a novel aspect introduced in this study. The initial step of the addition of BBCONTACTS contact pairs included the filtered of one- and two-pair strand contacts from the original BBCONTACTS list, since those contained high numbers of false positives (Jessica Andreani, personal communication). The findings in this study confirm this for all \textbeta-structure containing targets (\cref{fig:ample_proof_bbchange}). Precision values improved for all targets with changes ranging from 0.01 to 0.14 whilst retaining on average 80\% of all contacts. Filtered BBCONTACTS predictions were combined with other contact maps, i.e. PCONSC2, to either upweight or add contact pairs. Findings in this study highlight that upweighted contact pairs are more precise than ones to be added. The minimum precision score for a set of upweighted contacts is 0.72 for 29 contact pairs and the maximum of 1.00 for up to 27 contact pairs. In comparison, novel BBCONTACTS contact pairs not present in the base contact map range in precision scores from 0.22 (nine contacts) to 0.76 (21 contacts). 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ample_proof_bbchange.pdf}
+    \caption[Impact of contact filtering to BBCONTACTS contact prediction]{Impact of \textbeta-sheet contact filtering to BBCONTACTS contact prediction precision.}
+    \label{fig:ample_proof_bbchange}
+\end{figure}
+
 \subsection{Protein structure prediction}
 
 Predicted contact information is particularly useful to limit the conformation search space in \textit{ab initio} protein structure prediction. Since such predictions are the basis for AMPLE studies presented in this thesis, it is important to analyse the improvement in decoy quality.
@@ -110,6 +119,3 @@ Previously, \textit{ab initio} protein structure prediction for globular targets
     \caption[TM-score comparison for globular targets separated by fold]{\gls{tmscore} comparison for globular targets separated by fold and ordered by target chain length. Median \gls{tmscore}s for 1,000 decoys generated with simple ROSETTA (orange) or contact-guided ROSETTA (blue) runs. White numbers in each row correspond to the target chain length. Bars surpassing the dark gray line indicate that the majority of structures are better than random, whilst the light gray line indicates that the majority of structures are native-like \cite{Xu2010-kr}.}
     \label{fig:ample_proof_globtmcomp}
 \end{figure}
-
-One further important aspect in this study is the addition of BBCONTACTS contact pairs to improve structure prediction accuracy for \textbeta-structure containing targets. 
-
