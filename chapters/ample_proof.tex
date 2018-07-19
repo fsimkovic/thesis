@@ -126,12 +126,24 @@ The enhancement of \textbeta-structure specific contact pairs is an important pa
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{ample_proof_comprosconbb.pdf}
-    \caption[TM-score comparison for \textbeta-richt targets]{\gls{tmscore} comparison for \textbeta-structure containing globular targets separated by fold and ordered by the difference in median \gls{tmscore} between PCONSC2 and PCONSC2+BBCONTACTS decoys. Positive values indicate a better median \gls{tmscore} in favour of PCONSC2+BBCONTACTS decoys, whilst negative values those for PCONSC2. \Gls{pdb} IDs are provided alongside each bar.}
-    \label{fig:ample_proof_comprosconbb}
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ample_proof_comprosconbb.pdf}
+        \caption{}
+        \label{fig:ample_proof_comprosconbb}
+    \end{subfigure}
+    
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ample_proof_bbsat.pdf}
+        \caption{}
+        \label{fig:ample_proof_bbsat}
+    \end{subfigure}
+    
+    \caption[Decoy analysis of effects of BBCONTACTS contact addition]{(a) \Gls{tmscore} comparison for \textbeta-structure containing globular targets separated by fold and ordered by the difference in median \gls{tmscore} between PCONSC2 and PCONSC2+BBCONTACTS decoys. Positive values indicate a better median \gls{tmscore} in favour of PCONSC2+BBCONTACTS decoys, whilst negative values those for PCONSC2. \Gls{pdb} IDs are provided alongside each bar. (b) Satisfaction of BBCONTACTS contact pairs in decoys with added \textbeta-structure contact restraints (PCONSC2 + BBCONTACTS) and those without (PCONSC2).}
 \end{figure}
 
-\textcolor{red}{Something on local features restrained by BBCONTACTS \ldots}
+An analysis of the the satisfaction of BBCONTACTS contact pairs in decoys where extra \textbeta-sheet contact pairs were used as restraints compared those where not highlights a better satisfaction in the former (\cref{fig:ample_proof_bbsat}). This indicates that the added BBCONTACTS \textbeta-structure contact restraints enhance the formation of \textbeta-sheets in the resulting decoys, which would explain the overall improved decoy quality for more than half the targets outlined previously. \textcolor{red}{A distinction between upweighter and satisfied \ldots}.
 
 Transmembrane protein targets were modelled using residue-residue contact predictions derived with CCMPRED, MEMBRAIN and METAPSICOV STAGE1. A ROSETTA benchmark was also run to compare contact-guided decoys to the current norm. Findings in this study highlight the much improved decoy quality for almost all targets when contact information is used to reduce the conformational sampling space (\cref{fig:ample_proof_comproscon}). Across all methods, only two targets suffered from the addition of contact restraints during \textit{ab initio} protein structure prediction, namely the domains of ATP synthase C chain (\gls{pdb} ID: 2wie) and ATP synthase subunit C (\gls{pdb} ID: 3u2f). In both cases, ROSETTA generates decoys with median \gls{tmscore} of greater than 0.6 when no contact restraints are used. This contrasts strongly with contact-guided decoy sets, for which only METAPSICOV STAGE1 guide the modelling sufficiently to obtain overall native-like decoys, i.e. median TM-score of greater than 0.5. 
 
