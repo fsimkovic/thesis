@@ -170,5 +170,35 @@ Structure solutions were attempted for a total of 21 globular targets. Simple RO
 
 The majority of structure solutions were obtained for all-\textalpha\ targets in the dataset, with a total of eight structure solutions (\cref{fig:ample_proof_mrglob}). Seven of those eight structure solutions were achieved with unrestrained ROSETTA decoys, with target chain lengths up to 213 residues. The largest target in the globular dataset, and the only all-\textalpha\ target that required residue contacts, totals 221 residues in target chain length, which exceeds AMPLE's previously benchmarked limits for globular targets greatly \cite{Bibby2012-lm}. In comparison to all-\textalpha\ targets, \textbeta-structure containing proteins require the contact restraints to result in sufficiently accurate decoys for \gls{mr}. Across all-\textbeta\ and mixed \textalpha-\textbeta\ targets, only two structure solutions were obtained with unrestrained ROSETTA decoys. This contrasts to an additional three targets when PCONSC2 restraints were used during \textit{ab initio} structure prediction. Furthermore, the addition of BBCONTACTS contact restraints enabled an additional structure solution, yielding much greater success for \textbeta-structure containing protein targets compared to the previous default. Structure solutions for \textbeta-containing targets were obtained for target chain lengths up to 141 residues (\cref{fig:ample_proof_mrglob}).
 
-% Examples from paper --- 1lo7 and 1e0s
+In this study, three exceptional cases exemplify the application of contact predictions and their benefit to \gls{mr}. The first, the structure solutions for 4-hydroxybenzoyl CoA thioesterase (\gls{pdb} ID: 1lo7) based on AMPLE ensemble search models derived from the PCONSC2 and PCONSC2+BBCONTACTS decoy sets. Without contact restraints, AMPLE search models did not accurately represent the target fold (\cref{fig:ample_proof_1lo7_rosetta}). In comparison, precise residue-residue contacts primarily restraining the large \textbeta-sheet yielded decoys of sufficient quality to achieve \gls{mr} structure solution with both PCONSC2 (\cref{fig:ample_proof_1lo7_pconsc2}) and PCONSC2+BBCONTACTS (\cref{fig:ample_proof_1lo7_pconsc2bbcontacts}) decoy sets.
 
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ample_proof_1lo7_rosetta_c1_tl50_r3_polyAla.png}
+        \caption{}
+        \label{fig:ample_proof_1lo7_rosetta}
+    \end{subfigure}
+    %
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ample_proof_1lo7_pconsc2_c2_tl55_r3_reliable.png}
+        \caption{}
+        \label{fig:ample_proof_1lo7_pconsc2}
+    \end{subfigure}
+    % 
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ample_proof_1lo7_pconsc2bbcontacts_c3_tl50_r2_reliable.png}
+        \caption{}
+        \label{fig:ample_proof_1lo7_pconsc2bbcontacts}
+    \end{subfigure}
+
+    \caption[]{Structural superposition of the (a) ROSETTA (C\textalpha\ \gls{rmsd} 2.814 \AA; ensemble contains two structures), (b) PCONSC2 (C\textalpha\ \gls{rmsd} 1.748 \AA; 30 members) and (c) PCONSC2+BBCONTACTS (C\textalpha\ \gls{rmsd} 1.760 \AA; 15 members) search-model ensembles for 4-hydroxybenzoyl CoA thioesterase (\gls{pdb} ID: 1lo7). Examples are the highest scoring search models based on SHELXE \gls{cc} score, with only (b) and (c) leading to successful \gls{mr} structure solutions. Search models are shown as tubes and crystal structures as cartoons. (a) and (c) are 50\% of the target sequence, while (b) is 55\%. The colour scale illustrates the pairwise C\textalpha\ \gls{rmsd} between each search-model ensemble (represented by its first member) and the crystal structure, with blue representing the minimum C\textalpha\ \gls{rmsd} and red the maximum. Unaligned residues are coloured grey.}
+    \label{fig:ample_proof_example_1lo7}
+\end{figure}
+
+
+
+% Examples from paper --- 1eaz and 1e0s
