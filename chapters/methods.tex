@@ -112,7 +112,7 @@ The \gls{tmscore} is an alternative measure of the similarity between two protei
 $d_i$ describes the distance between the ith pair of residues. The distance scale $d_0$ to normalise the distances is defined by the equation $1.24\sqrt[3]{L_{target}-15}-1.8$. The \gls{tmscore} value falls in the range (0, 1]. A \gls{tmscore} value of $<0.2$ indicates two random unrelated structures, and a value $>0.5$ roughly the same fold \cite{Xu2010-kr}
 
 \subsection{Molecular Replacement data}
-\subsubsection{Register-Independent Overlap}
+\subsubsection{Register-Independent Overlap} \label{sec:methods_rio}
 The \gls{rio} score \cite{Thomas2015-wu} is a measure of structural similarity between two protein structures considering the total number of atoms within $<1.5$\AA. The \gls{rio} can be separated into the in- (\gls{rio}\textsubscript{in}) and out-of-register (\gls{rio}\textsubscript{out}) score considering the sequence register between the model and the target. The \gls{rio} score is primarily a measure for post-\gls{mr} search models to assess the placement of search model atoms with respect to the previously solved crystal structure. To avoid the addition of single atoms place correctly purely by chance, the \gls{rio} metric requires at least three consecutive C\textalpha\ atoms to be within th 1.5\AA\ threshold.
 
 \subsubsection{Structure solution} \label{sec:methods_mr_success}
