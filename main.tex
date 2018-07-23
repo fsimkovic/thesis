@@ -55,7 +55,7 @@
 \addbibresource{library.bib}
 
 \usepackage[acronym,toc,nomain,order=letter,nonumberlist,nopostdot,style=super]{glossaries}
-\input{glossary}
+\input{texfiles/glossary}
 \makeglossaries
 \setlength{\glsdescwidth}{0.8\textwidth}
 
@@ -67,15 +67,9 @@
 
 \pagenumbering{roman}
 
-\input{titlepage}
-
-% \chapter*{Declaration}
-% I declare that..
-
-% \input{abstract}
-
-% \chapter*{Acknowledgements}
-% I want to thank...
+\input{texfiles/titlepage}
+% \input{texfiles/abstract}
+% \input{texfiles/acknowledgements}
 
 \tableofcontents
 \clearpage
@@ -111,35 +105,35 @@
 
 \chapter{Introduction}
 \clearpage
-% \input{chapters/introduction}
+% \input{texfiles/introduction}
 
 \chapter{Materials \& Methods}
 \clearpage
-% \input{chapters/methods}
+% \input{texfiles/methods}
 
 \chapter{Evolutionary covariance in \textit{ab initio} structure prediction based Molecular Replacement} \label{chap:proof_of_principle}
 \clearpage
-\input{chapters/ample_proof}
+\input{texfiles/ample_proof}
 
 \chapter{Evaluation of ROSETTA distance-restraint energy functions on contact-guided \textit{ab initio} structure prediction} \label{chap:rosetta_energy_functions}
 \clearpage
-% \input{chapters/ample_predictors}
+% \input{texfiles/ample_predictors}
 
 \chapter{Alternative \textit{ab initio} structure prediction algorithms for AMPLE} \label{chap:alternate_abinitio_protocols}
 \clearpage
-% \input{chapters/ample_saint2}
+% \input{texfiles/ample_saint2}
 
 \chapter{Decoy subselection using contact information to enhance MR search model creation} \label{chap:ample_decoys}
 \clearpage
-% \input{chapters/ample_decoys}
+% \input{texfiles/ample_decoys}
 
 \chapter{Protein fragments as search models in Molecular Replacement} \label{chap:ample_flib}
 \clearpage
-% \input{chapters/ample_flib}
+% \input{texfiles/ample_flib}
 
 \chapter{Conclusion \& Outlook}
 \clearpage
-% \input{chapters/conclusion}
+% \input{texfiles/conclusion}
 
 \appendix
 \chapter{Appendix}
