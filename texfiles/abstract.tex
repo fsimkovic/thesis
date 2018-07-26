@@ -1,7 +1,7 @@
 \begin{center}
     \Large
     \textbf{Covariation-derived residue contacts in \textit{ab initio} modelling and Molecular Replacement}
-    
+
     \vspace{0.5cm}
     \textbf{Felix \v{S}imkovic}
     \vspace{0.5cm}
@@ -13,10 +13,15 @@ This thesis is concerned with the application of predicted residue contacts in \
 The initial work in this thesis explored the use of predicted residue contacts to improve \textit{ab initio} protein structure predictions, which were used to generate ensemble search models for Molecular Replacement in AMPLE. The results proved highly encouraging. Five additional targets were tractable where previous AMPLE attempts would have been unable to achieve structure solution. In particular, the improved decoy quality appeared to be the main reason for the extended target tractability.
 
 % Chapter 4
-Following on from the initial proof-of-concept study, different contact predictions and ROSETTA energy functions were trialled to identify the optimal strategy to generate decoys for unconventional Molecular Replacement in AMPLE.
+Following on from the initial proof-of-concept study, different contact prediction algorithms and ROSETTA energy functions were trialled to identify the optimal strategy to generate the most accurate decoys for unconventional Molecular Replacement in AMPLE. The findings showed supported previous claims that METAPSICOV produces the most precise contact predictions. Furthermore, the ROSETTA \texttt{FADE} energy function outperforms the \texttt{SIGMOID} function. Nevertheless, results also demonstrate that the most accurate structure predictions do not achieve the most Molecular Replacement structure solutions. 
 
 % Chapter 5
+Beyond different contact prediction algorithms and ROSETTA energy functions, many alternative fragment-based and fragment-independent protein structure prediction algorithms exist. In this chapter, results highlighted that ROSETTA remains the optimal structure prediction algorithm in combination with AMPLE to maximise structure solutions. 
+
 % Chapter 6
+The most accurate protein structure predictions may not be processed optimally in AMPLE. Thus, it is important to explore alternative ensembling strategies when more accurate contact-assisted decoys are used in AMPLE. The findings in this chapter demonstrated the successful application of estimating decoy quality by the satisfaction of long-range contact predictions used initially to restrain the folding procedure. Excluding the decoys that satisfy the least long-range contacts provided further structure solutions previously intractable.
+
 % Chapter 7
+Lastly, contact-driven selection of supersecondary structure elements or subfolds during fragment picking was explored to identify suitable search models for unconventional Molecular Replacement. Preliminary results of this approach strongly hint towards a potential new approach. Two out of four protein targets were solved with fragments extracted from sequence-independent protein targets, which crucially satisfied many predicted residue contacts.
 
-
+\clearpage
