@@ -13,7 +13,7 @@
 \usepackage{subcaption}
 
 \usepackage{fancyhdr}
-\pagestyle{fancy}
+% \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[LO,RE]{Chapter \thechapter}
 \fancyhead[RO,LE]{\thepage}
@@ -67,10 +67,12 @@
 
 \pagenumbering{roman}
 
+\pagestyle{plain}
 \input{texfiles/titlepage}
-% \input{texfiles/abstract}
+\input{texfiles/abstract}
 % \input{texfiles/acknowledgements}
 % \input{texfiles/dedication}
+\pagestyle{fancy}
 
 \tableofcontents
 \clearpage
