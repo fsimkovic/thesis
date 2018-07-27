@@ -21,13 +21,6 @@
 \setlength{\headheight}{12pt}
 \setlength{\parskip}{1em}
 
-\usepackage{afterpage}
-\newcommand\blankpage{%
-    \null
-    \thispagestyle{empty}%
-    \addtocounter{page}{-1}%
-    \newpage}
-
 \usepackage{amssymb,amsmath}
 \usepackage[artemisia]{textgreek}
 \usepackage{color}
@@ -65,24 +58,30 @@
 \makeglossaries
 \setlength{\glsdescwidth}{0.8\textwidth}
 
+\newcommand\blankpage{%
+    \clearpage
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
 \AtBeginBibliography{\small}
 
 \raggedbottom
 
 \begin{document}
-
 \pagenumbering{roman}
-
 \pagestyle{plain}
-\afterpage{\blankpage}
+
 \input{texfiles/titlepage}
-\afterpage{\blankpage}
+\blankpage
 \input{texfiles/abstract}
-\afterpage{\blankpage}
+\blankpage
 \input{texfiles/acknowledgements}
-\afterpage{\blankpage}
-% \input{texfiles/dedication}
-\afterpage{\blankpage}
+\blankpage
+\input{texfiles/dedication}
+\blankpage
+
 \pagestyle{fancy}
 
 \tableofcontents
