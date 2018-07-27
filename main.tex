@@ -21,6 +21,13 @@
 \setlength{\headheight}{12pt}
 \setlength{\parskip}{1em}
 
+\usepackage{afterpage}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
 \usepackage{amssymb,amsmath}
 \usepackage[artemisia]{textgreek}
 \usepackage{color}
@@ -67,10 +74,15 @@
 \pagenumbering{roman}
 
 \pagestyle{plain}
+\afterpage{\blankpage}
 \input{texfiles/titlepage}
+\afterpage{\blankpage}
 \input{texfiles/abstract}
+\afterpage{\blankpage}
 \input{texfiles/acknowledgements}
+\afterpage{\blankpage}
 % \input{texfiles/dedication}
+\afterpage{\blankpage}
 \pagestyle{fancy}
 
 \tableofcontents
