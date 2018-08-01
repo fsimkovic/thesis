@@ -45,7 +45,7 @@ The first step in this study was the prediction of residue-residue contacts usin
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_saint2_alndepth.pdf}
-    \caption[Distribution of alignment depth for subset of targets in the PREDICTORS dataset.]{Distribution of HHBLITS alignment depth for subset of targets in the PREDICTORS dataset. Red line indicates alignment depth threshold of 200 sequences \cite{Simkovic2017-xs}.}
+    \caption[Alignment depth for subsets of targets in the PREDICTORS dataset]{Distribution of HHBLITS alignment depth for subset of targets in the PREDICTORS dataset. Red line indicates alignment depth threshold of 200 sequences \cite{Simkovic2017-xs}.}
     \label{fig:ample_saint2_alndepth}
 \end{figure}
 
@@ -75,7 +75,7 @@ A direct comparison of the methods by median \gls{tmscore} of each contact-assis
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_saint2_tmscoredataincl.pdf}
-    \caption[Per-target TM-score analysis for four modelling algorithms with contacts]{Per-target \gls{tmscore} analysis for targets modelled with contact information and four separate \textit{ab initio} structure prediction algorithms. Analysis is subdivided by (a) median \gls{tmscore} of all decoys in each set and (b) \gls{tmscore} of the top-1 decoy in each set.}
+    \caption[TM-score analysis for four modelling algorithms with contacts]{Per-target \gls{tmscore} analysis for targets modelled with contact information and four separate \textit{ab initio} structure prediction algorithms. Analysis is subdivided by (a) median \gls{tmscore} of all decoys in each set and (b) \gls{tmscore} of the top-1 decoy in each set.}
     \label{fig:ample_saint2_tmscoredataincl}
 \end{figure}
 
@@ -97,7 +97,7 @@ The top decoy predicted by ROSETTA and SAINT2 based on the sequence of the FAT d
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_saint2_tmscoredataexcl.pdf}
-    \caption[Per-target TM-score analysis for four modelling algorithms without contacts]{Per-target \gls{tmscore} analysis for targets modelled without contact information and four separate \textit{ab initio} structure prediction algorithms. Analysis is subdivided by (a) median \gls{tmscore} of all decoys in each set and (b) \gls{tmscore} of the top-1 decoy in each set.}
+    \caption[TM-score analysis for four modelling algorithms]{Per-target \gls{tmscore} analysis for targets modelled without contact information and four separate \textit{ab initio} structure prediction algorithms. Analysis is subdivided by (a) median \gls{tmscore} of all decoys in each set and (b) \gls{tmscore} of the top-1 decoy in each set.}
     \label{fig:ample_saint2_tmscoredataexcl}
 \end{figure}
 
@@ -108,7 +108,7 @@ A further subdivision of all target decoys is by target chain length. At the sta
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_saint2_tmfoldsize.pdf}
-    \caption{Distribution of decoy TM-scores by fold, chain length and algorithm.}
+    \caption[Decoy TM-scores by fold, chain length and algorithm]{Decoy TM-scores by fold, chain length and algorithm.}
     \label{fig:ample_saint2_tmfoldsize}
 \end{figure}
 
@@ -120,7 +120,7 @@ Each \textit{ab initio} modelling-algorithm generated at least two decoy sets su
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_saint2_mrsuccess.pdf}
-    \caption[Summary of MR success with AMPLE ensemble search models.]{Summary of MR success with AMPLE ensemble search models. Search models are based on decoy sets generated with different \textit{ab initio} structure prediction protocols. The colour coding indicates structure solution: no solution (red), one solution (orange), more than one solution (green). The number in cells with at least one solution states the percentage of successful search models. The one-letter codes above each column indicate the target fold: all-\textalpha\ (A); all-\textbeta\ (B); mixed \textalpha-\textbeta\ (M). The row labelled ``IDEALH'' refers to AMPLE's ideal helix run.}
+    \caption[Summary of MR success with AMPLE ensemble search models]{Summary of MR success with AMPLE ensemble search models. Search models are based on decoy sets generated with different \textit{ab initio} structure prediction protocols. The colour coding indicates structure solution: no solution (red), one solution (orange), more than one solution (green). The number in cells with at least one solution states the percentage of successful search models. The one-letter codes above each column indicate the target fold: all-\textalpha\ (A); all-\textbeta\ (B); mixed \textalpha-\textbeta\ (M). The row labelled ``IDEALH'' refers to AMPLE's ideal helix run.}
     \label{fig:ample_saint2_mrsuccess}
 \end{figure}
 
@@ -142,7 +142,7 @@ This important observation is crucial in assessing the structure solutions obtai
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_saint2_betaex.pdf}
-    \caption[Examples of PHASER-placed AMPLE search models.]{Examples of PHASER-placed AMPLE search models that led to structure solution. AMPLE search models are coloured blue and deposited structures in gray. The \gls{pdb} identifiers and modelling protocol given alongside each example.}
+    \caption[Examples of PHASER-placed AMPLE search models]{Examples of PHASER-placed AMPLE search models that led to structure solution. AMPLE search models are coloured blue and deposited structures in gray. The \gls{pdb} identifiers and modelling protocol given alongside each example.}
     \label{fig:ample_saint2_betaex}
 \end{figure}
 
@@ -151,7 +151,7 @@ Whilst all \textit{ab initio} structure prediction algorithms enabled structure 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_saint2_mrstats.pdf}
-    \caption[Relationship between ensemble quality, PHASER LLG and SHELXE CC]{Relationship between ensemble quality, PHASER \gls{llg} and SHELXE \gls{cc}. Data points are coloured based on the outcome of their \gls{mr} trials: green indicate structure solution, red indicate no structure solution.}
+    \caption[Relationship between ensemble metrics]{Relationship between ensemble quality, PHASER \gls{llg} and SHELXE \gls{cc}. Data points are coloured based on the outcome of their \gls{mr} trials: green indicate structure solution, red indicate no structure solution.}
     \label{fig:ample_saint2_mrstats}
 \end{figure}
 
@@ -162,7 +162,7 @@ Indeed, a Ramachandran analysis of \textphi\ and \textpsi\ peptide backbone angl
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{ample_saint2_ramach.pdf}
-    \caption[Distribution of Ramachandran outliers of AMPLE ensemble search model centroids]{Distribution of Ramachandran outliers of AMPLE ensemble search model centroids based on decoys predicted with four \textit{ab initio} structure prediction protocols. Outliers were calculated using PyRAMA (\href{https://github.com/gerdos/PyRAMA}{https://github.com/gerdos/PyRAMA}).}
+    \caption[Ramachandran outliers of ensemble search model centroids]{Distribution of Ramachandran outliers of AMPLE ensemble search model centroids based on decoys predicted with four \textit{ab initio} structure prediction protocols. Outliers were calculated using PyRAMA (\href{https://github.com/gerdos/PyRAMA}{https://github.com/gerdos/PyRAMA}).}
     \label{fig:ample_saint2_ramach}
 \end{figure}
 

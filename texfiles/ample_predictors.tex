@@ -38,7 +38,7 @@ The addition of BBCONTACTS to existing sets of contacts was achieved with the FA
 
 \begin{table}[H]
     \centering
-    \caption[AMPLE keyword arguments for FADE and SIGMOID ROSETTA energy functions]{AMPLE keyword arguments for FADE and SIGMOID ROSETTA energy functions.}
+    \caption[AMPLE keyword arguments for two ROSETTA energy functions]{AMPLE keyword arguments for FADE and SIGMOID ROSETTA energy functions.}
     \label{table:ample_predictors_kwargs}
     \begin{tabularx}{\textwidth}{ s b }
         \hline
@@ -136,7 +136,7 @@ Separating these individual decoys solely by the ROSETTA energy function (exclud
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_predictors_tmmedian.pdf}
-    \caption[Median TM-score comparison between ROSETTA energy functions]{Median TM-score comparison of FADE and SIGMOID ROSETTA energy functions differentiated by fold and the addition of BBCONTACTS restraints.}
+    \caption[TM-score comparison between ROSETTA energy functions]{Median TM-score comparison of FADE and SIGMOID ROSETTA energy functions differentiated by fold and the addition of BBCONTACTS restraints.}
     \label{fig:ample_predictor_tmmedian}
 \end{figure}
 
@@ -184,7 +184,7 @@ Two further aspects in understanding the differences in effects of the FADE and 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_predictors_tmsummary.pdf}
-    \caption[Influence of target chain length and restraint precision on median TM-score]{Effects of target chain length and restraint precision on the median TM-score for FADE and SIGMOID ROSETTA energy functions. Each scatter point represents a 1,000-decoy set.}
+    \caption[Influence of target chain length and restraint precision on TM-score]{Effects of target chain length and restraint precision on the median TM-score for FADE and SIGMOID ROSETTA energy functions. Each scatter point represents a 1,000-decoy set.}
     \label{fig:ample_predictor_tmsummary}
 \end{figure}
 
@@ -209,7 +209,7 @@ The data generated as part of this study reveals a positive correlation ($\rho_{
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_predictors_ensdep.pdf}
-    \caption[Relationship between median TM-score and search model size of AMPLE ensembles]{Comparison of median TM-score (per 1,000 decoys) against the resulting AMPLE ensemble search model count. The equation of the line of best fit is defined by $y=228.50*\ln\left(20.96*x\right)-227.95$. Red dots indicate successful ensemble sets.}
+    \caption[Relationship between TM-score and AMPLE search model size]{Comparison of median TM-score (per 1,000 decoys) against the resulting AMPLE ensemble search model count. The equation of the line of best fit is defined by $y=228.50*\ln\left(20.96*x\right)-227.95$. Red dots indicate successful ensemble sets.}
     \label{fig:ample_predictor_ensdep}
 \end{figure}
 
@@ -218,7 +218,7 @@ Besides looking at the relationship between entire decoy sets and the resulting 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_predictors_clusizetm.pdf}
-    \caption[Relationship between median TM-score and decoy count in SPICKER cluster]{Relationship between cluster median TM-score and the number of cluster decoys. Blue line represents line of best fit with equation $y=148.85*\exp\left(2.90*x\right)-225.76$.}
+    \caption[Relationship between TM-score and SPICKER cluster decoy count]{Relationship between cluster median TM-score and the number of cluster decoys. Blue line represents line of best fit with equation $y=148.85*\exp\left(2.90*x\right)-225.76$.}
     \label{fig:ample_predictor_clusizetm}
 \end{figure}
 
