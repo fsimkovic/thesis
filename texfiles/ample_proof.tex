@@ -160,7 +160,7 @@ A split for decoy quality comparison between no-contact and contact-assisted dec
 \subsection{Molecular Replacement}
 The most important aspect of this study was the impact of contact-assisted decoys in AMPLE-\gls{mr}. Contact-unassisted AMPLE is primarily limited by a target's chain length and fold, which typically cannot exceed 150 residues, and performs poorly for \textbeta-rich folds \cite{Bibby2012-lm}. Findings presented in \cref{subsec:ample_proof_strupred} outlined improvements in overall decoy quality when predicted contact information was used as distance restraints in \textit{ab initio} protein structure prediction. However, it is yet to be seen how the improved decoy quality translates into \gls{mr} structure solutions.
 
-\subsubsection{Globular protein targets}
+\subsubsection{Globular protein targets} \label{subsec:ample_proof_globmr}
 Structure solutions were attempted for a total of 21 globular targets. Simple ROSETTA decoys --- those without contact restraints and AMPLE's current default --- resulted in nine structure solutions (\cref{fig:ample_proof_mrglob}). The addition of PCONSC2 contact-restraints to the structure prediction procedure improved decoy quality to achieve four additional structure solutions. However, the structure of the N-terminal region of P67Phox (\gls{pdb} ID: 1hh8) was not solved when PCONSC2-restrained decoys were used compared to simple ROSETTA ones. The addition of BBCONTACTS distance restraints to upweight and supplement PCONSC2 contacts enabled a further unique solution for the Phosphoinositol (3,4)-bisphosphate PH domain (\gls{pdb} ID: 1eaz) (\cref{fig:ample_proof_mrglob}).
 
 \begin{figure}[H]
