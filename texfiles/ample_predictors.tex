@@ -85,14 +85,14 @@ Besides considering decoy quality, one key interest of this study was the assess
 \subsection{Direct comparison of three contact metapredictors}
 In this study, a direct comparison between three metapredictors --- GREMLIN, METAPSICOV and PCONSC2 --- was carried out. Residue-residue contact pairs were predicted for 18 protein target sequences with a range of chain lengths and numbers of effective sequences in their PFAM \gls{msa}s.
 
+METAPSICOV was the most precise contact predictor across the protein target dataset in this study (\cref{fig:ample_predictors_cutoff}). The difference between the three metapredictors was most evident in the highest-scoring contact pairs (\textit{L}/10). The median precision values for METAPSICOV and PCONSC2 contact predictions were above 50\% up to \textit{L} contact pairs. GREMLIN, in comparison, predicted contacts with a median precision score at least 20\% worse than that of METAPSICOV and 15\% worse than PCONSC2. However, at 3\textit{L}/2 contact pairs the median precision scores were much more similar across the three different metapredictors: METAPSICOV and PCONSC2 were near identical, and GREMLIN is at most 12\% worse compared to the other two. Inspecting the mean precision scores over a continuous range of selection cutoff values illustrated further the difference between METAPSICOV, PCONSC2 and GREMLIN (Fig \ref{fig:ample_predictors_covprc}). The former two similarly high precision scores compared to the average precision scores for GREMLIN, which were approximately 0.2 precision score units lower. Added to the difference in precision scores was the difference in sequence coverage (\cref{fig:ample_predictors_covprc}). Although producing the on-average worst contact predictions out of the three metapredictors, GREMLIN contact predictions had the highest sequence coverage. However, an analysis of singleton contact pairs, usually with high degrees of \gls{fp} predicted contacts, revealed a positive correlation ($\rho_{Pearson}=0.47$; $p<0.001$) between the fraction of singleton contact pairs and sequence coverage and hinted to a weak negative correlation ($\rho_{Pearson}=-0.27$; $p<0.05$) between the fraction of singleton contact pairs and contact precision (\cref{fig:ample_predictors_singletons}).
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_predictors_cutoff.pdf}
     \caption[Precision analysis of three metapredictors]{Distribution of precision values for three metapredictors computed at five contact selection cutoff values relative to the target chain length (\textit{L}).}
     \label{fig:ample_predictors_cutoff}
 \end{figure}
-
-METAPSICOV was the most precise contact predictor across the protein target dataset in this study (\cref{fig:ample_predictors_cutoff}). The difference between the three metapredictors was most evident in the highest-scoring contact pairs (\textit{L}/10). The median precision values for METAPSICOV and PCONSC2 contact predictions were above 50\% up to \textit{L} contact pairs. GREMLIN, in comparison, predicted contacts with a median precision score at least 20\% worse than that of METAPSICOV and 15\% worse than PCONSC2. However, at 3\textit{L}/2 contact pairs the median precision scores were much more similar across the three different metapredictors: METAPSICOV and PCONSC2 were near identical, and GREMLIN is at most 12\% worse compared to the other two. Inspecting the mean precision scores over a continuous range of selection cutoff values illustrated further the difference between METAPSICOV, PCONSC2 and GREMLIN (Fig \ref{fig:ample_predictors_covprc}). The former two similarly high precision scores compared to the average precision scores for GREMLIN, which were approximately 0.2 precision score units lower. Added to the difference in precision scores was the difference in sequence coverage (\cref{fig:ample_predictors_covprc}). Although producing the on-average worst contact predictions out of the three metapredictors, GREMLIN contact predictions had the highest sequence coverage. However, an analysis of singleton contact pairs, usually with high degrees of \gls{fp} predicted contacts, revealed a positive correlation ($\rho_{Pearson}=0.47$; $p<0.001$) between the fraction of singleton contact pairs and sequence coverage and hinted to a weak negative correlation ($\rho_{Pearson}=-0.27$; $p<0.05$) between the fraction of singleton contact pairs and contact precision (\cref{fig:ample_predictors_singletons}).
 
 \begin{figure}[H]
     \centering
@@ -119,14 +119,14 @@ Given that the overall precision of contact pairs predicted by the three metapre
 
 The data presented in \cref{fig:ample_predictors_prcpeaks} also indicated that there was no direct link between chain length or \gls{meff} and the precision of the resulting contact predictions. The N-(5'-phosphoribosyl)anthranilate isomerase sequence (\gls{pdb}: 4aaj) with a chain length of 228 residues and 750 effective sequences in its PFAM \gls{msa} yielded a mean precision at \textit{L}/10 contact pairs of 0.283 (top-\textit{L}: 0.195) across the three metapredictors. This strongly contrasted with the sequence of sortase B (\gls{pdb}: 2oqz), which showed similar characteristics yet obtained  mean precision at \textit{L}/10 contact pairs of 0.938 (top-\textit{L}: 0.622).
 
+Although the contact predictions differed in precision, an interesting question rested with the similarity of the predicted contact pairs amongst the sets. Thus, the similarity of contact predictions across the three metapredictors was an important metric to evaluate the most appropriate algorithm for AMPLE users. Using the Jaccard similarity index to evaluate the direct overlap of contact pairs across sets of predictions, the data suggested very little similarity between the contact predictions of the three metapredictors for each target (\cref{fig:ample_predictors_jaccardidx}). As with the differences in precision scores at higher cutoff thresholds, the Jaccard index was also lower --- indicating less overlap --- at higher cutoff thresholds. However, it is worth noting that the Jaccard index only considers identical matches and did not consider the neighbourhood of a contact pair. Thus, the index does not highlight similar regions with contact pairs in both maps.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{ample_predictors_jaccardidx.pdf}
     \caption[Metapredictor contact pair similarity analysis]{Jaccard similarity index illustrates a higher degree of overlap between metapredictor contact predictions with increasing numbers of contact pairs included in the calculation. The three panels show the different comparisons. The color scale corresponds to the Jaccard index in range $[0, 1]$.}
     \label{fig:ample_predictors_jaccardidx}
 \end{figure}
-
-Although the contact predictions differed in precision, an interesting question rested with the similarity of the predicted contact pairs amongst the sets. Thus, the similarity of contact predictions across the three metapredictors was an important metric to evaluate the most appropriate algorithm for AMPLE users. Using the Jaccard similarity index to evaluate the direct overlap of contact pairs across sets of predictions, the data suggested very little similarity between the contact predictions of the three metapredictors for each target (\cref{fig:ample_predictors_jaccardidx}). As with the differences in precision scores at higher cutoff thresholds, the Jaccard index was also lower --- indicating less overlap --- at higher cutoff thresholds. However, it is worth noting that the Jaccard index only considers identical matches and did not consider the neighbourhood of a contact pair. Thus, the index does not highlight similar regions with contact pairs in both maps.
 
 \subsection{Protein structure prediction with two ROSETTA energy functions}
 The accuracy of the starting decoys is a major factor for an AMPLE run to succeed \cite{Thomas2017-sh}. Thus, the quality of the decoys was of great essence to this study. Given the two different ROSETTA energy functions, FADE and SIGMOID, all predicted contacts were subjected to individual \textit{ab initio} structure prediction runs. Additionally, all contact predictions were enriched with BBCONTACTS for all \textbeta-containing targets in separate trials. A total of 234,000 individual decoys were generated in this study across all targets, contact predictions and ROSETTA energy function combinations.
@@ -137,14 +137,14 @@ Besides the structure prediction accuracy of each set of decoys, the single, mos
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}[b]{0.90\textwidth}
         \centering
         \includegraphics[width=\textwidth]{ample_predictors_tmmedian.pdf}
         \caption{}
         \label{fig:ample_predictor_tmmedian}
     \end{subfigure}
 
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}[b]{0.90\textwidth}
         \centering
         \includegraphics[width=\textwidth]{ample_predictors_tmtop.pdf}
         \caption{}
@@ -175,7 +175,7 @@ A further important aspect of the presented work is the demonstration of the ben
     
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=0.9\textwidth]{ample_predictors_bbdif.pdf}
+        \includegraphics[width=0.8\textwidth]{ample_predictors_bbdif.pdf}
         \caption{}
         \label{fig:ample_predictor_bbdif}
     \end{subfigure}
@@ -277,16 +277,16 @@ The structure solution through pipelines like AMPLE and other unconventional \gl
 One interesting target in this set with respect to the sequence register of the AMPLE search models leading to structure solution was the putative ribonuclease III (\gls{pdb}: 1u61) domain. Although decoys from all contact conditions readily solved this target with at least 20 or more AMPLE search models, one important aspect arose from the RIO register analysis. Only GREMLIN decoys were primarily placed in-register (\cref{fig:ample_predictor_riotar}). AMPLE search models derived from the other three contact conditions, and in particular those from ROSETTA decoys, wereprimarily placed out-of-register with sequence coverage values of roughly 25\%. A close analysis of the diversity of AMPLE search models highlighted the accuracy of GREMLIN search models which represented a closely-matched substructure of the target protein (\cref{fig:ample_predictors_1u61_c2_t70_r1_reliable}).  
 
 \begin{figure}[H]
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ample_predictors_1u61_c2_t70_r1_reliable.png}
+        \includegraphics[width=0.8\textwidth]{ample_predictors_1u61_c2_t70_r1_reliable.png}
         \caption{}
         \label{fig:ample_predictors_1u61_c2_t70_r1_reliable}
     \end{subfigure}
     %
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ample_predictors_1fvg_gbb_phaser_c1_t25_r3_polyAla.png}
+        \includegraphics[width=0.8\textwidth]{ample_predictors_1fvg_gbb_phaser_c1_t25_r3_polyAla.png}
         \caption{}
         \label{fig:ample_predictors_1fvg_gbb_phaser_c1_t25_r3_polyAla}
     \end{subfigure}
