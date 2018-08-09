@@ -3,12 +3,11 @@
 import argparse
 import re
 
-RE_KEY = re.compile("^@[A-Za-z]+{(.*),$")
-RE_CITE = re.compile("\\cite{.*}")
+RE_KEY = re.compile('^@[A-Za-z]+{(.*),$')
+RE_CUT = re.compile('.*{([A-Za-z0-9,\\s_-]+)}.*')
 
 
 class Entry(object):
-
     def __init__(self):
         self.key = None
         self.text = ""
@@ -46,11 +45,10 @@ def read_tex(f):
     with open(f, "r") as f_in:
         for line in f_in:
             for word in line.strip().split():
-                if RE_CITE.search(word):
-                    keys.update(set(word.split("{")[1].split("}")[0].split(",")))
-                if "textcite" in word:
-                    keys.update(set(word.split("{")[1].split("}")[0].split(",")))
-
+                if '\\cite' in word or '\\textcite' in word:
+                    citations = RE_CUT.match(word).group(1)
+                    citations = set(citations.split(','))
+                    keys.update(citations)
     return keys
 
 
@@ -66,9 +64,9 @@ if __name__ == "__main__":
     p.add_argument("texfiles", nargs="+")
     args = p.parse_args()
 
-    bib_entries = read_bib(args.bibliography)    
+    bib_entries = read_bib(args.bibliography)
     tex_keys = set()
     for tex in args.texfiles:
         tex_keys.update(read_tex(tex))
-    
+
     write_bib("test.bib", bib_entries, tex_keys)
