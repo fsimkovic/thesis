@@ -1,9 +1,9 @@
-\documentclass[11pt,twoside,reqno,openright]{report}
+\documentclass[11pt,oneside,reqno,openright]{report}
 \usepackage[a4paper,left=40mm,top=25mm,right=25mm,bottom=25mm]{geometry}
 \usepackage{fncychap}
 
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+\usepackage[UKenglish]{babel}
 \usepackage[onehalfspacing]{setspace}
 
 \usepackage{graphicx}
@@ -14,7 +14,7 @@
 
 \usepackage{fancyhdr}
 \fancyhead{}
-\fancyhead[LO,RE]{Chapter \thechapter}
+\fancyhead[LO,RE]{\chaptername\ \thechapter}
 \fancyhead[RO,LE]{\thepage}
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0.8pt}
@@ -58,37 +58,27 @@
 \makeglossaries
 \setlength{\glsdescwidth}{0.8\textwidth}
 
-\newcommand\blankpage{%
-    \clearpage
-    \null
-    \thispagestyle{empty}%
-    \newpage}
-
 \AtBeginBibliography{\small}
 
 \raggedbottom
 
 \begin{document}
-\pagenumbering{roman}
-\pagestyle{plain}
-
+\pagenumbering{roman} \pagestyle{plain} 
 \input{texfiles/titlepage}
-\blankpage
+\clearpage
 \input{texfiles/abstract}
-\blankpage
+\clearpage
 \input{texfiles/acknowledgements}
-\blankpage
+\clearpage
 \input{texfiles/dedication}
-\blankpage
+\clearpage
 
 \pagestyle{fancy}
 
 \tableofcontents
 \clearpage
-
 \listoffigures
 \clearpage
-
 \listoftables
 \clearpage
 
@@ -96,7 +86,8 @@
 \newcommand{\listequationsname}{List of Equations}
 \newlistof{equations}{equ}{\listequationsname}
 \newcommand{\equations}[1]{%
-\addcontentsline{equ}{equations}{\protect\numberline{\theequation}#1}\par}
+    \addcontentsline{equ}{equations}{%
+        \protect\numberline{\theequation}#1}\par}
 \setlength{\cftequationsindent}{1.5em}
 \setlength{\cftequationsnumwidth}{2.3em}
 \addcontentsline{toc}{chapter}{List of Equations}
@@ -104,47 +95,26 @@
 \clearpage
 
 \printglossary[title={List of Abbreviations},toctitle={List of Abbreviations}]
-\clearpage
 
 \pagenumbering{arabic}
 
-\chapter{Introduction}
-\clearpage
 \input{texfiles/introduction}
-
-\chapter{Materials \& Methods}
-\clearpage
 \input{texfiles/methods}
-
-\chapter{Evolutionary covariance in \textit{ab initio} structure prediction-based Molecular Replacement} \label{chap:proof_of_principle}
-\clearpage
 \input{texfiles/ample_proof}
-
-\chapter{Evaluation of ROSETTA distance-restraint energy functions on contact-guided \textit{ab initio} structure prediction} \label{chap:rosetta_energy_functions}
-\clearpage
 \input{texfiles/ample_predictors}
-
-\chapter{Alternative \textit{ab initio} structure prediction algorithms for AMPLE} \label{chap:alternate_abinitio_protocols}
-\clearpage
 \input{texfiles/ample_saint2}
-
-\chapter{Decoy subselection to enhance MR search model creation} \label{chap:ample_decoys}
-\clearpage
 \input{texfiles/ample_decoys}
-
-\chapter{Protein fragments as search models in Molecular Replacement} \label{chap:ample_flib}
-\clearpage
 \input{texfiles/ample_flib}
-
-\chapter{Conclusion \& Outlook}
-\clearpage
 \input{texfiles/conclusion}
+\clearpage
 
 \appendix
-\chapter{Appendix}
-\clearpage
+\renewcommand\chaptername{Appendix }
 \input{texfiles/appendix}
+\clearpage
 
+\fancyhead[LO,RE]{\chaptername}
+\renewcommand\chaptername{Bibliography}
 \printbibliography[heading=bibintoc]
 
 \end{document}
