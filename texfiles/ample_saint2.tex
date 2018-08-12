@@ -107,7 +107,7 @@ The top decoy predicted by ROSETTA and SAINT2 based on the sequence of the FAT d
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{ample_saint2_tmfoldsize.pdf}
-    \caption[Decoy TM-scores by fold, chain length and algorithm]{Decoy TM-scores by fold, chain length and algorithm.}
+    \caption[Decoy TM-scores by fold, chain length and algorithm]{Decoy \gls{tmscore}s by fold, chain length and algorithm.}
     \label{fig:ample_saint2_tmfoldsize}
 \end{figure}
 
@@ -169,7 +169,7 @@ Lastly, one characteristic of a good \gls{mr} search model is good stereochemica
 
 Indeed, a Ramachandran analysis of \textphi\ and \textpsi\ peptide backbone angles outlined much poorer stereochemistry of ensemble search model centroids for CONFOLD2 compared to all fragment-assembly-based structure prediction algorithms (\cref{fig:ample_saint2_ramach}). ROSETTA search models, which were made up of crudely-refined decoys, possessed at most 2\% Ramachandran outliers. SAINT2, which generated less accurate structure predictions compared to other protocols, showed the second best stereochemistry of centroid models without any refinement.  FRAGFOLD contained around 5\% outliers for the majority of search models. In comparison to these statistics CONFOLD2 contained around 5-15\% Ramachandran outliers in centroid decoys. 
 
-Further analysis of the centroids of each truncated AMPLE ensemble demonstrated the importance of good stereochemistry for success. Out of 94 successful ensemble search models only 17 contained outliers. This contrasts to over 390 unsuccessful ensemble search models with TM-scores greater than 0.5 units and on average 6\% outliers (min\textsubscript{outliers}=1\%; max\textsubscript{outliers}=23\%). Therefore, perfect peptide backbone stereochemistry is still no guarantee for \gls{mr} structure solution. 
+Further analysis of the centroids of each truncated AMPLE ensemble demonstrated the importance of good stereochemistry for success. Out of 94 successful ensemble search models only 17 contained outliers. This contrasts to over 390 unsuccessful ensemble search models with \gls{tmscore}s greater than 0.5 units and on average 6\% outliers (min\textsubscript{outliers}=1\%; max\textsubscript{outliers}=23\%). Therefore, perfect peptide backbone stereochemistry is still no guarantee for \gls{mr} structure solution. 
 
 \section{Discussion}
 In this chapter, work was conducted to explore \textit{ab initio} protein structure prediction protocols as alternatives to ROSETTA and QUARK. Three algorithms --- CONFOLD2, FRAGFOLD and SAINT2 --- were trialled on a set of 27 globular targets to evaluate their performance with regards to structure prediction and subsequent \gls{mr} trials.
