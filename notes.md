@@ -1,0 +1,5 @@
+- anisotropy --> more reflections in one direction over another, i.e. horizontal compared to vertical
+- tNCS --> phase information of molecules in crystal is combined w/o relationship through crystal symmetry
+- PHASER log --> avoid floating point errors
+- PHASER LLGain --> delta in log likelihood for model compared to random atoms
+- Histogram matching (low res) --- Syre's equation (high res) for atomicity (composition)
