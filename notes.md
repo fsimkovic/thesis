@@ -3,3 +3,5 @@
 - PHASER log --> avoid floating point errors
 - PHASER LLGain --> delta in log likelihood for model compared to random atoms
 - Histogram matching (low res) --- Syre's equation (high res) for atomicity (composition)
+- Direct methods - measure the phase from isomorphous or anomalous differences 
+- Experimental methods - use mathematical relationships between reflection triplets and quartets to bootstrap a phase set for all reflections from phases for a small or random ``seed'' set of reflections 
