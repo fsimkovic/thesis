@@ -31,7 +31,7 @@ This section defines and describes data validation and verification procedures a
 
 \subsection{Sequence alignment data}
 \subsubsection{Sequence alignment diversity}
-The sequence diversity in a \gls{msa} can be described by the number of sequences ($M$) it contains divided by the sequence length of the target ($L$). The diversity metric was used in BBCONTACTS as input parameter \cite{Andreani2015-qn}. The \gls{msa} diversity $\eta$ is defined in \cref{eq:methods_alndiversity}.
+The sequence diversity in a \gls{msa} can be described by the number of sequences ($M$) it contains proportional to the sequence length of the target ($L$). The diversity metric was used in BBCONTACTS as input parameter \cite{Andreani2015-qn}. The \gls{msa} diversity $\eta$ is defined in \cref{eq:methods_alndiversity}.
 
 \begin{equation}
     \eta=\frac{M}{L}
@@ -89,7 +89,7 @@ The variables $x$ and $y$ are two sets of contact pairs. $\left |x \cap y\right 
 
 It is worth noting that only exact matches are considered and the neighbourhood of a single contact is ignored.
 \subsubsection{Contact map singleton content}
-Most sets of residue-residue contact pairs contain a fraction of contact pairs that do not co-localise with others. These contact pairs --- referred to as singleton contacts from here onwards --- typically show a high \gls{fp} rate and could be considered noise (although sometimes they encode \gls{tp} contacts in an oligomeric interface) \cite{Skwark2014-qp}. Such contacts are also often the ones to be down-weighted by neural network architectures of metapredictors, such as PCONSC2 \cite{Skwark2014-qp} or METAPSICOV \cite{Jones2015-vq}. To quantify the fraction of singleton contacts, a distance-based clustering routine was defined to isolate singleton contact pairs, and thus describe the level of noise in the prediction.
+Most sets of residue-residue contact pairs contain a fraction of contact pairs that do not co-localise with others. These contact pairs --- referred to as singleton contacts from here onwards --- typically show a high \gls{fp} rate and could be considered noise (although sometimes they encode \gls{tp} contacts in an oligomeric interface) \cite{Skwark2014-qp,Simkovic2017-xs}. Such contacts are also often the ones to be down-weighted by neural network architectures of metapredictors, such as PCONSC2 \cite{Skwark2014-qp} or METAPSICOV \cite{Jones2015-vq}. To quantify the fraction of singleton contacts, a distance-based clustering routine was defined to isolate singleton contact pairs, and thus describe the level of noise in the prediction.
 
 To identify singleton contact pairs in a set of contacts, the neighbourhood of each pair was searched for the presence of other contacts. The search radius was defined by $\pm2$ residues in a 2D-representation of the contact map. If no other contact pair was identified under such constraint, the contact pair was classified as singleton.
 
